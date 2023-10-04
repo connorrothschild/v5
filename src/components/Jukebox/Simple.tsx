@@ -80,15 +80,13 @@ export default function Example() {
     },
   ];
 
-  const [currentVideo, setCurrentVideo] = useState(null);
+  const [currentVideo, setCurrentVideo] = useState<string | null>(null);
   const currentVideoTitle = useMemo(
     () => options.find((video) => video.id === currentVideo)?.title,
     [currentVideo]
   );
 
   const [progress, setProgress] = useState(0);
-
-  const [youtubePlayerRef, setYoutubePlayerRef] = useState(null);
 
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
@@ -98,9 +96,11 @@ export default function Example() {
   };
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [youtubePlayerRef, setYoutubePlayerRef] = useState<any>(null);
+
   const playOrPause = () => {
     if (youtubePlayerRef) {
-      const playerState = youtubePlayerRef.getPlayerState();
+      const playerState = youtubePlayerRef?.getPlayerState();
 
       if (playerState === 1) {
         youtubePlayerRef.pauseVideo();
@@ -123,8 +123,8 @@ export default function Example() {
 
   const [videoEndedThrottle, setVideoEndedThrottle] = useState(true);
 
-  const [progressInterval, setProgressInterval] = useState(null);
-  const updateProgress = (event) => {
+  const [progressInterval, setProgressInterval] = useState<any>(null);
+  const updateProgress = (event: any) => {
     if (progressInterval) {
       clearInterval(progressInterval);
     }
@@ -140,7 +140,7 @@ export default function Example() {
 
   const previousVideo = () => {
     const thisVideo = options.find((video) => video.id === currentVideo);
-    const thisVideoIndex = options.indexOf(thisVideo);
+    const thisVideoIndex = options.indexOf(thisVideo || options[0]);
     const previousVideo = options[thisVideoIndex - 1];
     if (previousVideo) {
       setCurrentVideo(previousVideo.id);
@@ -152,7 +152,7 @@ export default function Example() {
 
   const nextVideo = () => {
     const thisVideo = options.find((video) => video.id === currentVideo);
-    const thisVideoIndex = options.indexOf(thisVideo);
+    const thisVideoIndex = options.indexOf(thisVideo || options[0]);
     const nextVideo = options[thisVideoIndex + 1];
     if (nextVideo) {
       setCurrentVideo(nextVideo.id);

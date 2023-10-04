@@ -8,15 +8,18 @@ export default function CanvasGradient({
   opacity: MotionValue<number>;
   incrementValue?: number;
 }) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLCanvasElement>(null);
   useLayoutEffect(() => {
     if (!ref.current) return;
-    var c = ref.current;
-    var $ = c.getContext("2d");
+    var c = ref.current as HTMLCanvasElement;
+    var ctx = c.getContext("2d");
+    if (!ctx) return;
 
     var col = function (x: number, y: number, r: number, g: number, b: number) {
-      $.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-      $.fillRect(x, y, 1, 1);
+      if (ctx) {
+        ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+        ctx.fillRect(x, y, 1, 1);
+      }
     };
     var R = function (x: number, y: number, t: number) {
       return Math.floor(192 + 64 * Math.cos((x * x - y * y) / 300 + t));

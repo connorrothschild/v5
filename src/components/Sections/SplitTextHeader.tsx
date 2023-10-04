@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, JSX } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
 import { useInView } from "framer-motion";
@@ -10,8 +10,8 @@ export default function SplitTextHeader({
   container: React.MutableRefObject<HTMLDivElement>;
   phrase: string;
 }) {
-  let refs = useRef([]);
-  const body = useRef(null);
+  let refs = useRef<HTMLSpanElement[]>([]);
+  const body = useRef<HTMLDivElement>(null);
   // const container = useRef(null);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function SplitTextHeader({
     });
   };
 
-  const splitWords = (phrase) => {
+  const splitWords = (phrase: string | string[]) => {
     let words;
     if (typeof phrase === "string") {
       words = phrase.split(" ");
@@ -60,7 +60,7 @@ export default function SplitTextHeader({
       words = phrase;
     }
 
-    let body = [];
+    let bodyText: JSX.Element[] = [];
     // phrase.split(" ").forEach((word, i) => {
     //   const letters = splitLetters(word);
     //   console.log(letters);
@@ -68,7 +68,7 @@ export default function SplitTextHeader({
     // });
     words.forEach((client, i) => {
       const letters = splitLetters(client, i === words.length - 1);
-      body.push(
+      bodyText.push(
         <p
           key={client + "_" + i}
           className="text-5xl font-serif text-left font-light text-stone-700"
@@ -77,17 +77,17 @@ export default function SplitTextHeader({
         </p>
       );
     });
-    return body;
+    return bodyText;
   };
 
-  const splitLetters = (word, isLast) => {
-    let letters = [];
+  const splitLetters = (word: string, isLast: boolean) => {
+    let lettersArray: JSX.Element[] = [];
     word.split("").forEach((letter, i) => {
-      letters.push(
+      lettersArray.push(
         <span
           key={letter + "_" + i}
           className="opacity-10"
-          ref={(el) => {
+          ref={(el: HTMLSpanElement) => {
             refs.current.push(el);
           }}
         >
@@ -97,7 +97,7 @@ export default function SplitTextHeader({
         </span>
       );
     });
-    return letters;
+    return lettersArray;
   };
 
   return (
