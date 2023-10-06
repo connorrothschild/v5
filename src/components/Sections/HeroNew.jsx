@@ -123,14 +123,7 @@ const Hero = () => {
           >
             Make beautiful stuff on the web.
           </h1> */}
-          <GradientButton
-            onMouseOver={() => {
-              shadowSize.set(0);
-            }}
-            onMouseLeave={() => {
-              shadowSize.set(40);
-            }}
-          />
+          <GradientButton />
         </div>
 
         <div className="pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex flex-col text-gray-700 border-t border-gray-500 mix-blend-overlay tracking-[0.0125rem] font-serif">

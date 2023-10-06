@@ -3,16 +3,14 @@ import { easeInOutQuint } from "@/config/eases";
 
 import { useState } from "react";
 
-const GradientButton = ({ onMouseOver, onMouseLeave }) => {
+const GradientButton = () => {
   const width = useMotionValue(550);
   const height = useMotionValue(80);
 
   const [isBig, setIsBig] = useState(false);
   return (
     <div
-      className="relative group cursor-pointer"
-      onMouseOver={onMouseOver}
-      onMouseLeave={onMouseLeave}
+      className="relative flex justify-center items-center group cursor-pointer"
       onClick={() => {
         setIsBig(!isBig);
       }}

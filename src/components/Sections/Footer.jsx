@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo, useState } from "react";
 import { motion, useSpring, motionValue } from "framer-motion";
 import CanvasGradient from "../CanvasGradient";
+import GradientButton from "../GradientButton";
 
 export default function Footer() {
   const nudgeX = useSpring(0, { stiffness: 100, damping: 100 });
@@ -40,6 +41,7 @@ export default function Footer() {
         <p className="font-serif cursor-pointer">Instagram</p>
         <p className="font-serif cursor-pointer">LinkedIn</p>
       </div>
+      {/* <GradientButton /> */}
     </footer>
   );
 }
