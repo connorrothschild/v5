@@ -4,6 +4,7 @@ import { easeInOutQuint } from "@/config/eases";
 
 import CursorShadow from "@/components/CursorShadow";
 import CanvasGradient from "../CanvasGradient";
+import GradientButton from "../GradientButton";
 
 const Hero = () => {
   useEffect(() => {
@@ -41,7 +42,7 @@ const Hero = () => {
         }}
         className="transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden relative"
       >
-        <CursorShadow shadowSize={shadowSize} shadowOpacity={svgOpacity} />
+        {/* <CursorShadow shadowSize={shadowSize} shadowOpacity={svgOpacity} /> */}
         <CanvasGradient opacity={svgOpacity} />
 
         {/* Top left */}
@@ -110,9 +111,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* List of clients, middle */}
         <div className="absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 w-full -translate-y-1/2 flex flex-col items-center justify-center mix-blend-overlay">
-          <h1
+          {/* <h1
             className="cursor-none p-8 text-center text-[1.57rem] leading-[.95] text-black font-light uppercase tracking-normal font-serif"
             onMouseOver={() => {
               shadowSize.set(10);
@@ -122,7 +122,15 @@ const Hero = () => {
             }}
           >
             Make beautiful stuff on the web.
-          </h1>
+          </h1> */}
+          <GradientButton
+            onMouseOver={() => {
+              shadowSize.set(0);
+            }}
+            onMouseLeave={() => {
+              shadowSize.set(40);
+            }}
+          />
         </div>
 
         <div className="pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex flex-col text-gray-700 border-t border-gray-500 mix-blend-overlay tracking-[0.0125rem] font-serif">

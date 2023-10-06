@@ -13,7 +13,7 @@ export default function Projects() {
     >
       <SplitTextHeader
         container={container}
-        phrase="I am available for freelance work and new collaborations. There are two main channels I work with clients through:"
+        phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
       />
 
       {/* Horizontally scrollable list of projects */}
