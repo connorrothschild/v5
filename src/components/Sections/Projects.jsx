@@ -3,14 +3,23 @@ import SplitTextHeader from "./SplitTextHeader";
 
 export default function Projects() {
   const container = useRef(null);
+
   return (
     <section
-      className="w-full bg-[var(--background)] h-screen sticky top-0 z-[2] py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
+      id="projects"
+      className="w-full bg-[var(--background)] min-h-screen sticky top-0 z-[2] py-12 px-4 rounded-t-[30px] flex flex-col justify-start gap-8"
       style={{
         boxShadow: "0 0 20px rgba(0,0,0,.1)",
       }}
       ref={container}
     >
+      {/* 1rem height clickable element at top (always visible) that scrolls to this section when clicked */}
+      {/* <div
+        className="absolute top-0 left-0 w-full h-[1rem] cursor-pointer"
+        onClick={() => {
+          console.log("clicked");
+        }}
+      /> */}
       <SplitTextHeader
         container={container}
         phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."

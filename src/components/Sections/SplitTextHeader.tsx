@@ -71,7 +71,7 @@ export default function SplitTextHeader({
       bodyText.push(
         <p
           key={client + "_" + i}
-          className="text-5xl font-serif text-left font-light text-stone-700"
+          className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-none font-serif text-left font-light text-stone-700"
         >
           {letters}
         </p>

@@ -1,18 +1,11 @@
-import { useEffect, useRef, useMemo, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useTransform, useScroll, motion, useSpring } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
-import Gradient from "@/components/Gradient";
 import CursorShadow from "@/components/CursorShadow";
-import BackgroundVideo from "@/components/Archived/BackgroundVideo";
 import CanvasGradient from "../CanvasGradient";
 
-const Hero = ({ hue, saturation, lightness, randomUuid }) => {
-  // Note: Rerenders a lot
-  // console.log("rendering RandomGradientComponent");
-  let [stopColor1Hue, setStopColor1Hue] = useState(hue);
-
-  // FIXME: Can use https://www.framer.com/motion/use-time/ instead?
+const Hero = () => {
   useEffect(() => {
     const handleMousemove = (e) => {
       const { clientX, clientY } = e;
@@ -20,26 +13,16 @@ const Hero = ({ hue, saturation, lightness, randomUuid }) => {
       document.documentElement.style.setProperty("--y", `${clientY}px`);
     };
 
-    const interval = setInterval(() => {
-      setStopColor1Hue((hue += 0.5));
-    }, 25);
-
     window.addEventListener("mousemove", handleMousemove);
 
     return () => {
-      clearInterval(interval);
       window.removeEventListener("mousemove", handleMousemove);
     };
   }, []);
 
-  const stopColor1 = useMemo(
-    () => `hsl(${stopColor1Hue}, ${saturation}%, ${lightness}%)`,
-    [stopColor1Hue, saturation, lightness]
-  );
-
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: ref, // This isn't doing anything since the element is sticky. Could use useViewportScroll to see when 100% of the page is scrolled down.
     offset: ["0%", "50%"],
   });
 
@@ -49,8 +32,7 @@ const Hero = ({ hue, saturation, lightness, randomUuid }) => {
   const LOADING_TIME = 3;
 
   return (
-    // https://tympanus.net/codrops/2019/02/19/svg-filter-effects-creating-texture-with-feturbulence/
-    <div className="h-screen relative z-[1] sticky top-0" ref={ref}>
+    <div className="h-screen z-[1] sticky top-0" ref={ref}>
       <motion.div
         style={{
           margin: "0 auto",
@@ -59,20 +41,7 @@ const Hero = ({ hue, saturation, lightness, randomUuid }) => {
         }}
         className="transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden relative"
       >
-        {/* <BackgroundVideo /> */}
         <CursorShadow shadowSize={shadowSize} shadowOpacity={svgOpacity} />
-        {/* FIXME: Should I just use this? https://www.svgbackgrounds.com/animate-svg-gradients/ 
-        Also see https://mesh.aarv.me/gallery */}
-        {/* <Gradient
-          stopColor={stopColor1}
-          randomUuid={randomUuid}
-          svgProps={{
-            style: {
-              opacity: svgOpacity,
-            },
-            // transition: { ease: "easeInOut", delay: 1.5, duration: 1 },
-          }}
-        /> */}
         <CanvasGradient opacity={svgOpacity} />
 
         {/* Top left */}
@@ -146,30 +115,19 @@ const Hero = ({ hue, saturation, lightness, randomUuid }) => {
           <h1
             className="cursor-none p-8 text-center text-[1.57rem] leading-[.95] text-black font-light uppercase tracking-normal font-serif"
             onMouseOver={() => {
-              // document.documentElement.style.setProperty(
-              //   "--shadow-size",
-              //   "10%"
-              // );
               shadowSize.set(10);
             }}
             onMouseLeave={() => {
-              // document.documentElement.style.setProperty(
-              //   "--shadow-size",
-              //   "40%"
-              // );
               shadowSize.set(40);
             }}
           >
-            {/* Available for freelance beginning December 2023. */}
             Make beautiful stuff on the web.
           </h1>
         </div>
 
-        {/* Bottom, spans entire screen */}
         <div className="pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex flex-col text-gray-700 border-t border-gray-500 mix-blend-overlay tracking-[0.0125rem] font-serif">
           The professional portfolio of software developer, data visualization
           engineer, and designer Connor Rothschild.
-          {/* Last updated 2023. */}
         </div>
       </motion.div>
     </div>

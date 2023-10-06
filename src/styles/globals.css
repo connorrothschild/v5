@@ -45,79 +45,8 @@ body {
   display: none;
 }
 
-/* @font-face {
-  font-family: "JWSans";
-  src: url("/fonts/JW.Sans-Light.woff2") format("woff2"),
-    url("/fonts/JW.Sans-Light.otf") format("opentype");
-  font-style: normal;
-  font-weight: 300;
-  text-rendering: optimizeLegibility;
-}
-
-@font-face {
-  font-family: "JWSans";
-  src: url("/fonts/JW.Sans-Regular.woff2") format("woff2"),
-    url("/fonts/JW.Sans-Regular.otf") format("opentype");
-  font-style: normal;
-  font-weight: 400;
-  text-rendering: optimizeLegibility;
-}
-
-@font-face {
-  font-family: "JWSans";
-  src: url("/fonts/JW.Sans-Medium.woff2") format("woff2"),
-    url("/fonts/JW.Sans-Medium.otf") format("opentype");
-  font-style: normal;
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: "JWSans";
-  src: url("/fonts/JW.Sans-Bold.woff2") format("woff2"),
-    url("/fonts/JW.Sans-Bold.otf") format("opentype");
-  font-style: normal;
-  font-weight: 600;
-} */
-
-/* YouTube Jukebox */
-/* #player {
-  pointer-events: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: auto;
-  height: calc(100% + 340px);
-  width: 177.77777778vh;
-  min-width: 100%;
-  min-height: 56.25vw;
-}
-
-.video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 2;
-  pointer-events: none;
-  background-color: #000;
-  transition: opacity 0.5s linear;
-}
-
-.video:not(.playing) {
-  opacity: 0;
-}
-
-.video.playing {
-  opacity: 0.5;
-}
-
-#movie_player > div.html5-video-container > video {
-  width: 100% !important;
-} */
-
-#player {
-  pointer-events: none;
-  opacity: 0;
+body.loaded footer,
+body.loaded #menu-button {
+  opacity: 1;
+  pointer-events: auto;
 }

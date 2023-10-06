@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { easeInOutQuint } from "@/config/eases";
+import Jukebox from "./Jukebox";
 
 export default function Menu({}) {
   const [showMenu, setShowMenu] = useState(false);
@@ -63,14 +64,22 @@ export default function Menu({}) {
 
   return (
     <>
+      {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       <p
-        className="fixed bottom-0 left-0 p-4 text-stone-800 cursor-pointer text-lg z-50 leading-none font-serif mix-blend-hard-light"
+        id="menu-button"
+        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 ${
+          showMenu ? "text-white" : "text-black"
+        }`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
       >
         Menu
       </p>
+
+      {/* We want to render the Jukebox at all times so that it plays even when not visible. We only toggle visibility, not rendering. */}
+      <Jukebox controllerIsVisible={showMenu} />
+
       <AnimatePresence>
         {showMenu && (
           <motion.div

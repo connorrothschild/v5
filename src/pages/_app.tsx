@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
-import { Instrument_Serif, Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 
 const timesNow = localFont({
@@ -207,12 +207,12 @@ const suisse = localFont({
   variable: "--font-suisse",
 });
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  display: "fallback",
-  variable: "--font-instrument-serif",
-});
+// const instrumentSerif = Instrument_Serif({
+//   subsets: ["latin"],
+//   weight: "400",
+//   display: "fallback",
+//   variable: "--font-instrument-serif",
+// });
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -222,19 +222,20 @@ const manrope = Manrope({
 });
 
 import Menu from "@/components/Menu";
-import Jukebox from "@/components/Jukebox/Simple";
+import Jukebox from "@/components/Jukebox";
 import Loader from "@/components/Loader";
+import Footer from "@/components/Sections/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main
-      className={`${tobias.variable} ${manrope.variable} ${instrumentSerif.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
+      className={`${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
     >
       <Menu />
-      <Jukebox />
       <Loader>
         <Component {...pageProps} />
       </Loader>
+      <Footer />
     </main>
   );
 }

@@ -1,8 +1,19 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import YouTube, { YouTubeProps } from "react-youtube";
+import { AnimatePresence, motion } from "framer-motion";
+import { easeInOutQuint } from "@/config/eases";
 
-export default function Example() {
+export default function Jukebox({
+  controllerIsVisible,
+}: {
+  controllerIsVisible: boolean;
+}) {
   const options = [
+    {
+      title: "Coldhands",
+      artist: "Oncle House",
+      id: "0Itos0zfA3s",
+    },
     {
       title: "The Kiss of Venus",
       artist: "Dominic Fike",
@@ -147,7 +158,7 @@ export default function Example() {
     } else {
       setCurrentVideo(options[options.length - 1].id);
     }
-    playOrPause();
+    // playOrPause();
   };
 
   const nextVideo = () => {
@@ -159,7 +170,7 @@ export default function Example() {
     } else {
       setCurrentVideo(options[0].id);
     }
-    playOrPause();
+    // playOrPause();
   };
 
   const onStateChange: YouTubeProps["onStateChange"] = (event) => {
@@ -185,7 +196,11 @@ export default function Example() {
   return (
     <>
       <div
-        className="opacity-0 fixed top-0 left-0 pointer-events-none"
+        className={`${
+          controllerIsVisible && isPlaying
+            ? "opacity-1 fixed top-1/2 left-1/2 z-30 pointer-events-none transform -translate-x-1/2 -translate-y-1/2 delay-1000"
+            : "opacity-0 fixed top-0 left-0 pointer-events-none"
+        } transition-opacity duration-1000 ease-in-out rounded-xl overflow-hidden`}
         key={currentVideo}
       >
         {currentVideo && (
@@ -198,62 +213,100 @@ export default function Example() {
         )}
       </div>
 
-      {/* Previous and Next */}
+      {/* Controller */}
       <div
-        className={`rounded-l-lg bg-[rgba(255,255,255,.5)] overflow-hidden z-50 fixed bottom-24 right-0 flex justify-between items-center w-[max-content] gap-3 px-4 py-5 ${
-          isPlaying ? "opacity-100" : "opacity-25"
-        } hover:opacity-100`}
-        style={{
-          transition: "opacity 250ms ease",
-        }}
+        className={`${
+          controllerIsVisible
+            ? "opacity-100 delay-[2500ms] duration-500"
+            : "opacity-0 duration-100 pointer-events-none"
+        } fixed bottom-0 right-0 z-50 px-4 py-5 transition-opacity ease-in-out`}
       >
-        {currentVideo ? (
-          <>
-            <div className="flex flex-col gap-1" onClick={playOrPause}>
-              <p className="leading-none text-gray-700 text-2xl font-serif font-semibold cursor-pointer">
-                {currentVideoTitle}
-              </p>
-              <p className="leading-none text-gray-700 text-base font-serif font-light cursor-pointer">
-                by {options.find((video) => video.id === currentVideo)?.artist}
-              </p>
-            </div>
-            <div className="h-10 flex flex-col justify-center">
-              <span
-                className="text-gray-700 leading-none font-light cursor-pointer h-5"
-                onClick={() => {
-                  previousVideo();
-                }}
-              >
-                &larr;
-              </span>
-              <span
-                className="text-gray-700 leading-none font-light cursor-pointer h-5"
-                onClick={() => {
-                  nextVideo();
-                }}
-              >
-                &rarr;
-              </span>
-            </div>
-            <span
+        <AnimatePresence>
+          {currentVideo && isPlaying ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.25 } }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ ease: easeInOutQuint }}
+              // bg-[rgba(0,0,0,.5)]
+              className={`rounded-tl-lg overflow-hidden z-50 fixed bottom-0 right-0 flex justify-between items-center w-[max-content] gap-3 px-4 py-5 ${
+                isPlaying ? "opacity-100" : "opacity-25"
+              } hover:opacity-100`}
               style={{
-                width: `${progress}%`,
-                backgroundColor: `rgba(0,0,0,.2)`,
-                zIndex: -1,
+                transition: "opacity 250ms ease",
               }}
-              className="absolute bottom-0 left-0 h-full rounded-l-lg"
-            />
-          </>
-        ) : (
-          <p
-            onClick={() => {
-              setCurrentVideo(options[0].id);
-            }}
-            className="leading-none text-black text-2xl font-serif font-semibold cursor-pointer"
-          >
-            Jam with me
-          </p>
-        )}
+            >
+              <div className="flex flex-col gap-1" onClick={playOrPause}>
+                <p className="leading-none text-gray-300 text-2xl font-serif font-semibold cursor-pointer">
+                  {currentVideoTitle}
+                </p>
+                <p className="leading-none text-gray-300 text-base font-serif font-light cursor-pointer">
+                  by{" "}
+                  {options.find((video) => video.id === currentVideo)?.artist}
+                </p>
+              </div>
+              <div className="h-10 flex flex-col justify-center">
+                <span
+                  className="text-gray-200 leading-none font-light cursor-pointer h-5"
+                  onClick={() => {
+                    previousVideo();
+                  }}
+                >
+                  &larr;
+                </span>
+                <span
+                  className="text-gray-200 leading-none font-light cursor-pointer h-5"
+                  onClick={() => {
+                    nextVideo();
+                  }}
+                >
+                  &rarr;
+                </span>
+              </div>
+              <span
+                style={{
+                  width: `${progress}%`,
+                  backgroundColor: `rgba(0,0,0,.2)`,
+                  zIndex: -1,
+                }}
+                className="absolute bottom-0 left-0 h-full rounded-tl-lg"
+              />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
+        <AnimatePresence>
+          {(!currentVideo || !isPlaying) && (
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.25 } }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ ease: easeInOutQuint }}
+              onClick={() => {
+                if (!currentVideo) {
+                  setCurrentVideo(options[0].id);
+                } else {
+                  playOrPause();
+                }
+              }}
+              className="leading-none text-white text-2xl font-serif cursor-pointer absolute bottom-0 right-0 z-50 px-4 py-5"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z"
+                />
+              </svg>
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
