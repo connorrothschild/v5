@@ -6,6 +6,9 @@
   .pause {
     animation-play-state: paused;
   }
+  .play {
+    animation-play-state: running;
+  }
 }
 
 :root {

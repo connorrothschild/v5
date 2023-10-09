@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
-import SplitTextHeader from "./SplitTextHeader";
+import SplitTextHeader from "../Elements/SplitTextHeader";
+import CornerPill from "../Elements/CornerPill";
+import AnimatedButton from "../AnimatedButton";
 
 export default function Projects() {
   const container = useRef(null);
@@ -11,91 +13,51 @@ export default function Projects() {
       }}
       ref={container}
     >
+      <CornerPill>Contact</CornerPill>
       <SplitTextHeader
         container={container}
         phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
       />
 
       {/* Horizontally scrollable list of projects */}
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col">
-          <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
-            1. Design & web development
-          </h1>
-          <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
-            Similar work: Praxis, Vana, Minerva.
-          </p>
-          <p className="text-stone-700 font-serif text-lg font-light leading-none">
-            Best for: Early stage startups
-          </p>
-          <h2 className="text-stone-700 font-sans text-right text-lg font-light">
-            Independent contract, get in touch &rarr;
-          </h2>
-        </div>
-        <div className="flex flex-col">
-          <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
-            2. Data visualization design
-          </h1>
-          <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
-            Similar work: Rest of World, ACLU of Texas, RTI
-          </p>
-          <p className="text-stone-700 font-serif text-lg font-light leading-none">
-            Best for: Established media companies, thinktanks
-          </p>
-          <h2 className="text-stone-700 font-sans text-right text-lg font-light">
-            Moksha Data Studio, get in touch &rarr;
-          </h2>
-        </div>
-        {/* <ProjectCard
-          client={"Rest of World"}
-          image={"/images/projects/blackouts.png"}
-          title={"A decade of internet blackouts"}
-          description={
-            "Visualizing seven years, 60 countries, and 935 government-imposed internet shutdowns."
-          }
-          color={"#0DCC6C"}
-          link={"https://restofworld.org/2022/blackouts/"}
-        />
-        <ProjectCard
-          client={"Collaborative Fund"}
-          image={"/images/projects/impact.png"}
-          title={"The history of impact investing"}
-          description={
-            "Visualizing 40 years of impact investing, from the first social venture capital firm to the rise of ESG."
-          }
-          color={"#7893eb"}
-          link={"https://impact.collabfund.com/"}
-        />
-        <ProjectCard
-          client={"Praxis"}
-          image={"/images/projects/praxis.png"}
-          title={"Building a new city"}
-          description={
-            "Web design and development for a new city in the Mediterranean."
-          }
-          color={"#348a00"}
-          link={"https://cityofpraxis.org"}
-        />
-        <ProjectCard
-          client={"Absolute Rest"}
-          image={"/images/projects/absolute-rest.png"}
-          title={"Democratizing sleep studies"}
-          description={
-            "Application development for a leading sleep study company."
-          }
-          color={"#312e81"}
-          link={"https://www.absoluterest.com/"}
-        />
-        <ProjectCard
-          client={"Gallery"}
-          image={"/images/projects/gallery.png"}
-          title={"Building virtual art galleries"}
-          description={
-            "Web design and development for the leading NFT gallery platform."
-          }
-          color={"#ffffff"}
-          link={"https://www.gallery.so/"}
-        /> */}
+
+      <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
+        <AnimatedButton expandOnHover classes="w-full">
+          <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
+            <div className="flex flex-col justify-between gap-1">
+              <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
+                1. Design & web development
+              </h1>
+              <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
+                Similar work: Praxis, Vana, Minerva
+              </p>
+              <p className="text-stone-700 font-serif text-lg font-light leading-none">
+                Best for: Early stage startups
+              </p>
+            </div>
+            <h2 className="text-stone-700 font-sans text-right text-lg font-light">
+              Independent contract, get in touch &rarr;
+            </h2>
+          </div>
+        </AnimatedButton>
+        <AnimatedButton expandOnHover classes="w-full">
+          <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
+            <div className="flex flex-col justify-between gap-1">
+              <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
+                2. Data visualization design
+              </h1>
+              <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
+                Similar work: Rest of World, ACLU of Texas, RTI
+              </p>
+              <p className="text-stone-700 font-serif text-lg font-light leading-none">
+                Best for: Established media companies, thinktanks
+              </p>
+            </div>
+            <h2 className="text-stone-700 font-sans text-right text-lg font-light">
+              Moksha Data Studio, get in touch &rarr;
+            </h2>
+          </div>
+        </AnimatedButton>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import SplitTextHeader from "./SplitTextHeader";
+import SplitTextHeader from "../Elements/SplitTextHeader";
+import CornerPill from "../Elements/CornerPill";
 
 export default function Projects() {
   const container = useRef(null);
@@ -13,13 +14,7 @@ export default function Projects() {
       }}
       ref={container}
     >
-      {/* 1rem height clickable element at top (always visible) that scrolls to this section when clicked */}
-      {/* <div
-        className="absolute top-0 left-0 w-full h-[1rem] cursor-pointer"
-        onClick={() => {
-          console.log("clicked");
-        }}
-      /> */}
+      <CornerPill>Projects</CornerPill>
       <SplitTextHeader
         container={container}
         phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."

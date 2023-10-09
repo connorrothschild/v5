@@ -27,12 +27,12 @@ export default function Footer() {
       onMouseMove={handleMousemove}
       onMouseLeave={() => nudgeX.set(0)}
     >
-      <CanvasGradient svgOpacity={svgOpacity} />
+      <CanvasGradient svgOpacity={svgOpacity} width="100vw" height="100vh" />
       <motion.h1
         style={{
           x: nudgeX,
         }}
-        className="font-serif text-[10.62vw] z-20 text-center leading-none text-white font-light"
+        className="font-serif text-[10.62vw] z-20 text-center leading-none text-white font-light mix-blend-overlay"
       >
         connorrothschild.com
       </motion.h1>

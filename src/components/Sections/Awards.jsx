@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import SplitTextHeader from "./SplitTextHeader";
+import SplitTextHeader from "../Elements/SplitTextHeader";
+import CornerPill from "../Elements/CornerPill";
 
 export default function Projects() {
   const container = useRef(null);
@@ -11,64 +12,14 @@ export default function Projects() {
       }}
       ref={container}
     >
+      <CornerPill>Awards</CornerPill>
       <SplitTextHeader
         container={container}
-        phrase="In my early career, my work has been recognized for the following awards"
+        phrase="In my early career, my work has been recognized for the following awards."
       />
 
       {/* Horizontally scrollable list of projects */}
-      <div className="flex gap-4 overflow-x-auto flex-nowrap scrollbar-hide">
-        <ProjectCard
-          client={"Rest of World"}
-          image={"/images/projects/blackouts.png"}
-          title={"A decade of internet blackouts"}
-          description={
-            "Visualizing seven years, 60 countries, and 935 government-imposed internet shutdowns."
-          }
-          color={"#0DCC6C"}
-          link={"https://restofworld.org/2022/blackouts/"}
-        />
-        <ProjectCard
-          client={"Collaborative Fund"}
-          image={"/images/projects/impact.png"}
-          title={"The history of impact investing"}
-          description={
-            "Visualizing 40 years of impact investing, from the first social venture capital firm to the rise of ESG."
-          }
-          color={"#7893eb"}
-          link={"https://impact.collabfund.com/"}
-        />
-        <ProjectCard
-          client={"Praxis"}
-          image={"/images/projects/praxis.png"}
-          title={"Building a new city"}
-          description={
-            "Web design and development for a new city in the Mediterranean."
-          }
-          color={"#348a00"}
-          link={"https://cityofpraxis.org"}
-        />
-        <ProjectCard
-          client={"Absolute Rest"}
-          image={"/images/projects/absolute-rest.png"}
-          title={"Democratizing sleep studies"}
-          description={
-            "Application development for a leading sleep study company."
-          }
-          color={"#312e81"}
-          link={"https://www.absoluterest.com/"}
-        />
-        <ProjectCard
-          client={"Gallery"}
-          image={"/images/projects/gallery.png"}
-          title={"Building virtual art galleries"}
-          description={
-            "Web design and development for the leading NFT gallery platform."
-          }
-          color={"#ffffff"}
-          link={"https://www.gallery.so/"}
-        />
-      </div>
+      <div className="flex gap-4 overflow-x-auto flex-nowrap scrollbar-hide"></div>
     </section>
   );
 }

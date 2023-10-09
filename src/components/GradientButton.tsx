@@ -17,10 +17,6 @@ const GradientButton = () => {
     >
       <motion.div
         className="relative rounded-full bg-[conic-gradient(from_var(--r),#222_0%,#eee_10%,#222_20%)] after:bg-[rgba(45,45,45)] group-hover:opacity-100 opacity-0 transition-opacity ease-in-out"
-        // style={{
-        //   width,
-        //   height,
-        // }}
         initial={false}
         animate={{
           height: !isBig ? 80 : window.innerHeight * 1.1,
