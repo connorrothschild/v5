@@ -1,9 +1,18 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import SplitTextHeader from "../Elements/SplitTextHeader";
 import CornerPill from "../Elements/CornerPill";
 
+import { gsap } from "gsap";
+import { Draggable } from "gsap/dist/Draggable";
+
 export default function Projects() {
   const container = useRef(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(Draggable);
+
+    return () => {};
+  }, []);
 
   return (
     <section
@@ -21,7 +30,8 @@ export default function Projects() {
       />
 
       {/* Horizontally scrollable list of projects */}
-      <div className="flex gap-4 overflow-x-auto flex-nowrap scrollbar-hide">
+      <Slider />
+      {/* <div className="flex gap-4 overflow-x-auto flex-nowrap scrollbar-hide">
         <ProjectCard
           client={"Rest of World"}
           image={"/images/projects/blackouts.png"}
@@ -72,7 +82,7 @@ export default function Projects() {
           color={"#ffffff"}
           link={"https://www.gallery.so/"}
         />
-      </div>
+      </div> */}
     </section>
   );
 }
@@ -82,7 +92,7 @@ function ProjectCard({ client, image, title, description, color }) {
 
   return (
     <div
-      className="flex flex-col min-w-[400px]"
+      className="flex flex-col min-w-[400px] max-w-[400px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -120,3 +130,125 @@ function ProjectCard({ client, image, title, description, color }) {
     </div>
   );
 }
+
+const pictures = [
+  {
+    source: "/images/projects/blackouts.png",
+    content: { date: "2022", desc: "A decade of internet blackouts" },
+  },
+  {
+    source: "/images/projects/impact.png",
+    content: { date: "2021", desc: "The history of impact investing" },
+  },
+  {
+    source: "/images/projects/praxis.png",
+    content: { date: "2020", desc: "Building a new city" },
+  },
+  {
+    source: "/images/projects/absolute-rest.png",
+    content: { date: "2019", desc: "Democratizing sleep studies" },
+  },
+  {
+    source: "/images/projects/gallery.png",
+    content: { date: "2018", desc: "Building virtual art galleries" },
+  },
+]; // pictures array
+
+const Slide = ({ imageSource, content }) => {
+  return (
+    <div className="slide">
+      <div className="preview">
+        <img src={imageSource} alt="The Plant" draggable="false" />
+      </div>
+      <div className="infos">
+        <h3>{content.date}</h3>
+        <h2>{content.desc}</h2>
+      </div>
+    </div>
+  );
+};
+
+export const Slider = () => {
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    if (!sliderRef.current) return;
+    gsap.registerPlugin(Draggable);
+    Draggable.create(sliderRef.current, {
+      type: "x",
+      bounds: {
+        minX: -sliderRef.current.clientWidth + window.innerWidth * 0.88,
+        maxX: 0,
+      },
+      inertia: true,
+    });
+  }, []);
+
+  return (
+    <div
+      id="slider"
+      className="flex gap-4 flex-nowrap scrollbar-hide"
+      style={{
+        width: "max-content",
+        overflowX: "hidden",
+      }}
+      ref={sliderRef}
+    >
+      {/* {pictures.map((item, index) => {
+        return (
+          <Slide key={index} imageSource={item.source} content={item.content} />
+        );
+      })} */}
+      <ProjectCard
+        client={"Rest of World"}
+        image={"/images/projects/blackouts.png"}
+        title={"A decade of internet blackouts"}
+        description={
+          "Visualizing seven years, 60 countries, and 935 government-imposed internet shutdowns."
+        }
+        color={"#0DCC6C"}
+        link={"https://restofworld.org/2022/blackouts/"}
+      />
+      <ProjectCard
+        client={"Collaborative Fund"}
+        image={"/images/projects/impact.png"}
+        title={"The history of impact investing"}
+        description={
+          "Visualizing 40 years of impact investing, from the first social venture capital firm to the rise of ESG."
+        }
+        color={"#7893eb"}
+        link={"https://impact.collabfund.com/"}
+      />
+      <ProjectCard
+        client={"Praxis"}
+        image={"/images/projects/praxis.png"}
+        title={"Building a new city"}
+        description={
+          "Web design and development for a new city in the Mediterranean."
+        }
+        color={"#348a00"}
+        link={"https://cityofpraxis.org"}
+      />
+      <ProjectCard
+        client={"Absolute Rest"}
+        image={"/images/projects/absolute-rest.png"}
+        title={"Democratizing sleep studies"}
+        description={
+          "Application development for a leading sleep study company."
+        }
+        color={"#312e81"}
+        link={"https://www.absoluterest.com/"}
+      />
+      <ProjectCard
+        client={"Gallery"}
+        image={"/images/projects/gallery.png"}
+        title={"Building virtual art galleries"}
+        description={
+          "Web design and development for the leading NFT gallery platform."
+        }
+        color={"#ffffff"}
+        link={"https://www.gallery.so/"}
+      />
+    </div>
+  );
+};
