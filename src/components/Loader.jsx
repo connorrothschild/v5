@@ -43,7 +43,7 @@ const Loader = ({ children }) => {
         clipPath: { duration: 1, delay: 2.25, ease: easeInOutQuint },
         position: { duration: 0, delay: 3.25 },
       }}
-      className="w-full h-full top-0 left-0 z-[1]"
+      className="w-full h-full top-0 left-0 z-[1] overflow-clip"
       ref={ref}
     >
       {children}

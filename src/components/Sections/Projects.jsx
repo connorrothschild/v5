@@ -17,7 +17,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="w-full bg-[var(--background)] min-h-screen sticky top-0 z-[2] py-12 px-4 rounded-t-[30px] flex flex-col justify-start gap-8"
+      className="w-full bg-[var(--background)] min-h-screen sticky top-0 z-[2] py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
       style={{
         boxShadow: "0 0 20px rgba(0,0,0,.1)",
       }}

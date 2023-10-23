@@ -3,7 +3,7 @@ import { motion, MotionValue } from "framer-motion";
 
 export default function CanvasGradient({
   opacity,
-  incrementValue = 0.01,
+  incrementValue = 0.02,
   width = "100vw",
   height = "100vh",
 }: {
@@ -61,7 +61,7 @@ export default function CanvasGradient({
     };
 
     run();
-  }, []);
+  }, [incrementValue]);
 
   return (
     <motion.canvas

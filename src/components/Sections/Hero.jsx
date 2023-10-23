@@ -5,6 +5,7 @@ import { easeInOutQuint } from "@/config/eases";
 import CursorShadow from "@/components/CursorShadow";
 import CanvasGradient from "../CanvasGradient";
 import GradientButton from "../GradientButton";
+import BackgroundVideo from "../Archived/BackgroundVideo";
 
 const Hero = () => {
   useEffect(() => {
@@ -43,6 +44,7 @@ const Hero = () => {
         className="transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden relative"
       >
         {/* <CursorShadow shadowSize={shadowSize} shadowOpacity={svgOpacity} /> */}
+        {/* <BackgroundVideo /> */}
         <CanvasGradient svgOpacity={svgOpacity} width="100vw" height="100vh" />
 
         {/* Top left */}

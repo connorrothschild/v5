@@ -10,9 +10,9 @@ export default function Jukebox({
 }) {
   const options = [
     {
-      title: "Coldhands",
-      artist: "Oncle House",
-      id: "0Itos0zfA3s",
+      title: "Pattern064",
+      artist: "Unknown",
+      id: "2n1YQGT3Vvw",
     },
     {
       title: "The Kiss of Venus",
@@ -23,6 +23,11 @@ export default function Jukebox({
       title: "Dreams Tonite",
       artist: "Alvvays",
       id: "ZXu6q-6JKjA",
+    },
+    {
+      title: "Coldhands",
+      artist: "Oncle House",
+      id: "0Itos0zfA3s",
     },
     {
       title: "That I Miss You",
@@ -83,6 +88,11 @@ export default function Jukebox({
       title: "Jackie",
       artist: "Yves Tumor",
       id: "bQpaWvPFx8A",
+    },
+    {
+      title: "Jasmine (Demo)",
+      artist: "Jai Paul",
+      id: "RWQMg56ZVZY",
     },
     {
       title: "Bags",
