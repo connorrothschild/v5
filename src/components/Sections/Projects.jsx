@@ -4,12 +4,13 @@ import CornerPill from "../Elements/CornerPill";
 
 import { gsap } from "gsap";
 import { Draggable } from "gsap/dist/Draggable";
+import { InertiaPlugin } from "gsap/dist/InertiaPlugin";
 
 export default function Projects() {
   const container = useRef(null);
 
   useEffect(() => {
-    gsap.registerPlugin(Draggable);
+    gsap.registerPlugin(Draggable, InertiaPlugin);
 
     return () => {};
   }, []);
@@ -181,6 +182,8 @@ export const Slider = () => {
         maxX: 0,
       },
       inertia: true,
+      throwResistance: 2500,
+      minDuration: 0.25,
     });
   }, []);
 
