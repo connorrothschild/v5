@@ -7,9 +7,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Projects />
-      <Awards />
-      <Contact />
+      <div className="sticky top-0 z-10">
+        <Projects />
+        <Awards />
+        <Contact />
+      </div>
     </>
   );
 }

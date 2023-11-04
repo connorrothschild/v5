@@ -25,9 +25,25 @@ const GradientButton = () => {
         transition={{ ease: easeInOutQuint, duration: 2 }}
         id="a"
       />
-      <p className="z-50 uppercase w-full text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[1.57rem] leading-[.95] text-black font-light tracking-normal font-serif mix-blend-overlay group-hover:mix-blend-normal group-hover:text-white transition-colors duration-500 ease-in-out">
-        Make beautiful stuff on the web.
-      </p>
+      <div className="z-50 uppercase w-full text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[1.57rem] leading-[.95] text-black font-light tracking-normal font-serif mix-blend-overlay group-hover:mix-blend-normal group-hover:text-white transition-colors duration-500 ease-in-out flex flex-col gap-2">
+        {/* <p
+          style={{
+            opacity: isBig ? 1 : 0,
+            transition: "opacity 1s ease-in-out",
+          }}
+        >
+          I am a multidisciplinary designer and developer.
+        </p> */}
+        <p>Make beautiful stuff on the web.</p>
+        {/* <p
+          style={{
+            opacity: isBig ? 1 : 0,
+            transition: "opacity 1s ease-in-out",
+          }}
+        >
+          You can find me on the internet.
+        </p> */}
+      </div>
     </div>
   );
 };

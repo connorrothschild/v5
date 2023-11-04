@@ -27,29 +27,43 @@ export default function Footer() {
   return (
     // Note that this is visible (opacity: 1) and interactable (pointer-events: auto) when the body is loaded. See globals.css
     <footer
-      className="opacity-0 pointer-events-none sticky overflow-hidden h-screen flex flex-col justify-center bottom-0 left-0 w-full z-0"
+      className="opacity-0 pointer-events-none sticky overflow-hidden h-[600px] flex flex-col justify-center bottom-0 left-0 w-full z-0 bg-gray-900"
       onMouseMove={handleMousemove}
       onMouseLeave={() => nudgeX.set(0)}
     >
-      <CanvasGradient svgOpacity={svgOpacity} width="100vw" height="100vh" />
-      <h2 className="font-serif text-[2.5rem] z-20 text-left ml-4 leading-none text-black font-light mix-blend-overlay">
-        Thanks for visiting!
-      </h2>
-      <motion.h1
-        style={{
-          x: nudgeX,
-          y: nudgeY,
-        }}
-        className="font-serif text-[10.62vw] z-20 text-center leading-none text-black font-light mix-blend-overlay"
-      >
-        connorrothschild.com
-      </motion.h1>
-      <div className="text-lg flex justify-between items-center w-full text-black font-light text-center mix-blend-overlay max-w-[300px] ml-auto mr-4 mt-4">
-        <p className="font-serif cursor-pointer">Twitter</p>
-        <p className="font-serif cursor-pointer">Instagram</p>
-        <p className="font-serif cursor-pointer">LinkedIn</p>
+      <div className="max-w-7xl mx-auto">
+        {/* <CanvasGradient svgOpacity={svgOpacity} width="100vw" height="100vh" /> */}
+        <h2
+          className="cursor-pointer font-serif text-[2.5rem] z-20 text-left leading-none text-gray-200 font-extralight"
+          onClick={() => {
+            // Copy email to clipboard
+            navigator.clipboard.writeText("connor@connorrothschild.com");
+          }}
+        >
+          connor@
+        </h2>
+        <motion.h1
+          onClick={() => {
+            // Copy email to clipboard
+            navigator.clipboard.writeText("connor@connorrothschild.com");
+          }}
+          style={
+            {
+              // x: nudgeX,
+              // y: nudgeY,
+            }
+          }
+          className="cursor-pointer font-serif text-[60px] lg:text-[110px] z-20 text-center leading-[.8] text-white font-extralight "
+        >
+          connorrothschild.com
+        </motion.h1>
+        <div className="text-lg flex justify-end gap-4 items-center w-full text-gray-200 font-extralight text-center max-w-[300px] ml-auto mt-6">
+          <p className="font-serif cursor-pointer">Twitter</p>
+          <p className="font-serif cursor-pointer">Instagram</p>
+          <p className="font-serif cursor-pointer">LinkedIn</p>
+        </div>
+        {/* <GradientButton /> */}
       </div>
-      {/* <GradientButton /> */}
     </footer>
   );
 }

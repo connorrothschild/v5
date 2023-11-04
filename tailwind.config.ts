@@ -10,9 +10,11 @@ const config: Config = {
     extend: {
       fontFamily: {
         // serif: ["var(--font-times-now)"],
-        serif: ["var(--font-tobias)"],
+        // serif: ["var(--font-tobias)"],
+        serif: ["ivypresto-display"],
         // sans: ["var(--font-suisse)"],
         sans: ["var(--font-manrope)"],
+        // sans: ["ivypresto-display"],
       },
     },
   },

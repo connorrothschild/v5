@@ -10,14 +10,19 @@ export default function Jukebox({
 }) {
   const options = [
     {
-      title: "Pattern064",
-      artist: "Unknown",
-      id: "2n1YQGT3Vvw",
-    },
-    {
       title: "The Kiss of Venus",
       artist: "Dominic Fike",
       id: "L2IJzVAOvaU",
+    },
+    {
+      title: "Doo Wop",
+      artist: "JID",
+      id: "cnYw1jxtDzI",
+    },
+    {
+      title: "Pattern064",
+      artist: "Unknown",
+      id: "2n1YQGT3Vvw",
     },
     {
       title: "Dreams Tonite",

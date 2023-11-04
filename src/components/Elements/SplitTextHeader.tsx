@@ -6,9 +6,11 @@ import { useInView } from "framer-motion";
 export default function SplitTextHeader({
   container,
   phrase,
+  textAlignment = "center",
 }: {
   container: React.MutableRefObject<HTMLDivElement>;
   phrase: string;
+  textAlignment?: "left" | "center" | "right";
 }) {
   let refs = useRef<HTMLSpanElement[]>([]);
   const body = useRef<HTMLDivElement>(null);
@@ -20,21 +22,25 @@ export default function SplitTextHeader({
   }, []);
 
   const isInView = useInView(container);
+  const [hasInstantiated, setHasInstantiated] = useState(false);
 
   // Wait to create animation until after refs.current is populated and thing is in view
   useEffect(() => {
     // if (!body.current) return;
     // if (refs.current.length === 0) return;
     if (!isInView) return; // Important to check this last
+    if (hasInstantiated) return;
 
     createAnimation();
+    setHasInstantiated(true);
   }, [
     // refs.current,
     isInView,
+    hasInstantiated,
   ]);
 
   const createAnimation = () => {
-    if (!container.current) return;
+    if (!container.current || !container.current?.offsetHeight) return;
     gsap.to(refs.current, {
       scrollTrigger: {
         trigger: container.current,
@@ -42,7 +48,8 @@ export default function SplitTextHeader({
         // pin: true,
 
         start: "top center",
-        end: () => "+=" + container.current.offsetHeight,
+        end: () => "+=" + container.current?.offsetHeight || 300,
+        // end: "bottom top",
 
         // markers: true, // DEBUG
       },
@@ -71,7 +78,11 @@ export default function SplitTextHeader({
       bodyText.push(
         <p
           key={client + "_" + i}
-          className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-none font-serif text-left font-light text-stone-700"
+          className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-none font-serif font-light text-stone-700"
+          style={{
+            textAlign: textAlignment,
+            justifyContent: textAlignment,
+          }}
         >
           {letters}
         </p>
@@ -102,8 +113,18 @@ export default function SplitTextHeader({
 
   return (
     <div
-      className="max-w-7xl w-full text-left flex flex-row px-4 items-center flex-wrap gap-2 tracking-tight"
+      className="max-w-5xl w-full flex flex-row items-center flex-wrap gap-2 tracking-tight"
       ref={body}
+      style={{
+        margin:
+          textAlignment === "center"
+            ? "0 auto"
+            : textAlignment === "left"
+            ? "0 auto 0 0"
+            : "0 0 0 auto",
+        textAlign: textAlignment,
+        justifyContent: textAlignment,
+      }}
     >
       {/* {splitWords(clients.map((client) => client.name))} */}
       {splitWords(phrase)}

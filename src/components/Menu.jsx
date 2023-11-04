@@ -67,8 +67,8 @@ export default function Menu({}) {
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 ${
-          showMenu ? "text-white" : "text-black"
+        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-difference ${
+          showMenu ? "text-white" : "text-gray-400"
         }`}
         onClick={() => {
           setShowMenu(!showMenu);

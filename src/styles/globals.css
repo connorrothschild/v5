@@ -13,7 +13,7 @@
 
 :root {
   --background: #e4e4e4;
-  /* --background: #131517; */
+  --background-invert: #131517;
 }
 
 html {

@@ -224,6 +224,7 @@ const manrope = Manrope({
 import Menu from "@/components/Menu";
 import Jukebox from "@/components/Jukebox";
 import Loader from "@/components/Loader";
+import Grid from "@/components/Grid";
 import Footer from "@/components/Sections/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -231,7 +232,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <main
       className={`${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
     >
+      <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
       <Menu />
+      {/* For testing */}
+      {/* <Grid /> */}
       <Loader>
         <Component {...pageProps} />
       </Loader>

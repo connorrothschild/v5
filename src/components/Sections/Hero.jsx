@@ -51,7 +51,7 @@ const Hero = () => {
         <div className="absolute top-4 left-4 flex flex-col items-start mix-blend-overlay">
           <div className="overflow-hidden pr-1">
             <motion.h1
-              className="text-left text-[4rem] md:text-[6.57rem] leading-[.9] text-black font-normal uppercase tracking-tighter"
+              className="font-serif text-left text-[4rem] md:text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight"
               animate={{ translateY: 0 }}
               initial={{ translateY: "100%" }}
               transition={{
@@ -66,7 +66,7 @@ const Hero = () => {
 
           <div className="overflow-hidden pr-1">
             <motion.h1
-              className="text-left text-[4rem] md:text-[6.57rem] leading-[.9] text-black font-normal uppercase tracking-tighter"
+              className="font-serif text-left text-[4rem] md:text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight"
               animate={{ translateY: 0 }}
               initial={{ translateY: "100%" }}
               transition={{
@@ -84,7 +84,7 @@ const Hero = () => {
         <div className="hidden lg:flex absolute top-4 right-4 flex-col items-end mix-blend-soft-light">
           <div className="overflow-hidden pr-1">
             <motion.h1
-              className="text-right text-[6.57rem] leading-[.9] text-black font-normal uppercase tracking-tighter opacity-30"
+              className="text-right text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight opacity-30"
               animate={{ translateY: 0 }}
               initial={{ translateY: "100%" }}
               transition={{
@@ -99,7 +99,7 @@ const Hero = () => {
           </div>
           <div className="overflow-hidden pr-1">
             <motion.h1
-              className="text-right text-[6.57rem] leading-[.9] text-black font-normal uppercase tracking-tighter opacity-30"
+              className="text-right text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight opacity-30"
               animate={{ translateY: 0 }}
               initial={{ translateY: "100%" }}
               transition={{
