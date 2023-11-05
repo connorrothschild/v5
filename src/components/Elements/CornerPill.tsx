@@ -6,7 +6,7 @@ export default function CornerPill({
   children: React.ReactNode;
 }) {
   return (
-    <p className="font-sans cursor-default absolute top-0 right-0 m-[18px] uppercase px-4 py-1 rounded-full border border-solid border-stone-500 text-stone-700 bg-stone-50 text-xs">
+    <p className="sticky font-sans cursor-default w-max ml-auto top-4 lg:top-12 right-0 uppercase px-6 py-1.5 rounded-full border border-solid border-stone-900 bg-stone-800 text-stone-50 text-xs">
       {children}
     </p>
   );

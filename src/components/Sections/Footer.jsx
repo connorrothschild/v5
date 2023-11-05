@@ -24,6 +24,16 @@ export default function Footer() {
 
   const svgOpacity = motionValue(1);
 
+  const [showEmailCopied, setShowEmailCopied] = useState(false);
+  useEffect(() => {
+    if (showEmailCopied) {
+      const timeout = setTimeout(() => {
+        setShowEmailCopied(false);
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [showEmailCopied]);
+
   return (
     // Note that this is visible (opacity: 1) and interactable (pointer-events: auto) when the body is loaded. See globals.css
     <footer
@@ -33,19 +43,31 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         {/* <CanvasGradient svgOpacity={svgOpacity} width="100vw" height="100vh" /> */}
-        <h2
+        <motion.h2
+          key={showEmailCopied}
           className="cursor-pointer font-serif text-[2.5rem] z-20 text-left leading-none text-gray-200 font-extralight"
           onClick={() => {
             // Copy email to clipboard
             navigator.clipboard.writeText("connor@connorrothschild.com");
+            setShowEmailCopied(true);
+          }}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          exit={{
+            y: "100%",
+            opacity: 0,
           }}
         >
-          connor@
-        </h2>
+          {showEmailCopied ? "copied" : "connor@"}
+        </motion.h2>
         <motion.h1
           onClick={() => {
             // Copy email to clipboard
             navigator.clipboard.writeText("connor@connorrothschild.com");
+            setShowEmailCopied(true);
           }}
           style={
             {

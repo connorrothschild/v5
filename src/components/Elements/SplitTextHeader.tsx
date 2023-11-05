@@ -41,6 +41,15 @@ export default function SplitTextHeader({
 
   const createAnimation = () => {
     if (!container.current || !container.current?.offsetHeight) return;
+
+    // Use the height of the container to determine the end position
+    // But if this height were to exceed 80vh, then just use 80vh
+    const windowHeight = window.innerHeight;
+    const endPosition =
+      container.current?.offsetHeight > windowHeight * 0.8
+        ? windowHeight * 0.8
+        : container.current?.offsetHeight;
+
     gsap.to(refs.current, {
       scrollTrigger: {
         trigger: container.current,
@@ -48,7 +57,7 @@ export default function SplitTextHeader({
         // pin: true,
 
         start: "top center",
-        end: () => "+=" + container.current?.offsetHeight || 300,
+        end: () => "+=" + endPosition,
         // end: "bottom top",
 
         // markers: true, // DEBUG

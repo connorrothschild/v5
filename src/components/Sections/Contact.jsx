@@ -7,7 +7,7 @@ export default function Projects() {
   const container = useRef(null);
   return (
     <section
-      className="w-full relative bg-[var(--background)] min-h-screen px-4 lg:px-12 py-24 flex flex-col justify-between gap-8"
+      className="w-full relative bg-[var(--background)] px-4 lg:px-12 py-24"
       // className="w-full bg-[var(--background)] min-h-[calc(100vh-2rem)] sticky top-[2rem] z-[3] py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
       // style={{
       //   boxShadow: "0 0 20px rgba(0,0,0,.1)",
@@ -16,13 +16,16 @@ export default function Projects() {
     >
       {/* <CornerPill>Contact</CornerPill> */}
 
-      <SplitTextHeader
-        container={container}
-        phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
-        textAlignment="left"
-      />
+      <div className="flex flex-col justify-between gap-8">
+        <SplitTextHeader
+          container={container}
+          phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
+          textAlignment="left"
+        />
 
-      {/* <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
+        <div className="h-16" />
+
+        {/* <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
         <AnimatedButton expandOnHover classes="w-full">
           <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
             <div className="flex flex-col justify-between gap-1">
@@ -61,28 +64,28 @@ export default function Projects() {
         </AnimatedButton>
       </div> */}
 
-      <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
-        <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
-          <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
-            1.
-          </span>{" "}
-          Design & web development
-        </h1>
+        <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
+          <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
+            <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
+              1.
+            </span>{" "}
+            Design & web development
+          </h1>
 
-        <span className="hidden lg:block text-stone-400 font-serif text-5xl font-light leading-none mb-1">
-          &
-        </span>
+          <span className="hidden lg:block text-stone-400 font-serif text-5xl font-light leading-none mb-1">
+            &
+          </span>
 
-        <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
-          <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
-            2.
-          </span>{" "}
-          Data visualization design
-        </h1>
-      </div>
+          <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
+            <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
+              2.
+            </span>{" "}
+            Data visualization design
+          </h1>
+        </div>
 
-      {/* Basic tabular layout, two rows */}
-      {/* <div className="flex flex-col gap-2">
+        {/* Basic tabular layout, two rows */}
+        {/* <div className="flex flex-col gap-2">
         <div className="w-full flex flex-row justify-between items-start gap-6 px-4 py-6 bg-black rounded-lg">
           <div className="flex flex-col justify-between gap-4">
             <h1 className="text-3xl font-serif text-left font-light text-stone-100 mb-2">
@@ -120,6 +123,7 @@ export default function Projects() {
           </h2>
         </div>
       </div> */}
+      </div>
     </section>
   );
 }

@@ -20,7 +20,9 @@ export default function Projects() {
     <section
       id="projects"
       // className="w-full bg-[var(--background)] min-h-screen py-12 px-4 flex flex-col justify-between gap-8"
-      className="relative w-full bg-[var(--background-invert)] min-h-screen px-4 lg:px-12 py-24 flex flex-col justify-between gap-8"
+      // className="relative w-full bg-[var(--background-invert)] min-h-screen px-4 lg:px-12 py-24 flex flex-col justify-between gap-8"
+
+      className="relative w-full bg-[var(--background-invert)] py-24 px-4 lg:px-12"
       // className="w-full bg-[var(--background)] min-h-screen py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
       // style={{
       //   boxShadow: "0 0 20px rgba(0,0,0,.1)",
@@ -29,24 +31,26 @@ export default function Projects() {
     >
       {/* <CornerPill>Projects</CornerPill> */}
 
-      <h1 className="text-7xl font-serif text-left font-light text-stone-300 mb-2">
-        Hi, I&apos;m Connor.
-      </h1>
+      <div className="flex flex-col justify-between gap-8">
+        <h1 className="text-7xl font-serif text-left font-light text-stone-300 mb-2">
+          Hi, I&apos;m Connor.
+        </h1>
 
-      <div className="invert">
-        <SplitTextHeader
-          container={container}
-          phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
-          textAlignment="left"
-        />
+        <div className="invert">
+          <SplitTextHeader
+            container={container}
+            phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
+            textAlignment="left"
+          />
+        </div>
+
+        <div className="h-16" />
+
+        {/* Horizontally scrollable list of projects */}
+        {/* <Slider /> */}
+        {/* <Grid /> */}
+        <TextGrid />
       </div>
-
-      <div className="h-16" />
-
-      {/* Horizontally scrollable list of projects */}
-      {/* <Slider /> */}
-      {/* <Grid /> */}
-      <TextGrid />
     </section>
   );
 }
