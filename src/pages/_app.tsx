@@ -176,6 +176,92 @@ const tobias = localFont({
   variable: "--font-tobias",
 });
 
+const canela = localFont({
+  src: [
+    {
+      path: "./fonts/canela/Canela-Thin-Trial.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-Thin-Trial.otf",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-Light-Trial.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-LightItalic-Trial.otf",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "./fonts/canela/Canela-Regular-Trial.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-RegularItalic-Trial.otf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/canela/Canela-Medium-Trial.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-MediumItalic-Trial.otf",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./fonts/canela/Canela-Medium-Trial.otf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-MediumItalic-Trial.otf",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "./fonts/canela/Canela-Bold-Trial.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-BoldItalic-Trial.otf",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "./fonts/canela/Canela-Black-Trial.otf",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-BlackItalic-Trial.otf",
+      weight: "800",
+      style: "italic",
+    },
+    {
+      path: "./fonts/canela/Canela-Black-Trial.otf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/canela/Canela-BlackItalic-Trial.otf",
+      weight: "900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-canela",
+});
+
 const family = localFont({
   src: "./fonts/test-family-regular.woff2",
   variable: "--font-family",
@@ -230,7 +316,7 @@ import Footer from "@/components/Sections/Footer";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main
-      className={`${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
+      className={`${canela.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
     >
       <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
       <Menu />
@@ -238,8 +324,8 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* <Grid /> */}
       <Loader>
         <Component {...pageProps} />
+        <Footer />
       </Loader>
-      <Footer />
     </main>
   );
 }

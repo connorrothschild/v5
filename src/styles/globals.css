@@ -12,8 +12,8 @@
 }
 
 :root {
-  --background: #e4e4e4;
-  --background-invert: #131517;
+  --background: #131517;
+  --background-invert: #e4e4e4;
 }
 
 html {
@@ -48,7 +48,7 @@ body {
   display: none;
 }
 
-body.loaded footer,
+/* body.loaded footer, */
 body.loaded #menu-button {
   opacity: 1;
   pointer-events: auto;

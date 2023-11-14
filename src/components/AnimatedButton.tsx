@@ -15,7 +15,7 @@ const AnimatedButton = ({
       className={`relative flex justify-stretch items-center group cursor-pointer ${classes}`}
     >
       <div
-        className={`relative w-full after:transition-opacity after:duration-500 rounded-[20px] overflow-hidden after:bg-[radial-gradient(circle_farthest-side_at_50px_50px,_#fff_0%,transparent_200%)] after:block after:absolute after:inset-[2px] after:z-10 after:rounded-[18px] animate-[rotating_10s_linear_infinite] ${
+        className={`relative w-full after:transition-opacity after:duration-500 rounded-[30px] overflow-hidden after:bg-[radial-gradient(circle_farthest-side_at_50px_50px,_#fff_0%,transparent_200%)] after:block after:absolute after:inset-[5px] after:z-10 after:rounded-[25px] animate-[rotating_10s_linear_infinite] ${
           expandOnHover ? "hover:after:opacity-[.35]" : ""
         }`}
       >

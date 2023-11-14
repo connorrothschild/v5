@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import SplitTextHeader from "../Elements/SplitTextHeader";
 import CornerPill from "../Elements/CornerPill";
+import { useScroll, motion, useTransform } from "framer-motion";
 
 const awards = [
   {
@@ -208,6 +209,15 @@ const awards = [
 
 export default function Awards() {
   const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    ref: container,
+  });
+
+  const translateY = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.5, 1],
+    ["100%", "10%", "0%", "0%"]
+  );
   return (
     <section
       className="relative w-full bg-gray-300 py-24 px-4 lg:px-12"
@@ -225,11 +235,14 @@ export default function Awards() {
           textAlignment="left"
         />
 
-        <div className="h-16" />
-
         {/* Horizontally scrollable list of projects */}
         {/* Tabular view */}
-        <div className="flex flex-col justify-start items-start gap-2 w-full divide divide-y divide-gray-400">
+        <motion.div
+          style={{
+            translateY,
+          }}
+          className="flex flex-col justify-start items-start gap-4 w-full divide divide-y divide-gray-400"
+        >
           {awards.map((award, i) => (
             <Card
               key={award.title + "_" + i}
@@ -239,7 +252,7 @@ export default function Awards() {
               award={award.award}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -247,16 +260,16 @@ export default function Awards() {
 
 const Card = ({ title, year, organization, award }) => {
   return (
-    <div className="w-full flex flex-row justify-between items-end gap-2 py-3">
+    <div className="w-full flex flex-row justify-between items-center gap-2 pt-3">
       {/* <div className="flex flex-col justify-center gap-2"> */}
       <h1 className="leading-none text-xl font-serif text-left font-regular text-stone-700 pt-1">
-        {title},
-        <span className="ml-1 text-stone-600 font-serif text-lg font-light leading-none">
+        {title}
+        <span className="ml-3 text-stone-500 font-sans text-base font-light leading-none">
           {award} @ {organization}
         </span>
       </h1>
       {/* </div> */}
-      <span className="font-sans font-normal tracking-tight text-stone-500">
+      <span className="pt-1 font-sans font-normal tracking-tight text-stone-500">
         {year}
       </span>
     </div>

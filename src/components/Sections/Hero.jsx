@@ -28,24 +28,33 @@ const Hero = () => {
     offset: ["0%", "50%"],
   });
 
-  const svgOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.5], [0, 20]);
+  // const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const translateY = useTransform(scrollYProgress, [0, 0.5], [0, -150]);
+  const svgOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 1, 1]);
 
   const shadowSize = useSpring(40, { damping: 100, stiffness: 1000 });
   const LOADING_TIME = 3;
 
   return (
-    <div className="h-screen z-[1] sticky top-0" ref={ref}>
+    <div className="relative h-screen z-[1]" ref={ref}>
+      <span className="z-[9] absolute bottom-24 right-8 user-select-none font-serif font-light text-gray-500">
+        psst. there&apos;s music—click the menu ☺
+      </span>
       <motion.div
         style={{
+          borderRadius,
+          // scale,
+          translateY,
           margin: "0 auto",
-          background:
-            "linear-gradient(to bottom, transparent, var(--background))",
+          // background:
+          //   "linear-gradient(to bottom, transparent, var(--background))",
         }}
-        className="transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden relative"
+        className="z-10 transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden relative"
       >
         {/* <CursorShadow shadowSize={shadowSize} shadowOpacity={svgOpacity} /> */}
         {/* <BackgroundVideo /> */}
-        <CanvasGradient svgOpacity={svgOpacity} width="100vw" height="100vh" />
+        <CanvasGradient opacity={svgOpacity} width="100vw" height="100vh" />
 
         {/* Top left */}
         <div className="absolute top-4 left-4 flex flex-col items-start mix-blend-overlay">

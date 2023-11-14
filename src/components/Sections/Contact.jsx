@@ -1,91 +1,121 @@
 import { useState, useRef } from "react";
 import SplitTextHeader from "../Elements/SplitTextHeader";
-import CornerPill from "../Elements/CornerPill";
+import { useScroll, motion, useTransform } from "framer-motion";
 import AnimatedButton from "../AnimatedButton";
 
-export default function Projects() {
+export default function Contact() {
   const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    ref: container,
+  });
+
+  // From rounded to not (50%) to rounded
+  const borderRadius = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0, 50]);
+  const scale = useTransform(scrollYProgress, [0, 0.25, 1], [1, 1, 0.85]);
+
   return (
-    <section
-      className="w-full relative bg-[var(--background)] px-4 lg:px-12 py-24"
-      // className="w-full bg-[var(--background)] min-h-[calc(100vh-2rem)] sticky top-[2rem] z-[3] py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
-      // style={{
-      //   boxShadow: "0 0 20px rgba(0,0,0,.1)",
-      // }}
-      ref={container}
+    <AnimatedButton
+      classes="mx-auto scale-95 rounded-3xl w-full relative px-4 md:px-8 lg:px-12 py-24"
+      expandOnHover={true}
     >
-      {/* <CornerPill>Contact</CornerPill> */}
+      <motion.section
+        className="w-full px-4 md:px-8 lg:px-12 py-24"
+        // className="w-full bg-[var(--background)] min-h-[calc(100vh-2rem)] sticky top-[2rem] z-[3] py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
+        // style={{
+        //   boxShadow: "0 0 20px rgba(0,0,0,.1)",
+        // }}
+        ref={container}
+        // style={{
+        //   borderRadius,
+        //   scale,
+        //   // translateY,
+        // }}
+      >
+        {/* <CornerPill>Contact</CornerPill> */}
 
-      <div className="flex flex-col justify-between gap-8">
-        <SplitTextHeader
-          container={container}
-          phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
-          textAlignment="left"
-        />
+        <div className="flex flex-col justify-between gap-8">
+          <SplitTextHeader
+            container={container}
+            phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
+            textAlignment="left"
+          />
 
-        <div className="h-16" />
+          <div className="h-16" />
 
-        {/* <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
-        <AnimatedButton expandOnHover classes="w-full">
-          <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
-            <div className="flex flex-col justify-between gap-1">
-              <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
-                1. Design & web development
-              </h1>
-              <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
-                Similar work: Praxis, Vana, Minerva
-              </p>
-              <p className="text-stone-700 font-serif text-lg font-light leading-none">
-                Best for: Early stage startups
-              </p>
+          {/* <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
+          <AnimatedButton expandOnHover classes="w-full">
+            <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
+              <div className="flex flex-col justify-between gap-1">
+                <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
+                  1. Design & web development
+                </h1>
+                <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
+                  Similar work: Praxis, Vana, Minerva
+                </p>
+                <p className="text-stone-700 font-serif text-lg font-light leading-none">
+                  Best for: Early stage startups
+                </p>
+              </div>
+              <h2 className="text-stone-700 font-sans text-right text-lg font-light">
+                Independent contract, get in touch &rarr;
+              </h2>
             </div>
-            <h2 className="text-stone-700 font-sans text-right text-lg font-light">
-              Independent contract, get in touch &rarr;
-            </h2>
-          </div>
-        </AnimatedButton>
-        <AnimatedButton expandOnHover classes="w-full">
-          <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
-            <div className="flex flex-col justify-between gap-1">
-              <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
-                2. Data visualization design
-              </h1>
-              <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
-                Similar work: Rest of World, ACLU of Texas, RTI
-              </p>
-              <p className="text-stone-700 font-serif text-lg font-light leading-none">
-                Best for: Established media companies, thinktanks
-              </p>
+          </AnimatedButton>
+          <AnimatedButton expandOnHover classes="w-full">
+            <div className="w-full flex flex-col justify-center gap-12 px-8 py-12">
+              <div className="flex flex-col justify-between gap-1">
+                <h1 className="text-5xl font-serif text-left font-light text-stone-700 mb-2">
+                  2. Data visualization design
+                </h1>
+                <p className="text-stone-700 font-serif text-lg font-light leading-none mb-1">
+                  Similar work: Rest of World, ACLU of Texas, RTI
+                </p>
+                <p className="text-stone-700 font-serif text-lg font-light leading-none">
+                  Best for: Established media companies, thinktanks
+                </p>
+              </div>
+              <h2 className="text-stone-700 font-sans text-right text-lg font-light">
+                Moksha Data Studio, get in touch &rarr;
+              </h2>
             </div>
-            <h2 className="text-stone-700 font-sans text-right text-lg font-light">
-              Moksha Data Studio, get in touch &rarr;
-            </h2>
+          </AnimatedButton>
+        </div> */}
+
+          <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
+            <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
+              <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
+                1.
+              </span>{" "}
+              Design & web development
+            </h1>
+
+            <span className="hidden lg:block text-stone-400 font-serif text-5xl font-light leading-none mb-1">
+              &
+            </span>
+
+            <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
+              <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
+                2.
+              </span>{" "}
+              Data visualization design
+            </h1>
           </div>
-        </AnimatedButton>
-      </div> */}
 
-        <div className="flex flex-col lg:flex-row justify-stretch gap-2 w-full">
-          <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
-            <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
-              1.
-            </span>{" "}
-            Design & web development
-          </h1>
+          <div className="h-16" />
 
-          <span className="hidden lg:block text-stone-400 font-serif text-5xl font-light leading-none mb-1">
-            &
-          </span>
+          <h2 className="text-stone-500 font-serif text-left text-xl font-light">
+            For either, please email me at{" "}
+            <a
+              href="mailto:connor@connorrothschild.com"
+              className="text-stone-700 font-sans text-right text-lg font-light underline underline-offset-4"
+            >
+              connor@connorrothschild.com
+            </a>{" "}
+            with a brief description of the project, timeline, and budget.
+          </h2>
 
-          <h1 className="pl-4 text-5xl font-serif relative text-left font-light text-stone-700 mb-2">
-            <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
-              2.
-            </span>{" "}
-            Data visualization design
-          </h1>
-        </div>
-
-        {/* Basic tabular layout, two rows */}
-        {/* <div className="flex flex-col gap-2">
+          {/* Basic tabular layout, two rows */}
+          {/* <div className="flex flex-col gap-2">
         <div className="w-full flex flex-row justify-between items-start gap-6 px-4 py-6 bg-black rounded-lg">
           <div className="flex flex-col justify-between gap-4">
             <h1 className="text-3xl font-serif text-left font-light text-stone-100 mb-2">
@@ -123,8 +153,9 @@ export default function Projects() {
           </h2>
         </div>
       </div> */}
-      </div>
-    </section>
+        </div>
+      </motion.section>
+    </AnimatedButton>
   );
 }
 

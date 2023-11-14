@@ -1,214 +1,547 @@
-import { useRef, useEffect, useState } from "react";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import gsap from "gsap";
+import { useState, useRef, useEffect } from "react";
+import SplitTextHeader from "../Elements/SplitTextHeader";
+import CornerPill from "../Elements/CornerPill";
 
-const phrase =
-  "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.";
+import { gsap } from "gsap";
+import { Draggable } from "gsap/dist/Draggable";
+import { InertiaPlugin } from "gsap/dist/InertiaPlugin";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 
-const clients = [
-  { name: "ACLU of Texas", color: "#1d478c" },
-  { name: "Axios", color: "#ff0000" },
-  { name: "Babby", color: "#1d8c78" },
-  { name: "Beat Foundry", color: "#a83c2c" },
-  { name: "Collaborative Fund", color: "#3c2ca8" },
-  { name: "Gallery", color: "#9c2ca8" },
-  { name: "Mapping Police Violence", color: "#f1b65a" },
-  { name: "Praxis", color: "#0f2c96" },
-  { name: "Rest of World", color: "#0DCC6C" },
-  { name: "Texas Policy Lab", color: "#7c2ca8" },
-  { name: "USSOCOM", color: "#cc9900" },
-  { name: "Vana", color: "#dbff00" },
-];
-
-export default function Clients() {
-  const [color, setColor] = useState("#131517");
-
-  let refs = useRef([]);
-  const body = useRef(null);
+export default function Projects() {
   const container = useRef(null);
+  const { scrollYProgress } = useScroll({
+    ref: container,
+  });
+
+  const handRotation = useTransform(scrollYProgress, [0, 1], ["0deg", "30deg"]);
 
   useEffect(() => {
-    if (!body.current) return;
-    gsap.registerPlugin(ScrollTrigger);
-    createAnimation();
+    gsap.registerPlugin(Draggable, InertiaPlugin);
+
+    return () => {};
   }, []);
-
-  const createAnimation = () => {
-    gsap.to(refs.current, {
-      scrollTrigger: {
-        trigger: container.current,
-        scrub: true,
-        // pin: true,
-        // end: () => "+=" + container.current.offsetHeight,
-
-        start: "top top",
-        end: "+=1000",
-        // end: 1000,
-      },
-      opacity: 1,
-      ease: "none",
-      stagger: 0.1,
-    });
-  };
-
-  const splitWords = (phrase) => {
-    let words;
-    if (typeof phrase === "string") {
-      words = phrase.split(" ");
-    } else {
-      words = phrase;
-    }
-
-    let body = [];
-    // phrase.split(" ").forEach((word, i) => {
-    //   const letters = splitLetters(word);
-    //   console.log(letters);
-    //   body.push(<p key={word + "_" + i}>{letters}</p>);
-    // });
-    words.forEach((client, i) => {
-      const letters = splitLetters(client, i === clients.length - 1);
-      body.push(
-        <p
-          key={client + "_" + i}
-          className="text-6xl font-serif text-left font-light text-white"
-        >
-          {letters}
-        </p>
-      );
-    });
-    return body;
-  };
-
-  const splitLetters = (word, isLast) => {
-    let letters = [];
-    word.split("").forEach((letter, i) => {
-      letters.push(
-        <span
-          key={letter + "_" + i}
-          className="opacity-10"
-          ref={(el) => {
-            refs.current.push(el);
-          }}
-        >
-          {/* Letter with comma at end */}
-          {letter}
-          {i === word.length - 1 && !isLast ? "," : ""}
-        </span>
-      );
-    });
-    return letters;
-  };
 
   return (
     <section
-      //   className="bg-[var(--background)] sticky top-0 z-[1]"
-      className="bg-[var(--background)]"
-      //   style={{
-      //     boxShadow: "0 -10px 20px 5px rgba(0,0,0,0.5)",
-      //   }}
-      style={{
-        background: color,
-        transition: "background 250ms ease-in-out",
-      }}
+      id="projects"
+      // className="w-full bg-[var(--background)] min-h-screen py-12 px-4 flex flex-col justify-between gap-8"
+      // className="relative w-full bg-[var(--background-invert)] min-h-screen px-4 lg:px-12 py-24 flex flex-col justify-between gap-8"
+
+      className="relative w-full bg-[var(--background)] py-24 px-4 lg:px-12"
+      // className="w-full bg-[var(--background)] min-h-screen py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
+      // style={{
+      //   boxShadow: "0 0 20px rgba(0,0,0,.1)",
+      // }}
       ref={container}
     >
-      {/* Color gradient */}
-      {/* <svg
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-        viewBox="0 0 1422 800"
-        className="absolute top-0 left-0 w-[100vw] z-[-1]"
-      >
-        <defs>
-          <radialGradient id="cccircular-grad" r="50%" cx="50%" cy="50%">
-            <stop offset="15%" stopColor="#cb839a" stopOpacity="0.5"></stop>
-            <stop
-              offset="75%"
-              stopColor="hsl(341, 100%, 85%)"
-              stopOpacity="1"
-            ></stop>
-            <stop offset="100%" stopColor={color} stopOpacity="1"></stop>
-          </radialGradient>
-        </defs>
-        <g fill="url(#cccircular-grad)">
-          <circle r="1504" cx="0" cy="400" opacity="0.05"></circle>
-          <circle r="1472" cx="0" cy="400" opacity="0.07"></circle>
-          <circle r="1440" cx="0" cy="400" opacity="0.09"></circle>
-          <circle r="1408" cx="0" cy="400" opacity="0.11"></circle>
-          <circle r="1376" cx="0" cy="400" opacity="0.13"></circle>
-          <circle r="1344" cx="0" cy="400" opacity="0.15"></circle>
-          <circle r="1312" cx="0" cy="400" opacity="0.17"></circle>
-          <circle r="1280" cx="0" cy="400" opacity="0.19"></circle>
-          <circle r="1248" cx="0" cy="400" opacity="0.22"></circle>
-          <circle r="1216" cx="0" cy="400" opacity="0.24"></circle>
-          <circle r="1184" cx="0" cy="400" opacity="0.26"></circle>
-          <circle r="1152" cx="0" cy="400" opacity="0.28"></circle>
-          <circle r="1120" cx="0" cy="400" opacity="0.30"></circle>
-          <circle r="1088" cx="0" cy="400" opacity="0.32"></circle>
-          <circle r="1056" cx="0" cy="400" opacity="0.34"></circle>
-          <circle r="1024" cx="0" cy="400" opacity="0.36"></circle>
-          <circle r="992" cx="0" cy="400" opacity="0.38"></circle>
-          <circle r="960" cx="0" cy="400" opacity="0.40"></circle>
-          <circle r="928" cx="0" cy="400" opacity="0.42"></circle>
-          <circle r="896" cx="0" cy="400" opacity="0.44"></circle>
-          <circle r="864" cx="0" cy="400" opacity="0.46"></circle>
-          <circle r="832" cx="0" cy="400" opacity="0.48"></circle>
-          <circle r="800" cx="0" cy="400" opacity="0.50"></circle>
-          <circle r="768" cx="0" cy="400" opacity="0.53"></circle>
-          <circle r="736" cx="0" cy="400" opacity="0.55"></circle>
-          <circle r="704" cx="0" cy="400" opacity="0.57"></circle>
-          <circle r="672" cx="0" cy="400" opacity="0.59"></circle>
-          <circle r="640" cx="0" cy="400" opacity="0.61"></circle>
-          <circle r="608" cx="0" cy="400" opacity="0.63"></circle>
-          <circle r="576" cx="0" cy="400" opacity="0.65"></circle>
-          <circle r="544" cx="0" cy="400" opacity="0.67"></circle>
-          <circle r="512" cx="0" cy="400" opacity="0.69"></circle>
-          <circle r="480" cx="0" cy="400" opacity="0.71"></circle>
-          <circle r="448" cx="0" cy="400" opacity="0.73"></circle>
-          <circle r="416" cx="0" cy="400" opacity="0.75"></circle>
-          <circle r="384" cx="0" cy="400" opacity="0.77"></circle>
-          <circle r="352" cx="0" cy="400" opacity="0.79"></circle>
-          <circle r="320" cx="0" cy="400" opacity="0.81"></circle>
-          <circle r="288" cx="0" cy="400" opacity="0.83"></circle>
-          <circle r="256" cx="0" cy="400" opacity="0.86"></circle>
-          <circle r="224" cx="0" cy="400" opacity="0.88"></circle>
-          <circle r="192" cx="0" cy="400" opacity="0.90"></circle>
-          <circle r="160" cx="0" cy="400" opacity="0.92"></circle>
-          <circle r="128" cx="0" cy="400" opacity="0.94"></circle>
-          <circle r="96" cx="0" cy="400" opacity="0.96"></circle>
-          <circle r="64" cx="0" cy="400" opacity="0.98"></circle>
-        </g>
-      </svg> */}
-      <div className="sticky top-0 h-screen" ref={body}>
-        <div className="group max-w-7xl py-8 w-full text-left flex flex-row gap-2 px-4 items-start flex-wrap">
-          {/* {splitWords(clients.map((client) => client.name))} */}
-          {/* {splitWords(phrase)} */}
-          {clients.map((client, i) => (
-            <div
-              key={client.name + "_" + i}
-              style={{
-                "--background": client.color,
-              }}
-              onMouseEnter={() => setColor(client.color)}
-              onMouseLeave={() => setColor("#131517")}
-              className={`hover:opacity-70 transition-all duration-500 ease-in-out`}
-            >
-              <p
-                className="text-6xl font-serif text-left font-light text-white"
-                // style={{
-                //   mixBlendMode: "overlay",
-                // }}
-              >
-                {client.name}
-              </p>
-            </div>
-          ))}
-        </div>
-        <h1 className="text-white text-[11vw] text-center font-bold absolute bottom-8 leading-none right-4 tracking-tighter uppercase">
-          Clients
+      {/* <CornerPill>Projects</CornerPill> */}
+
+      <div className="flex flex-col justify-between gap-8">
+        <h1 className="text-7xl font-serif text-left font-light text-stone-300 mb-2">
+          Hi, I&apos;m Connor{" "}
+          <motion.span
+            style={{
+              display: "inline-block",
+              rotate: handRotation,
+            }}
+          >
+            👋
+          </motion.span>
         </h1>
+
+        <div className="invert">
+          <SplitTextHeader
+            container={container}
+            // phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
+            phrase="I am a creative developer based in Houston, Texas. I am passionate about designing and developing websites with a focus on information design and data visualization."
+            textAlignment="left"
+          />
+        </div>
+
+        <div className="h-16" />
+
+        {/* Horizontally scrollable list of projects */}
+        {/* <Slider /> */}
+        {/* <Grid /> */}
+        {/* <TextGrid scrollYProgress={scrollYProgress} /> */}
       </div>
     </section>
   );
 }
+
+function ProjectCard({ client, image, title, description, color }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      className="flex flex-col aspect-square overflow-hidden rounded-xl"
+      style={{
+        borderColor: color,
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="image-with-text relative h-full group">
+        <img
+          className="object-cover absolute w-full h-full filter brightness-50 group-hover:filter-none transition delay-0 rotate-45 scale-[.75] blur hover:rotate-0 hover:scale-100 hover:blur-0 group-hover:delay-200"
+          src={image}
+        />
+        <h2
+          className="text-white font-serif text-center font-light text-2xl border border-solid px-6 py-2 uppercase absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group-hover:opacity-0 rounded w-[max-content] backdrop-blur-xl"
+          style={{
+            color: color,
+            borderColor: color,
+            background: `${color}30`,
+            transition: "opacity .2s ease-in-out",
+          }}
+        >
+          {client}
+        </h2>
+      </div>
+      {/* <div className="mt-3 flex flex-col justify-center items-center text-center gap-2 p-4">
+     
+        <p className="text-stone-300 text-xl font-bold">{title}</p>
+        <p className="text-stone-300 text-sm">{description}</p>
+      </div> */}
+    </div>
+  );
+}
+
+const projects = [
+  {
+    client: "Rest of World",
+    image: "/images/projects/blackouts.png",
+    title: "A decade of internet blackouts",
+    description:
+      "Visualizing seven years, 60 countries, and 935 government-imposed internet shutdowns.",
+    color: "#0DCC6C",
+    link: "https://restofworld.org/2022/blackouts/",
+  },
+  {
+    client: "Collaborative Fund",
+    image: "/images/projects/impact.png",
+    title: "The history of impact investing",
+    description:
+      "Visualizing 40 years of impact investing, from the first social venture capital firm to the rise of ESG.",
+    color: "#7893eb",
+    link: "https://impact.collabfund.com/",
+  },
+  {
+    client: "Praxis",
+    image: "/images/projects/praxis.png",
+    title: "Building a new city",
+    description:
+      "Web design and development for a new city in the Mediterranean.",
+    color: "#348a00",
+    link: "https://cityofpraxis.org",
+  },
+  {
+    client: "Absolute Rest",
+    image: "/images/projects/absolute-rest.png",
+    title: "Democratizing sleep studies",
+    description: "Application development for a leading sleep study company.",
+    color: "#312e81",
+    link: "https://www.absoluterest.com/",
+  },
+  {
+    client: "Gallery",
+    image: "/images/projects/gallery.png",
+    title: "Building virtual art galleries",
+    description:
+      "Web design and development for the leading NFT gallery platform.",
+    color: "#ffffff",
+    link: "https://www.gallery.so/",
+  },
+  {
+    client: "Minerva",
+    image: "/images/projects/gallery.png",
+    title: "Revolutionizing real estate",
+    description:
+      "Web design and development for a new real estate management platform.",
+    color: "#f03c3c",
+    link: "https://www.gallery.so/",
+  },
+];
+
+const Slider = () => {
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    if (!sliderRef.current) return;
+    gsap.registerPlugin(Draggable);
+    Draggable.create(sliderRef.current, {
+      type: "x",
+      bounds: {
+        minX: -sliderRef.current.clientWidth + window.innerWidth * 0.88,
+        maxX: 0,
+      },
+      inertia: true,
+      throwResistance: 2500,
+      minDuration: 0.25,
+    });
+  }, []);
+
+  return (
+    <div
+      id="slider"
+      className="flex gap-4 flex-nowrap scrollbar-hide"
+      style={{
+        width: "max-content",
+        overflowX: "hidden",
+      }}
+      ref={sliderRef}
+    >
+      {projects.map((d) => (
+        <ProjectCard
+          key={d.client}
+          client={d.client}
+          image={d.image}
+          title={d.title}
+          description={d.description}
+          color={d.color}
+          link={d.link}
+        />
+      ))}
+    </div>
+  );
+};
+
+const Grid = () => {
+  return (
+    <div
+      className="grid gap-2"
+      style={{
+        gridTemplateColumns: "repeat(auto-fill, minmax(400px, 1fr))",
+      }}
+    >
+      {projects.map((d) => (
+        <ProjectCard
+          key={d.client}
+          client={d.client}
+          image={d.image}
+          title={d.title}
+          description={d.description}
+          color={d.color}
+          link={d.link}
+        />
+      ))}
+    </div>
+  );
+};
+
+const expansiveList = [
+  {
+    layout: "client",
+    title: "Absolute Rest",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "aclu-square.png",
+    img_alt: "Logo for the American Civil Liberties Union of Texas",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "ACLU of Texas",
+    service: "Microsite development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "aclu-square.png",
+    img_alt: "Logo for the American Civil Liberties Union of Texas",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Axios",
+    service: "Data visualization",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "axios-square.png",
+    img_alt: "Logo for Axios",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Babby",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "babby-square.png",
+    img_alt: "Logo for Babby",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Beat Foundry",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: true,
+    image: "beat-foundry-square.png",
+    img_alt: "Logo for Beat Foundry",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Collaborative Fund",
+    service: "Microsite development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "collaborative-fund-square.png",
+    img_alt: "Logo for Collaborative Fund",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Gallery",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "gallery-square.png",
+    img_alt: "Logo for Gallery",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Mapping Police Violence",
+    service: "Data visualization",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: true,
+    image: "mapping-police-violence-square.png",
+    img_alt: "Logo for Mapping Police Violence",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Minerva",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "mapping-police-violence-square.png",
+    img_alt: "Logo for Mapping Police Violence",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Praxis",
+    service: "Data visualization",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "praxis-square.png",
+    img_alt: "Logo for Praxis",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Rest of World",
+    service: "Data visualization",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "rest-of-world-square.png",
+    img_alt: "Logo for Rest of World",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Texas Policy Lab",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: true,
+    image: "texas-policy-lab-square.png",
+    img_alt: "Logo for Texas Policy Lab",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "US Special Operations Command",
+    service: "Web design and development",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: true,
+    image: "ussocom-square.png",
+    img_alt: "Logo for US Special Operations Command",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+  {
+    layout: "client",
+    title: "Vana",
+    service: "Data visualization",
+    description: null,
+    date: "",
+    audience: null,
+    featured: false,
+    archived: false,
+    image: "vana-square.png",
+    img_alt: "Logo for Vana",
+    techstack: ["JavaScript"],
+    github: null,
+    url: "",
+  },
+].filter((d) => !d.archived);
+
+const convertIndexToTwoDigitZeroPrefix = (number) => {
+  const correctedIndex = number + 1;
+  const isAlreadyTwoDigits = correctedIndex >= 10;
+  return isAlreadyTwoDigits ? correctedIndex : `0${correctedIndex}`;
+};
+
+const TextGrid = ({ scrollYProgress }) => {
+  const [hovered, setHovered] = useState(null);
+
+  const translateY = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.5, 1],
+    ["100%", "10%", "0%", "0%"]
+  );
+
+  return (
+    <motion.div
+      style={{
+        translateY,
+      }}
+      className="flex flex-row gap-x-2 gap-y-2 flex-wrap max-w-7xl group justify-start"
+    >
+      {expansiveList.map((d, i) => (
+        <h2
+          key={d.client}
+          //  hover:tracking-tight tracking-normal
+          className={`inline-flex items-center gap-6 border-2 border-solid rounded-lg border-transparent hover:border-[${d.color}] transition-all duration-300 delay-[--delay] group-hover:delay-0`}
+          style={{
+            // borderColor: hovered === d.title ? d.color : "transparent",
+            // background: hovered === d.title ? `${d.color}10` : "transparent",
+            opacity: hovered && hovered !== d.title ? 0.25 : 1,
+            filter: hovered && hovered !== d.title ? "blur(1px)" : "none",
+            "--delay": `${i * 50}ms`,
+          }}
+          onMouseEnter={() => setHovered(d.title)}
+          onMouseLeave={() => setHovered(null)}
+        >
+          <a
+            href="#"
+            key={d.title}
+            className="text-stone-200 font-serif font-light text-3xl md:text-4xl lg:text-5xl xl:text-6xl relative"
+            style={{
+              color: d.color,
+            }}
+          >
+            <p className="absolute -top-1 -left-3 text-xs flex items-center gap-1">
+              <span>{convertIndexToTwoDigitZeroPrefix(i)}. </span>
+              {/* <AnimatePresence>
+                {hovered === d.title && (
+                  <motion.span
+                    className="tracking-normal"
+                    initial={{
+                      translateY: 5,
+                      opacity: 0,
+                      // translateX: "-50%",
+                    }}
+                    animate={{
+                      translateY: 0,
+                      opacity: 1,
+                      // translateX: "-50%",
+                    }}
+                    exit={{
+                      translateY: 0,
+                      opacity: 0,
+                      // translateX: "-50%",
+                    }}
+                    style={{
+                      textShadow: "-1px -1px 5px var(--background)",
+                    }}
+                  >
+                    {d.service} with
+                  </motion.span>
+                )}
+              </AnimatePresence> */}
+            </p>
+            {d.title}{" "}
+            <span
+              className="text-stone-500 px-2"
+              style={{
+                opacity: i < expansiveList.length - 1 ? 1 : 0,
+              }}
+            >
+              &
+            </span>
+            <img
+              src={`images/projects/${d.image}`}
+              className="aspect-square h-full object-cover rounded absolute right-0 top-0"
+              style={{
+                opacity: hovered === d.title ? 1 : 0,
+                transition: "opacity .2s ease-in-out",
+              }}
+            />
+          </a>
+        </h2>
+      ))}
+    </motion.div>
+  );
+};

@@ -122,7 +122,7 @@ export default function SplitTextHeader({
 
   return (
     <div
-      className="max-w-5xl w-full flex flex-row items-center flex-wrap gap-2 tracking-tight"
+      className="max-w-6xl w-full flex flex-row items-center flex-wrap gap-2 tracking-tight"
       ref={body}
       style={{
         margin:
