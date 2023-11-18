@@ -17,7 +17,7 @@ const lethargy = new Lethargy(15, 12, 0.05);
 
 const MotionBox = motion(Box);
 
-const ItemComp = ({ item, children }) => {
+const ItemComp = ({ item, children }: { item: any; children: any }) => {
   const x = useMotionValue(item.center.x);
   const y = useMotionValue(item.center.y);
 

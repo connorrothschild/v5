@@ -148,7 +148,7 @@ export class Grid {
 
   getClosestItem() {
     let minDistance = Infinity;
-    let closestItem: Item = null;
+    let closestItem: Item | null = null;
     this.items.forEach((item) => {
       const distance = item.center.distanceTo(this.cameraPosition);
       if (distance < minDistance) {
