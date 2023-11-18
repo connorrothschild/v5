@@ -16,8 +16,9 @@
   --background-invert: #e4e4e4;
 }
 
-html {
-  background: var(--background);
+html,
+body {
+  background: var(--background) !important;
 }
 
 html,

@@ -58,10 +58,21 @@ export default function Projects() {
           <SplitTextHeader
             container={container}
             // phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
-            phrase="I am a creative developer based in Houston, Texas. I am passionate about designing and developing websites with a focus on information design and data visualization."
+            phrase="I am a creative developer based in Houston, Texas. I am passionate about designing and developing websites with a focus on information design & data visualization."
             textAlignment="left"
           />
         </div>
+        {/* <h2
+          className="font-serif text-gray-300 text-3xl font-extralight max-w-3xl indent-10"
+          style={{
+            textWrap: "balance",
+          }}
+        >
+          <span className="font-serif text-yellow-500">&</span> I am a creative
+          developer based in Houston, Texas. I am passionate about designing and
+          developing websites with a focus on information design & data
+          visualization.
+        </h2> */}
 
         <div className="h-16" />
 

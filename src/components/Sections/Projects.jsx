@@ -1,8 +1,101 @@
 import Image from "next/image";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { InfiniteGrid } from "../InfiniteGrid/InfiniteGrid";
+import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
+
+const photos = [
+  {
+    id: "1075",
+    author: "Verne Ho",
+    width: 1214,
+    height: 809,
+    url: "https://unsplash.com/photos/dccIfU1V1VU",
+    download_url: "https://picsum.photos/id/1075/1214/809",
+  },
+  {
+    id: "1076",
+    author: "Samuel Zeller",
+    width: 1208,
+    height: 805,
+    url: "https://unsplash.com/photos/WlD3vixTVUg",
+    download_url: "https://picsum.photos/id/1076/1208/805",
+  },
+  {
+    id: "1077",
+    author: "Maico Amorim",
+    width: 1000,
+    height: 665,
+    url: "https://unsplash.com/photos/SJWPKMb9u-k",
+    download_url: "https://picsum.photos/id/1077/1000/665",
+  },
+  {
+    id: "1078",
+    author: "Vladimir Kudinov",
+    width: 1000,
+    height: 667,
+    url: "https://unsplash.com/photos/KBX9XHk266s",
+    download_url: "https://picsum.photos/id/1078/1000/667",
+  },
+  {
+    id: "1079",
+    author: "Kamesh Vedula",
+    width: 1124,
+    height: 750,
+    url: "https://unsplash.com/photos/ISL7czxIP-k",
+    download_url: "https://picsum.photos/id/1079/1124/750",
+  },
+  {
+    id: "108",
+    author: "Florian Klauer",
+    width: 1000,
+    height: 666,
+    url: "https://unsplash.com/photos/t1mqA3V3-7g",
+    download_url: "https://picsum.photos/id/108/1000/666",
+  },
+  {
+    id: "1084",
+    author: "Jay Ruzesky",
+    width: 1144,
+    height: 817,
+    url: "https://unsplash.com/photos/h13Y8vyIXNU",
+    download_url: "https://picsum.photos/id/1084/1144/817",
+  },
+  {
+    id: "109",
+    author: "Zwaddi",
+    width: 1071,
+    height: 598,
+    url: "https://unsplash.com/photos/YvYBOSiBJE8",
+    download_url: "https://picsum.photos/id/109/1071/598",
+  },
+  {
+    id: "11",
+    author: "Paul Jarvis",
+    width: 1250,
+    height: 833,
+    url: "https://unsplash.com/photos/Cm7oKel-X2Q",
+    download_url: "https://picsum.photos/id/11/1250/833",
+  },
+  {
+    id: "110",
+    author: "Kenneth Thewissen",
+    width: 1123,
+    height: 748,
+    url: "https://unsplash.com/photos/D76DklsG-5U",
+    download_url: "https://picsum.photos/id/110/1123/748",
+  },
+  {
+    id: "111",
+    author: "Gabe Rodriguez",
+    width: 1100,
+    height: 664,
+    url: "https://unsplash.com/photos/eLUegVAjN7s",
+    download_url: "https://picsum.photos/id/111/1100/664",
+  },
+];
 
 export default function Home() {
   const ref = useRef(null);
@@ -77,7 +170,7 @@ export default function Home() {
         opacity,
         // translateY,
       }}
-      className="relative min-h-screen my-24 w-screen overflow-visible"
+      className="relative h-screen my-24 w-screen overflow-visible"
       ref={ref}
     >
       <div
@@ -111,14 +204,85 @@ export default function Home() {
       </div>
       <div className="pointer-events-none absolute left-1/2 top-1/2 transform translate-x-[-50%] translate-y-[-50%] text-white text-center z-40">
         <h1 className="leading-[1.05] font-light font-serif text-7xl">
-          Some of those projects can be found here.
+          <span className="text-yellow-500">&</span> Some of my projects can be
+          found here.
         </h1>
       </div>
+      {/* <InfiniteGrid>
+        <Grid
+          templateAreas={`
+          "a a a b b b c c"
+          "d d e e e f f f"
+          "g g g h h i i i"
+        `}
+          gridTemplateColumns={"repeat(8, 1fr)"}
+          gridTemplateRows={"repeat(3, 1fr)"}
+          w={{ base: "150vw", md: "100vw" }}
+          h={{ base: "100vh", md: "125vh" }}
+          gap={4}
+          p={2}
+        >
+          <GridItem
+            area="a"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="b"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="c"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="d"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="e"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="f"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="g"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="h"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+          <GridItem
+            area="i"
+            bgImage={`/images/projects/blackouts.png`}
+            bgSize="cover"
+            rounded="xl"
+          />
+        </Grid>
+      </InfiniteGrid> */}
       <Link
         href="/archive"
-        className="cursor-pointer z-50 absolute bottom-2 right-2 text-xs text-gray-400"
+        className="cursor-pointer z-50 absolute bottom-2 right-2 text-lg text-gray-200 font-serif font-light hover:text-gray-1"
       >
-        See all projects
+        & more projects here
       </Link>
     </motion.section>
   );

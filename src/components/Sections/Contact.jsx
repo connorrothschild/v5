@@ -36,7 +36,7 @@ export default function Contact() {
         <div className="flex flex-col justify-between gap-8">
           <SplitTextHeader
             container={container}
-            phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest and easy collaboration. There are two main channels I work with clients through:"
+            phrase="I am available for freelance work and new collaborations. I keep an intentionally small roster of clients to ensure mutual interest & easy collaboration. There are two main channels I work with clients through:"
             textAlignment="left"
           />
 
@@ -86,7 +86,7 @@ export default function Contact() {
               <span className="absolute top-0 left-0 text-stone-700 font-serif text-lg font-light leading-none mb-1">
                 1.
               </span>{" "}
-              Design & web development
+              Design and web development
             </h1>
 
             <span className="hidden lg:block text-stone-400 font-serif text-5xl font-light leading-none mb-1">
@@ -107,7 +107,7 @@ export default function Contact() {
             For either, please email me at{" "}
             <a
               href="mailto:connor@connorrothschild.com"
-              className="text-stone-700 font-sans text-right text-lg font-light underline underline-offset-4"
+              className="text-amber-500 font-serif text-right text-lg font-light mix-blend-hard-light"
             >
               connor@connorrothschild.com
             </a>{" "}

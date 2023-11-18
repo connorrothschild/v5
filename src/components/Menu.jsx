@@ -95,28 +95,35 @@ export default function Menu({}) {
               backdropFilter: "blur(7px)",
             }}
           >
-            {["Projects,", "Awards,", "About,", "Contact"].map((w, index) => (
-              <motion.h2
-                variants={word}
-                key={`menu-${index}`}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                className="text-white text-4xl overflow-hidden cursor-pointer"
-              >
-                {w.split("").map((l, index) => {
-                  return (
-                    <motion.span
-                      variants={letter}
-                      key={index}
-                      className="inline-block"
-                    >
-                      {l}
-                    </motion.span>
-                  );
-                })}{" "}
-              </motion.h2>
-            ))}
+            {["Home", "Projects", "Awards", "About", "Contact"].map(
+              (w, index) => (
+                <motion.h2
+                  variants={word}
+                  key={`menu-${index}`}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className="text-white text-4xl overflow-hidden cursor-pointer"
+                >
+                  {w.split("").map((l, index) => {
+                    return (
+                      <motion.span
+                        variants={letter}
+                        key={index}
+                        className="inline-block"
+                      >
+                        {l}
+                      </motion.span>
+                    );
+                  })}{" "}
+                  {index < 4 && (
+                    <span className="text-gray-400 opacity-50 font-light text-4xl overflow-hidden">
+                      &
+                    </span>
+                  )}
+                </motion.h2>
+              )
+            )}
           </motion.div>
         )}
       </AnimatePresence>
