@@ -1,12 +1,6 @@
-import Link from "next/link";
 import React, { useState } from "react";
-import {
-  ArrowRightCircleIcon,
-  ArrowRightIcon,
-} from "@heroicons/react/20/solid";
 import { AnimatePresence, easeIn, motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
-import Globe from "../Globe/Globe";
 import TripleViz from "../TripleViz/TripleViz";
 import GridTitle from "../Elements/GridTitle";
 
@@ -59,7 +53,7 @@ export default function Contact() {
                 active={vizActive}
                 setActive={setVizActive}
               >
-                <RotatingGlobe active={vizActive} />
+                <VizScreen active={vizActive} />
               </ServiceCard>
               <ServiceCard
                 title="Web development"
@@ -68,7 +62,7 @@ export default function Contact() {
                 active={webActive}
                 setActive={setWebActive}
               >
-                <SampleWebsite active={webActive} />
+                <WebsiteScreen active={webActive} />
               </ServiceCard>
             </div>
             <div className="w-full text-right">
@@ -141,16 +135,15 @@ function ServiceCard({
   );
 }
 
-function RotatingGlobe({ active }: { active: boolean }) {
+function VizScreen({ active }: { active: boolean }) {
   return (
     <div className="h-[227px] rounded bg-blue-50 border border-solid border-blue-400 overflow-hidden relative p-4">
       <TripleViz active={active} />
-      {/* <Globe active={active} /> */}
     </div>
   );
 }
 
-function SampleWebsite({ active }: { active: boolean }) {
+function WebsiteScreen({ active }: { active: boolean }) {
   return (
     <div className="h-[227px] rounded bg-rose-50 border border-solid border-rose-400 overflow-hidden">
       <div
