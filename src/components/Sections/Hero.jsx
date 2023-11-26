@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTransform, useScroll, motion, useSpring } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
@@ -9,6 +9,7 @@ import BackgroundVideo from "../Archived/BackgroundVideo";
 
 import { InfiniteGrid } from "../InfiniteGrid/InfiniteGrid";
 import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
+import Image from "next/image";
 
 const photos = [
   {
@@ -131,7 +132,7 @@ const Hero = () => {
   const LOADING_TIME = 3;
 
   return (
-    <div className="relative h-screen z-[1]" ref={ref}>
+    <div className="relative h-screen z-[1]" ref={ref} id="home">
       <span className="z-[9] absolute bottom-24 right-8 user-select-none font-serif font-extralight tracking-wide text-yellow-500">
         psst. there&apos;s music—click the menu ☺
       </span>
@@ -152,10 +153,10 @@ const Hero = () => {
         {/* <CanvasGradient opacity={svgOpacity} width="100vw" height="100vh" /> */}
         <ProjectsGrid />
 
-        <div className="pointer-events-none w-[calc(100%-2rem)] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-row gap-4 text-center justify-center items-center mix-blend-exclusion">
-          <div className="overflow-hidden pr-1">
+        <div className="pointer-events-none w-[calc(100%-2rem)] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-2 md:gap-3 text-center justify-center items-center mix-blend-hard-light">
+          <div className="overflow-hidden px-1.5">
             <motion.h1
-              className="font-serif text-[5rem] leading-[.85] text-white font-light uppercase tracking-tighter"
+              className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light uppercase tracking-tighter"
               animate={{ translateY: 0 }}
               initial={{ translateY: "100%" }}
               transition={{
@@ -168,9 +169,9 @@ const Hero = () => {
             </motion.h1>
           </div>
 
-          <div className="overflow-hidden pr-1 self-end">
+          <div className="overflow-hidden md:self-end px-1.5">
             <motion.h1
-              className="font-serif text-[5rem] leading-[.85] text-white font-light uppercase tracking-tight"
+              className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light uppercase tracking-tight"
               animate={{ translateY: 0 }}
               initial={{ translateY: "100%" }}
               transition={{
@@ -293,62 +294,92 @@ function ProjectsGrid() {
         h={{ base: "100vh", md: "125vh" }}
         gap={6}
         p={3}
+        cursor="grab"
+        userSelect="none"
+        willChange={"transform"}
       >
-        <GridItem
-          area="a"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="b"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="c"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="d"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="e"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="f"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="g"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="h"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
-        <GridItem
-          area="i"
-          bgImage={`/images/projects/blackouts.png`}
-          bgSize="cover"
-          rounded="xl"
-        />
+        <GridItem area="a" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/babby-1-screen-studio.mp4" />
+        </GridItem>
+        <GridItem area="b" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/praxis-1.mp4" />
+        </GridItem>
+        <GridItem area="c" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
+        </GridItem>
+        <GridItem area="d" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
+        </GridItem>
+        <GridItem area="e" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/vana.mp4" />
+        </GridItem>
+        <GridItem area="f" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/babby-1-screen-studio.mp4" />
+        </GridItem>
+        <GridItem area="g" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/praxis-1.mp4" />
+        </GridItem>
+        <GridItem area="h" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
+        </GridItem>
+        <GridItem area="i" bgSize="cover" rounded="xl">
+          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
+        </GridItem>
       </Grid>
     </InfiniteGrid>
+  );
+}
+
+function VideoThatPlaysOnHover({ src }) {
+  const ref = useRef(null);
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <div className="relative w-full h-full rounded-lg overflow-hidden user-select-none">
+      <video
+        // https://web.dev/articles/lazy-loading-video
+        // preload="metadata"
+
+        // When using thumbnail images, preload nothing
+        preload="none"
+        className="absolute w-[calc(100%-2px)] h-[calc(100%-2px)] object-cover top-[1px] left-[1px] user-select-none"
+        src={src}
+        loop
+        muted
+        ref={ref}
+        onMouseEnter={() => {
+          ref.current.play();
+          setPlaying(true);
+        }}
+        onMouseLeave={() => {
+          ref.current.pause();
+          // Set frame to 0
+          ref.current.currentTime = 0;
+          setPlaying(false);
+        }}
+      />
+
+      {/* Use the first frame of the video */}
+      {/* <div
+        className="pointer-events-none absolute w-full h-full bg-black bg-opacity-50"
+        style={{
+          opacity: playing ? 0 : 1,
+          transition: "opacity .2s ease-in-out",
+        }}
+      /> */}
+
+      {/* Use thumbnail/covers for each video */}
+      <Image
+        alt=""
+        src="/images/projects/blackouts.png"
+        draggable={false}
+        layout="fill"
+        className="absolute w-full h-full object-cover opacity-50 pointer-events-none user-select-none"
+        style={{
+          opacity: playing ? 0 : 1,
+          transition: "opacity 300ms ease-in-out 100ms",
+        }}
+      />
+    </div>
   );
 }

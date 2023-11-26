@@ -8,14 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        "1.5xl": "1.375rem",
+      },
       fontFamily: {
+        serif: ["ivypresto-display"],
         // serif: ["var(--font-times-now)"],
         // serif: ["var(--font-tobias)"],
         // serif: ["var(--font-canela)"],
-        serif: ["ivypresto-display"],
-        // sans: ["var(--font-suisse)"],
         sans: ["var(--font-manrope)"],
-        // sans: ["ivypresto-display"],
+        // sans: ["var(--font-suisse)"],
       },
     },
   },

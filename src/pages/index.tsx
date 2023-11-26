@@ -3,6 +3,7 @@ import Clients from "@/components/Sections/Clients";
 import Projects from "@/components/Sections/Projects";
 import Contact from "@/components/Sections/Contact";
 import Archive from "@/components/Sections/Archive";
+import Ethos from "@/components/Sections/Ethos";
 
 export default function Home() {
   return (
@@ -10,7 +11,8 @@ export default function Home() {
       <Hero />
       {/* <div className="sticky top-0 z-10"> */}
       <Clients />
-      <Projects />
+      <Ethos />
+      {/* <Projects /> */}
       {/* <Awards /> */}
       <Contact />
       {/* </div> */}

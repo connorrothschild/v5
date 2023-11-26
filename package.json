@@ -11,6 +11,7 @@
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
     "@chakra-ui/theme": "^3.3.1",
+    "@heroicons/react": "^2.0.18",
     "@motionone/utils": "^10.16.3",
     "@react-hook/window-size": "^3.1.1",
     "@types/node": "20.6.3",
@@ -34,5 +35,12 @@
     "react-youtube": "^10.1.0",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "d3-array": "^3.2.4",
+    "d3-geo": "^3.1.0",
+    "d3-scale": "^4.0.2",
+    "flubber": "^0.4.2",
+    "topojson-client": "^3.1.0"
   }
 }

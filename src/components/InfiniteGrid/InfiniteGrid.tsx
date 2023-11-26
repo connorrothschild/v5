@@ -109,7 +109,7 @@ export const InfiniteGrid = ({
         direction: [dx, dy],
       }) => {
         // add some inertia at end of drag
-        event.preventDefault();
+        // event.preventDefault();
         springs.x.set(initialOffsetRef.current.x - x - dx * vx * 180);
         springs.y.set(initialOffsetRef.current.y - y - dy * vy * 180);
       },
@@ -142,6 +142,7 @@ export const InfiniteGrid = ({
         alignItems="center"
         justifyContent="center"
         style={{ x, y, touchAction: "none" }}
+        willChange={"transform"}
       >
         <Box pos="absolute" inset={0}>
           <Box

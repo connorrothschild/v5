@@ -3,6 +3,25 @@ import { useState } from "react";
 import { easeInOutQuint } from "@/config/eases";
 import Jukebox from "./Jukebox";
 
+const menuItems = [
+  {
+    href: "#home",
+    w: "Home",
+  },
+  // {
+  //   href: "#about",
+  //   w: "About",
+  // },
+  {
+    href: "#work",
+    w: "Projects",
+  },
+  {
+    href: "#contact",
+    w: "Contact",
+  },
+];
+
 export default function Menu({}) {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -67,9 +86,7 @@ export default function Menu({}) {
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-difference ${
-          showMenu ? "text-white" : "text-gray-400"
-        }`}
+        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-difference text-gray-200`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -95,35 +112,40 @@ export default function Menu({}) {
               backdropFilter: "blur(7px)",
             }}
           >
-            {["Home", "Projects", "Awards", "About", "Contact"].map(
-              (w, index) => (
-                <motion.h2
-                  variants={word}
-                  key={`menu-${index}`}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  className="text-white text-4xl overflow-hidden cursor-pointer"
-                >
-                  {w.split("").map((l, index) => {
-                    return (
-                      <motion.span
-                        variants={letter}
-                        key={index}
-                        className="inline-block"
-                      >
-                        {l}
-                      </motion.span>
-                    );
-                  })}{" "}
-                  {index < 4 && (
-                    <span className="text-gray-400 opacity-50 font-light text-4xl overflow-hidden">
-                      &
-                    </span>
-                  )}
-                </motion.h2>
-              )
-            )}
+            {menuItems.map(({ href, w }, index) => (
+              <motion.h2
+                variants={word}
+                key={`menu-${index}`}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                className="text-white text-4xl overflow-hidden cursor-pointer"
+                onClick={() => {
+                  setShowMenu(false);
+                  const element = document.querySelector(href);
+                  element.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                {w.split("").map((l, index) => {
+                  return (
+                    <motion.span
+                      variants={letter}
+                      key={index}
+                      className="inline-block"
+                    >
+                      {l}
+                    </motion.span>
+                  );
+                })}{" "}
+                {index < menuItems.length - 1 && (
+                  <span className="text-gray-400 opacity-50 font-light text-4xl overflow-hidden">
+                    &
+                  </span>
+                )}
+              </motion.h2>
+            ))}
           </motion.div>
         )}
       </AnimatePresence>
