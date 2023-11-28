@@ -241,6 +241,7 @@ function ProjectsGrid() {
 function VideoThatPlaysOnHover({ src }) {
   const ref = useRef(null);
   const [playing, setPlaying] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   return (
     <div
@@ -258,11 +259,15 @@ function VideoThatPlaysOnHover({ src }) {
         style={{
           // Start at top left
           objectPosition: "top left",
+          cursor: hasLoaded ? "unset" : "wait",
         }}
         src={`/videos/${src}.mp4`}
         loop
         muted
         ref={ref}
+        onLoadedData={() => {
+          setHasLoaded(true);
+        }}
         onMouseEnter={() => {
           // video.currentTime > 0 &&
           //   !video.paused &&
