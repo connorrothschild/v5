@@ -5,7 +5,7 @@ import Jukebox from "./Jukebox";
 
 const menuItems = [
   {
-    href: "#home",
+    href: "/#home",
     w: "Home",
   },
   // {
@@ -13,11 +13,11 @@ const menuItems = [
   //   w: "About",
   // },
   {
-    href: "#work",
+    href: "/#work",
     w: "Projects",
   },
   {
-    href: "#contact",
+    href: "/#contact",
     w: "Contact",
   },
 ];
@@ -81,6 +81,23 @@ export default function Menu({}) {
     },
   };
 
+  const ampersand = {
+    // From translateX: 100% to translateX: 0
+    hidden: { opacity: 0, translateY: "100%" },
+    show: {
+      opacity: 1,
+      translateY: 0,
+      transition: {
+        duration: WORD_IN_DURATION / 4,
+        ease: easeInOutQuint,
+      },
+    },
+    exit: {
+      //   translateY: "-100%",
+      opacity: 0,
+    },
+  };
+
   return (
     <>
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
@@ -113,7 +130,7 @@ export default function Menu({}) {
             }}
           >
             {menuItems.map(({ href, w }, index) => (
-              <motion.h2
+              <motion.a
                 variants={word}
                 key={`menu-${index}`}
                 initial="hidden"
@@ -122,11 +139,12 @@ export default function Menu({}) {
                 className="text-white text-4xl overflow-hidden cursor-pointer"
                 onClick={() => {
                   setShowMenu(false);
-                  const element = document.querySelector(href);
-                  element.scrollIntoView({
-                    behavior: "smooth",
-                  });
+                  // const element = document.querySelector(href);
+                  // element.scrollIntoView({
+                  //   behavior: "smooth",
+                  // });
                 }}
+                href={href}
               >
                 {w.split("").map((l, index) => {
                   return (
@@ -140,11 +158,14 @@ export default function Menu({}) {
                   );
                 })}{" "}
                 {index < menuItems.length - 1 && (
-                  <span className="text-gray-400 opacity-50 font-light text-4xl overflow-hidden">
+                  <motion.span
+                    className="text-gray-400 opacity-50 font-light text-4xl overflow-hidden"
+                    variants={ampersand}
+                  >
                     &
-                  </span>
+                  </motion.span>
                 )}
-              </motion.h2>
+              </motion.a>
             ))}
           </motion.div>
         )}

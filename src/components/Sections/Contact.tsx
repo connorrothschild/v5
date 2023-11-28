@@ -10,7 +10,7 @@ export default function Contact() {
 
   return (
     <section
-      className="relative w-full bg-[var(--background-invert)] py-24 px-4 lg:px-12"
+      className="relative w-full bg-[var(--background-invert)] px-4 lg:px-12 rounded-b-[1rem]"
       id="contact"
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -21,7 +21,7 @@ export default function Contact() {
           </span>
         </div>
         {/* RIGHT SIDE */}
-        <div className="col-span-2 flex flex-col gap-12 w-full">
+        <div className="col-span-2 flex flex-col gap-12 w-full pb-24">
           <h1
             className="text-6xl font-serif text-left font-light text-stone-700 mb-2"
             style={{
@@ -114,6 +114,9 @@ function ServiceCard({
       }}
       onMouseLeave={() => {
         setActive(false);
+      }}
+      onClick={() => {
+        alert("Popup: Email, meet, DM");
       }}
     >
       {children}

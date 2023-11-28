@@ -9,10 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       fontSize: {
-        "1.5xl": "1.375rem",
+        "1.5xl": "1.35rem",
       },
       fontFamily: {
         serif: ["ivypresto-display"],
+        // serif: ["var(--font-editorial-new)"],
         // serif: ["var(--font-times-now)"],
         // serif: ["var(--font-tobias)"],
         // serif: ["var(--font-canela)"],

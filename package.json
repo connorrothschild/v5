@@ -14,13 +14,13 @@
     "@heroicons/react": "^2.0.18",
     "@motionone/utils": "^10.16.3",
     "@react-hook/window-size": "^3.1.1",
-    "@types/node": "20.6.3",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "@use-gesture/react": "^10.3.0",
     "autoprefixer": "10.4.16",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.2",
+    "fluent-ffmpeg": "^2.1.2",
     "framer-motion": "^10.16.4",
     "gsap": "file:gsap-bonus.tgz",
     "lethargy": "^1.0.9",
@@ -37,6 +37,8 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/node": "^20.10.0",
     "@types/topojson-client": "^3.1.4",
     "d3-array": "^3.2.4",
     "d3-geo": "^3.1.0",

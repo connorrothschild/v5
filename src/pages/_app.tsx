@@ -300,6 +300,22 @@ const suisse = localFont({
 //   variable: "--font-instrument-serif",
 // });
 
+const editorialNew = localFont({
+  src: [
+    {
+      path: "./fonts/editorial/PPEditorialNew-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/editorial/PPEditorialNew-Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-editorial-new",
+});
+
 const manrope = Manrope({
   subsets: ["latin"],
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -327,7 +343,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <main
-      className={`${canela.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
+      className={`${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
     >
       <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
       <ChakraProvider theme={theme}>

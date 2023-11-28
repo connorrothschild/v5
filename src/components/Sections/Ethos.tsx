@@ -6,18 +6,18 @@ import GridTitle from "../Elements/GridTitle";
 export default function Ethos() {
   return (
     <section
-      className="relative w-full bg-[var(--background-invert)] py-24 px-4 lg:px-12"
+      className="rounded-t-[1rem] relative w-full bg-[var(--background-invert)] px-4 lg:px-12"
       id="work"
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         {/* LEFT SIDE */}
         <div className="flex flex-col col-span-1 gap-12">
-          <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase lg:sticky lg:top-12">
+          <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase lg:sticky lg:top-0 pt-12">
             01. Work
           </span>
         </div>
         {/* RIGHT SIDE */}
-        <div className="col-span-2 flex flex-col gap-12 w-full">
+        <div className="col-span-2 flex flex-col gap-12 w-full py-24">
           <h1
             className="text-6xl font-serif text-left font-light text-stone-700 mb-2"
             style={{
@@ -48,19 +48,19 @@ export default function Ethos() {
                 client="Minerva"
                 service="App, web development"
                 url="#"
-                image="#"
+                image="/images/projects/minerva.png"
               />
               <ProjectCard
                 client="Rest of World"
                 service="Data visualization"
                 url="#"
-                image="#"
+                image="/images/projects/blackouts.png"
               />
               <ProjectCard
                 client="Praxis"
                 service="Web development"
                 url="#"
-                image="#"
+                image="/images/projects/praxis.png"
               />
             </div>
             <div className="w-full text-right">
@@ -91,14 +91,25 @@ function ProjectCard({
 }) {
   return (
     <Link
-      className="w-full flex flex-col items-start gap-1 group-hover:grayscale hover:!grayscale-0 transition-all"
+      className="w-full flex flex-col items-start gap-1 group-hover:grayscale hover:!grayscale-0 transition-all duration-300"
       href={url}
     >
       {/* Image */}
-      <div className="w-full h-36 bg-gray-300 rounded-lg" />
-      <div className="flex flex-row items-center gap-2 flex-wrap mt-2">
+      <div className="w-full bg-gray-300 rounded-t-lg relative">
+        <img
+          src={image}
+          // Origin top left
+          className="w-full aspect-square rounded-t-lg object-cover object-left-top"
+        />
+        {/* style={{
+          backgroundImage:
+            "linear-gradient(to bottom, transparent, var(--background))",
+        }} */}
+        <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background-invert)] rounded-t-lg" />
+      </div>
+      <div className="flex flex-row items-center gap-1 flex-wrap">
         <h1 className="font-serif text-xl leading-none">{client}</h1>
-        <h2 className="font-sans w-max mt-1 bg-yellow-50 tracking-tight border border-double border-yellow-400 px-3 py-1 text-yellow-500 font-semibold text-[9px] rounded-full uppercase">
+        <h2 className="font-sans w-max mt-1 bg-gray-50 group-hover:bg-gray-50 tracking-tight border border-double border-gray-400 group-hover:border-yellow-400 px-2 py-1 text-gray-500 group-hover:text-yellow-500 font-semibold text-[9px] rounded-full uppercase transition-all duration-300">
           {service}
         </h2>
       </div>

@@ -8,99 +8,8 @@ import GradientButton from "../GradientButton";
 import BackgroundVideo from "../Archived/BackgroundVideo";
 
 import { InfiniteGrid } from "../InfiniteGrid/InfiniteGrid";
-import { ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
+import { AspectRatio, ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
 import Image from "next/image";
-
-const photos = [
-  {
-    id: "1075",
-    author: "Verne Ho",
-    width: 1214,
-    height: 809,
-    url: "https://unsplash.com/photos/dccIfU1V1VU",
-    download_url: "https://picsum.photos/id/1075/1214/809",
-  },
-  {
-    id: "1076",
-    author: "Samuel Zeller",
-    width: 1208,
-    height: 805,
-    url: "https://unsplash.com/photos/WlD3vixTVUg",
-    download_url: "https://picsum.photos/id/1076/1208/805",
-  },
-  {
-    id: "1077",
-    author: "Maico Amorim",
-    width: 1000,
-    height: 665,
-    url: "https://unsplash.com/photos/SJWPKMb9u-k",
-    download_url: "https://picsum.photos/id/1077/1000/665",
-  },
-  {
-    id: "1078",
-    author: "Vladimir Kudinov",
-    width: 1000,
-    height: 667,
-    url: "https://unsplash.com/photos/KBX9XHk266s",
-    download_url: "https://picsum.photos/id/1078/1000/667",
-  },
-  {
-    id: "1079",
-    author: "Kamesh Vedula",
-    width: 1124,
-    height: 750,
-    url: "https://unsplash.com/photos/ISL7czxIP-k",
-    download_url: "https://picsum.photos/id/1079/1124/750",
-  },
-  {
-    id: "108",
-    author: "Florian Klauer",
-    width: 1000,
-    height: 666,
-    url: "https://unsplash.com/photos/t1mqA3V3-7g",
-    download_url: "https://picsum.photos/id/108/1000/666",
-  },
-  {
-    id: "1084",
-    author: "Jay Ruzesky",
-    width: 1144,
-    height: 817,
-    url: "https://unsplash.com/photos/h13Y8vyIXNU",
-    download_url: "https://picsum.photos/id/1084/1144/817",
-  },
-  {
-    id: "109",
-    author: "Zwaddi",
-    width: 1071,
-    height: 598,
-    url: "https://unsplash.com/photos/YvYBOSiBJE8",
-    download_url: "https://picsum.photos/id/109/1071/598",
-  },
-  {
-    id: "11",
-    author: "Paul Jarvis",
-    width: 1250,
-    height: 833,
-    url: "https://unsplash.com/photos/Cm7oKel-X2Q",
-    download_url: "https://picsum.photos/id/11/1250/833",
-  },
-  {
-    id: "110",
-    author: "Kenneth Thewissen",
-    width: 1123,
-    height: 748,
-    url: "https://unsplash.com/photos/D76DklsG-5U",
-    download_url: "https://picsum.photos/id/110/1123/748",
-  },
-  {
-    id: "111",
-    author: "Gabe Rodriguez",
-    width: 1100,
-    height: 664,
-    url: "https://unsplash.com/photos/eLUegVAjN7s",
-    download_url: "https://picsum.photos/id/111/1100/664",
-  },
-];
 
 const Hero = () => {
   useEffect(() => {
@@ -268,9 +177,12 @@ const Hero = () => {
           {/* <GradientButton /> */}
         </div>
 
-        <div className="pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex flex-col text-gray-300 border-t border-gray-500 mix-blend-difference tracking-[0.0125rem] font-serif z-[49]">
+        <div className="hidden md:flex pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex-col text-gray-300 border-t border-gray-500 mix-blend-difference tracking-[0.0125rem] font-serif z-[49]">
           The professional portfolio of software developer & data visualization
           engineer & designer Connor Rothschild.
+        </div>
+        <div className="flex md:hidden pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex-col text-gray-300 border-t border-gray-500 mix-blend-difference tracking-[0.0125rem] font-serif z-[49]">
+          2024 Portfolio
         </div>
       </motion.div>
     </div>
@@ -283,48 +195,44 @@ function ProjectsGrid() {
   return (
     <InfiniteGrid>
       <Grid
-        templateAreas={`
-          "a a a b b b c c"
-          "d d e e e f f f"
-          "g g g h h i i i"
-        `}
-        gridTemplateColumns={"repeat(8, 1fr)"}
-        gridTemplateRows={"repeat(3, 1fr)"}
-        w={{ base: "150vw", md: "100vw" }}
-        h={{ base: "100vh", md: "125vh" }}
-        gap={6}
-        p={3}
+        templateAreas={{
+          base: `
+          "a b"
+          "c d"
+          "e f"
+          "g h"
+          "i j"
+          "k l"
+          `,
+          md: `
+          "a a a b b b c c c"
+          "d d d e e e f f f"
+          "g g g h h h i i i"
+          "j j j k k k l l l"
+        `,
+        }}
+        gridTemplateColumns={{ base: "repeat(2, 1fr)", md: "repeat(9, 1fr)" }}
+        gridTemplateRows={{ base: "repeat(4, 1fr)", md: "repeat(3, 1fr)" }}
+        // w={{ base: "150vw", md: "100vw" }}
+        // h={{ base: "100vh", md: "125vh" }}
+        gap={{ base: 3, md: 4 }}
+        p={2}
         cursor="grab"
         userSelect="none"
         willChange={"transform"}
       >
-        <GridItem area="a" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/babby-1-screen-studio.mp4" />
-        </GridItem>
-        <GridItem area="b" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/praxis-1.mp4" />
-        </GridItem>
-        <GridItem area="c" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
-        </GridItem>
-        <GridItem area="d" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
-        </GridItem>
-        <GridItem area="e" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/vana.mp4" />
-        </GridItem>
-        <GridItem area="f" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/babby-1-screen-studio.mp4" />
-        </GridItem>
-        <GridItem area="g" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/praxis-1.mp4" />
-        </GridItem>
-        <GridItem area="h" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
-        </GridItem>
-        <GridItem area="i" bgSize="cover" rounded="xl">
-          <VideoThatPlaysOnHover src="/videos/gallery-1.mp4" />
-        </GridItem>
+        <Item id="a" src="row-blackouts-1" />
+        <Item id="b" src="babby-2" />
+        <Item id="c" src="babby-1" />
+        <Item id="d" src="impact" />
+        <Item id="e" src="vana-1" />
+        <Item id="f" src="praxis-1" />
+        <Item id="g" src="row-tech-2" />
+        <Item id="h" src="row-tech-1" />
+        <Item id="i" src="praxis-2" />
+        <Item id="j" src="row-blackouts-2" />
+        <Item id="k" src="quarantunes-1" />
+        <Item id="l" src="row-tech-3" />
       </Grid>
     </InfiniteGrid>
   );
@@ -335,15 +243,24 @@ function VideoThatPlaysOnHover({ src }) {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <div className="relative w-full h-full rounded-lg overflow-hidden user-select-none">
+    <div
+      className="relative w-full h-full rounded-lg overflow-hidden user-select-none"
+      style={{
+        aspectRatio: "1.5 / 1",
+      }}
+    >
       <video
         // https://web.dev/articles/lazy-loading-video
         // preload="metadata"
 
         // When using thumbnail images, preload nothing
         preload="none"
-        className="absolute w-[calc(100%-2px)] h-[calc(100%-2px)] object-cover top-[1px] left-[1px] user-select-none"
-        src={src}
+        className="absolute w-full h-full object-fill top-0 left-0 user-select-none"
+        style={{
+          // Start at top left
+          objectPosition: "top left",
+        }}
+        src={`/videos/${src}.mp4`}
         loop
         muted
         ref={ref}
@@ -360,26 +277,36 @@ function VideoThatPlaysOnHover({ src }) {
       />
 
       {/* Use the first frame of the video */}
-      {/* <div
+      <div
         className="pointer-events-none absolute w-full h-full bg-black bg-opacity-50"
-        style={{
-          opacity: playing ? 0 : 1,
-          transition: "opacity .2s ease-in-out",
-        }}
-      /> */}
-
-      {/* Use thumbnail/covers for each video */}
-      <Image
-        alt=""
-        src="/images/projects/blackouts.png"
-        draggable={false}
-        layout="fill"
-        className="absolute w-full h-full object-cover opacity-50 pointer-events-none user-select-none"
         style={{
           opacity: playing ? 0 : 1,
           transition: "opacity 300ms ease-in-out 100ms",
         }}
       />
+
+      {/* Use thumbnail/covers for each video */}
+      <Image
+        alt=""
+        src={`/images/thumbnails/${src}.png`}
+        draggable={false}
+        layout="fill"
+        className="absolute w-full h-full opacity-50 pointer-events-none user-select-none"
+        style={{
+          opacity: playing ? 0 : 0.5,
+          transition: "opacity 300ms ease-in-out 100ms",
+        }}
+      />
     </div>
+  );
+}
+
+function Item({ id, src }) {
+  return (
+    <AspectRatio ratio={1.5} gridArea={id}>
+      <GridItem area={id} bgSize="cover" rounded="xl">
+        <VideoThatPlaysOnHover src={src} />
+      </GridItem>
+    </AspectRatio>
   );
 }

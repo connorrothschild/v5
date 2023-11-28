@@ -48,11 +48,11 @@ export default function Footer() {
       onMouseEnter={() => {
         setShowEmail(true);
         animate(rotateX, 0, {
-          duration: 1,
+          duration: 0.75,
           ease: easeInOutQuint,
         });
         animate(translateY, 0, {
-          duration: 1,
+          duration: 0.75,
           ease: easeInOutQuint,
         });
       }}
@@ -116,7 +116,7 @@ export default function Footer() {
         >
           connorrothschild.com
         </h1>
-        <div className="text-lg flex justify-start lg:justify-end gap-2 items-center w-full text-gray-200 font-light text-center max-w-[300px] lg:ml-auto mt-3 lg:mt-6">
+        <div className="z-40 text-lg flex justify-start lg:justify-end gap-2 items-center w-full text-gray-200 font-light text-center max-w-[300px] lg:ml-auto mt-3 lg:mt-6">
           <FooterSocialLink
             label="X"
             link="https://twitter.com/CL_Rothschild"
