@@ -12,7 +12,7 @@ fs.readdir(videosDir, (err, files) => {
 
   files.forEach((file) => {
     const videoPath = `${videosDir}/${file}`;
-    const thumbnailPath = `${thumbnailsDir}/${file.split(".")[0]}.png`;
+    const thumbnailPath = `${thumbnailsDir}/${file.split(".")[0]}.jpg`;
 
     ffmpeg(videoPath)
       .frames(1)

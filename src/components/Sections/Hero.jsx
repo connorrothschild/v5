@@ -296,9 +296,12 @@ function VideoThatPlaysOnHover({ src }) {
       {/* Use thumbnail/covers for each video */}
       <Image
         alt=""
-        src={`/images/thumbnails/${src}.png`}
+        src={`/images/thumbnails/${src}.jpg`}
         draggable={false}
         priority
+        placeholder="blur"
+        blurDataURL={`/images/blurs/${src}.jpg`}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         layout="fill"
         className="absolute w-full h-full opacity-50 pointer-events-none user-select-none"
         style={{
