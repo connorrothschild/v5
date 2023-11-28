@@ -62,7 +62,7 @@ const Hero = () => {
         {/* <CanvasGradient opacity={svgOpacity} width="100vw" height="100vh" /> */}
         <ProjectsGrid />
 
-        <div className="pointer-events-none w-[calc(100%-2rem)] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-2 md:gap-3 text-center justify-center items-center mix-blend-hard-light">
+        <div className="pointer-events-none w-[calc(100%-2rem)] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-2 md:gap-3 text-center justify-center items-center mix-blend-revert-layer">
           <div className="overflow-hidden px-1.5">
             <motion.h1
               className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light uppercase tracking-tighter"
@@ -251,10 +251,9 @@ function VideoThatPlaysOnHover({ src }) {
     >
       <video
         // https://web.dev/articles/lazy-loading-video
-        // preload="metadata"
-
+        preload="metadata"
         // When using thumbnail images, preload nothing
-        preload="none"
+        // preload="none"
         className="absolute w-full h-full object-fill top-0 left-0 user-select-none"
         style={{
           // Start at top left
@@ -265,10 +264,19 @@ function VideoThatPlaysOnHover({ src }) {
         muted
         ref={ref}
         onMouseEnter={() => {
+          // video.currentTime > 0 &&
+          //   !video.paused &&
+          //   !video.ended &&
+          //   video.readyState > video.HAVE_CURRENT_DATA;
+          // if (playing || ref.current.currentTime > 0 || ref.current.ended) {
+          //   return;
+          // }
+          if (playing) return;
           ref.current.play();
           setPlaying(true);
         }}
         onMouseLeave={() => {
+          if (!playing) return;
           ref.current.pause();
           // Set frame to 0
           ref.current.currentTime = 0;
@@ -290,6 +298,7 @@ function VideoThatPlaysOnHover({ src }) {
         alt=""
         src={`/images/thumbnails/${src}.png`}
         draggable={false}
+        priority
         layout="fill"
         className="absolute w-full h-full opacity-50 pointer-events-none user-select-none"
         style={{

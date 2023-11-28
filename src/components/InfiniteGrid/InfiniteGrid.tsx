@@ -93,12 +93,12 @@ export const InfiniteGrid = ({
   useGesture(
     {
       onDragStart: ({ event, offset: [x, y] }) => {
-        event.preventDefault();
+        // event.preventDefault();
         initialOffsetRef.current.x = springs.x.get() + x;
         initialOffsetRef.current.y = springs.y.get() + y;
       },
       onDrag: ({ event, offset: [x, y] }) => {
-        event.preventDefault();
+        // event.preventDefault();
         springs.x.set(initialOffsetRef.current.x - x);
         springs.y.set(initialOffsetRef.current.y - y);
       },
