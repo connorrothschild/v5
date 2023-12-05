@@ -335,7 +335,7 @@ export default function Archive() {
           A selected collection of my work—mostly for my own reference.
         </p>
         <div className="w-full max-w-5xl flex flex-row justify-between items-center gap-2 mb-2">
-          <p className="min-w-[34px] text-sm uppercase text-left font-light">
+          <p className="min-w-[40px] text-sm uppercase text-left font-light">
             No.
           </p>
           <p className="w-full text-sm uppercase font-light">Title</p>
@@ -394,7 +394,7 @@ function TableRow({
         cursor: url ? "pointer" : "default",
       }}
     >
-      <p className="min-w-[34px] text-left text-lg font-serif font-light text-gray-700">
+      <p className="min-w-[40px] text-left text-lg font-serif font-light text-gray-700">
         {prefixNumberWithZeroes(id)}.
       </p>
       <div className="w-full text-left text-lg font-serif font-light text-gray-700">

@@ -47,7 +47,7 @@ export default function Projects() {
       {/* <CornerPill>Projects</CornerPill> */}
 
       <div className="flex flex-col justify-between gap-8">
-        <h1 className="text-7xl font-serif text-left font-light text-stone-300 mb-2">
+        <h1 className="text-7xl font-serif text-left font-normal text-stone-300 mb-2">
           Hi, I&apos;m Connor{" "}
           <motion.span
             style={{

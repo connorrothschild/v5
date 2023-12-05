@@ -10,6 +10,7 @@ import BackgroundVideo from "../Archived/BackgroundVideo";
 import { InfiniteGrid } from "../InfiniteGrid/InfiniteGrid";
 import { AspectRatio, ChakraProvider, Grid, GridItem } from "@chakra-ui/react";
 import Image from "next/image";
+import { Carousel } from "../Carousel";
 
 const Hero = () => {
   useEffect(() => {
@@ -62,7 +63,7 @@ const Hero = () => {
         {/* <CanvasGradient opacity={svgOpacity} width="100vw" height="100vh" /> */}
         <ProjectsGrid />
 
-        <div className="pointer-events-none w-[calc(100%-2rem)] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-2 md:gap-3 text-center justify-center items-center mix-blend-revert-layer">
+        <div className="pointer-events-none w-[calc(100%-2rem)] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col md:flex-row gap-2 md:gap-3 text-center justify-center items-center mix-blend-hard-light">
           <div className="overflow-hidden px-1.5">
             <motion.h1
               className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light uppercase tracking-tighter"
@@ -193,48 +194,49 @@ export default Hero;
 
 function ProjectsGrid() {
   return (
-    <InfiniteGrid>
-      <Grid
-        templateAreas={{
-          base: `
-          "a b"
-          "c d"
-          "e f"
-          "g h"
-          "i j"
-          "k l"
-          `,
-          md: `
-          "a a a b b b c c c"
-          "d d d e e e f f f"
-          "g g g h h h i i i"
-          "j j j k k k l l l"
-        `,
-        }}
-        gridTemplateColumns={{ base: "repeat(2, 1fr)", md: "repeat(9, 1fr)" }}
-        gridTemplateRows={{ base: "repeat(4, 1fr)", md: "repeat(3, 1fr)" }}
-        // w={{ base: "150vw", md: "100vw" }}
-        // h={{ base: "100vh", md: "125vh" }}
-        gap={{ base: 3, md: 4 }}
-        p={2}
-        cursor="grab"
-        userSelect="none"
-        willChange={"transform"}
-      >
-        <Item id="a" src="row-blackouts-1" />
-        <Item id="b" src="babby-2" />
-        <Item id="c" src="babby-1" />
-        <Item id="d" src="impact" />
-        <Item id="e" src="vana-1" />
-        <Item id="f" src="praxis-1" />
-        <Item id="g" src="row-tech-2" />
-        <Item id="h" src="row-tech-1" />
-        <Item id="i" src="praxis-2" />
-        <Item id="j" src="row-blackouts-2" />
-        <Item id="k" src="quarantunes-1" />
-        <Item id="l" src="row-tech-3" />
-      </Grid>
-    </InfiniteGrid>
+    <Carousel />
+    // <InfiniteGrid>
+    //   <Grid
+    //     templateAreas={{
+    //       base: `
+    //       "a b"
+    //       "c d"
+    //       "e f"
+    //       "g h"
+    //       "i j"
+    //       "k l"
+    //       `,
+    //       md: `
+    //       "a a a b b b c c c"
+    //       "d d d e e e f f f"
+    //       "g g g h h h i i i"
+    //       "j j j k k k l l l"
+    //     `,
+    //     }}
+    //     gridTemplateColumns={{ base: "repeat(2, 1fr)", md: "repeat(9, 1fr)" }}
+    //     gridTemplateRows={{ base: "repeat(4, 1fr)", md: "repeat(3, 1fr)" }}
+    //     // w={{ base: "150vw", md: "100vw" }}
+    //     // h={{ base: "100vh", md: "125vh" }}
+    //     gap={{ base: 3, md: 4 }}
+    //     p={2}
+    //     cursor="grab"
+    //     userSelect="none"
+    //     willChange={"transform"}
+    //   >
+    //     <Item id="a" src="row-blackouts-1" />
+    //     <Item id="b" src="babby-2" />
+    //     <Item id="c" src="babby-1" />
+    //     <Item id="d" src="impact" />
+    //     <Item id="e" src="vana-1" />
+    //     <Item id="f" src="praxis-1" />
+    //     <Item id="g" src="row-tech-2" />
+    //     <Item id="h" src="row-tech-1" />
+    //     <Item id="i" src="praxis-2" />
+    //     <Item id="j" src="row-blackouts-2" />
+    //     <Item id="k" src="quarantunes-1" />
+    //     <Item id="l" src="row-tech-3" />
+    //   </Grid>
+    // </InfiniteGrid>
   );
 }
 

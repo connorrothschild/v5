@@ -12,7 +12,8 @@ const config: Config = {
         "1.5xl": "1.35rem",
       },
       fontFamily: {
-        serif: ["ivypresto-display"],
+        // serif: ["ivypresto-display"],
+        serif: ["var(--font-nyght)"],
         // serif: ["var(--font-editorial-new)"],
         // serif: ["var(--font-times-now)"],
         // serif: ["var(--font-tobias)"],

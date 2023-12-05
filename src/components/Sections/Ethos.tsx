@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import GridTitle from "../Elements/GridTitle";
+import EmphasizeOnScroll from "../Elements/EmphasizeOnScroll";
 
 export default function Ethos() {
   return (
@@ -19,15 +20,15 @@ export default function Ethos() {
         {/* RIGHT SIDE */}
         <div className="col-span-2 flex flex-col gap-12 w-full py-24">
           <h1
-            className="text-6xl font-serif text-left font-light text-stone-700 mb-2"
+            className="text-6xl font-serif text-left font-normal text-stone-700 mb-2"
             style={{
               textWrap: "balance",
             }}
           >
             I design and develop{" "}
-            <span className="text-yellow-600">difference-making websites</span>{" "}
-            for{" "}
-            <span className="text-yellow-600">difference-making clients</span>.
+            <EmphasizeOnScroll>difference-making websites</EmphasizeOnScroll>{" "}
+            for <EmphasizeOnScroll>difference-making clients</EmphasizeOnScroll>
+            .
           </h1>
           <h2
             className="text-1.5xl leading-snug font-sans text-left font-normal text-stone-500 mb-2"
@@ -108,10 +109,18 @@ function ProjectCard({
         <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background-invert)] rounded-t-lg" />
       </div>
       <div className="flex flex-row items-center gap-1 flex-wrap">
-        <h1 className="font-serif text-xl leading-none">{client}</h1>
-        <h2 className="font-sans w-max mt-1 bg-gray-50 group-hover:bg-gray-50 tracking-tight border border-double border-gray-400 group-hover:border-yellow-400 px-2 py-1 text-gray-500 group-hover:text-yellow-500 font-semibold text-[9px] rounded-full uppercase transition-all duration-300">
+        <h1 className="font-serif text-xl leading-none text-gray-700 italic">
+          {client}
+        </h1>
+        <h2 className="font-sans ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 tracking-tight border border-double border-gray-400 group-hover:border-yellow-400 px-2 py-1 text-gray-500 group-hover:text-yellow-500 font-semibold text-[9px] rounded-full uppercase transition-all duration-300">
           {service}
         </h2>
+        {/* <h1 className="font-serif text-xl leading-none text-gray-700">
+          {client}
+        </h1>
+        <h2 className="font-serif text-sm leading-none text-gray-400 font-normal italic">
+          {service}
+        </h2> */}
       </div>
     </Link>
   );

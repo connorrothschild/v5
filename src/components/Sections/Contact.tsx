@@ -3,6 +3,7 @@ import { AnimatePresence, easeIn, motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 import TripleViz from "../TripleViz/TripleViz";
 import GridTitle from "../Elements/GridTitle";
+import EmphasizeOnScroll from "../Elements/EmphasizeOnScroll";
 
 export default function Contact() {
   const [vizActive, setVizActive] = useState(false);
@@ -23,13 +24,13 @@ export default function Contact() {
         {/* RIGHT SIDE */}
         <div className="col-span-2 flex flex-col gap-12 w-full pb-24">
           <h1
-            className="text-6xl font-serif text-left font-light text-stone-700 mb-2"
+            className="text-6xl font-serif text-left font-normal text-stone-700 mb-2"
             style={{
               textWrap: "balance",
             }}
           >
-            I am <span className="text-yellow-600">available</span> for
-            freelance work and new collaborations.
+            I am <EmphasizeOnScroll>available</EmphasizeOnScroll> for freelance
+            work and new collaborations.
           </h1>
           <h2
             className="text-1.5xl leading-snug font-sans text-left font-normal text-stone-500 mb-2"
