@@ -123,7 +123,7 @@ export default function Menu({}) {
             animate="show"
             exit="exit"
             transition={{ duration: MENU_IN_DURATION, ease: easeInOutQuint }}
-            className="z-40 fixed top-0 left-0 w-screen h-screen flex justify-center items-center gap-2 font-serif"
+            className="z-40 fixed top-0 left-0 w-screen h-screen flex flex-col md:flex-row justify-center items-center gap-2 font-serif"
             style={{
               background: "rgba(0,0,0,.7)",
               backdropFilter: "blur(7px)",

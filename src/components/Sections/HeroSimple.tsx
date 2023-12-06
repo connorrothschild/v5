@@ -22,7 +22,7 @@ export default function HeroSimple() {
           translateY: showProjects ? "-100%" : "-50%",
           left: showProjects ? "100%" : "50%",
           translateX: showProjects ? "-100%" : "-50%",
-          scale: showProjects ? 0.33 : 1,
+          scale: showProjects ? 0.5 : 1,
         }}
         transition={{
           ease: easeInOutQuint,

@@ -49,9 +49,9 @@ const SVGMorph = ({
     <path
       ref={svgPathRef}
       d={paths[0]}
-      fill="#bfdbfe"
-      stroke="#2563eb"
-      strokeWidth={2}
+      fill="#fde68a"
+      stroke="#fbbf24"
+      strokeWidth={"5"}
     />
   );
 };

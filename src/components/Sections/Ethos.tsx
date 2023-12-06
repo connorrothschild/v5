@@ -3,6 +3,8 @@ import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import GridTitle from "../Elements/GridTitle";
 import EmphasizeOnScroll from "../Elements/EmphasizeOnScroll";
+import SectionTitle from "../Elements/SectionTitle";
+import SectionSubtitle from "../Elements/SectionSubtitle";
 
 export default function Ethos() {
   return (
@@ -19,32 +21,22 @@ export default function Ethos() {
         </div>
         {/* RIGHT SIDE */}
         <div className="col-span-2 flex flex-col gap-12 w-full py-24">
-          <h1
-            className="text-6xl font-serif text-left font-normal text-stone-700 mb-2"
-            style={{
-              textWrap: "balance",
-            }}
-          >
+          <SectionTitle>
             I design and develop{" "}
             <EmphasizeOnScroll>difference-making websites</EmphasizeOnScroll>{" "}
             for <EmphasizeOnScroll>difference-making clients</EmphasizeOnScroll>
             .
-          </h1>
-          <h2
-            className="text-1.5xl leading-snug font-sans text-left font-normal text-stone-500 mb-2"
-            style={{
-              textWrap: "balance",
-            }}
-          >
+          </SectionTitle>
+          <SectionSubtitle>
             I specialize in information design, data visualization, and
             performant UI. I combine cutting edge technologies with design
             sensibilities to make websites that are engaging, intuitive, and
             durable.
-          </h2>
+          </SectionSubtitle>
 
           <div className="flex flex-col gap-2">
             <GridTitle>Select projects</GridTitle>
-            <div className="flex flex-row gap-2 group">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-2 group">
               <ProjectCard
                 client="Minerva"
                 service="App, web development"

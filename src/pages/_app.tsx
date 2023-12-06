@@ -407,6 +407,12 @@ const editorialNew = localFont({
   variable: "--font-editorial-new",
 });
 
+const tasaOrbiter = localFont({
+  // Variable font
+  src: "./fonts/TasaOrbiterVF.woff2",
+  variable: "--font-tasa-orbiter",
+});
+
 const manrope = Manrope({
   subsets: ["latin"],
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -434,7 +440,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <main
-      className={`${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} font-sans`}
+      className={`${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
     >
       <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
       <ChakraProvider theme={theme}>

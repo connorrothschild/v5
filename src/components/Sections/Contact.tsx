@@ -4,6 +4,8 @@ import { easeInOutQuint } from "@/config/eases";
 import TripleViz from "../TripleViz/TripleViz";
 import GridTitle from "../Elements/GridTitle";
 import EmphasizeOnScroll from "../Elements/EmphasizeOnScroll";
+import SectionTitle from "../Elements/SectionTitle";
+import SectionSubtitle from "../Elements/SectionSubtitle";
 
 export default function Contact() {
   const [vizActive, setVizActive] = useState(false);
@@ -23,25 +25,15 @@ export default function Contact() {
         </div>
         {/* RIGHT SIDE */}
         <div className="col-span-2 flex flex-col gap-12 w-full pb-24">
-          <h1
-            className="text-6xl font-serif text-left font-normal text-stone-700 mb-2"
-            style={{
-              textWrap: "balance",
-            }}
-          >
+          <SectionTitle>
             I am <EmphasizeOnScroll>available</EmphasizeOnScroll> for freelance
             work and new collaborations.
-          </h1>
-          <h2
-            className="text-1.5xl leading-snug font-sans text-left font-normal text-stone-500 mb-2"
-            style={{
-              textWrap: "pretty",
-            }}
-          >
+          </SectionTitle>
+          <SectionSubtitle>
             I keep an intentionally small roster of clients to ensure mutual
             interest & easy collaboration. There are two main channels I work
             with clients through:
-          </h2>
+          </SectionSubtitle>
 
           <div className="flex flex-col gap-2">
             <GridTitle>Choose your starter</GridTitle>
@@ -103,13 +95,13 @@ function ServiceCard({
 }) {
   return (
     <div
-      className={`shadow hover:shadow-none transition-all duration-500 cursor-pointer group w-full rounded-lg px-3 py-4 border-2 border-solid ${
-        color === "rose" ? "border-rose-400" : "border-blue-400"
+      className={`transition-all duration-500 cursor-pointer group w-full rounded-lg px-3 py-4 border-2 border-solid ${
+        color === "rose" ? "border-amber-400" : "border-amber-400"
       } flex flex-col gap-1 bg-gradient-to-bl ${
         color === "rose"
-          ? "from-rose-50 to-rose-100"
-          : "from-blue-50 to-blue-100"
-      }`}
+          ? "from-amber-50 to-amber-200"
+          : "from-amber-50 to-amber-200"
+      } ${active ? "" : "grayscale"}`}
       onMouseEnter={() => {
         setActive(true);
       }}
@@ -123,14 +115,14 @@ function ServiceCard({
       {children}
       <h2
         className={`text-xl font-serif leading-none mt-4 mb-1 ${
-          color === "rose" ? "text-rose-500" : "text-blue-500"
+          color === "rose" ? "text-amber-700" : "text-amber-700"
         }`}
       >
         {title}
       </h2>
       <h2
         className={`text-sm font-sans leading-snug ${
-          color === "rose" ? "text-rose-400" : "text-blue-400"
+          color === "rose" ? "text-amber-500" : "text-amber-500"
         }`}
       >
         {description}
@@ -141,7 +133,7 @@ function ServiceCard({
 
 function VizScreen({ active }: { active: boolean }) {
   return (
-    <div className="h-[227px] rounded bg-blue-50 border border-solid border-blue-400 overflow-hidden relative p-4">
+    <div className="h-[227px] rounded bg-amber-50 border border-solid border-amber-400 overflow-hidden relative p-4">
       <TripleViz active={active} />
     </div>
   );
@@ -149,7 +141,7 @@ function VizScreen({ active }: { active: boolean }) {
 
 function WebsiteScreen({ active }: { active: boolean }) {
   return (
-    <div className="h-[227px] rounded bg-rose-50 border border-solid border-rose-400 overflow-hidden">
+    <div className="h-[227px] rounded bg-amber-50 border border-solid border-amber-400 overflow-hidden">
       <div
         // style={{
         //   justifyContent: active ? "flex-start" : "space-between",
@@ -157,10 +149,10 @@ function WebsiteScreen({ active }: { active: boolean }) {
         style={{
           justifyContent: "space-between",
         }}
-        className="flex w-full gap-1.5 px-2 py-2 border-b border-solid border-rose-200"
+        className="flex w-full gap-1.5 px-2 py-2 border-b border-solid border-amber-200"
         id="site"
       >
-        <div className="w-4 h-4 rounded-full bg-rose-200 border border-solid border-rose-400" />
+        <div className="w-4 h-4 rounded-full bg-amber-200 border border-solid border-amber-400" />
         <motion.p
           layout="position"
           className="text-xs text-gray-600"
@@ -171,12 +163,12 @@ function WebsiteScreen({ active }: { active: boolean }) {
         </motion.p>
       </div>
       <div className="flex flex-row w-full h-48">
-        <div className="bg-rose-50 h-full w-full border-r border-solid border-gray-200 flex flex-col items-start px-[8px] justify-center">
+        <div className="bg-amber-50 h-full w-full border-r border-solid border-gray-200 flex flex-col items-start px-[8px] justify-center">
           <p
             key="rev"
-            className="text-[16px] text-rose-500 mb-[3px] relative w-full"
+            className="text-[13px] text-amber-500 mb-[3px] relative w-full"
           >
-            <span className="opacity-0 pointer-events-none leading-snug">
+            <span className="opacity-0 pointer-events-none leading-snug text-[13px]">
               Revolutionizing fake copy.
             </span>
             <motion.span
@@ -192,7 +184,7 @@ function WebsiteScreen({ active }: { active: boolean }) {
                 delay: active ? 0 : 0.25,
                 duration: 0.2,
               }}
-              className="text-[16px] text-rose-500 mb-[3px] absolute top-0 left-0 leading-snug"
+              className="text-[13px] text-amber-500 mb-[3px] absolute top-0 left-0 leading-snug"
             >
               Revolutionizing fake copy.
             </motion.span>
@@ -207,14 +199,14 @@ function WebsiteScreen({ active }: { active: boolean }) {
                 delay: active ? 0.25 : 0,
                 duration: 0.2,
               }}
-              className="text-[16px] text-rose-500 mb-[3px] absolute top-0 left-0 leading-snug"
+              className="text-[13px] text-amber-500 mb-[3px] absolute top-0 left-0 leading-snug"
             >
               Creating elegant sites.
             </motion.span>
           </p>
-          <span className="text-[10px] text-rose-400 leading-snug">
+          <span className="text-[10px] text-amber-400 leading-snug">
             Since 2019, I&apos;ve mastered the art of{" "}
-            {active ? "making cool" : "adding fake copy in"} hero sections
+            {active ? "making cool" : "faking copy in"} hero sections
           </span>
         </div>
         <div className="bg-gray-50 h-full w-full">
@@ -241,7 +233,7 @@ function WebsiteScreen({ active }: { active: boolean }) {
                     duration: 0.5,
                     delay: i * 0.05,
                   }}
-                  className="bg-gray-100 border border-solid border-gray-200 rounded-full col-span-1 row-span-1"
+                  className="bg-amber-200 border border-solid border-amber-400 rounded-full col-span-1 row-span-1"
                 >
                   <AnimatePresence>
                     {i === 8 && (

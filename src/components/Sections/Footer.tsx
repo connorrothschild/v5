@@ -112,7 +112,7 @@ export default function Footer() {
             setShowEmailCopied(true);
           }}
           // className="cursor-pointer font-serif text-[40px] sm:text-[50px] md:text-[60px] lg:text-[7.5vw] z-20 text-left leading-[.8] text-white font-extralight "
-          className="cursor-pointer font-serif text-[11.7vw] z-20 text-left leading-[.8] text-white font-extralight "
+          className="cursor-pointer font-serif text-[10.5vw] z-20 text-left leading-[.8] text-white font-extralight "
         >
           connorrothschild.com
         </h1>

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   useCursor,
@@ -249,9 +249,9 @@ const FLOATING_LAYOUT = [
     position: [-3, 3, 2],
     rotation: [0, 0, 0],
     // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("gallery-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
+    url: imageConstructor("babby-2"),
+    name: "Babby",
+    link: "https://babby.xyz/",
   },
 ];
 
@@ -262,14 +262,16 @@ const CAMERA_Y = 2;
 const CAMERA_Z = 4;
 
 export default function ImageGridWrapper() {
-  const cameraControlsRef = useRef();
+  const cameraControlsRef = useRef<CameraControls | null>(null);
 
-  useEffect(() => {
-    if (!cameraControlsRef.current) return;
-    cameraControlsRef.current.mouseButtons.left = 0;
-    // cameraControlsRef.current.mouseButtons.right = 0;
-    cameraControlsRef.current.mouseButtons.wheel = 0;
-  }, []);
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      if (!cameraControlsRef.current) return;
+      cameraControlsRef.current.mouseButtons.left = 0;
+      cameraControlsRef.current.mouseButtons.right = 0;
+      cameraControlsRef.current.mouseButtons.wheel = 0;
+    }, 1000);
+  }, [cameraControlsRef]);
 
   return (
     <div className="w-screen h-screen relative">
@@ -281,6 +283,7 @@ export default function ImageGridWrapper() {
         }}
       />
       <Canvas
+        shadows
         dpr={[5, 15]}
         camera={{ fov: 70, position: [CAMERA_X, CAMERA_Y, CAMERA_Z] }}
         // linear
@@ -296,10 +299,10 @@ export default function ImageGridWrapper() {
           intensity={10}
           position={[0, 0, 5]}
           castShadow
-          color="#ffffff"
+          color="#000000"
         /> */}
 
-        <group position={[0, 0, 0]}>
+        <group position={[0, 0, 0]} castShadow>
           <Frames images={images} cameraControlsRef={cameraControlsRef} />
 
           {/* Reflective BG/floor */}
@@ -498,6 +501,8 @@ function Frame({
         onPointerOut={() => hover(false)}
         scale={[1, 1, FRAME_DEPTH]}
         position={[0, 0, 0]}
+        castShadow
+        receiveShadow
       >
         {/* Box — needed for click events */}
         <boxGeometry />
@@ -556,7 +561,13 @@ function Frame({
         Project.
       </Text> */}
 
-      <Html position={[-0.5, 0.6, 0.01]} occlude>
+      <Html
+        position={[-0.5, 0.6, 0.01]}
+        occlude
+        style={{
+          pointerEvents: isActive ? "all" : "none",
+        }}
+      >
         <a
           href="#"
           style={{

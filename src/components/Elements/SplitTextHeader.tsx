@@ -87,7 +87,7 @@ export default function SplitTextHeader({
       bodyText.push(
         <p
           key={client + "_" + i}
-          className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-none font-serif font-light text-stone-600"
+          className="text-2xl md:text-2xl lg:text-3xl xl:text-4xl leading-none font-serif font-light text-stone-600"
           style={{
             textAlign: textAlignment,
             justifyContent: textAlignment,
@@ -122,7 +122,7 @@ export default function SplitTextHeader({
 
   return (
     <div
-      className="max-w-6xl w-full flex flex-row items-center flex-wrap gap-2 tracking-tight"
+      className="max-w-5xl w-full flex flex-row items-center flex-wrap gap-2 tracking-tight"
       ref={body}
       style={{
         margin:
