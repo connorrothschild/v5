@@ -8,9 +8,6 @@ import HeroSimple from "@/components/Sections/HeroSimple";
 import ImageGridWrapper from "@/components/Sections/ImageGrid";
 
 export default function Home() {
-  const constructImageUrl = (url: string) => {
-    return `https://next-site-git-infinite-grid-connorrothschild.vercel.app/_next/image?url=%2Fimages%2Fthumbnails%2F${url}.jpg&w=3840&q=75`;
-  };
   return (
     <>
       {/* <ImageGridWrapper

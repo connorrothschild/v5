@@ -332,9 +332,11 @@ export default function ImageGridWrapper() {
           touches={
             {
               one: 0,
-              two: 2, // PAN
+              two: 0, // PAN
             } as any
           }
+          interactiveArea={{ x: 0, y: 0, width: 0, height: 0 }}
+          // enabled={false}
         />
       </Canvas>
     </div>
@@ -564,7 +566,7 @@ function Frame({
         Project.
       </Text> */}
 
-      <Html
+      {/* <Html
         position={[-0.5, 0.6, 0.01]}
         occlude
         style={{
@@ -585,7 +587,7 @@ function Frame({
         >
           {name}
         </a>
-      </Html>
+      </Html> */}
     </group>
   );
 }
