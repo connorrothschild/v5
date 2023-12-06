@@ -13,7 +13,7 @@ export default function HeroSimple() {
   const [showProjects, setShowProjects] = useState(false);
 
   return (
-    <section className="h-screen w-full relative">
+    <section className="h-[calc(100vh-50px)] w-full relative  rounded-b-[1rem] overflow-hidden">
       {/* BOTTOM LEFT CORNER */}
       <motion.div
         className="absolute z-20 text-center w-full"

@@ -278,16 +278,20 @@ const CAMERA_X = 5;
 const CAMERA_Y = 2;
 const CAMERA_Z = 4;
 
-export default function ImageGridWrapper({showProjects}: {showProjects: boolean}) {
+export default function ImageGridWrapper({
+  showProjects,
+}: {
+  showProjects: boolean;
+}) {
   const cameraControlsRef = useRef<CameraControls | null>(null);
 
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-screen h-full relative">
       <div
         className="absolute w-full h-full z-10"
         style={{
-          background:
-            "linear-gradient(to bottom, transparent 50%, var(--background) 100%)",
+          // background:
+          //   "linear-gradient(to bottom, transparent 50%, var(--background) 100%)",
           pointerEvents: showProjects ? "none" : "all",
         }}
       />
@@ -361,9 +365,6 @@ export default function ImageGridWrapper({showProjects}: {showProjects: boolean}
   );
 }
 
-
-
-
 function Frames({
   images,
   q = new THREE.Quaternion(),
@@ -378,12 +379,11 @@ function Frames({
   const [, params] = useRoute("/:id");
   // const params = useParams();
 
-
   const DEFAULT_X_ROTATION = Math.PI * 0.25;
   const DEFAULT_Y_ROTATION = Math.PI * 0.45;
 
   useFrame(({ camera }) => {
-    if (params?.id) return
+    if (params?.id) return;
     if (cameraControlsRef.current) {
       const Y_MIDPOINT = window.innerHeight / 2;
       const X_MIDPOINT = window.innerWidth / 2;
@@ -391,8 +391,8 @@ function Frames({
       const Y_POSITION = mousePosition.y - Y_MIDPOINT;
       const X_POSITION = mousePosition.x - X_MIDPOINT;
 
-      const Y_PERCENT_FROM_MIDPOINT = Y_POSITION / Y_MIDPOINT * -1;
-      const X_PERCENT_FROM_MIDPOINT = X_POSITION / X_MIDPOINT * -1;
+      const Y_PERCENT_FROM_MIDPOINT = (Y_POSITION / Y_MIDPOINT) * -1;
+      const X_PERCENT_FROM_MIDPOINT = (X_POSITION / X_MIDPOINT) * -1;
 
       const NUDGEABLE_Y_AMOUNT = 0.25;
       const NUDGEABLE_X_AMOUNT = 0.25;
@@ -476,7 +476,7 @@ function Frames({
           paddingBottom: 0.1,
           paddingLeft: 0.1,
           paddingRight: 0.1,
-        }),
+        })
         // cameraControlsRef.current?.rotateTo(0, Math.PI / 2, true)
       )}
       onPointerMissed={() => {
