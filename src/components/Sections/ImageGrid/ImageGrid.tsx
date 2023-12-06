@@ -278,16 +278,17 @@ const CAMERA_X = 5;
 const CAMERA_Y = 2;
 const CAMERA_Z = 4;
 
-export default function ImageGridWrapper() {
+export default function ImageGridWrapper({showProjects}: {showProjects: boolean}) {
   const cameraControlsRef = useRef<CameraControls | null>(null);
 
   return (
     <div className="w-screen h-screen relative">
       <div
-        className="absolute w-full h-full z-10 pointer-events-none"
+        className="absolute w-full h-full z-10"
         style={{
           background:
             "linear-gradient(to bottom, transparent 50%, var(--background) 100%)",
+          pointerEvents: showProjects ? "none" : "all",
         }}
       />
       <Canvas
@@ -381,7 +382,6 @@ function Frames({
   const DEFAULT_X_ROTATION = Math.PI * 0.25;
   const DEFAULT_Y_ROTATION = Math.PI * 0.45;
 
-
   useFrame(({ camera }) => {
     if (params?.id) return
     if (cameraControlsRef.current) {
@@ -391,8 +391,8 @@ function Frames({
       const Y_POSITION = mousePosition.y - Y_MIDPOINT;
       const X_POSITION = mousePosition.x - X_MIDPOINT;
 
-      const Y_PERCENT_FROM_MIDPOINT = Y_POSITION / Y_MIDPOINT;
-      const X_PERCENT_FROM_MIDPOINT = X_POSITION / X_MIDPOINT;
+      const Y_PERCENT_FROM_MIDPOINT = Y_POSITION / Y_MIDPOINT * -1;
+      const X_PERCENT_FROM_MIDPOINT = X_POSITION / X_MIDPOINT * -1;
 
       const NUDGEABLE_Y_AMOUNT = 0.25;
       const NUDGEABLE_X_AMOUNT = 0.25;

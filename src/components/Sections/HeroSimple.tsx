@@ -97,7 +97,7 @@ export default function HeroSimple() {
         }}
         className="absolute top-0 left-0 w-full h-full z-10"
       >
-        <ImageGridWrapper />
+        <ImageGridWrapper showProjects={showProjects} />
         {/* <ProjectsGrid /> */}
       </motion.div>
       {/* TOP RIGHT CORNER */}
