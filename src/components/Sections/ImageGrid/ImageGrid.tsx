@@ -332,7 +332,7 @@ export default function ImageGridWrapper() {
           touches={
             {
               one: 0,
-              two: 0,
+              two: 2, // PAN
             } as any
           }
         />
