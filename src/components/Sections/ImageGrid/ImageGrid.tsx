@@ -264,15 +264,6 @@ const CAMERA_Z = 4;
 export default function ImageGridWrapper() {
   const cameraControlsRef = useRef<CameraControls | null>(null);
 
-  useLayoutEffect(() => {
-    setTimeout(() => {
-      if (!cameraControlsRef.current) return;
-      cameraControlsRef.current.mouseButtons.left = 0;
-      cameraControlsRef.current.mouseButtons.right = 0;
-      cameraControlsRef.current.mouseButtons.wheel = 0;
-    }, 1000);
-  }, [cameraControlsRef]);
-
   return (
     <div className="w-screen h-screen relative">
       <div
@@ -332,6 +323,12 @@ export default function ImageGridWrapper() {
           minDistance={0.001}
           maxDistance={5}
           distance={0.1}
+          mouseButtons={{
+            left: 0,
+            middle: 0,
+            wheel: 0,
+            right: 0,
+          }}
         />
       </Canvas>
     </div>
