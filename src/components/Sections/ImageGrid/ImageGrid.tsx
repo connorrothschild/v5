@@ -329,6 +329,12 @@ export default function ImageGridWrapper() {
             wheel: 0,
             right: 0,
           }}
+          touches={
+            {
+              one: 0,
+              two: 0,
+            } as any
+          }
         />
       </Canvas>
     </div>
