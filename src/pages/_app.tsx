@@ -409,7 +409,7 @@ const editorialNew = localFont({
 
 const tasaOrbiter = localFont({
   // Variable font
-  src: "./fonts/TasaOrbiterVF.woff2",
+  src: "./fonts/TASAOrbiterVF.woff2",
   variable: "--font-tasa-orbiter",
 });
 
