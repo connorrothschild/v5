@@ -24,8 +24,6 @@ import getUuid from "uuid-by-string";
 import { motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
-const LOADING_TIME = 3;
-
 // const images = [
 //   "/images/thumbnails/row-blackouts-1.jpg",
 //   "/images/thumbnails/babby-2.jpg",
@@ -257,6 +255,25 @@ const FLOATING_LAYOUT = [
 
 const images = FLOATING_LAYOUT;
 
+// Custom hook to track mouse position
+function useMousePosition() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    function handleMouseMove(event) {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    }
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return mousePosition;
+}
+
 const CAMERA_X = 5;
 const CAMERA_Y = 2;
 const CAMERA_Z = 4;
@@ -343,17 +360,54 @@ export default function ImageGridWrapper() {
   );
 }
 
+
+
+
 function Frames({
   images,
   q = new THREE.Quaternion(),
   p = new THREE.Vector3(),
   cameraControlsRef,
 }) {
+  const mousePosition = useMousePosition();
+
   const ref = useRef();
   const clicked = useRef();
   // FIXME.
   const [, params] = useRoute("/:id");
   // const params = useParams();
+
+
+  const DEFAULT_X_ROTATION = Math.PI * 0.25;
+  const DEFAULT_Y_ROTATION = Math.PI * 0.45;
+
+
+  useFrame(({ camera }) => {
+    if (params?.id) return
+    if (cameraControlsRef.current) {
+      const Y_MIDPOINT = window.innerHeight / 2;
+      const X_MIDPOINT = window.innerWidth / 2;
+
+      const Y_POSITION = mousePosition.y - Y_MIDPOINT;
+      const X_POSITION = mousePosition.x - X_MIDPOINT;
+
+      const Y_PERCENT_FROM_MIDPOINT = Y_POSITION / Y_MIDPOINT;
+      const X_PERCENT_FROM_MIDPOINT = X_POSITION / X_MIDPOINT;
+
+      const NUDGEABLE_Y_AMOUNT = 0.25;
+      const NUDGEABLE_X_AMOUNT = 0.25;
+
+      // Calculate rotation based on mouse position
+      const yRotation =
+        DEFAULT_Y_ROTATION + Y_PERCENT_FROM_MIDPOINT * NUDGEABLE_Y_AMOUNT;
+      const xRotation =
+        DEFAULT_X_ROTATION + X_PERCENT_FROM_MIDPOINT * NUDGEABLE_X_AMOUNT;
+
+      // Apply rotation to camera
+      cameraControlsRef.current.rotateTo(xRotation, yRotation, true);
+      // cameraControlsRef.current.update();
+    }
+  });
 
   const [, setLocation] = useLocation();
   useEffect(() => {
@@ -369,12 +423,12 @@ function Frames({
         paddingLeft: 0.1,
         paddingRight: 0.1,
       });
-      // cameraControlsRef.current?.rotateTo(0, Math.PI / 2, true);
+      cameraControlsRef.current?.rotateTo(0, Math.PI / 2, true);
     } else {
       // p.set(CAMERA_X, CAMERA_Y, CAMERA_Z);
       // cameraControlsRef.current?.fitToBox(ref.current, true);
       cameraControlsRef.current?.moveTo(CAMERA_X, CAMERA_Y, CAMERA_Z, true);
-      cameraControlsRef.current?.rotateTo(Math.PI * 0.25, Math.PI * 0.45, true);
+      // cameraControlsRef.current?.rotateTo(Math.PI * 0.25, Math.PI * 0.45, true);
       q.identity();
     }
   });
@@ -423,16 +477,16 @@ function Frames({
           paddingLeft: 0.1,
           paddingRight: 0.1,
         }),
-        cameraControlsRef.current?.rotateTo(0, Math.PI / 2, true)
+        // cameraControlsRef.current?.rotateTo(0, Math.PI / 2, true)
       )}
       onPointerMissed={() => {
         // cameraControlsRef.current?.fitToBox(ref.current, true);
         // cameraControlsRef.current?.moveTo(CAMERA_X, CAMERA_Y, CAMERA_Z, true);
-        cameraControlsRef.current?.rotateTo(
-          Math.PI * 0.25,
-          Math.PI * 0.45,
-          true
-        );
+        // cameraControlsRef.current?.rotateTo(
+        //   Math.PI * 0.25,
+        //   Math.PI * 0.45,
+        //   true
+        // );
         setLocation("/");
       }}
     >
@@ -566,7 +620,7 @@ function Frame({
         Project.
       </Text> */}
 
-      {/* <Html
+      <Html
         position={[-0.5, 0.6, 0.01]}
         occlude
         style={{
@@ -587,7 +641,7 @@ function Frame({
         >
           {name}
         </a>
-      </Html> */}
+      </Html>
     </group>
   );
 }
