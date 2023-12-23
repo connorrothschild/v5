@@ -70,7 +70,7 @@ export default function CanvasGradient({
       height="32"
       className="z-[-2] absolute top-0 left-0"
       style={{
-        filter: "brightness(.5)",
+        filter: "brightness(.7)",
         opacity: opacity,
         width: width,
         height: height,

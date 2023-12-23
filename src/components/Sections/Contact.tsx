@@ -12,19 +12,16 @@ export default function Contact() {
   const [webActive, setWebActive] = useState(false);
 
   return (
-    <section
-      className="relative w-full bg-[var(--background-invert)] px-4 lg:px-12 rounded-b-[1rem]"
-      id="contact"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <section className="relative px-[20px] py-48 overflow-visible" id="contact">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-auto max-w-7xl">
         {/* LEFT SIDE */}
-        <div className="flex flex-col col-span-1 gap-12">
+        {/* <div className="flex flex-col col-span-1 gap-12">
           <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase lg:sticky lg:top-12">
             02. With me
           </span>
-        </div>
+        </div> */}
         {/* RIGHT SIDE */}
-        <div className="col-span-2 flex flex-col gap-12 w-full pb-24">
+        <div className="col-span-3 flex flex-col gap-12 w-full pb-24">
           <SectionTitle>
             I am <EmphasizeOnScroll>available</EmphasizeOnScroll> for freelance
             work and new collaborations.
@@ -42,7 +39,6 @@ export default function Contact() {
                 title="Data visualization"
                 description="Elegant, interactive data visualization design and development for
         established clients in government, journalism, and research."
-                color="blue"
                 active={vizActive}
                 setActive={setVizActive}
               >
@@ -51,7 +47,6 @@ export default function Contact() {
               <ServiceCard
                 title="Web development"
                 description="Robust, performant web and application development ideal for startups going from 0 to 1."
-                color="rose"
                 active={webActive}
                 setActive={setWebActive}
               >
@@ -59,7 +54,12 @@ export default function Contact() {
               </ServiceCard>
             </div>
             <div className="w-full text-right">
-              <p className="mt-6 text-gray-500 font-sans max-w-2xl ml-auto">
+              <p
+                className="mt-4 text-gray-500 font-sans leading-snug max-w-2xl ml-auto"
+                style={{
+                  textWrap: "balance",
+                }}
+              >
                 Note: I maintain a minimum engagement fee of $8,000 per month of
                 work, which allows me to allocate the necessary time and
                 resources to deliver exceptional results.
@@ -74,6 +74,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      {/* <Gradient /> */}
     </section>
   );
 }
@@ -81,59 +82,47 @@ export default function Contact() {
 function ServiceCard({
   title,
   description,
-  color,
   children,
   active,
   setActive,
 }: {
   title: string;
   description: string;
-  color: string;
   children: React.ReactNode;
   active: boolean;
   setActive: any; // fixme.
 }) {
   return (
-    <div
-      className={`transition-all duration-500 cursor-pointer group w-full rounded-lg px-3 py-4 border-2 border-solid ${
-        color === "rose" ? "border-amber-400" : "border-amber-400"
-      } flex flex-col gap-1 bg-gradient-to-bl ${
-        color === "rose"
-          ? "from-amber-50 to-amber-200"
-          : "from-amber-50 to-amber-200"
-      } ${active ? "" : "grayscale"}`}
-      onMouseEnter={() => {
-        setActive(true);
-      }}
-      onMouseLeave={() => {
-        setActive(false);
-      }}
-      onClick={() => {
-        alert("Popup: Email, meet, DM");
-      }}
-    >
-      {children}
-      <h2
-        className={`text-xl font-serif leading-none mt-4 mb-1 ${
-          color === "rose" ? "text-amber-700" : "text-amber-700"
+    <div className={`w-full transition-all ${active ? "" : "grayscale"}`}>
+      <div
+        className={`duration-500 transition-all animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-500 via-green-500 to-orange-600 to-[125%] ${
+          active ? "running" : "opacity-80 paused"
         }`}
+        onMouseEnter={() => {
+          setActive(true);
+        }}
+        onMouseLeave={() => {
+          setActive(false);
+        }}
+        onClick={() => {
+          alert("Popup: Email, meet, DM");
+        }}
       >
-        {title}
-      </h2>
-      <h2
-        className={`text-sm font-sans leading-snug ${
-          color === "rose" ? "text-amber-500" : "text-amber-500"
-        }`}
-      >
-        {description}
-      </h2>
+        {children}
+        <h2 className="text-xl font-serif font-light tracking-wide leading-none mt-4 mb-1 text-white">
+          {title}
+        </h2>
+        <h2 className="text-base font-sans leading-snug text-gray-100">
+          {description}
+        </h2>
+      </div>
     </div>
   );
 }
 
 function VizScreen({ active }: { active: boolean }) {
   return (
-    <div className="h-[227px] rounded bg-amber-50 border border-solid border-amber-400 overflow-hidden relative p-4">
+    <div className="h-[227px] rounded bg-gray-200/50 backdrop-blur-lg border border-solid border-gray-500 overflow-hidden relative p-4 shadow group-hover:shadow-none transition-shadow">
       <TripleViz active={active} />
     </div>
   );
@@ -141,18 +130,15 @@ function VizScreen({ active }: { active: boolean }) {
 
 function WebsiteScreen({ active }: { active: boolean }) {
   return (
-    <div className="h-[227px] rounded bg-amber-50 border border-solid border-amber-400 overflow-hidden">
+    <div className="h-[227px] rounded bg-gray-200/50 backdrop-blur-lg border border-solid border-gray-500 overflow-hidden shadow group-hover:shadow-none transition-shadow">
       <div
-        // style={{
-        //   justifyContent: active ? "flex-start" : "space-between",
-        // }}
         style={{
           justifyContent: "space-between",
         }}
-        className="flex w-full gap-1.5 px-2 py-2 border-b border-solid border-amber-200"
+        className="flex w-full gap-1.5 px-2 py-2 border-b border-solid border-gray-300"
         id="site"
       >
-        <div className="w-4 h-4 rounded-full bg-amber-200 border border-solid border-amber-400" />
+        <div className="w-4 h-4 rounded-full border border-solid border-gray-400" />
         <motion.p
           layout="position"
           className="text-xs text-gray-600"
@@ -163,10 +149,10 @@ function WebsiteScreen({ active }: { active: boolean }) {
         </motion.p>
       </div>
       <div className="flex flex-row w-full h-48">
-        <div className="bg-amber-50 h-full w-full border-r border-solid border-gray-200 flex flex-col items-start px-[8px] justify-center">
+        <div className=" h-full bg-gray-400/50 w-full flex flex-col items-start px-[8px] justify-center">
           <p
             key="rev"
-            className="text-[13px] text-amber-500 mb-[3px] relative w-full"
+            className="text-[13px] text-gray-200 mb-[3px] relative w-full"
           >
             <span className="opacity-0 pointer-events-none leading-snug text-[13px]">
               Revolutionizing fake copy.
@@ -184,7 +170,7 @@ function WebsiteScreen({ active }: { active: boolean }) {
                 delay: active ? 0 : 0.25,
                 duration: 0.2,
               }}
-              className="text-[13px] text-amber-500 mb-[3px] absolute top-0 left-0 leading-snug"
+              className="text-[13px] text-gray-200 mb-[3px] absolute top-0 left-0 leading-snug"
             >
               Revolutionizing fake copy.
             </motion.span>
@@ -199,17 +185,17 @@ function WebsiteScreen({ active }: { active: boolean }) {
                 delay: active ? 0.25 : 0,
                 duration: 0.2,
               }}
-              className="text-[13px] text-amber-500 mb-[3px] absolute top-0 left-0 leading-snug"
+              className="text-[13px] text-gray-200 mb-[3px] absolute top-0 left-0 leading-snug"
             >
               Creating elegant sites.
             </motion.span>
           </p>
-          <span className="text-[10px] text-amber-400 leading-snug">
+          <span className="text-[10px] text-gray-200 leading-snug">
             Since 2019, I&apos;ve mastered the art of{" "}
             {active ? "making cool" : "faking copy in"} hero sections
           </span>
         </div>
-        <div className="bg-gray-50 h-full w-full">
+        <div className="bg-gray-50/50 h-full w-full">
           <motion.div
             layout
             className="h-full mx-auto aspect-square grid grid-cols-3 grid-rows-3 p-[30px] gap-1"
@@ -233,7 +219,7 @@ function WebsiteScreen({ active }: { active: boolean }) {
                     duration: 0.5,
                     delay: i * 0.05,
                   }}
-                  className="bg-amber-200 border border-solid border-amber-400 rounded-full col-span-1 row-span-1"
+                  className="bg-gray-200 border border-solid border-gray-400 rounded-full col-span-1 row-span-1"
                 >
                   <AnimatePresence>
                     {i === 8 && (
@@ -269,5 +255,63 @@ function WebsiteScreen({ active }: { active: boolean }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function Gradient() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      viewBox="0 0 800 800"
+      className="absolute bottom-0 left-0 h-full z-[-1]"
+    >
+      <defs>
+        <filter
+          id="bbblurry-filter"
+          x="-100%"
+          y="-100%"
+          width="400%"
+          height="400%"
+          filterUnits="objectBoundingBox"
+          primitiveUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feGaussianBlur
+            stdDeviation="55"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+            in="SourceGraphic"
+            edgeMode="none"
+            result="blur"
+          ></feGaussianBlur>
+        </filter>
+      </defs>
+      <g filter="url(#bbblurry-filter)">
+        <ellipse
+          rx="182.5"
+          ry="150"
+          cx="347.3610203927724"
+          cy="435.45020553828533"
+          fill="hsla(167, 72%, 60%, 1.00)"
+        ></ellipse>
+        <ellipse
+          rx="182.5"
+          ry="150"
+          cx="57.467413937234085"
+          cy="338.4110970222513"
+          fill="hsla(90, 69%, 72%, 1.00)"
+        ></ellipse>
+        <ellipse
+          rx="182.5"
+          ry="150"
+          cx="88.1070010200221"
+          cy="572.4287016703821"
+          fill="hsla(37, 91%, 55%, 1.00)"
+        ></ellipse>
+      </g>
+    </svg>
   );
 }

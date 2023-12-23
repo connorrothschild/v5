@@ -1,90 +1,36 @@
 import { useState, useRef, useEffect } from "react";
 import SplitTextHeader from "../Elements/SplitTextHeader";
-import CornerPill from "../Elements/CornerPill";
 
 import { gsap } from "gsap";
 import { Draggable } from "gsap/dist/Draggable";
-import { InertiaPlugin } from "gsap/dist/InertiaPlugin";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Dot from "../Elements/Dot";
 
 export default function Projects() {
   const container = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "start end"],
-  });
-
-  const handRotation = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    ["-15deg", "15deg", "-15deg", "15deg", "-15deg", "15deg"]
-  );
-
-  useEffect(() => {
-    gsap.registerPlugin(Draggable, InertiaPlugin);
-
-    return () => {};
-  }, []);
-
   return (
     <section
-      id="projects"
-      // className="w-full bg-[var(--background)] min-h-screen py-12 px-4 flex flex-col justify-between gap-8"
-      // className="relative w-full bg-[var(--background-invert)] min-h-screen px-4 lg:px-12 py-24 flex flex-col justify-between gap-8"
-
-      className="relative w-full bg-[var(--background)] py-24 px-4 lg:px-12"
-      // className="w-full bg-[var(--background)] min-h-screen py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
-      // style={{
-      //   boxShadow: "0 0 20px rgba(0,0,0,.1)",
-      // }}
+      id="work"
+      className="relative mb-48 px-[20px] overflow-visible"
       ref={container}
     >
-      {/* <CornerPill>Projects</CornerPill> */}
-
-      <div className="flex flex-col justify-between gap-8">
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif text-left font-normal text-stone-300 mb-2">
-          Hi, I&apos;m Connor{" "}
-          <motion.span
-            style={{
-              display: "inline-block",
-              rotate: handRotation,
-            }}
-          >
-            👋
-          </motion.span>
-        </h1>
-
-        <div className="invert">
-          <SplitTextHeader
-            container={container}
-            // phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
-            phrase="I am a creative developer based in Houston, Texas. I am passionate about designing and developing websites with a focus on information design & data visualization."
-            textAlignment="left"
-          />
+      <Gradient />
+      <div className="max-w-7xl w-full mx-auto">
+        <div className="flex flex-col justify-between gap-8">
+          <div className="">
+            <SplitTextHeader
+              container={container}
+              // phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
+              // phrase="I am a creative developer based in Houston, Texas. I am passionate about designing and developing websites with a focus on information design & data visualization."
+              phrase="I'm Connor, a designer & developer based in Houston, Texas. Clients call me when they need to make websites that are performant, beautiful, and durable."
+              textAlignment="left"
+            />
+          </div>
+          <div className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5">
+            Booking new projects for 2024
+            <Dot />
+          </div>
         </div>
-        {/* <h2
-          className="font-serif text-gray-300 text-3xl font-extralight max-w-3xl indent-10"
-          style={{
-            textWrap: "balance",
-          }}
-        >
-          <span className="font-serif text-yellow-500">&</span> I am a creative
-          developer based in Houston, Texas. I am passionate about designing and
-          developing websites with a focus on information design & data
-          visualization.
-        </h2> */}
-
-        <div className="h-16" />
-
-        {/* Horizontally scrollable list of projects */}
-        {/* <Slider /> */}
-        {/* <Grid /> */}
-        {/* <TextGrid scrollYProgress={scrollYProgress} /> */}
       </div>
     </section>
   );
@@ -125,6 +71,64 @@ function ProjectCard({ client, image, title, description, color }) {
         <p className="text-stone-300 text-sm">{description}</p>
       </div> */}
     </div>
+  );
+}
+
+function Gradient() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      viewBox="0 0 800 800"
+      className="absolute top-full transform -translate-y-1/2 right-0 w-full z-[-1] opacity-30"
+    >
+      <defs>
+        <filter
+          id="bbblurry-filter"
+          x="-100%"
+          y="-100%"
+          width="400%"
+          height="400%"
+          filterUnits="objectBoundingBox"
+          primitiveUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feGaussianBlur
+            stdDeviation="61"
+            x="0%"
+            y="0%"
+            width="100%"
+            height="100%"
+            in="SourceGraphic"
+            edgeMode="none"
+            result="blur"
+          ></feGaussianBlur>
+        </filter>
+      </defs>
+      <g filter="url(#bbblurry-filter)">
+        <ellipse
+          rx="215"
+          ry="150"
+          cx="601.1240490019634"
+          cy="552.3812431615061"
+          fill="hsl(37, 99%, 67%)"
+        ></ellipse>
+        <ellipse
+          rx="215"
+          ry="150"
+          cx="333.495442814852"
+          cy="522.0717990735438"
+          fill="hsl(316, 73%, 52%)"
+        ></ellipse>
+        <ellipse
+          rx="215"
+          ry="150"
+          cx="550.7388997502352"
+          cy="338.5728695854466"
+          fill="hsl(185, 100%, 57%)"
+        ></ellipse>
+      </g>
+    </svg>
   );
 }
 

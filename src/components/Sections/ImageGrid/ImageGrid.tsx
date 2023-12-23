@@ -1,5 +1,12 @@
 import * as THREE from "three";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   useCursor,
@@ -23,237 +30,9 @@ import getUuid from "uuid-by-string";
 
 import { motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
+import { GlassPortal } from "@/components/Three/GlassPortal";
 
-// const images = [
-//   "/images/thumbnails/row-blackouts-1.jpg",
-//   "/images/thumbnails/babby-2.jpg",
-//   "/images/thumbnails/babby-1.jpg",
-//   "/images/thumbnails/impact.jpg",
-//   "/images/thumbnails/vana-1.jpg",
-//   "/images/thumbnails/praxis-1.jpg",
-//   "/images/thumbnails/row-tech-2.jpg",
-//   "/images/thumbnails/row-tech-1.jpg",
-//   "/images/thumbnails/praxis-2.jpg",
-//   "/images/thumbnails/row-row-blackouts-1-2.jpg",
-//   "/images/thumbnails/quarantunes-1.jpg",
-//   "/images/thumbnails/row-tech-3.jpg",
-// ];
-
-const GOLDENRATIO = 1.196; // 1.61803398875;
-
-// const pexel = (id) =>
-//   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`;
-const imageConstructor = (id: string) => `/images/thumbnails/${id}.jpg`;
-const CAROUSEL_LAYOUT = [
-  // Front
-  {
-    position: [0, 0, -1.2],
-    rotation: [0, 0, 0],
-    url: imageConstructor(1103970),
-  },
-
-  // Back
-  {
-    position: [-1, 0, -0.6],
-    rotation: [0, 0, 0],
-    url: imageConstructor(416430),
-  },
-  {
-    position: [1, 0, -0.6],
-    rotation: [0, 0, 0],
-    url: imageConstructor(310452),
-  },
-
-  // Left
-  {
-    position: [-1.75, 0, 0.25],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor(327482),
-  },
-  {
-    position: [-2.15, 0, 1.5],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor(325185),
-  },
-  {
-    position: [-2, 0, 2.75],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor(358574),
-  },
-
-  // Right
-  {
-    position: [1.75, 0, 0.25],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor(227675),
-  },
-  {
-    position: [2.15, 0, 1.5],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor(911738),
-  },
-  {
-    position: [2, 0, 2.75],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor(1738986),
-  },
-];
-
-const LINE_LAYOUT = [
-  // Front
-  {
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
-    url: imageConstructor("row-blackouts-1"),
-  },
-
-  // Back
-  {
-    position: [1 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-  {
-    position: [2 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-
-  // Left
-  {
-    position: [3 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-  {
-    position: [4 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-  {
-    position: [5 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-
-  // Right
-  {
-    position: [6 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-  {
-    position: [7 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-2"),
-  },
-  {
-    position: [8 * GOLDENRATIO, 0, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-1"),
-  },
-];
-
-const FLOATING_LAYOUT = [
-  // Front
-  {
-    position: [3, 1, 1],
-    rotation: [0, 0, 0],
-    url: imageConstructor("babby-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-
-  // Back
-  {
-    position: [-3, 0, -1],
-    rotation: [0, 0, 0],
-    url: imageConstructor("row-tech-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-  {
-    position: [-1, 1, -4],
-    rotation: [0, 0, 0],
-    url: imageConstructor("row-blackouts-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-
-  // Left
-  {
-    position: [2, 3, -2],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor("vana-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-  {
-    position: [3, 0, -1],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor("impact"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-  {
-    position: [-3, 3, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, Math.PI / 2.5, 0],
-    url: imageConstructor("praxis-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-
-  // Right
-  {
-    position: [-1, 2, 0],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("quarantunes-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-  {
-    position: [3, 0, 2],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("row-blackouts-2"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-  {
-    position: [-2, 0, 3],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("gallery-1"),
-    name: "Gallery",
-    link: "https://gallery.so/",
-  },
-  {
-    position: [-3, 3, 2],
-    rotation: [0, 0, 0],
-    // rotation: [0, -Math.PI / 2.5, 0],
-    url: imageConstructor("babby-2"),
-    name: "Babby",
-    link: "https://babby.xyz/",
-  },
-];
-
-const images = FLOATING_LAYOUT;
+const GOLDENRATIO = 1.196;
 
 // Custom hook to track mouse position
 function useMousePosition() {
@@ -274,16 +53,28 @@ function useMousePosition() {
   return mousePosition;
 }
 
-const CAMERA_X = 5;
-const CAMERA_Y = 2;
-const CAMERA_Z = 4;
+const CAMERA_X = 0;
+const CAMERA_Y = 0.15;
+const CAMERA_Z = 2;
 
 export default function ImageGridWrapper({
   showProjects,
+  images,
+  currentImageIndex,
 }: {
   showProjects: boolean;
+  images: any[];
+  currentImageIndex: number;
 }) {
   const cameraControlsRef = useRef<CameraControls | null>(null);
+  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const currentImageUrl = useMemo(
+    () =>
+      images[currentImageIndex]
+        ? images[currentImageIndex]?.url
+        : images[0]?.url,
+    [currentImageIndex]
+  );
 
   return (
     <div className="w-screen h-full relative">
@@ -295,17 +86,19 @@ export default function ImageGridWrapper({
           pointerEvents: showProjects ? "none" : "all",
         }}
       />
+
       <Canvas
         shadows
         dpr={[5, 15]}
-        camera={{ fov: 70, position: [CAMERA_X, CAMERA_Y, CAMERA_Z] }}
+        camera={{ fov: 80, position: [CAMERA_X, CAMERA_Y, CAMERA_Z] }}
         // linear
         // flat
         // frameloop="demand"
       >
         {/* Background color */}
-        {/* <color attach="background" args={["#191920"]} />
-        <fog attach="fog" args={["#191920", 0, 15]} /> */}
+        {/* <color attach="background" args={["#191920"]} /> */}
+        <color attach="background" args={["#111111"]} />
+        <fog attach="fog" args={["#191920", 0, 15]} />
 
         {/* FIXME: Not working */}
         {/* <directionalLight
@@ -315,12 +108,18 @@ export default function ImageGridWrapper({
           color="#000000"
         /> */}
 
+        <Environment preset="warehouse" />
+
         <group position={[0, 0, 0]} castShadow>
-          <Frames images={images} cameraControlsRef={cameraControlsRef} />
+          <Frames
+            images={images}
+            cameraControlsRef={cameraControlsRef}
+            currentImageUrl={currentImageUrl}
+          />
 
           {/* Reflective BG/floor */}
           {/* <mesh rotation={[-Math.PI / 2, 0, 0]}>
-            <planeGeometry args={[50, 50]} />
+            <planeGeometry args={[100, 10]} />
             <MeshReflectorMaterial
               blur={[300, 100]}
               resolution={2048}
@@ -331,33 +130,67 @@ export default function ImageGridWrapper({
               minDepthThreshold={0.4}
               maxDepthThreshold={1.4}
               color="#050505"
-              metalness={0.5}
+              metalness={0.25}
             />
           </mesh> */}
         </group>
-        <Environment preset="city" />
-        <CameraControls
-          ref={cameraControlsRef}
+
+        {/* <Environment preset="warehouse" /> */}
+        {/* <Environment preset="city" /> */}
+        {/* <Environment near={1} far={1000} resolution={256}>
+          <mesh scale={100}>
+            <sphereGeometry args={[1, 64, 64]} />
+            <meshBasicMaterial color={"#ffffff"} side={THREE.DoubleSide} />
+          </mesh>
+        </Environment> */}
+
+        {/* <OrbitControls
+          makeDefault
+          // target={[0, 0, 0]}
+          // autoRotate
           minPolarAngle={Math.PI / 4}
           maxPolarAngle={Math.PI / 2}
           minAzimuthAngle={-Math.PI / 8}
           maxAzimuthAngle={Math.PI / 4}
-          minDistance={0.001}
-          maxDistance={5}
-          distance={0.1}
+          // mouseButtons={{
+          //   LEFT: 0, // THREE.MOUSE.ROTATE,
+          //   MIDDLE: 0,
+          //   RIGHT: 0,
+          // }}
+          enablePan={false}
+          enableZoom={false}
+          enableRotate={false}
+        /> */}
+        <CameraControls
+          ref={cameraControlsRef}
           mouseButtons={{
             left: 0,
+            // left: THREE.MOUSE.PAN,
             middle: 0,
             wheel: 0,
             right: 0,
           }}
-          touches={
-            {
-              one: 0,
-              two: 0, // PAN
-            } as any
-          }
-          interactiveArea={{ x: 0, y: 0, width: 0, height: 0 }}
+
+          // minPolarAngle={Math.PI / 4}
+          // maxPolarAngle={Math.PI / 2}
+          // minAzimuthAngle={-Math.PI / 8}
+          // maxAzimuthAngle={Math.PI / 4}
+          // minDistance={0.001}
+          // maxDistance={5}
+          // distance={0.1}
+          // mouseButtons={{
+          //   left: 0,
+          //   middle: 0,
+          //   wheel: 0,
+          //   right: 0,
+          // }}
+          // touches={
+          //   {
+          //     one: 0,
+          //     two: 0, // PAN
+          //   } as any
+          // }
+          // interactiveArea={{ x: 0, y: 0, width: 0, height: 0 }}
           // enabled={false}
         />
       </Canvas>
@@ -370,6 +203,7 @@ function Frames({
   q = new THREE.Quaternion(),
   p = new THREE.Vector3(),
   cameraControlsRef,
+  currentImageUrl,
 }) {
   const mousePosition = useMousePosition();
 
@@ -379,43 +213,79 @@ function Frames({
   const [, params] = useRoute("/:id");
   // const params = useParams();
 
-  const DEFAULT_X_ROTATION = Math.PI * 0.25;
+  const DEFAULT_X_ROTATION = 0; // Math.PI * 0.25;
   const DEFAULT_Y_ROTATION = Math.PI * 0.45;
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  useEffect(() => {
+    if (!images[currentImageIndex]) return;
+    setLocation(images[currentImageIndex].url.split("/").pop());
+  }, [currentImageIndex]);
+
+  // Handler for keydown events
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!params?.id) return;
+      if (event.key === "ArrowLeft") {
+        const currentUrl = params.id;
+        const currentIndex = images.findIndex(
+          (image) => image.url.split("/").pop() === currentUrl
+        );
+        const previousUrl = images[currentIndex - 1]?.url;
+        setLocation(previousUrl ? previousUrl.split("/").pop() : "/");
+      } else if (event.key === "ArrowRight") {
+        const currentUrl = params.id;
+        const currentIndex = images.findIndex(
+          (image) => image.url.split("/").pop() === currentUrl
+        );
+        const nextUrl = images[currentIndex + 1]?.url;
+        setLocation(nextUrl ? nextUrl.split("/").pop() : "/");
+      }
+    },
+    [images.length, params?.id]
+  );
+
+  // Bind the event listener
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  // const { camera } = useThree();
+  // console.log(camera);
 
   useFrame(({ camera }) => {
     if (params?.id) return;
-    if (cameraControlsRef.current) {
-      const Y_MIDPOINT = window.innerHeight / 2;
-      const X_MIDPOINT = window.innerWidth / 2;
-
-      const Y_POSITION = mousePosition.y - Y_MIDPOINT;
-      const X_POSITION = mousePosition.x - X_MIDPOINT;
-
-      const Y_PERCENT_FROM_MIDPOINT = (Y_POSITION / Y_MIDPOINT) * -1;
-      const X_PERCENT_FROM_MIDPOINT = (X_POSITION / X_MIDPOINT) * -1;
-
-      const NUDGEABLE_Y_AMOUNT = 0.25;
-      const NUDGEABLE_X_AMOUNT = 0.25;
-
-      // Calculate rotation based on mouse position
-      const yRotation =
-        DEFAULT_Y_ROTATION + Y_PERCENT_FROM_MIDPOINT * NUDGEABLE_Y_AMOUNT;
-      const xRotation =
-        DEFAULT_X_ROTATION + X_PERCENT_FROM_MIDPOINT * NUDGEABLE_X_AMOUNT;
-
-      // Apply rotation to camera
-      cameraControlsRef.current.rotateTo(xRotation, yRotation, true);
-      // cameraControlsRef.current.update();
-    }
+    // if (cameraControlsRef.current) {
+    const Y_MIDPOINT = window.innerHeight / 2;
+    const X_MIDPOINT = window.innerWidth / 2;
+    const Y_POSITION = mousePosition.y - Y_MIDPOINT;
+    const X_POSITION = mousePosition.x - X_MIDPOINT;
+    const Y_PERCENT_FROM_MIDPOINT = (Y_POSITION / Y_MIDPOINT) * -1;
+    const X_PERCENT_FROM_MIDPOINT = (X_POSITION / X_MIDPOINT) * -1;
+    const NUDGEABLE_Y_AMOUNT = 0.25;
+    const NUDGEABLE_X_AMOUNT = 0.25;
+    // Calculate rotation based on mouse position
+    const yRotation =
+      DEFAULT_Y_ROTATION + Y_PERCENT_FROM_MIDPOINT * NUDGEABLE_Y_AMOUNT;
+    const xRotation =
+      DEFAULT_X_ROTATION + X_PERCENT_FROM_MIDPOINT * NUDGEABLE_X_AMOUNT;
+    // Apply rotation to camera
+    cameraControlsRef.current.rotateTo(xRotation, yRotation, true);
+    // camera.rotation.set(xRotation, yRotation, 0);
+    // }
   });
 
   const [, setLocation] = useLocation();
   useEffect(() => {
     clicked.current = ref.current.getObjectByName(params?.id);
     if (clicked.current) {
-      // clicked.current.parent.updateWorldMatrix(true, true);
-      // clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25));
-      // clicked.current.parent.getWorldQuaternion(q);
+      clicked.current.parent.updateWorldMatrix(true, true);
+      clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, 1.25));
+      clicked.current.parent.getWorldQuaternion(q);
       // Change rotation to 0
       cameraControlsRef.current?.fitToBox(clicked.current, true, {
         paddingTop: 0.1,
@@ -425,13 +295,15 @@ function Frames({
       });
       cameraControlsRef.current?.rotateTo(0, Math.PI / 2, true);
     } else {
-      // p.set(CAMERA_X, CAMERA_Y, CAMERA_Z);
+      p.set(CAMERA_X, CAMERA_Y, CAMERA_Z);
+      // cameraControlsRef.current?.moveTo(CAMERA_X, CAMERA_Y, CAMERA_Z, true);
+
       // cameraControlsRef.current?.fitToBox(ref.current, true);
-      cameraControlsRef.current?.moveTo(CAMERA_X, CAMERA_Y, CAMERA_Z, true);
       // cameraControlsRef.current?.rotateTo(Math.PI * 0.25, Math.PI * 0.45, true);
+
       q.identity();
     }
-  });
+  }, [params?.id]);
 
   // cameraControlsRef.current?.fitToBox(clicked.current, true);
   // cameraControlsRef.current?.rotateTo(0, 1.5, false);
@@ -487,12 +359,14 @@ function Frames({
         //   Math.PI * 0.45,
         //   true
         // );
+        cameraControlsRef.current?.moveTo(CAMERA_X, CAMERA_Y, CAMERA_Z, true);
         setLocation("/");
       }}
     >
-      {images.map(
-        (props) => <Frame key={props.url} cameraControlsRef={cameraControlsRef} {...props} /> /* prettier-ignore */
-      )}
+      {/* <GlassPortal image={currentImageUrl} /> */}
+      {images.map((image, i) => (
+        <Frame key={image.url} {...image} />
+      ))}
     </group>
   );
 }
@@ -517,7 +391,7 @@ function Frame({
 
   const [hovered, hover] = useState(false);
   const [rnd] = useState(() => Math.random());
-  const id = getUuid(url);
+  const id = url.split("/").pop();
   const isActive = params?.id === id;
 
   useCursor(hovered);
@@ -566,7 +440,7 @@ function Frame({
         {/* Box — needed for click events */}
         <boxGeometry />
 
-        {/* Optiona: radial gradient around frame */}
+        {/* Optional: radial gradient around frame */}
         {/* <meshBasicMaterial>
           <GradientTexture
             stops={[0, 0.5, 1]} // As many stops as you want

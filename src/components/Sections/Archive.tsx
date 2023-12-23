@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Dot from "../Elements/Dot";
 
 // FIXME: Add Axios, Moksha, freelance work.
 const projects = [
@@ -238,13 +239,13 @@ const projects = [
     type: "Story",
     featured: true,
   },
-  {
-    title: "How Many People Have Had COVID-19?",
-    description: "A novel way to visualize COVID-19 case counts.",
-    year: 2020,
-    url: "https://connorrothschild.github.io/how-many-people",
-    type: "Story",
-  },
+  // {
+  //   title: "How Many People Have Had COVID-19?",
+  //   description: "A novel way to visualize COVID-19 case counts.",
+  //   year: 2020,
+  //   url: "https://connorrothschild.github.io/how-many-people",
+  //   type: "Story",
+  // },
   {
     title: "Mapping Houston Homicides",
     description: "An exploration of homicides in Houston.",
@@ -321,12 +322,12 @@ export default function Archive() {
   const DARK_MODE = false;
   return (
     <section
-      className="w-full min-h-screen bg-[var(--background-invert)]"
+      className="w-full min-h-screen relative"
       style={{
         filter: DARK_MODE ? "invert(1)" : "none",
       }}
     >
-      <div className="flex flex-col items-start justify-start py-24 w-full min-h-screen text-black px-4 lg:px-12">
+      <div className="flex flex-col items-start justify-start py-24 w-full min-h-screen text-black px-[20px]">
         <h1 className="text-7xl font-light font-serif mb-4">
           <span className="opacity-20">&&</span>
           Archive
@@ -361,6 +362,7 @@ export default function Archive() {
             />
           ))}
       </div>
+      {/* <Gradient /> */}
     </section>
   );
 }
@@ -418,7 +420,7 @@ function TableRow({
       <p
         className={`w-12 text-right text-sm font-sans uppercase font-light text-gray-700`}
       >
-        {featured ? "🔥" : ""}
+        {featured && <Dot />}
       </p>
     </a>
   );
@@ -465,3 +467,61 @@ function TableTitle({ label, isActive }: { label: string; isActive: boolean }) {
     </div>
   );
 }
+
+// function Gradient() {
+//   return (
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       version="1.1"
+//       viewBox="0 0 800 800"
+//       className="fixed bottom-0 right-0 w-full z-[-1] opacity-30"
+//     >
+//       <defs>
+//         <filter
+//           id="bbblurry-filter"
+//           x="-100%"
+//           y="-100%"
+//           width="400%"
+//           height="400%"
+//           filterUnits="objectBoundingBox"
+//           primitiveUnits="userSpaceOnUse"
+//           color-interpolation-filters="sRGB"
+//         >
+//           <feGaussianBlur
+//             stdDeviation="61"
+//             x="0%"
+//             y="0%"
+//             width="100%"
+//             height="100%"
+//             in="SourceGraphic"
+//             edgeMode="none"
+//             result="blur"
+//           ></feGaussianBlur>
+//         </filter>
+//       </defs>
+//       <g filter="url(#bbblurry-filter)">
+//         <ellipse
+//           rx="215"
+//           ry="150"
+//           cx="601.1240490019634"
+//           cy="552.3812431615061"
+//           fill="hsl(37, 99%, 67%)"
+//         ></ellipse>
+//         <ellipse
+//           rx="215"
+//           ry="150"
+//           cx="333.495442814852"
+//           cy="522.0717990735438"
+//           fill="hsl(316, 73%, 52%)"
+//         ></ellipse>
+//         <ellipse
+//           rx="215"
+//           ry="150"
+//           cx="550.7388997502352"
+//           cy="338.5728695854466"
+//           fill="hsl(185, 100%, 57%)"
+//         ></ellipse>
+//       </g>
+//     </svg>
+//   );
+// }

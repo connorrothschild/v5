@@ -1,13 +1,14 @@
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { FaceSmileIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import Dot from "./Dot";
 
 export default function GridTitle({ children }: { children: React.ReactNode }) {
   return (
-    <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase flex flex-row gap-1 items-center ml-1">
+    <span className="text-gray-500 font-sans text-base flex flex-row gap-1.5 items-center">
       {children}
-      <ArrowRightIcon className="text-inherit h-4 w-4" />
-      {/* <Smiley /> */}
+      <Dot />
+      {/* <ArrowRightIcon className="text-inherit h-4 w-4" /> */}
     </span>
   );
 }

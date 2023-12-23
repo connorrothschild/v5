@@ -9,12 +9,12 @@ export default function EmphasizeOnScroll({
   const ref = useRef(null);
   const isInView = useInView(ref);
 
-  const emphasisClass = "text-yellow-600";
+  const emphasisClass = "gradient-text";
   return (
     <span
       className={`${
-        isInView ? emphasisClass : ""
-      } transition-color duration-500 ease-in-out delay-300`}
+        isInView ? emphasisClass : "text-stone-500"
+      } font-serif italic font-normal transition-all delay-200`}
       ref={ref}
     >
       {children}

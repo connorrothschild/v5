@@ -12,8 +12,8 @@
 }
 
 :root {
-  --background: #131517;
-  --background-invert: #e4e4e4;
+  --background: #f8f8f8;
+  --background-invert: #131517;
 }
 
 html,
@@ -127,3 +127,38 @@ body.loaded #menu-button {
     --r2: 360deg;
   }
 } */
+
+@keyframes hue-rotate-animation {
+  0% {
+    filter: hue-rotate(0deg);
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(360deg);
+    -webkit-filter: hue-rotate(360deg);
+  }
+
+  100% {
+    filter: hue-rotate(0deg);
+    -webkit-filter: hue-rotate(0deg);
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-[-25%] from-blue-500 via-green-500 to-amber-600 to-[125%] text-transparent bg-clip-text inline box-decoration-clone;
+  }
+  .animate-gradient {
+    animation: hue-rotate-animation 12s infinite 500ms;
+    -webkit-animation: hue-rotate-animation 12s infinite 500ms;
+  }
+  .paused {
+    animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+  }
+  .running {
+    animation-play-state: running;
+    -webkit-animation-play-state: running;
+  }
+}

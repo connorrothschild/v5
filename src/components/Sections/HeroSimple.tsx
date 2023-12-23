@@ -9,8 +9,259 @@ import { useTransform, motion } from "framer-motion";
 import ImageGridWrapper from "./ImageGrid/ImageGrid";
 import { easeInOutQuint } from "@/config/eases";
 
+const imageUrls = [
+  "/images/thumbnails/gallery-1.jpg",
+  "/images/thumbnails/babby-1.jpg",
+  "/images/thumbnails/impact.jpg",
+  "/images/thumbnails/vana-1.jpg",
+  "/images/thumbnails/praxis-1.jpg",
+  "/images/thumbnails/row-blackouts-1.jpg",
+  "/images/thumbnails/quarantunes-1.jpg",
+];
+
+const GOLDENRATIO = 1.196; // 1.61803398875;
+
+// const pexel = (id) =>
+//   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`;
+const imageConstructor = (id: string) => `/images/thumbnails/${id}.jpg`;
+const CAROUSEL_LAYOUT = [
+  // Front
+  {
+    position: [0, 0, -1.2],
+    rotation: [0, 0, 0],
+    url: imageConstructor(1103970),
+  },
+
+  // Back
+  {
+    position: [-1, 0, -0.6],
+    rotation: [0, 0, 0],
+    url: imageConstructor(416430),
+  },
+  {
+    position: [1, 0, -0.6],
+    rotation: [0, 0, 0],
+    url: imageConstructor(310452),
+  },
+
+  // Left
+  {
+    position: [-1.75, 0, 0.25],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageConstructor(327482),
+  },
+  {
+    position: [-2.15, 0, 1.5],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageConstructor(325185),
+  },
+  {
+    position: [-2, 0, 2.75],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageConstructor(358574),
+  },
+
+  // Right
+  {
+    position: [1.75, 0, 0.25],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor(227675),
+  },
+  {
+    position: [2.15, 0, 1.5],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor(911738),
+  },
+  {
+    position: [2, 0, 2.75],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor(1738986),
+  },
+];
+
+const LINE_LAYOUT = [
+  // Front
+  {
+    position: [0, 0.5, 0],
+    rotation: [0, 0, 0],
+    url: imageUrls[0],
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+
+  // Back
+  {
+    position: [1 * GOLDENRATIO, 0.5, 0],
+    rotation: [0, 0, 0],
+    url: imageUrls[1],
+    name: "Babby",
+    link: "https://babby.xyz/",
+  },
+  {
+    position: [2 * GOLDENRATIO, 0.5, 0],
+    rotation: [0, 0, 0],
+    url: imageUrls[2],
+    name: "Collaborative Fund",
+    link: "https://collaborativefund.com/",
+  },
+
+  // Left
+  // {
+  //   position: [3 * GOLDENRATIO, 0.5, 0],
+  //   rotation: [0, 0, 0],
+  //   // rotation: [0, Math.PI / 2.5, 0],
+  //   url: imageUrls[3],
+
+  //   name: "Gallery",
+  //   link: "https://gallery.so/",
+  // },
+  {
+    position: [4 * GOLDENRATIO, 0.5, 0],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageUrls[4],
+
+    name: "Vana",
+    link: "https://vana.com/",
+  },
+  {
+    position: [5 * GOLDENRATIO, 0.5, 0],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageUrls[5],
+
+    name: "Praxis",
+    link: "https://cityofpraxis.org/",
+  },
+
+  // Right
+  {
+    position: [6 * GOLDENRATIO, 0.5, 0],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageUrls[6],
+
+    name: "Rest of World",
+    link: "https://restofworld.org/",
+  },
+  // {
+  //   position: [7 * GOLDENRATIO, 0.5, 0],
+  //   rotation: [0, 0, 0],
+  //   // rotation: [0, -Math.PI / 2.5, 0],
+  //   url: imageUrls[7],
+
+  //   name: 'Quarantunes',
+  //   link: 'https://quarantunes.club/'
+  // },
+  // {
+  //   position: [8 * GOLDENRATIO, 0.5, 0],
+  //   rotation: [0, 0, 0],
+  //   // rotation: [0, -Math.PI / 2.5, 0],
+  //   url: imageUrls[7],
+
+  //   name: "ACLU of Texas",
+  //   link: "https://www.aclutx.org/",
+  // },
+];
+
+const FLOATING_LAYOUT = [
+  // Front
+  {
+    position: [3, 1, 1],
+    rotation: [0, 0, 0],
+    url: imageConstructor("babby-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+
+  // Back
+  {
+    position: [-3, 0, -1],
+    rotation: [0, 0, 0],
+    url: imageConstructor("row-tech-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+  {
+    position: [-1, 1, -4],
+    rotation: [0, 0, 0],
+    url: imageConstructor("row-blackouts-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+
+  // Left
+  {
+    position: [2, 3, -2],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageConstructor("vana-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+  {
+    position: [3, 0, -1],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageConstructor("impact"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+  {
+    position: [-3, 3, 0],
+    rotation: [0, 0, 0],
+    // rotation: [0, Math.PI / 2.5, 0],
+    url: imageConstructor("praxis-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+
+  // Right
+  {
+    position: [-1, 2, 0],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor("quarantunes-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+  {
+    position: [3, 0, 2],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor("row-blackouts-2"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+  {
+    position: [-2, 0, 3],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor("gallery-1"),
+    name: "Gallery",
+    link: "https://gallery.so/",
+  },
+  {
+    position: [-3, 3, 2],
+    rotation: [0, 0, 0],
+    // rotation: [0, -Math.PI / 2.5, 0],
+    url: imageConstructor("babby-2"),
+    name: "Babby",
+    link: "https://babby.xyz/",
+  },
+];
+
+const images = LINE_LAYOUT;
+
 export default function HeroSimple() {
   const [showProjects, setShowProjects] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
     <section className="h-[calc(100vh-50px)] w-full relative  rounded-b-[1rem] overflow-hidden">
@@ -97,7 +348,31 @@ export default function HeroSimple() {
         }}
         className="absolute top-0 left-0 w-full h-full z-10"
       >
-        <ImageGridWrapper showProjects={showProjects} />
+        {/* <div className="absolute top-0 left-0 w-screen h-screen z-50 leading-none">
+          {images.map((image, i) => (
+            <div
+              key={image.url}
+              className="text-[8vw] text-white font-light tracking-tighter font-serif uppercase inline-block px-4"
+              style={{
+                opacity:
+                  currentImageIndex === null || currentImageIndex === i
+                    ? 1
+                    : 0.2,
+                transition: "opacity 300ms ease-in-out 100ms",
+              }}
+              onMouseOver={() => {
+                setCurrentImageIndex(i);
+              }}
+            >
+              {image.name} &
+            </div>
+          ))}
+        </div> */}
+        {/* <ImageGridWrapper
+          showProjects={showProjects}
+          images={images}
+          currentImageIndex={currentImageIndex}
+        /> */}
         {/* <ProjectsGrid /> */}
       </motion.div>
       {/* TOP RIGHT CORNER */}

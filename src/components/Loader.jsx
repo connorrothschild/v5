@@ -31,7 +31,7 @@ const Loader = ({ children }) => {
         borderRadius: "0px",
         // clipPath: "circle(100% at 50% 50%)",
         clipPath: "inset(0% 0% 0% 0% round 0px)",
-        position: "relative",
+        position: "unset",
       }}
       exit={{
         opacity: 0,

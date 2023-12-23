@@ -41,7 +41,7 @@ export default function Footer() {
     // NO LONGER RELEVANT: Note that this is visible (opacity: 1) and interactable (pointer-events: auto) when the body is loaded. See globals.css
     <footer
       // className="opacity-0 pointer-events-none sticky overflow-hidden h-[600px] flex flex-col justify-center bottom-0 left-0 w-full z-0 bg-gray-900"
-      className="overflow-hidden h-[600px] w-full z-0 grid grid-cols-1 lg:grid-cols-3 gap-12 relative bg-[var(--background)] py-24 px-4 lg:px-12"
+      className="overflow-hidden h-[600px] w-full z-0 grid grid-cols-1 lg:grid-cols-3 gap-12 relative bg-[var(--background)] py-24 px-[20px]"
       onMouseMove={handleMousemove}
       onMouseLeave={() => nudgeX.set(0)}
       ref={container}

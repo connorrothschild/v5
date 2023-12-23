@@ -220,7 +220,7 @@ export default function Awards() {
   );
   return (
     <section
-      className="relative w-full bg-gray-300 py-24 px-4 lg:px-12"
+      className="relative w-full bg-gray-300 py-24 px-[20px]"
       // className="w-full bg-[var(--background)] min-h-[calc(100vh-1rem)] sticky top-[1rem] z-[2] py-12 px-4 rounded-t-[30px] flex flex-col justify-between gap-8"
       // style={{
       //   boxShadow: "0 0 20px rgba(0,0,0,.1)",

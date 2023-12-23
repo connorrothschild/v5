@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { easeInOutQuint } from "@/config/eases";
 import Jukebox from "./Jukebox";
+import CanvasGradient from "./CanvasGradient";
 
 const menuItems = [
   {
@@ -103,7 +104,7 @@ export default function Menu({}) {
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-difference text-gray-200`}
+        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-overlay text-gray-200`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -124,11 +125,12 @@ export default function Menu({}) {
             exit="exit"
             transition={{ duration: MENU_IN_DURATION, ease: easeInOutQuint }}
             className="z-40 fixed top-0 left-0 w-screen h-screen flex flex-col md:flex-row justify-center items-center gap-2 font-serif"
-            style={{
-              background: "rgba(0,0,0,.7)",
-              backdropFilter: "blur(7px)",
-            }}
+            // style={{
+            //   background: "rgba(0,0,0,.7)",
+            //   backdropFilter: "blur(7px)",
+            // }}
           >
+            <CanvasGradient />
             {menuItems.map(({ href, w }, index) => (
               <motion.a
                 variants={word}
@@ -159,7 +161,7 @@ export default function Menu({}) {
                 })}{" "}
                 {index < menuItems.length - 1 && (
                   <motion.span
-                    className="text-gray-400 opacity-50 font-light text-4xl overflow-hidden"
+                    className="text-gray-300 opacity-50 font-light text-4xl overflow-hidden"
                     variants={ampersand}
                   >
                     &

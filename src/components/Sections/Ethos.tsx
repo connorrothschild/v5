@@ -8,11 +8,8 @@ import SectionSubtitle from "../Elements/SectionSubtitle";
 
 export default function Ethos() {
   return (
-    <section
-      className="rounded-t-[1rem] relative w-full bg-[var(--background-invert)] px-4 lg:px-12"
-      id="work"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <section className="relative px-[20px]" id="work">
+      <div className="grid grid-cols-1 gap-12">
         {/* LEFT SIDE */}
         <div className="flex flex-col col-span-1 gap-12">
           <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase lg:sticky lg:top-0 pt-12">
@@ -20,13 +17,13 @@ export default function Ethos() {
           </span>
         </div>
         {/* RIGHT SIDE */}
-        <div className="col-span-2 flex flex-col gap-12 w-full py-24">
-          <SectionTitle>
+        <div className="col-span-2 flex flex-col gap-12 w-full">
+          {/* <SectionTitle>
             I design and develop{" "}
             <EmphasizeOnScroll>difference-making websites</EmphasizeOnScroll>{" "}
             for <EmphasizeOnScroll>difference-making clients</EmphasizeOnScroll>
             .
-          </SectionTitle>
+          </SectionTitle> */}
           <SectionSubtitle>
             I specialize in information design, data visualization, and
             performant UI. I combine cutting edge technologies with design
@@ -98,7 +95,7 @@ function ProjectCard({
           backgroundImage:
             "linear-gradient(to bottom, transparent, var(--background))",
         }} */}
-        <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background-invert)] rounded-t-lg" />
+        <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background)] rounded-t-lg" />
       </div>
       <div className="flex flex-row items-center gap-1 flex-wrap">
         <h1 className="font-serif text-xl leading-none text-gray-700 italic">

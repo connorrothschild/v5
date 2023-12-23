@@ -6,6 +6,7 @@ import Archive from "@/components/Sections/Archive";
 import Ethos from "@/components/Sections/Ethos";
 import HeroSimple from "@/components/Sections/HeroSimple";
 import ImageGridWrapper from "@/components/Sections/ImageGrid";
+import ImageGrid from "@/components/Sections/ImageGrid";
 
 export default function Home() {
   return (
@@ -26,15 +27,16 @@ export default function Home() {
           constructImageUrl("row-tech-3"),
         ]}
       /> */}
-      <HeroSimple />
-      {/* <Hero /> */}
-      {/* <div className="sticky top-0 z-10"> */}
-      <Clients />
-      <Ethos />
-      {/* <Projects /> */}
-      {/* <Awards /> */}
-      <Contact />
-      {/* </div> */}
+      {/* <HeroSimple /> */}
+      <Hero />
+      <div className="bg-[--background] z-[9] relative">
+        <Clients />
+        <ImageGrid />
+        {/* <Ethos /> */}
+        {/* <Projects /> */}
+        {/* <Awards /> */}
+        <Contact />
+      </div>
     </>
   );
 }

@@ -420,38 +420,33 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
+const montreal = localFont({
+  src: "./fonts/montreal/PPNeueMontreal-Book.otf",
+  // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "fallback",
+  variable: "--font-montreal",
+});
+
 import Menu from "@/components/Menu";
 import Jukebox from "@/components/Jukebox";
 import Loader from "@/components/Loader";
 import Grid from "@/components/Grid";
 import Footer from "@/components/Sections/Footer";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const theme = extendTheme({
-    styles: {
-      global: () => ({
-        body: {
-          bg: "",
-        },
-      }),
-    },
-  });
-
   return (
     <main
-      className={`${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
+      className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
     >
       <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
-      <ChakraProvider theme={theme}>
-        <Menu />
-        {/* For testing */}
-        {/* <Grid /> */}
-        <Loader>
-          <Component {...pageProps} />
-          <Footer />
-        </Loader>
-      </ChakraProvider>
+
+      <Menu />
+      {/* For testing */}
+      {/* <Grid /> */}
+      <Loader>
+        <Component {...pageProps} />
+        <Footer />
+      </Loader>
     </main>
   );
 }
