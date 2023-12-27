@@ -20,7 +20,7 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="bg-gray-900 h-[600px] relative group z-20"
+      className="bg-gray-900 h-[600px] relative group z-20 overflow-hidden"
       style={{
         borderTopLeftRadius: borderTopRadius,
         borderTopRightRadius: borderTopRadius,
