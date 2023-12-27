@@ -208,7 +208,7 @@ function Gradient() {
           height="400%"
           filterUnits="objectBoundingBox"
           primitiveUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feGaussianBlur
             stdDeviation="51"

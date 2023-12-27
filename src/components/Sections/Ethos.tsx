@@ -2,28 +2,16 @@ import Link from "next/link";
 import React from "react";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import GridTitle from "../Elements/GridTitle";
-import EmphasizeOnScroll from "../Elements/EmphasizeOnScroll";
-import SectionTitle from "../Elements/SectionTitle";
 import SectionSubtitle from "../Elements/SectionSubtitle";
+import Dot from "../Elements/Dot";
+import SectionTitle from "../Elements/SectionTitle";
 
 export default function Ethos() {
   return (
-    <section className="relative px-[20px]" id="work">
-      <div className="grid grid-cols-1 gap-12">
-        {/* LEFT SIDE */}
-        <div className="flex flex-col col-span-1 gap-12">
-          <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase lg:sticky lg:top-0 pt-12">
-            01. Work
-          </span>
-        </div>
-        {/* RIGHT SIDE */}
-        <div className="col-span-2 flex flex-col gap-12 w-full">
-          {/* <SectionTitle>
-            I design and develop{" "}
-            <EmphasizeOnScroll>difference-making websites</EmphasizeOnScroll>{" "}
-            for <EmphasizeOnScroll>difference-making clients</EmphasizeOnScroll>
-            .
-          </SectionTitle> */}
+    <section className="relative px-[20px] py-6 md:py-48" id="work">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col gap-12 w-full">
+          <SectionTitle classes="-right-6">01. Work</SectionTitle>
           <SectionSubtitle>
             I specialize in information design, data visualization, and
             performant UI. I combine cutting edge technologies with design
@@ -38,27 +26,27 @@ export default function Ethos() {
                 client="Minerva"
                 service="App, web development"
                 url="#"
-                image="/images/projects/minerva.png"
+                image="/images/mockups/praxis 1.jpg"
               />
               <ProjectCard
                 client="Rest of World"
                 service="Data visualization"
                 url="#"
-                image="/images/projects/blackouts.png"
+                image="/images/mockups/praxis 3.jpg"
               />
               <ProjectCard
                 client="Praxis"
                 service="Web development"
                 url="#"
-                image="/images/projects/praxis.png"
+                image="/images/mockups/praxis 4.jpg"
               />
             </div>
             <div className="w-full text-right">
               <Link
                 href="/archive"
-                className="mt-6 text-gray-500 font-serif flex items-center gap-1 justify-end"
+                className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5 mt-3 justify-end max-w-7xl mx-auto"
               >
-                View all <ArrowRightIcon className="w-4 h-4" />
+                View all <Dot />
               </Link>
             </div>
           </div>
@@ -85,23 +73,23 @@ function ProjectCard({
       href={url}
     >
       {/* Image */}
-      <div className="w-full bg-gray-300 rounded-t-lg relative">
+      <div className="w-full bg-gray-300 rounded-lg relative group/image">
         <img
           src={image}
           // Origin top left
-          className="w-full aspect-square rounded-t-lg object-cover object-left-top"
+          className="w-full aspect-square rounded-lg object-cover object-center"
         />
         {/* style={{
           backgroundImage:
             "linear-gradient(to bottom, transparent, var(--background))",
         }} */}
-        <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background)] rounded-t-lg" />
+        <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background)] rounded-t-lg group-hover/image:opacity-0 transition-all duration-300" />
       </div>
       <div className="flex flex-row items-center gap-1 flex-wrap">
-        <h1 className="font-serif text-xl leading-none text-gray-700 italic">
+        <h1 className="font-serif font-light text-xl leading-none text-gray-700">
           {client}
         </h1>
-        <h2 className="font-sans ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 tracking-tight border border-double border-gray-400 group-hover:border-yellow-400 px-2 py-1 text-gray-500 group-hover:text-yellow-500 font-semibold text-[9px] rounded-full uppercase transition-all duration-300">
+        <h2 className="font-sans font-normal ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 border border-double border-gray-400 group-hover/image:border-gray-800 px-3 py-1 tracking-wide text-gray-500 group-hover/image:text-gray-700 text-[9px] rounded-full uppercase transition-all duration-300">
           {service}
         </h2>
         {/* <h1 className="font-serif text-xl leading-none text-gray-700">

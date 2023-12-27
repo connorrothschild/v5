@@ -202,7 +202,7 @@ export default function Home() {
         <ProjectImage left="65%" top="2.5%" src="blackouts" scale={0.5} />
         <ProjectImage left="40%" top="75%" src="blackouts" scale={0.5} />
       </div>
-      <div className="pointer-events-none absolute left-1/2 top-1/2 transform translate-x-[-50%] translate-y-[-50%] text-white text-center z-40">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 transform translate-x-[-50%] translate-y-[-50%] text-black text-center z-40">
         <h1 className="leading-[1.05] font-light font-serif text-7xl">
           <span className="text-yellow-500">&</span> Some of my projects can be
           found here.

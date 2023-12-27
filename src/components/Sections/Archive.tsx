@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Dot from "../Elements/Dot";
+import SectionTitle from "../Elements/SectionTitle";
 
-// FIXME: Add Axios, Moksha, freelance work.
 const projects = [
   {
     title: "Svelte Charts",
@@ -327,40 +327,42 @@ export default function Archive() {
         filter: DARK_MODE ? "invert(1)" : "none",
       }}
     >
-      <div className="flex flex-col items-start justify-start py-24 w-full min-h-screen text-black px-[20px]">
-        <h1 className="text-7xl font-light font-serif mb-4">
-          <span className="opacity-20">&&</span>
-          Archive
-        </h1>
-        <p className="text-lg font-sans font-light mb-12 text-gray-700">
-          A selected collection of my work—mostly for my own reference.
-        </p>
-        <div className="w-full max-w-5xl flex flex-row justify-between items-center gap-2 mb-2">
-          <p className="min-w-[40px] text-sm uppercase text-left font-light">
-            No.
+      <div className="relative flex flex-col items-start justify-start pt-48 pb-24 w-full min-h-screen text-black px-[20px]">
+        <div className="max-w-7xl mx-auto w-full">
+          <h1 className="text-7xl font-serif italic font-extralight text-gray-500 mb-4">
+            Archive
+          </h1>
+          {/* <SectionTitle classes="relative top-0">Archive</SectionTitle> */}
+          <p className="text-lg font-sans font-light mb-12 text-gray-700">
+            A selected collection of my work—mostly for my own reference.
           </p>
-          <p className="w-full text-sm uppercase font-light">Title</p>
-          <p className="w-full md:w-[100px] text-sm uppercase font-light">
-            Type
-          </p>
-          <p className="w-full md:w-[100px] text-sm uppercase font-light">
-            Year
-          </p>
-          <p className="w-12"></p>
+          <div className="w-full max-w-5xl flex flex-row justify-between items-center gap-2 mb-2">
+            <p className="min-w-[40px] text-sm uppercase text-left font-light">
+              No.
+            </p>
+            <p className="w-full text-sm uppercase font-light">Title</p>
+            <p className="w-full md:w-[100px] text-sm uppercase font-light">
+              Type
+            </p>
+            <p className="w-full md:w-[100px] text-sm uppercase font-light">
+              Year
+            </p>
+            <p className="w-12"></p>
+          </div>
+          {projectsFiltered
+            .sort((a, b) => b.id - a.id)
+            .map((project) => (
+              <TableRow
+                key={project.id}
+                id={project.id}
+                title={project.title}
+                type={project.type}
+                year={project.year}
+                url={project.url}
+                featured={project.featured}
+              />
+            ))}
         </div>
-        {projectsFiltered
-          .sort((a, b) => b.id - a.id)
-          .map((project) => (
-            <TableRow
-              key={project.id}
-              id={project.id}
-              title={project.title}
-              type={project.type}
-              year={project.year}
-              url={project.url}
-              featured={project.featured}
-            />
-          ))}
       </div>
       {/* <Gradient /> */}
     </section>
@@ -389,44 +391,44 @@ function TableRow({
       target="_blank"
       rel="noopener noreferrer"
       key={id}
-      className="group w-full max-w-5xl flex flex-row justify-between items-center gap-2 border-t py-2 border-gray-400"
+      className="group w-full max-w-5xl flex flex-col md:flex-row justify-between items-center gap-1.5 md:gap-2 border-t py-3 border-gray-400"
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
       style={{
         cursor: url ? "pointer" : "default",
       }}
     >
-      <p className="min-w-[40px] text-left text-lg font-serif font-light text-gray-700">
+      <p className="hidden md:block min-w-[40px] text-left text-sm font-sans font-light text-gray-500">
         {prefixNumberWithZeroes(id)}.
       </p>
-      <div className="w-full text-left text-lg font-serif font-light text-gray-700">
-        <TableTitle label={title} isActive={isActive} />
+      <div className="w-full text-left text-lg font-sans font-medium text-gray-700">
+        <TableTitle label={title} featured={featured} isActive={isActive} />
       </div>
-      <p className="w-full md:w-[100px] text-left text-xs leading-none font-sans uppercase font-medium text-gray-500">
+      <p className="w-full md:w-[100px] text-left text-sm leading-none font-sans uppercase font-medium text-gray-500">
         {type}
+        <span className="md:hidden font-sans inline">, {year}</span>
       </p>
-      <p className="w-full md:w-[100px] text-left text-xs leading-none font-sans uppercase font-medium text-gray-500">
+      <p className="hidden md:block w-full md:w-[100px] text-left text-sm leading-none font-sans uppercase font-medium text-gray-500">
         {year}
       </p>
-
-      {/* <p
-        className={`w-12 text-right text-sm font-sans uppercase font-light text-gray-700 opacity-0 ${
-          url && "group-hover:opacity-100"
-        } transition-opacity ease-in-out duration-500`}
-      >
-        &rarr;
-      </p> */}
-
-      <p
-        className={`w-12 text-right text-sm font-sans uppercase font-light text-gray-700`}
+      <div
+        className={`hidden md:block w-12 text-right text-sm font-sans uppercase font-light text-gray-700`}
       >
         {featured && <Dot />}
-      </p>
+      </div>
     </a>
   );
 }
 
-function TableTitle({ label, isActive }: { label: string; isActive: boolean }) {
+function TableTitle({
+  label,
+  featured,
+  isActive,
+}: {
+  label: string;
+  featured: boolean | undefined;
+  isActive: boolean;
+}) {
   return (
     <div
       className="relative"
@@ -435,14 +437,14 @@ function TableTitle({ label, isActive }: { label: string; isActive: boolean }) {
       }}
     >
       <div
-        className="overflow-hidden relative flex flex-col group h-full w-full"
+        className="leading-none overflow-hidden relative flex flex-row items-center gap-1 group h-full w-full"
         style={{
           transformStyle: "preserve-3d",
           transition: "transform 800ms cubic-bezier(0.76, 0, 0.24, 1)",
         }}
       >
         <p
-          className="transition-all duration-[500ms] ease-in-out pointer-events-none"
+          className="transition-all font-normal duration-500 ease-in-out pointer-events-none"
           style={{
             opacity: isActive ? 0 : 1,
             transform: isActive ? "translateY(-100%)" : "translateY(0)",
@@ -451,7 +453,7 @@ function TableTitle({ label, isActive }: { label: string; isActive: boolean }) {
           {label}
         </p>
         <p
-          className="absolute transform transition-all duration-[500ms] ease-in-out pointer-events-none"
+          className="absolute font-light transform transition-all duration-500 font-serif ease-in-out pointer-events-none"
           style={{
             transform: isActive ? "none" : "rotateX(-90deg)",
             opacity: isActive ? 1 : 0,
@@ -463,6 +465,7 @@ function TableTitle({ label, isActive }: { label: string; isActive: boolean }) {
         >
           {label}
         </p>
+        <div className="md:hidden block">{featured && <Dot />}</div>
       </div>
     </div>
   );
@@ -485,7 +488,7 @@ function TableTitle({ label, isActive }: { label: string; isActive: boolean }) {
 //           height="400%"
 //           filterUnits="objectBoundingBox"
 //           primitiveUnits="userSpaceOnUse"
-//           color-interpolation-filters="sRGB"
+//           colorInterpolationFilters="sRGB"
 //         >
 //           <feGaussianBlur
 //             stdDeviation="61"

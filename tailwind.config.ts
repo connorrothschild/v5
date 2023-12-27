@@ -25,7 +25,8 @@ const config: Config = {
         // serif: ["var(--font-times-now)"],
         // serif: ["var(--font-tobias)"],
         // serif: ["var(--font-canela)"],
-        sans: ["var(--font-montreal)"],
+        // !! Sans is defined in app.tsx so that it can be used in global styles, including shadcn modals
+        // sans: ["var(--font-montreal)"],
         // sans: ["var(--font-manrope)"],
         // sans: ["var(--font-tasa-orbiter)"],
         // sans: ["var(--font-suisse)"],

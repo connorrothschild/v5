@@ -3,17 +3,23 @@ import { AnimatePresence, easeIn, motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 import TripleViz from "../TripleViz/TripleViz";
 import GridTitle from "../Elements/GridTitle";
-import EmphasizeOnScroll from "../Elements/EmphasizeOnScroll";
+
 import SectionTitle from "../Elements/SectionTitle";
 import SectionSubtitle from "../Elements/SectionSubtitle";
+import { ContactPopup } from "../Elements/ContactPopup";
 
 export default function Contact() {
   const [vizActive, setVizActive] = useState(false);
   const [webActive, setWebActive] = useState(false);
 
+  const [atLeastOneHasHovered, setAtLeastOneHasHovered] = useState(false);
+
   return (
-    <section className="relative px-[20px] py-48 overflow-visible" id="contact">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mx-auto max-w-7xl">
+    <section
+      className="relative px-[20px] py-6 md:py-48 overflow-visible"
+      id="contact"
+    >
+      <div className="gap-12 mx-auto max-w-7xl">
         {/* LEFT SIDE */}
         {/* <div className="flex flex-col col-span-1 gap-12">
           <span className="text-gray-700 font-serif italic font-extralight tracking-wide uppercase lg:sticky lg:top-12">
@@ -21,11 +27,8 @@ export default function Contact() {
           </span>
         </div> */}
         {/* RIGHT SIDE */}
-        <div className="col-span-3 flex flex-col gap-12 w-full pb-24">
-          <SectionTitle>
-            I am <EmphasizeOnScroll>available</EmphasizeOnScroll> for freelance
-            work and new collaborations.
-          </SectionTitle>
+        <div className="flex flex-col gap-12 w-full pb-12">
+          <SectionTitle classes="-left-6">02. Contact</SectionTitle>
           <SectionSubtitle>
             I keep an intentionally small roster of clients to ensure mutual
             interest & easy collaboration. There are two main channels I work
@@ -33,29 +36,35 @@ export default function Contact() {
           </SectionSubtitle>
 
           <div className="flex flex-col gap-2">
-            <GridTitle>Choose your starter</GridTitle>
+            <GridTitle>
+              {atLeastOneHasHovered ? "Click to contact" : "Hover to reveal"}
+            </GridTitle>
             <div className="flex flex-col md:flex-row gap-2">
               <ServiceCard
                 title="Data visualization"
                 description="Elegant, interactive data visualization design and development for
         established clients in government, journalism, and research."
+                inquiryPlaceholder="I saw on your website you work on data visualization. I'm interested in..."
                 active={vizActive}
                 setActive={setVizActive}
+                setAtLeastOneHasHovered={setAtLeastOneHasHovered}
               >
                 <VizScreen active={vizActive} />
               </ServiceCard>
               <ServiceCard
                 title="Web development"
                 description="Robust, performant web and application development ideal for startups going from 0 to 1."
+                inquiryPlaceholder="I saw on your website you work on web development. I'm interested in..."
                 active={webActive}
                 setActive={setWebActive}
+                setAtLeastOneHasHovered={setAtLeastOneHasHovered}
               >
                 <WebsiteScreen active={webActive} />
               </ServiceCard>
             </div>
-            <div className="w-full text-right">
+            <div className="w-full md:text-right max-w-2xl md:ml-auto">
               <p
-                className="mt-4 text-gray-500 font-sans leading-snug max-w-2xl ml-auto"
+                className="mt-4 w-full text-gray-500 font-sans leading-snug"
                 style={{
                   textWrap: "balance",
                 }}
@@ -64,12 +73,6 @@ export default function Contact() {
                 work, which allows me to allocate the necessary time and
                 resources to deliver exceptional results.
               </p>
-              {/* <Link
-                href="#"
-                className="mt-6 text-gray-500 font-serif flex items-center gap-1 justify-end"
-              >
-                Get in touch <ArrowRightIcon className="w-4 h-4" />
-              </Link> */}
             </div>
           </div>
         </div>
@@ -82,41 +85,57 @@ export default function Contact() {
 function ServiceCard({
   title,
   description,
+  inquiryPlaceholder,
   children,
   active,
   setActive,
+  setAtLeastOneHasHovered,
 }: {
   title: string;
   description: string;
+  inquiryPlaceholder: string;
   children: React.ReactNode;
   active: boolean;
-  setActive: any; // fixme.
+  setActive: (active: boolean) => void;
+  setAtLeastOneHasHovered: (active: boolean) => void;
 }) {
+  const [hasHoveredOnce, setHasHoveredOnce] = useState(false);
+
   return (
-    <div className={`w-full transition-all ${active ? "" : "grayscale"}`}>
+    <ContactPopup inquiryPlaceholder={inquiryPlaceholder}>
       <div
-        className={`duration-500 transition-all animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-500 via-green-500 to-orange-600 to-[125%] ${
-          active ? "running" : "opacity-80 paused"
-        }`}
+        className={`w-full transition-all duration-500 ${
+          active ? "" : "grayscale"
+        } ${hasHoveredOnce ? "" : " blur-[3px]"}`}
         onMouseEnter={() => {
-          setActive(true);
+          setHasHoveredOnce(true);
+          setAtLeastOneHasHovered(true);
         }}
-        onMouseLeave={() => {
-          setActive(false);
-        }}
-        onClick={() => {
-          alert("Popup: Email, meet, DM");
-        }}
+        // onMouseLeave={() => {
+        //   setActive(false);
+        // }}
       >
-        {children}
-        <h2 className="text-xl font-serif font-light tracking-wide leading-none mt-4 mb-1 text-white">
-          {title}
-        </h2>
-        <h2 className="text-base font-sans leading-snug text-gray-100">
-          {description}
-        </h2>
+        <div
+          className={`transition-all animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-500 via-green-500 to-orange-600 to-[125%] ${
+            active ? "running" : "opacity-80 paused"
+          }`}
+          onMouseEnter={() => {
+            setActive(true);
+          }}
+          onMouseLeave={() => {
+            setActive(false);
+          }}
+        >
+          {children}
+          <h2 className="text-xl font-serif font-light tracking-wide leading-none mt-4 mb-1 text-white">
+            {title}
+          </h2>
+          <h2 className="text-base font-sans leading-snug text-gray-100">
+            {description}
+          </h2>
+        </div>
       </div>
-    </div>
+    </ContactPopup>
   );
 }
 
@@ -275,7 +294,7 @@ function Gradient() {
           height="400%"
           filterUnits="objectBoundingBox"
           primitiveUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feGaussianBlur
             stdDeviation="55"

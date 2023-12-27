@@ -14,7 +14,7 @@ export default function EmphasizeOnScroll({
     <span
       className={`${
         isInView ? emphasisClass : "text-stone-500"
-      } font-serif italic font-normal transition-all delay-200`}
+      } font-serif font-normal transition-all delay-200 pr-px`}
       ref={ref}
     >
       {children}

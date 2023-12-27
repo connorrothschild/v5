@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { Draggable } from "gsap/dist/Draggable";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Dot from "../Elements/Dot";
+import { ContactPopup } from "../Elements/ContactPopup";
 
 export default function Projects() {
   const container = useRef(null);
@@ -26,10 +27,12 @@ export default function Projects() {
               textAlignment="left"
             />
           </div>
-          <div className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5">
-            Booking new projects for 2024
-            <Dot />
-          </div>
+          <ContactPopup>
+            <div className="cursor-pointer text-gray-500 font-sans text-base flex flex-row items-center gap-1.5">
+              Booking new projects for 2024
+              <Dot />
+            </div>
+          </ContactPopup>
         </div>
       </div>
     </section>
@@ -91,7 +94,7 @@ function Gradient() {
           height="400%"
           filterUnits="objectBoundingBox"
           primitiveUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
           <feGaussianBlur
             stdDeviation="61"

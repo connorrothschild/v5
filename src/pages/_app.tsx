@@ -428,25 +428,96 @@ const montreal = localFont({
 });
 
 import Menu from "@/components/Menu";
-import Jukebox from "@/components/Jukebox";
 import Loader from "@/components/Loader";
 import Grid from "@/components/Grid";
 import Footer from "@/components/Sections/Footer";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return (
-    <main
-      className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
-    >
-      <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
+  // We only want this loader on 1) fresh loads and 2) on the home page
+  const router = useRouter();
+  const [skipLoading, setSkipLoading] = useState(false);
+  useEffect(() => {
+    const startHandler = () => {
+      console.log("Router change started");
+      setSkipLoading(true);
+    };
 
-      <Menu />
-      {/* For testing */}
-      {/* <Grid /> */}
-      <Loader>
-        <Component {...pageProps} />
-        <Footer />
-      </Loader>
-    </main>
+    const completeHandler = () => {
+      console.log("Router change completed");
+    };
+
+    router.events.on("routeChangeStart", startHandler);
+    router.events.on("routeChangeComplete", completeHandler);
+
+    return () => {
+      router.events.off("routeChangeStart", startHandler);
+      router.events.off("routeChangeComplete", completeHandler);
+    };
+  }, []);
+
+  const LOADING_TIME = 3.25;
+  // Set a class of "loading" on the body for 4 seconds
+
+  useEffect(() => {
+    if (skipLoading) {
+      document.body.classList.add("loaded");
+      return;
+    }
+
+    console.log("Adding loading animation");
+    document.body.classList.add("loading");
+    document.body.classList.remove("loaded");
+
+    setTimeout(() => {
+      document.body.classList.remove("loading");
+      document.body.classList.add("loaded");
+    }, LOADING_TIME * 1000);
+  }, [skipLoading]);
+
+  return (
+    <>
+      {/* Needed to make global fonts apply in shadcn components */}
+      <style jsx global>{`
+        html {
+          --font-sans: ${montreal.style.fontFamily};
+        }
+
+        .font-sans {
+          font-family: var(--font-sans);
+        }
+
+        body {
+          font-family: var(--font-sans);
+        }
+      `}</style>
+
+      <main
+      // vaul-drawer-wrapper=""
+      // className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
+      >
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/mhr2lku.css"
+        ></link>
+
+        {/* For testing */}
+        {/* <Grid /> */}
+        <Menu />
+
+        {router.pathname === "/" ? (
+          <Loader>
+            <Component {...pageProps} />
+            <Footer />
+          </Loader>
+        ) : (
+          <>
+            <Component {...pageProps} />
+            <Footer />
+          </>
+        )}
+      </main>
+    </>
   );
 }

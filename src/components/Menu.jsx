@@ -3,6 +3,7 @@ import { useState } from "react";
 import { easeInOutQuint } from "@/config/eases";
 import Jukebox from "./Jukebox";
 import CanvasGradient from "./CanvasGradient";
+import { useRouter } from "next/router";
 
 const menuItems = [
   {
@@ -99,12 +100,21 @@ export default function Menu({}) {
     },
   };
 
+  const router = useRouter();
+  const routeIsHome = router.pathname === "/";
+
   return (
     <>
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
+      {/* If the route is not /, that means there is no loading animation. In that case, we should apply the CanvasGradient behind the menu */}
+      {routeIsHome ? null : (
+        <div className="h-[60px] bg-gray-900 z-10 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]">
+          {/* <CanvasGradient /> */}
+        </div>
+      )}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-overlay text-gray-200`}
+        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 text-gray-200`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -161,7 +171,7 @@ export default function Menu({}) {
                 })}{" "}
                 {index < menuItems.length - 1 && (
                   <motion.span
-                    className="text-gray-300 opacity-50 font-light text-4xl overflow-hidden"
+                    className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
                     variants={ampersand}
                   >
                     &

@@ -99,7 +99,7 @@ export default function SplitTextHeader({
           key={word + "_" + i}
           className={`text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] leading-[.9] ${
             emphasized
-              ? "font-serif italic font-normal gradient-text"
+              ? "font-serif font-normal gradient-text"
               : "font-sans font-extralight text-gray-600 mix-blend-multiply"
           }`}
           style={{

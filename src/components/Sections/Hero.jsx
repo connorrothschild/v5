@@ -103,7 +103,7 @@ function Name({ hasLoaded }) {
               {hasLoaded && (
                 <motion.span
                   key={i}
-                  className="inline-block"
+                  className="inline-block font-serif"
                   animate={{ translateX: 0, rotateY: 0, opacity: 1 }}
                   initial={{ translateX: "100%", rotateY: 90, opacity: 0 }}
                   // animate={{ translateY: 0, rotateY: 0, opacity: 1 }}
@@ -132,7 +132,7 @@ function Name({ hasLoaded }) {
             <AnimatePresence key={i}>
               {hasLoaded && (
                 <motion.span
-                  className="inline-block"
+                  className="inline-block font-serif"
                   animate={{ translateX: 0, rotateY: 0, opacity: 1 }}
                   initial={{ translateX: "100%", rotateY: 90, opacity: 0 }}
                   // animate={{ translateY: 0, rotateY: 0, opacity: 1 }}

@@ -11,30 +11,11 @@ import ImageGrid from "@/components/Sections/ImageGrid";
 export default function Home() {
   return (
     <>
-      {/* <ImageGridWrapper
-        imageUrls={[
-          constructImageUrl("row-blackouts-1"),
-          constructImageUrl("babby-2"),
-          constructImageUrl("babby-1"),
-          constructImageUrl("impact"),
-          constructImageUrl("vana-1"),
-          constructImageUrl("praxis-1"),
-          constructImageUrl("row-tech-2"),
-          constructImageUrl("row-tech-1"),
-          constructImageUrl("praxis-2"),
-          constructImageUrl("row-blackouts-2"),
-          constructImageUrl("quarantunes-1"),
-          constructImageUrl("row-tech-3"),
-        ]}
-      /> */}
-      {/* <HeroSimple /> */}
       <Hero />
       <div className="bg-[--background] z-[9] relative">
         <Clients />
-        <ImageGrid />
-        {/* <Ethos /> */}
-        {/* <Projects /> */}
-        {/* <Awards /> */}
+        {/* <ImageGrid /> */}
+        <Ethos />
         <Contact />
       </div>
     </>
