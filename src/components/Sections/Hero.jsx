@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   useTransform,
   useScroll,
@@ -39,6 +39,12 @@ export default function Hero() {
 
   const [width, height] = useWindowSize();
 
+  const defaultClipPath = "inset(0px 0px 0px 0px round 0)";
+  const animatedClipPath = useMemo(
+    () => `inset(20px 20px ${height - 80}px 20px round 10px)`,
+    [height]
+  );
+
   const scrollRef = useRef(null);
   const isInView = useInView(scrollRef);
 
@@ -59,9 +65,7 @@ export default function Hero() {
           transition={{ ease: easeInOutQuint, duration: 0.6 }}
           animate={{
             clipPath:
-              isInView || !hasLoaded
-                ? "inset(0px 0px 0px 0px round 0)"
-                : `inset(20px 20px ${height - 80}px 20px round 10px)`,
+              isInView || !hasLoaded ? defaultClipPath : animatedClipPath,
           }}
           className="transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden"
         >
