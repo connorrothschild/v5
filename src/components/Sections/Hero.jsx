@@ -11,7 +11,7 @@ import { easeInOutQuint } from "@/config/eases";
 
 import { useWindowSize } from "@react-hook/window-size";
 
-import CanvasGradient from "../CanvasGradient";
+import CanvasGradient from "@/components/CanvasGradient";
 
 const LOADING_TIME = 3.25;
 

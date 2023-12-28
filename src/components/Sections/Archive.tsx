@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Dot from "../Elements/Dot";
-import SectionTitle from "../Elements/SectionTitle";
+import Dot from "@/components/Elements/Dot";
+import SectionTitle from "@/components/Elements/SectionTitle";
 
 const projects = [
   {

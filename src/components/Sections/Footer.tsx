@@ -1,8 +1,8 @@
 import { easeInOutQuint } from "@/config/eases";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
-import Dot from "../Elements/Dot";
-import { ContactPopup } from "../Elements/ContactPopup";
+import Dot from "@/components/Elements/Dot";
+import { ContactPopup } from "@/components/Elements/ContactPopup";
 
 export default function Footer() {
   const container = useRef(null);

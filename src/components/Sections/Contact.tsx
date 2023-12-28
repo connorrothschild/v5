@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { AnimatePresence, easeIn, motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
-import TripleViz from "../TripleViz/TripleViz";
-import GridTitle from "../Elements/GridTitle";
+import TripleViz from "@/components/TripleViz";
+import GridTitle from "@/components/Elements/GridTitle";
 
-import SectionTitle from "../Elements/SectionTitle";
-import SectionSubtitle from "../Elements/SectionSubtitle";
-import { ContactPopup } from "../Elements/ContactPopup";
+import SectionTitle from "@/components/Elements/SectionTitle";
+import SectionSubtitle from "@/components/Elements/SectionSubtitle";
+import { ContactPopup } from "@/components/Elements/ContactPopup";
 
 export default function Contact() {
   const [vizActive, setVizActive] = useState(false);

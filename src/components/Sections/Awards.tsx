@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import SplitTextHeader from "../Elements/SplitTextHeader";
-import CornerPill from "../Elements/CornerPill";
+import SplitTextHeader from "@/components/Elements/SplitTextHeader";
+import CornerPill from "@/components/Elements/CornerPill";
 import { useScroll, motion, useTransform } from "framer-motion";
 
 const awards = [

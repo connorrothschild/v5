@@ -10,7 +10,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef } from "react";
-import Dot from "../Elements/Dot";
+import Dot from "@/components/Elements/Dot";
 
 const images = [
   { src: "/images/mockups/praxis 1.jpg", columns: 3 },

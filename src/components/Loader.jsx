@@ -1,54 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
-import { useRouter } from "next/router";
 
 const Loader = ({ children }) => {
-  // We only want this loader on 1) fresh loads and 2) on the home page
-  // const router = useRouter();
-  // const [skipLoading, setSkipLoading] = useState(false);
-
-  // useEffect(() => {
-  //   if (router.pathname !== "/") {
-  //     setSkipLoading(true);
-  //   }
-  // }, [router.pathname]);
-
-  // useEffect(() => {
-  //   const startHandler = () => {
-  //     console.log("Router change started");
-  //     setSkipLoading(true);
-  //   };
-
-  //   const completeHandler = () => {
-  //     console.log("Router change completed");
-  //   };
-
-  //   router.events.on("routeChangeStart", startHandler);
-  //   router.events.on("routeChangeComplete", completeHandler);
-
-  //   return () => {
-  //     router.events.off("routeChangeStart", startHandler);
-  //     router.events.off("routeChangeComplete", completeHandler);
-  //   };
-  // }, []);
-
-  // const LOADING_TIME = 3.25;
-  // useEffect(() => {
-  //   if (skipLoading) {
-  //     document.body.classList.add("loaded");
-  //     return;
-  //   }
-
-  //   document.body.classList.add("loading");
-  //   document.body.classList.remove("loaded");
-
-  //   setTimeout(() => {
-  //     document.body.classList.remove("loading");
-  //     document.body.classList.add("loaded");
-  //   }, LOADING_TIME * 1000);
-  // }, [skipLoading]);
-
   return (
     <motion.div
       initial={{
