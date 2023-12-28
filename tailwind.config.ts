@@ -15,8 +15,11 @@ const config: Config = {
       },
     },
     extend: {
-      fontSize: {
-        "1.5xl": "1.35rem",
+      height: {
+        screen: ["100vh", "100dvh"],
+      },
+      minHeight: {
+        screen: ["100vh", "100dvh"],
       },
       fontFamily: {
         serif: ["ivypresto-display"],

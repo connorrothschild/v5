@@ -1,9 +1,6 @@
-import { useState, useRef, useEffect, MutableRefObject } from "react";
+import { useRef } from "react";
 import SplitTextHeader from "@/components/Elements/SplitTextHeader";
 
-import { gsap } from "gsap";
-import { Draggable } from "gsap/dist/Draggable";
-import { motion, useScroll, useTransform } from "framer-motion";
 import Dot from "@/components/Elements/Dot";
 import { ContactPopup } from "@/components/Elements/ContactPopup";
 
@@ -21,10 +18,7 @@ export default function Projects() {
           <div className="">
             <SplitTextHeader
               container={container}
-              // phrase="I am a Houston-based creative developer, working as a partner and engineer at Moksha Data Studio. I have designed and developed websites with a focus on information design for clients like..."
-              // phrase="I am a creative developer based in Houston, Texas. I am passionate about designing and developing websites with a focus on information design & data visualization."
               phrase="I'm Connor, a designer & developer based in Houston, Texas. Clients call me when they need to make websites that are performant, beautiful, and durable."
-              textAlignment="left"
             />
           </div>
           <ContactPopup>

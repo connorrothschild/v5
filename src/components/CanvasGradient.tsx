@@ -4,13 +4,9 @@ import { motion, MotionValue } from "framer-motion";
 export default function CanvasGradient({
   opacity,
   incrementValue = 0.02,
-  width = "100vw",
-  height = "100vh",
 }: {
   opacity: MotionValue<number>;
   incrementValue?: number;
-  width?: string;
-  height?: string;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useLayoutEffect(() => {
@@ -68,12 +64,10 @@ export default function CanvasGradient({
       id="canvas"
       width="32"
       height="32"
-      className="z-[-2] absolute top-0 left-0"
+      className="z-[-2] absolute top-0 left-0 w-full h-screen"
       style={{
         filter: "brightness(.7)",
         opacity: opacity,
-        width: width,
-        height: height,
       }}
       ref={ref}
     />

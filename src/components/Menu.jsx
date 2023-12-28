@@ -108,9 +108,7 @@ export default function Menu({}) {
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       {/* If the route is not /, that means there is no loading animation. In that case, we should apply the CanvasGradient behind the menu */}
       {routeIsHome ? null : (
-        <div className="h-[60px] bg-gray-900 z-10 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]">
-          {/* <CanvasGradient /> */}
-        </div>
+        <div className="h-[60px] bg-gray-900 z-10 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]" />
       )}
       <p
         id="menu-button"

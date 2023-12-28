@@ -1,35 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  useTransform,
-  useScroll,
-  motion,
-  useAnimate,
-  AnimatePresence,
-  useInView,
-} from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
-
-import { useWindowSize } from "@react-hook/window-size";
 
 import CanvasGradient from "@/components/CanvasGradient";
 
 const LOADING_TIME = 3.25;
 
 export default function Hero() {
-  // useEffect(() => {
-  //   const handleMousemove = (e) => {
-  //     const { clientX, clientY } = e;
-  //     document.documentElement.style.setProperty("--x", `${clientX}px`);
-  //     document.documentElement.style.setProperty("--y", `${clientY}px`);
-  //   };
-
-  //   window.addEventListener("mousemove", handleMousemove);
-
-  //   return () => {
-  //     window.removeEventListener("mousemove", handleMousemove);
-  //   };
-  // }, []);
-
   const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
     setTimeout(() => {
@@ -37,7 +14,17 @@ export default function Hero() {
     }, LOADING_TIME * 1000);
   }, []);
 
-  const [width, height] = useWindowSize();
+  // const [width, height] = useWindowSize();
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      setHeight(window.innerHeight);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const defaultClipPath = "inset(0px 0px 0px 0px round 0)";
   const animatedClipPath = useMemo(
@@ -62,17 +49,17 @@ export default function Hero() {
           // BOUNCY:
           // transition={{ ease: circInOut, duration: 1 }}
           // transition={{ ease: [0.14, 1.26, 0.64, 1], duration: 0.6 }}
-          transition={{ ease: easeInOutQuint, duration: 0.6 }}
+          // transition={{ ease: easeInOutQuint, duration: 0.6 }}
           animate={{
             clipPath:
               isInView || !hasLoaded ? defaultClipPath : animatedClipPath,
           }}
-          className="transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden"
+          className="transform-gpu flex items-center justify-center transform-origin-center w-screen overflow-hidden h-screen"
         >
           {/* Gradient spanning entire hero, from transparent to --background */}
           {/* <div className="pointer-events-none absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[--background] z-[49]" /> */}
 
-          <CanvasGradient width="100vw" height="100vh" />
+          <CanvasGradient />
 
           <div className="hidden md:flex pl-12 leading-none font-light py-4 text-right absolute bottom-0 right-4 w-[calc(100%-12px)] text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-serif z-[49]">
             The portfolio of software & data visualization engineer, Connor

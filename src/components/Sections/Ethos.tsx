@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React from "react";
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import GridTitle from "@/components/Elements/GridTitle";
 import SectionSubtitle from "@/components/Elements/SectionSubtitle";
 import Dot from "@/components/Elements/Dot";
 import SectionTitle from "@/components/Elements/SectionTitle";
+import Image from "next/image";
 
 export default function Ethos() {
   return (
@@ -74,9 +74,11 @@ function ProjectCard({
     >
       {/* Image */}
       <div className="w-full bg-gray-300 rounded-lg relative group/image">
-        <img
+        <Image
+          width={1000}
+          height={1000}
           src={image}
-          // Origin top left
+          alt="Project image"
           className="w-full aspect-square rounded-lg object-cover object-center"
         />
         {/* style={{

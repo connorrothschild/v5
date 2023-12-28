@@ -1,6 +1,5 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import SplitTextHeader from "@/components/Elements/SplitTextHeader";
-import CornerPill from "@/components/Elements/CornerPill";
 import { useScroll, motion, useTransform } from "framer-motion";
 
 const awards = [
@@ -232,7 +231,6 @@ export default function Awards() {
         <SplitTextHeader
           container={container}
           phrase="In my early career, my work has been recognized for the following awards."
-          textAlignment="left"
         />
 
         {/* Horizontally scrollable list of projects */}
@@ -258,7 +256,17 @@ export default function Awards() {
   );
 }
 
-const Card = ({ title, year, organization, award }) => {
+const Card = ({
+  title,
+  year,
+  organization,
+  award,
+}: {
+  title: string;
+  year: string;
+  organization: string;
+  award: string;
+}) => {
   return (
     <div className="w-full flex flex-row justify-between items-center gap-2 pt-3">
       {/* <div className="flex flex-col justify-center gap-2"> */}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AnimatePresence, easeIn, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 import TripleViz from "@/components/TripleViz";
 import GridTitle from "@/components/Elements/GridTitle";
