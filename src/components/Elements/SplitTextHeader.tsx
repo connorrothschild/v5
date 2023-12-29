@@ -41,7 +41,7 @@ export default function SplitTextHeader({
         trigger: container.current,
         scrub: true,
 
-        start: "top 80%", // When the top of the container reaches 80% down the viewport
+        start: "top 90%", // When the top of the container reaches 80% down the viewport
         end: "bottom 20%", // When the bottom of the container reaches 20% down the viewport
       },
       opacity: 1,
@@ -71,7 +71,7 @@ export default function SplitTextHeader({
       bodyText.push(
         <p
           key={word + "_" + i}
-          className={`text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] leading-[.9] ${
+          className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] !leading-[.9] lg:!leading-none ${
             emphasized
               ? "font-serif font-normal gradient-text"
               : "font-sans font-extralight text-gray-600 mix-blend-multiply"

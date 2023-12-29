@@ -56,28 +56,28 @@ export function ContactPopup({
   // }
 
   // FIXME: Drawer will unmount sticky elements, including navbar, when animating, watch https://github.com/shadcn-ui/ui/pull/2147
-  // return (
-  //   <Drawer open={open} onOpenChange={setOpen}>
-  //     <DrawerTrigger asChild>
-  //       {/* <Button variant="outline">Edit Profile</Button> */}
-  //       {children}
-  //     </DrawerTrigger>
-  //     <DrawerContent className="!font-sans">
-  //       <DrawerHeader className="text-left">
-  //         <DrawerTitle>Get in touch</DrawerTitle>
-  //         <DrawerDescription>
-  //           Tell me a bit about your project, and I&apos;ll be in touch soon.
-  //         </DrawerDescription>
-  //       </DrawerHeader>
-  //       <ProfileForm className="px-4" inquiryPlaceholder={inquiryPlaceholder} />
-  //       <DrawerFooter className="pt-2">
-  //         <DrawerClose asChild>
-  //           <Button variant="outline">Cancel</Button>
-  //         </DrawerClose>
-  //       </DrawerFooter>
-  //     </DrawerContent>
-  //   </Drawer>
-  // );
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        {/* <Button variant="outline">Edit Profile</Button> */}
+        {children}
+      </DrawerTrigger>
+      <DrawerContent className="!font-sans">
+        <DrawerHeader className="text-left">
+          <DrawerTitle>Get in touch</DrawerTitle>
+          <DrawerDescription>
+            Tell me a bit about your project, and I&apos;ll be in touch soon.
+          </DrawerDescription>
+        </DrawerHeader>
+        <ProfileForm className="px-4" inquiryPlaceholder={inquiryPlaceholder} />
+        <DrawerFooter className="pt-2">
+          <DrawerClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
+  );
 }
 
 function ProfileForm({

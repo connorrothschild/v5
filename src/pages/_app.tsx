@@ -494,7 +494,6 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
 
       <main
-      // vaul-drawer-wrapper=""
       // className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
       >
         <link

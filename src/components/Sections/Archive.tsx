@@ -333,10 +333,10 @@ export default function Archive() {
             Archive
           </h1>
           {/* <SectionTitle classes="relative top-0">Archive</SectionTitle> */}
-          <p className="text-lg font-sans font-light mb-12 text-gray-700">
+          <p className="text-lg font-sans font-light leading-snug mb-12 text-gray-700">
             A selected collection of my work—mostly for my own reference.
           </p>
-          <div className="w-full max-w-5xl flex flex-row justify-between items-center gap-2 mb-2">
+          <div className="hidden w-full max-w-5xl md:flex flex-row justify-between items-center gap-2 mb-2">
             <p className="min-w-[40px] text-sm uppercase text-left font-light">
               No.
             </p>
@@ -398,17 +398,17 @@ function TableRow({
         cursor: url ? "pointer" : "default",
       }}
     >
-      <p className="hidden md:block min-w-[40px] text-left text-sm font-sans font-light text-gray-500">
+      <p className="hidden md:block min-w-[40px] text-left text-xs font-sans font-light text-gray-500">
         {prefixNumberWithZeroes(id)}.
       </p>
       <div className="w-full text-left text-lg font-sans font-medium text-gray-700">
         <TableTitle label={title} featured={featured} isActive={isActive} />
       </div>
-      <p className="w-full md:w-[100px] text-left text-sm leading-none font-sans uppercase font-medium text-gray-500">
+      <p className="w-full md:w-[100px] text-left text-xs leading-none font-sans uppercase font-medium text-gray-500">
         {type}
         <span className="md:hidden font-sans inline">, {year}</span>
       </p>
-      <p className="hidden md:block w-full md:w-[100px] text-left text-sm leading-none font-sans uppercase font-medium text-gray-500">
+      <p className="hidden md:block w-full md:w-[100px] text-left text-xs leading-none font-sans uppercase font-medium text-gray-500">
         {year}
       </p>
       <div

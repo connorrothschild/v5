@@ -25,20 +25,20 @@ export default function Ethos() {
               <ProjectCard
                 client="Minerva"
                 service="App, web development"
-                url="#"
-                image="/images/mockups/praxis 1.jpg"
+                url="https://realtors.minervadata.xyz/"
+                image="/images/mockups/minerva.jpg"
               />
               <ProjectCard
                 client="Rest of World"
                 service="Data visualization"
-                url="#"
-                image="/images/mockups/praxis 3.jpg"
+                url="https://restofworld.org/2022/blackouts/"
+                image="/images/mockups/rest-of-world.jpg"
               />
               <ProjectCard
                 client="Praxis"
                 service="Web development"
-                url="#"
-                image="/images/mockups/praxis 4.jpg"
+                url="https://www.cityofpraxis.com/"
+                image="/images/mockups/praxis.jpg"
               />
             </div>
             <div className="w-full text-right">
@@ -68,12 +68,13 @@ function ProjectCard({
   image: string;
 }) {
   return (
-    <Link
+    <a
       className="w-full flex flex-col items-start gap-1 group-hover:grayscale hover:!grayscale-0 transition-all duration-300"
       href={url}
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      {/* Image */}
-      <div className="w-full bg-gray-300 rounded-lg relative group/image">
+      <div className="w-full rounded-lg relative group/image">
         <Image
           width={1000}
           height={1000}
@@ -81,10 +82,6 @@ function ProjectCard({
           alt="Project image"
           className="w-full aspect-square rounded-lg object-cover object-center"
         />
-        {/* style={{
-          backgroundImage:
-            "linear-gradient(to bottom, transparent, var(--background))",
-        }} */}
         <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background)] rounded-t-lg group-hover/image:opacity-0 transition-all duration-300" />
       </div>
       <div className="flex flex-row items-center gap-1 flex-wrap">
@@ -94,13 +91,7 @@ function ProjectCard({
         <h2 className="font-sans font-normal ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 border border-double border-gray-400 group-hover/image:border-gray-800 px-3 py-1 tracking-wide text-gray-500 group-hover/image:text-gray-700 text-[9px] rounded-full uppercase transition-all duration-300">
           {service}
         </h2>
-        {/* <h1 className="font-serif text-xl leading-none text-gray-700">
-          {client}
-        </h1>
-        <h2 className="font-serif text-sm leading-none text-gray-400 font-normal italic">
-          {service}
-        </h2> */}
       </div>
-    </Link>
+    </a>
   );
 }

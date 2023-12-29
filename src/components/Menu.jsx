@@ -146,7 +146,7 @@ export default function Menu({}) {
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                className="text-white text-4xl overflow-hidden cursor-pointer"
+                className="text-white text-4xl overflow-hidden leading-snug cursor-pointer"
                 onClick={() => {
                   setShowMenu(false);
                   // const element = document.querySelector(href);

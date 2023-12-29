@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 import TripleViz from "@/components/TripleViz";
@@ -7,12 +7,26 @@ import GridTitle from "@/components/Elements/GridTitle";
 import SectionTitle from "@/components/Elements/SectionTitle";
 import SectionSubtitle from "@/components/Elements/SectionSubtitle";
 import { ContactPopup } from "@/components/Elements/ContactPopup";
+import { useMediaQuery } from "usehooks-ts";
 
 export default function Contact() {
   const [vizActive, setVizActive] = useState(false);
   const [webActive, setWebActive] = useState(false);
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [atLeastOneHasHovered, setAtLeastOneHasHovered] = useState(false);
+
+  // If mobile, always show the card with no blur
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     setAtLeastOneHasHovered(true);
+  //   }
+  // }, [isMobile]);
+
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   return (
     <section
@@ -36,9 +50,15 @@ export default function Contact() {
           </SectionSubtitle>
 
           <div className="flex flex-col gap-2">
-            <GridTitle>
-              {atLeastOneHasHovered ? "Click to contact" : "Hover to reveal"}
-            </GridTitle>
+            {hasMounted && (
+              <GridTitle>
+                {atLeastOneHasHovered || isMobile
+                  ? isMobile
+                    ? "Tap to contact"
+                    : "Click to contact"
+                  : "Hover to reveal"}
+              </GridTitle>
+            )}
             <div className="flex flex-col md:flex-row gap-2">
               <ServiceCard
                 title="Data visualization"
@@ -48,6 +68,7 @@ export default function Contact() {
                 active={vizActive}
                 setActive={setVizActive}
                 setAtLeastOneHasHovered={setAtLeastOneHasHovered}
+                isMobile={isMobile}
               >
                 <VizScreen active={vizActive} />
               </ServiceCard>
@@ -58,6 +79,7 @@ export default function Contact() {
                 active={webActive}
                 setActive={setWebActive}
                 setAtLeastOneHasHovered={setAtLeastOneHasHovered}
+                isMobile={isMobile}
               >
                 <WebsiteScreen active={webActive} />
               </ServiceCard>
@@ -90,6 +112,7 @@ function ServiceCard({
   active,
   setActive,
   setAtLeastOneHasHovered,
+  isMobile,
 }: {
   title: string;
   description: string;
@@ -98,6 +121,7 @@ function ServiceCard({
   active: boolean;
   setActive: (active: boolean) => void;
   setAtLeastOneHasHovered: (active: boolean) => void;
+  isMobile: boolean;
 }) {
   const [hasHoveredOnce, setHasHoveredOnce] = useState(false);
 
@@ -106,7 +130,7 @@ function ServiceCard({
       <div
         className={`w-full transition-all duration-500 ${
           active ? "" : "grayscale"
-        } ${hasHoveredOnce ? "" : " blur-[3px]"}`}
+        } ${hasHoveredOnce || isMobile ? "" : " blur-[3px]"}`}
         onMouseEnter={() => {
           setHasHoveredOnce(true);
           setAtLeastOneHasHovered(true);
