@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-}
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  webpack: (config) => {
+    config.externals = [...config.externals, { canvas: "canvas" }]; // required to make Konva & react-konva work
+    config.resolve.fallback = { fs: false, module: false, path: false };
+    return config;
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

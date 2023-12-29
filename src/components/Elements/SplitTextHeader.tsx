@@ -1,20 +1,18 @@
 import { useRef, useEffect, useState, JSX } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
-import { useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import type { RefObject } from "react";
 
 export default function SplitTextHeader({
   container,
   phrase,
-  textAlignment = "center",
 }: {
-  container: React.MutableRefObject<HTMLDivElement>;
+  container: RefObject<HTMLDivElement>;
   phrase: string;
-  textAlignment?: "left" | "center" | "right";
 }) {
   let refs = useRef<HTMLSpanElement[]>([]);
   const body = useRef<HTMLDivElement>(null);
-  // const container = useRef(null);
 
   useEffect(() => {
     if (!body.current) return;
@@ -33,34 +31,18 @@ export default function SplitTextHeader({
 
     createAnimation();
     setHasInstantiated(true);
-  }, [
-    // refs.current,
-    isInView,
-    hasInstantiated,
-  ]);
+  }, [isInView, hasInstantiated]);
 
   const createAnimation = () => {
     if (!container.current || !container.current?.offsetHeight) return;
-
-    // Use the height of the container to determine the end position
-    // But if this height were to exceed 80vh, then just use 80vh
-    const windowHeight = window.innerHeight;
-    const endPosition =
-      container.current?.offsetHeight > windowHeight * 0.8
-        ? windowHeight * 0.8
-        : container.current?.offsetHeight;
 
     gsap.to(refs.current, {
       scrollTrigger: {
         trigger: container.current,
         scrub: true,
-        // pin: true,
 
-        start: "top center",
-        end: () => "+=" + endPosition,
-        // end: "bottom top",
-
-        // markers: true, // DEBUG
+        start: "top 90%", // When the top of the container reaches 80% down the viewport
+        end: "bottom 20%", // When the bottom of the container reaches 20% down the viewport
       },
       opacity: 1,
       ease: "none",
@@ -77,21 +59,23 @@ export default function SplitTextHeader({
     }
 
     let bodyText: JSX.Element[] = [];
-    // phrase.split(" ").forEach((word, i) => {
-    //   const letters = splitLetters(word);
-    //   console.log(letters);
-    //   body.push(<p key={word + "_" + i}>{letters}</p>);
-    // });
-    words.forEach((client, i) => {
-      const letters = splitLetters(client, i === words.length - 1);
+    words.forEach((word, i) => {
+      const letters = splitLetters(word, i === words.length - 1);
+      const emphasized = [
+        "houston,",
+        "texas.",
+        "data",
+        "visualization.",
+        "websites",
+      ].includes(word.toLowerCase());
       bodyText.push(
         <p
-          key={client + "_" + i}
-          className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-none font-serif font-light text-stone-700"
-          style={{
-            textAlign: textAlignment,
-            justifyContent: textAlignment,
-          }}
+          key={word + "_" + i}
+          className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] !leading-[.9] lg:!leading-none ${
+            emphasized
+              ? "font-serif font-normal gradient-text"
+              : "font-sans font-extralight text-gray-600 mix-blend-multiply"
+          }`}
         >
           {letters}
         </p>
@@ -111,9 +95,7 @@ export default function SplitTextHeader({
             refs.current.push(el);
           }}
         >
-          {/* Letter with comma at end */}
           {letter}
-          {/* {i === word.length - 1 && !isLast ? "," : ""} */}
         </span>
       );
     });
@@ -121,22 +103,11 @@ export default function SplitTextHeader({
   };
 
   return (
-    <div
-      className="max-w-6xl w-full flex flex-row items-center flex-wrap gap-2 tracking-tight"
+    <motion.div
+      className="w-full flex flex-row items-center flex-wrap gap-x-3 gap-y-1 tracking-tight"
       ref={body}
-      style={{
-        margin:
-          textAlignment === "center"
-            ? "0 auto"
-            : textAlignment === "left"
-            ? "0 auto 0 0"
-            : "0 0 0 auto",
-        textAlign: textAlignment,
-        justifyContent: textAlignment,
-      }}
     >
-      {/* {splitWords(clients.map((client) => client.name))} */}
       {splitWords(phrase)}
-    </div>
+    </motion.div>
   );
 }

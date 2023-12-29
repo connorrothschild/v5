@@ -176,6 +176,97 @@ const tobias = localFont({
   variable: "--font-tobias",
 });
 
+const nyghtSerif = localFont({
+  src: [
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Light.woff2",
+      weight: "100",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-LightItalic.woff2",
+      weight: "100",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Light.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-LightItalic.woff2",
+      weight: "200",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-LightItalic.woff2",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-RegularItalic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-MediumItalic.woff2",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Medium.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-MediumItalic.woff2",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Dark.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-DarkItalic.woff2",
+      weight: "800",
+      style: "italic",
+    },
+    {
+      path: "./fonts/nyght-serif/NyghtSerif-Dark.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-nyght",
+});
+
 const canela = localFont({
   src: [
     {
@@ -300,6 +391,28 @@ const suisse = localFont({
 //   variable: "--font-instrument-serif",
 // });
 
+const editorialNew = localFont({
+  src: [
+    {
+      path: "./fonts/editorial/PPEditorialNew-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/editorial/PPEditorialNew-Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  variable: "--font-editorial-new",
+});
+
+const tasaOrbiter = localFont({
+  // Variable font
+  src: "./fonts/TASAOrbiterVF.woff2",
+  variable: "--font-tasa-orbiter",
+});
+
 const manrope = Manrope({
   subsets: ["latin"],
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -307,25 +420,103 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
+const montreal = localFont({
+  src: "./fonts/montreal/PPNeueMontreal-Book.otf",
+  // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "fallback",
+  variable: "--font-montreal",
+});
+
 import Menu from "@/components/Menu";
-import Jukebox from "@/components/Jukebox";
 import Loader from "@/components/Loader";
 import Grid from "@/components/Grid";
 import Footer from "@/components/Sections/Footer";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
+  // We only want this loader on 1) fresh loads and 2) on the home page
+  const router = useRouter();
+  const [skipLoading, setSkipLoading] = useState(false);
+  useEffect(() => {
+    const startHandler = () => {
+      console.log("Router change started");
+      setSkipLoading(true);
+    };
+
+    const completeHandler = () => {
+      console.log("Router change completed");
+    };
+
+    router.events.on("routeChangeStart", startHandler);
+    router.events.on("routeChangeComplete", completeHandler);
+
+    return () => {
+      router.events.off("routeChangeStart", startHandler);
+      router.events.off("routeChangeComplete", completeHandler);
+    };
+  }, []);
+
+  const LOADING_TIME = 3.25;
+  // Set a class of "loading" on the body for 4 seconds
+
+  useEffect(() => {
+    if (skipLoading) {
+      document.body.classList.add("loaded");
+      return;
+    }
+
+    console.log("Adding loading animation");
+    document.body.classList.add("loading");
+    document.body.classList.remove("loaded");
+
+    setTimeout(() => {
+      document.body.classList.remove("loading");
+      document.body.classList.add("loaded");
+    }, LOADING_TIME * 1000);
+  }, [skipLoading]);
+
   return (
-    <main
-      className={`${canela.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} font-sans`}
-    >
-      <link rel="stylesheet" href="https://use.typekit.net/mhr2lku.css"></link>
-      <Menu />
-      {/* For testing */}
-      {/* <Grid /> */}
-      <Loader>
-        <Component {...pageProps} />
-        <Footer />
-      </Loader>
-    </main>
+    <>
+      {/* Needed to make global fonts apply in shadcn components */}
+      <style jsx global>{`
+        html {
+          --font-sans: ${montreal.style.fontFamily};
+        }
+
+        .font-sans {
+          font-family: var(--font-sans);
+        }
+
+        body {
+          font-family: var(--font-sans);
+        }
+      `}</style>
+
+      <main
+      // className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
+      >
+        <link
+          rel="stylesheet"
+          href="https://use.typekit.net/mhr2lku.css"
+        ></link>
+
+        {/* For testing */}
+        {/* <Grid /> */}
+        <Menu />
+
+        {router.pathname === "/" ? (
+          <Loader>
+            <Component {...pageProps} />
+            <Footer />
+          </Loader>
+        ) : (
+          <>
+            <Component {...pageProps} />
+            <Footer />
+          </>
+        )}
+      </main>
+    </>
   );
 }

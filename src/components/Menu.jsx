@@ -2,6 +2,27 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { easeInOutQuint } from "@/config/eases";
 import Jukebox from "./Jukebox";
+import CanvasGradient from "./CanvasGradient";
+import { useRouter } from "next/router";
+
+const menuItems = [
+  {
+    href: "/#home",
+    w: "Home",
+  },
+  // {
+  //   href: "#about",
+  //   w: "About",
+  // },
+  {
+    href: "/#work",
+    w: "Projects",
+  },
+  {
+    href: "/#contact",
+    w: "Contact",
+  },
+];
 
 export default function Menu({}) {
   const [showMenu, setShowMenu] = useState(false);
@@ -62,14 +83,36 @@ export default function Menu({}) {
     },
   };
 
+  const ampersand = {
+    // From translateX: 100% to translateX: 0
+    hidden: { opacity: 0, translateY: "100%" },
+    show: {
+      opacity: 1,
+      translateY: 0,
+      transition: {
+        duration: WORD_IN_DURATION / 4,
+        ease: easeInOutQuint,
+      },
+    },
+    exit: {
+      //   translateY: "-100%",
+      opacity: 0,
+    },
+  };
+
+  const router = useRouter();
+  const routeIsHome = router.pathname === "/";
+
   return (
     <>
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
+      {/* If the route is not /, that means there is no loading animation. In that case, we should apply the CanvasGradient behind the menu */}
+      {routeIsHome ? null : (
+        <div className="h-[60px] bg-gray-900 z-10 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]" />
+      )}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed bottom-0 left-0 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 mix-blend-difference ${
-          showMenu ? "text-white" : "text-gray-400"
-        }`}
+        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 text-gray-200`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -89,20 +132,29 @@ export default function Menu({}) {
             animate="show"
             exit="exit"
             transition={{ duration: MENU_IN_DURATION, ease: easeInOutQuint }}
-            className="z-40 fixed top-0 left-0 w-screen h-screen flex justify-center items-center gap-2 font-serif"
-            style={{
-              background: "rgba(0,0,0,.7)",
-              backdropFilter: "blur(7px)",
-            }}
+            className="z-40 fixed top-0 left-0 w-screen h-screen flex flex-col md:flex-row justify-center items-center gap-2 font-serif"
+            // style={{
+            //   background: "rgba(0,0,0,.7)",
+            //   backdropFilter: "blur(7px)",
+            // }}
           >
-            {["Projects,", "Awards,", "About,", "Contact"].map((w, index) => (
-              <motion.h2
+            <CanvasGradient />
+            {menuItems.map(({ href, w }, index) => (
+              <motion.a
                 variants={word}
                 key={`menu-${index}`}
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                className="text-white text-4xl overflow-hidden cursor-pointer"
+                className="text-white text-4xl overflow-hidden leading-snug cursor-pointer"
+                onClick={() => {
+                  setShowMenu(false);
+                  // const element = document.querySelector(href);
+                  // element.scrollIntoView({
+                  //   behavior: "smooth",
+                  // });
+                }}
+                href={href}
               >
                 {w.split("").map((l, index) => {
                   return (
@@ -115,7 +167,15 @@ export default function Menu({}) {
                     </motion.span>
                   );
                 })}{" "}
-              </motion.h2>
+                {index < menuItems.length - 1 && (
+                  <motion.span
+                    className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
+                    variants={ampersand}
+                  >
+                    &
+                  </motion.span>
+                )}
+              </motion.a>
             ))}
           </motion.div>
         )}

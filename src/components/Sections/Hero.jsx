@@ -1,149 +1,146 @@
-import { useEffect, useRef } from "react";
-import { useTransform, useScroll, motion, useSpring } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
-import CursorShadow from "@/components/CursorShadow";
-import CanvasGradient from "../CanvasGradient";
-import GradientButton from "../GradientButton";
-import BackgroundVideo from "../Archived/BackgroundVideo";
+import CanvasGradient from "@/components/CanvasGradient";
 
-const Hero = () => {
+const LOADING_TIME = 3.25;
+
+export default function Hero() {
+  const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
-    const handleMousemove = (e) => {
-      const { clientX, clientY } = e;
-      document.documentElement.style.setProperty("--x", `${clientX}px`);
-      document.documentElement.style.setProperty("--y", `${clientY}px`);
-    };
-
-    window.addEventListener("mousemove", handleMousemove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMousemove);
-    };
+    setTimeout(() => {
+      setHasLoaded(true);
+    }, LOADING_TIME * 1000);
   }, []);
 
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref, // This isn't doing anything since the element is sticky. Could use useViewportScroll to see when 100% of the page is scrolled down.
-    offset: ["0%", "50%"],
-  });
+  // const [width, height] = useWindowSize();
+  const [height, setHeight] = useState(0);
+  useEffect(() => {
+    const handleResize = () => {
+      setHeight(window.innerHeight);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-  const borderRadius = useTransform(scrollYProgress, [0, 0.5], [0, 20]);
-  // const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const translateY = useTransform(scrollYProgress, [0, 0.5], [0, -150]);
-  const svgOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 1, 1]);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const shadowSize = useSpring(40, { damping: 100, stiffness: 1000 });
-  const LOADING_TIME = 3;
+  const defaultClipPath = "inset(0px 0px 0px 0px round 0)";
+  const animatedClipPath = useMemo(
+    () => `inset(20px 20px ${height - 80}px 20px round 10px)`,
+    [height]
+  );
+
+  const scrollRef = useRef(null);
+  const isInView = useInView(scrollRef);
 
   return (
-    <div className="relative h-screen z-[1]" ref={ref}>
-      <span className="z-[9] absolute bottom-24 right-8 user-select-none font-serif font-light text-gray-500">
-        psst. there&apos;s music—click the menu ☺
-      </span>
-      <motion.div
-        style={{
-          borderRadius,
-          // scale,
-          translateY,
-          margin: "0 auto",
-          // background:
-          //   "linear-gradient(to bottom, transparent, var(--background))",
-        }}
-        className="z-10 transform-gpu flex items-center justify-center transform-origin-center h-screen w-screen overflow-hidden relative"
-      >
-        {/* <CursorShadow shadowSize={shadowSize} shadowOpacity={svgOpacity} /> */}
-        {/* <BackgroundVideo /> */}
-        <CanvasGradient opacity={svgOpacity} width="100vw" height="100vh" />
+    <>
+      {/* Create a dummy element that is 1px tall, at the top of the screen.
+      This element will be representative of whether the page is fully scrolled to the top. */}
+      <div ref={scrollRef} className="absolute top-0 left-0 w-full h-px" />
 
-        {/* Top left */}
-        <div className="absolute top-4 left-4 flex flex-col items-start mix-blend-overlay">
-          <div className="overflow-hidden pr-1">
-            <motion.h1
-              className="font-serif text-left text-[4rem] md:text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight"
-              animate={{ translateY: 0 }}
-              initial={{ translateY: "100%" }}
-              transition={{
-                ease: easeInOutQuint,
-                duration: 1,
-                delay: LOADING_TIME,
-              }}
-            >
-              Connor
-            </motion.h1>
+      <div className="pointer-events-none sticky top-0 left-0 z-10" id="home">
+        {/* <span className="z-[9] absolute bottom-24 right-8 user-select-none font-serif font-extralight tracking-wide text-yellow-500">
+          psst. there&apos;s music—click the menu ☺
+        </span> */}
+        <motion.div
+          // BOUNCY:
+          // transition={{ ease: circInOut, duration: 1 }}
+          // transition={{ ease: [0.14, 1.26, 0.64, 1], duration: 0.6 }}
+          // transition={{ ease: easeInOutQuint, duration: 0.6 }}
+          animate={{
+            clipPath:
+              isInView || !hasLoaded ? defaultClipPath : animatedClipPath,
+          }}
+          className="transform-gpu flex items-center justify-center transform-origin-center w-screen overflow-hidden h-screen"
+        >
+          {/* Gradient spanning entire hero, from transparent to --background */}
+          {/* <div className="pointer-events-none absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[--background] z-[49]" /> */}
+
+          <CanvasGradient />
+
+          <div className="hidden md:flex pl-12 leading-none font-light py-4 text-right absolute bottom-0 right-4 w-[calc(100%-12px)] text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-serif z-[49]">
+            The portfolio of software & data visualization engineer, Connor
+            Rothschild.
           </div>
-
-          <div className="overflow-hidden pr-1">
-            <motion.h1
-              className="font-serif text-left text-[4rem] md:text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight"
-              animate={{ translateY: 0 }}
-              initial={{ translateY: "100%" }}
-              transition={{
-                ease: easeInOutQuint,
-                duration: 1,
-                delay: LOADING_TIME + 0.382,
-              }}
-            >
-              Rothschild
-            </motion.h1>
+          <div className="flex md:hidden pl-12 leading-none font-light py-4 text-right absolute bottom-0 right-4 text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-serif z-[49]">
+            2024 Portfolio
           </div>
-        </div>
+          <Name hasLoaded={hasLoaded} />
+        </motion.div>
+      </div>
+    </>
+  );
+}
 
-        {/* Top right */}
-        <div className="hidden lg:flex absolute top-4 right-4 flex-col items-end mix-blend-soft-light">
-          <div className="overflow-hidden pr-1">
-            <motion.h1
-              className="text-right text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight opacity-30"
-              animate={{ translateY: 0 }}
-              initial={{ translateY: "100%" }}
-              transition={{
-                ease: easeInOutQuint,
+function Name({ hasLoaded }) {
+  return (
+    <div
+      className="absolute top-0 left-0 z-[-1] h-full w-full flex flex-col md:flex-row text-center justify-center items-center mix-blend-hard-light"
+      style={{
+        gap: hasLoaded ? ".75rem" : "0.25rem",
+      }}
+    >
+      <div className="">
+        <motion.div
+          layout="position"
+          className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light"
+        >
+          C
+          {["o", "n", "n", "o", "r"].map((letter, i) => (
+            <AnimatePresence key={i}>
+              {hasLoaded && (
+                <motion.span
+                  key={i}
+                  className="inline-block font-serif"
+                  animate={{ translateX: 0, rotateY: 0, opacity: 1 }}
+                  initial={{ translateX: "100%", rotateY: 90, opacity: 0 }}
+                  // animate={{ translateY: 0, rotateY: 0, opacity: 1 }}
+                  // initial={{ translateY: "100%", rotateY: 15, opacity: 0 }}
+                  transition={{
+                    ease: easeInOutQuint,
+                    duration: 1,
+                    delay: (i - 1) * (0.25 / 5),
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          ))}
+        </motion.div>
+      </div>
 
-                duration: 1,
-                delay: LOADING_TIME + 0.382,
-              }}
-            >
-              Portfolio
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden pr-1">
-            <motion.h1
-              className="text-right text-[6.57rem] leading-[.9] text-black font-light uppercase tracking-tight opacity-30"
-              animate={{ translateY: 0 }}
-              initial={{ translateY: "100%" }}
-              transition={{
-                ease: easeInOutQuint,
-                duration: 1,
-                delay: LOADING_TIME,
-              }}
-            >
-              2023
-            </motion.h1>
-          </div>
-        </div>
-
-        <div className="absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 w-full -translate-y-1/2 flex flex-col items-center justify-center mix-blend-overlay">
-          {/* <h1
-            className="cursor-none p-8 text-center text-[1.57rem] leading-[.95] text-black font-light uppercase tracking-normal font-serif"
-            onMouseOver={() => {
-              shadowSize.set(10);
-            }}
-            onMouseLeave={() => {
-              shadowSize.set(40);
-            }}
-          >
-            Make beautiful stuff on the web.
-          </h1> */}
-          <GradientButton />
-        </div>
-
-        <div className="pl-12 leading-none font-light py-4 text-right absolute bottom-0 left-[6px] w-[calc(100%-12px)] text-xl flex flex-col text-gray-700 border-t border-gray-500 mix-blend-overlay tracking-[0.0125rem] font-serif">
-          The professional portfolio of software developer, data visualization
-          engineer, and designer Connor Rothschild.
-        </div>
-      </motion.div>
+      <div className="">
+        <motion.div
+          layout="position"
+          className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light"
+        >
+          R
+          {["o", "t", "h", "s", "c", "h", "i", "l", "d"].map((letter, i) => (
+            <AnimatePresence key={i}>
+              {hasLoaded && (
+                <motion.span
+                  className="inline-block font-serif"
+                  animate={{ translateX: 0, rotateY: 0, opacity: 1 }}
+                  initial={{ translateX: "100%", rotateY: 90, opacity: 0 }}
+                  // animate={{ translateY: 0, rotateY: 0, opacity: 1 }}
+                  // initial={{ translateY: "-100%", rotateY: -15, opacity: 0 }}
+                  transition={{
+                    ease: easeInOutQuint,
+                    duration: 1,
+                    delay: (i - 1) * (0.25 / 9),
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
-};
-
-export default Hero;
+}
