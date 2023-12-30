@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
 const Loader = ({ children }) => {
+  const DURATION = 3.5;
   return (
     <motion.div
       initial={{
@@ -24,15 +25,15 @@ const Loader = ({ children }) => {
         position: "fixed",
       }}
       transition={{
-        translateY: { duration: 2, ease: easeInOutQuint },
+        translateY: { duration: DURATION * 0.6153, ease: easeInOutQuint },
         clipPath: {
-          duration: 1,
-          delay: 2.25,
+          duration: DURATION * 0.30769,
+          delay: DURATION * 0.692,
           ease: easeInOutQuint,
         },
         position: {
           duration: 0,
-          delay: 3.25,
+          delay: DURATION,
         },
       }}
       className="w-full h-full top-0 left-0 z-[1] overflow-clip"

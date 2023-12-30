@@ -433,6 +433,7 @@ import Grid from "@/components/Grid";
 import Footer from "@/components/Sections/Footer";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { Toaster } from "sonner";
 
 export default function App({ Component, pageProps }: AppProps) {
   // We only want this loader on 1) fresh loads and 2) on the home page
@@ -457,8 +458,14 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
-  const LOADING_TIME = 3.25;
-  // Set a class of "loading" on the body for 4 seconds
+  // If route is anything other than the home page, skip the loading animation
+  useEffect(() => {
+    if (router.pathname !== "/") {
+      setSkipLoading(true);
+    }
+  }, [router.pathname]);
+
+  const LOADING_TIME = 3.5;
 
   useEffect(() => {
     if (skipLoading) {
@@ -494,12 +501,14 @@ export default function App({ Component, pageProps }: AppProps) {
       `}</style>
 
       <main
-      // className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${timesNow.variable} ${suisse.variable} ${nyghtSerif.variable} ${tasaOrbiter.variable} font-sans`}
+        className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${suisse.variable} ${nyghtSerif.variable} font-sans`}
       >
         <link
           rel="stylesheet"
           href="https://use.typekit.net/mhr2lku.css"
         ></link>
+
+        <Toaster richColors />
 
         {/* For testing */}
         {/* <Grid /> */}

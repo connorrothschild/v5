@@ -4,7 +4,7 @@ import { easeInOutQuint } from "@/config/eases";
 
 import CanvasGradient from "@/components/CanvasGradient";
 
-const LOADING_TIME = 3.25;
+const LOADING_TIME = 3.5;
 
 export default function Hero() {
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -58,7 +58,6 @@ export default function Hero() {
         >
           {/* Gradient spanning entire hero, from transparent to --background */}
           {/* <div className="pointer-events-none absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[--background] z-[49]" /> */}
-
           <CanvasGradient />
 
           <div className="hidden md:flex pl-12 leading-none font-light py-4 text-right absolute bottom-0 right-4 w-[calc(100%-12px)] text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-serif z-[49]">
@@ -75,10 +74,10 @@ export default function Hero() {
   );
 }
 
-function Name({ hasLoaded }) {
+function Name({ hasLoaded }: { hasLoaded: boolean }) {
   return (
     <div
-      className="absolute top-0 left-0 z-[-1] h-full w-full flex flex-col md:flex-row text-center justify-center items-center mix-blend-hard-light"
+      className="absolute top-0 left-0 z-1 h-full w-full flex flex-col md:flex-row text-center justify-center items-center mix-blend-hard-light"
       style={{
         gap: hasLoaded ? ".75rem" : "0.25rem",
       }}

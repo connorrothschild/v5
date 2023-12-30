@@ -1,4 +1,5 @@
-import * as React from "react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 import { useMediaQuery } from "usehooks-ts";
 import {
@@ -32,7 +33,7 @@ export function ContactPopup({
   children: React.ReactNode;
   inquiryPlaceholder?: string;
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   // if (isDesktop) {
@@ -46,10 +47,13 @@ export function ContactPopup({
         <DialogHeader>
           <DialogTitle>Get in touch</DialogTitle>
           <DialogDescription>
-            Tell me a bit about your project, and I&apos;ll be in touch soon.
+            Tell me a bit about your project, and I&apos;ll be in touch!
           </DialogDescription>
         </DialogHeader>
-        <ProfileForm inquiryPlaceholder={inquiryPlaceholder} />
+        <ProfileForm
+          inquiryPlaceholder={inquiryPlaceholder}
+          setOpen={setOpen}
+        />
       </DialogContent>
     </Dialog>
   );
@@ -66,10 +70,14 @@ export function ContactPopup({
         <DrawerHeader className="text-left">
           <DrawerTitle>Get in touch</DrawerTitle>
           <DrawerDescription>
-            Tell me a bit about your project, and I&apos;ll be in touch soon.
+            Tell me a bit about your project, and I&apos;ll be in touch!
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className="px-4" inquiryPlaceholder={inquiryPlaceholder} />
+        <ProfileForm
+          className="px-4"
+          inquiryPlaceholder={inquiryPlaceholder}
+          setOpen={setOpen}
+        />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -83,21 +91,117 @@ export function ContactPopup({
 function ProfileForm({
   className,
   inquiryPlaceholder = "",
+  setOpen,
 }: {
   className?: string;
   inquiryPlaceholder?: string;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    inquiry: inquiryPlaceholder,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (formData.name === "") {
+      toast.error("Please enter your name.");
+      return;
+    }
+
+    if (formData.email === "") {
+      toast.error("Please enter your email.");
+      return;
+    }
+
+    if (formData.inquiry === "") {
+      toast.error("Please enter your inquiry.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.inquiry,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Message sent successfully");
+        toast.success("Sent! I'll be in touch soon.");
+
+        setFormData({
+          name: "",
+          email: "",
+          inquiry: "",
+        });
+        setOpen(false);
+      } else {
+        console.error("Failed to send message");
+        toast.error("Failed to send message. Please try again.");
+        // Optional: Give user feedback about the error
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again.");
+      // Optional: Give user feedback about the network error
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <form className={clsx("grid items-start gap-4", className)}>
+    <form
+      className={clsx("grid items-start gap-4", className)}
+      onSubmit={handleSubmit}
+    >
+      <div className="grid gap-2">
+        <Label htmlFor="email">Name</Label>
+        <Input
+          type="text"
+          id="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </div>
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" defaultValue="your@email.com" />
+        <Input
+          type="email"
+          id="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="inquiry">Inquiry</Label>
-        <Textarea id="inquiry" defaultValue={inquiryPlaceholder} />
+        <Textarea
+          id="inquiry"
+          value={formData.inquiry}
+          onChange={handleChange}
+        />
       </div>
-      <Button type="submit">Send</Button>
+      <Button type="submit" disabled={isSubmitting}>
+        Send
+      </Button>
     </form>
   );
 }

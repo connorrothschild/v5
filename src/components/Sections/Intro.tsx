@@ -4,11 +4,10 @@ import SplitTextHeader from "@/components/Elements/SplitTextHeader";
 import Dot from "@/components/Elements/Dot";
 import { ContactPopup } from "@/components/Elements/ContactPopup";
 
-export default function Projects() {
+export default function Intro() {
   const container = useRef<HTMLDivElement>(null);
   return (
     <section
-      id="work"
       className="relative mb-48 px-[20px] overflow-visible"
       ref={container}
     >

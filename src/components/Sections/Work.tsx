@@ -6,17 +6,16 @@ import Dot from "@/components/Elements/Dot";
 import SectionTitle from "@/components/Elements/SectionTitle";
 import Image from "next/image";
 
-export default function Ethos() {
+export default function Work() {
   return (
     <section className="relative px-[20px] py-6 md:py-48" id="work">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col gap-12 w-full">
           <SectionTitle classes="-right-6">01. Work</SectionTitle>
           <SectionSubtitle>
-            I specialize in information design, data visualization, and
-            performant UI. I combine cutting edge technologies with design
-            sensibilities to make websites that are engaging, intuitive, and
-            durable.
+            I design clear, effective websites with a focus on interface and
+            information design. My work blends modern technology with
+            user-friendly design for intuitive, robust websites.
           </SectionSubtitle>
 
           <div className="flex flex-col gap-2">
@@ -44,7 +43,7 @@ export default function Ethos() {
             <div className="w-full text-right">
               <Link
                 href="/archive"
-                className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5 mt-3 justify-end max-w-7xl mx-auto"
+                className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5 justify-end max-w-7xl mx-auto"
               >
                 View all <Dot />
               </Link>
@@ -69,7 +68,7 @@ function ProjectCard({
 }) {
   return (
     <a
-      className="w-full flex flex-col items-start gap-1 group-hover:grayscale hover:!grayscale-0 transition-all duration-300"
+      className="w-full flex flex-col items-start gap-2 md:gap-2.5 group-hover:grayscale hover:!grayscale-0 transition-all duration-300"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
