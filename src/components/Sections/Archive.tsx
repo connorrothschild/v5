@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Dot from "@/components/Elements/Dot";
-import SectionTitle from "@/components/Elements/SectionTitle";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useRouter } from "next/router";
 
 const projects = [
   {
@@ -8,175 +15,195 @@ const projects = [
     year: 2023,
     url: "https://www.sveltecharts.com/",
     type: "App, web",
+    filterCategory: "web",
   },
   {
     title: "How China took over the world’s online shopping carts",
     year: 2023,
     url: "https://restofworld.org/2023/china-shopping-shein-temu-global-rise/",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Causative Labs",
     year: 2023,
     // url: "https://minervadata.xyz/",
     type: "App",
+    filterCategory: "web",
   },
   {
     title: "Roadwise",
     year: 2023,
     url: "https://roadwisedss.com/",
     type: "App, web",
+    filterCategory: "web",
   },
   {
     title: "Minerva",
     year: 2023,
     url: "https://minervadata.xyz/",
     type: "App",
-    featured: true,
+    filterCategory: "web",
   },
   {
     title: "Absolute Rest",
     year: 2023,
     type: "App",
+    filterCategory: "web",
   },
   {
     title: "Better Data Visualizations with Svelte",
     year: 2023,
     url: "https://www.newline.co/courses/better-data-visualizations-with-svelte",
     type: "Course",
+    filterCategory: "visualization",
   },
   {
     title: "A Visual Introduction to Prompt Engineering",
     year: 2023,
     url: "https://www.learnpromptengineering.org/",
     type: "Story",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "What languages dominate the internet?",
     year: 2023,
     url: "https://restofworld.org/2023/internet-most-used-languages/",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Vana",
     year: 2022,
     url: "https://vana.com",
     type: "App, web",
+    filterCategory: "web",
   },
   {
     title: "Tech's very bad year, in numbers",
     year: 2023,
     url: "https://restofworld.org/2023/techs-bad-year-global-layoffs-data/",
     type: "Story",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "babby.xyz",
     year: 2022,
     url: "https://opensea.io/collection/babbys",
     type: "App, web",
+    filterCategory: "web",
   },
   {
     title: "Painting Attention: How Asphalt Art Saves Lives",
     year: 2022,
     url: "https://mokshadata.studio/projects/asphalt-art/",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Get to Know the Houston Budget",
     year: 2022,
     url: "https://houstonbudget.cool/",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Praxis",
     year: 2022,
     url: "https://cityofpraxis.org",
     type: "App, web",
-    featured: true,
+    filterCategory: "web",
   },
   {
     title: "Gallery",
     year: 2022,
     url: "https://gallery.so",
     type: "App, web",
+    filterCategory: "web",
   },
   {
     title: "In the Dark",
     year: 2022,
     url: "https://restofworld.org/2022/blackouts/",
     type: "Story",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "An Interactive History of Impact Investing",
     year: 2022,
     url: "https://impact.collabfund.com/",
     type: "Microsite",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "COVID vulnerability scores vs. vaccination rates across the U.S.",
     year: 2021,
     url: "https://www.axios.com/2021/06/21/coronavirus-vaccines-vulnerability-states-outbreaks-variants",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Olympic winners, over time",
     year: 2021,
     url: "https://www.axios.com/2021/07/23/olympic-winners",
     type: "Chart",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "The U.S. college population, visualized as 100 students",
     year: 2021,
     url: "https://www.axios.com/2021/08/21/hard-truths-deep-dive-higher-education-affirmative-action",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Olympics medal tracker",
     year: 2021,
     url: "https://www.axios.com/2021/07/27/olympics-medal-count-usa-tokyo",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Non-white share of population by county",
     year: 2021,
     url: "https://www.axios.com/2021/08/15/diversity-majority-minority-white-american-census",
     type: "Charts",
+    filterCategory: "visualization",
   },
   {
-    title: "Axios Internship",
+    title: "Axios",
     year: 2021,
     url: "https://muckrack.com/connor-rothschild-1/portfolio",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Beat Foundry",
     year: 2021,
     url: "https://fontsinuse.com/uses/47829/beat-foundry-visual-identity",
     type: "App, web",
+    filterCategory: "web",
   },
   {
     title: "Texas School District COVID-19 Monitoring Dashboard",
     year: 2021,
     url: "https://news.rice.edu/2021/05/05/dashboard-developed-at-rice-will-help-texas-schools-open-safely-amid-pandemic/",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Changes in Federal and State Minimum Wages",
     year: 2021,
     url: "https://twitter.com/CL_Rothschild/status/1366879233935564803",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "The Bob Ross Virtual Art Gallery",
     year: 2021,
     url: "https://connorrothschild.github.io/bob-ross-art-gallery/",
     type: "Story",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "One Line Hacks",
@@ -186,24 +213,28 @@ const projects = [
     archived: true,
     url: "https://connorrothschild.github.io/one-line-hacks/",
     type: "Story",
+    filterCategory: "web",
   },
   {
-    title: "USSOCOM Internship",
+    title: "USSOCOM",
     year: 2020,
     // url: "https://twitter.com/CL_Rothschild/status/1328746973952942081",
     type: "App",
+    filterCategory: "visualization",
   },
   {
     title: "When COVID Peaked",
     year: 2020,
     url: "https://twitter.com/CL_Rothschild/status/1328746973952942081",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "COVID on Campus",
     year: 2020,
     url: "https://twitter.com/CL_Rothschild/status/1315353704388866048",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Mask Wearing in Your County",
@@ -211,6 +242,7 @@ const projects = [
     year: 2020,
     url: "https://observablehq.com/@connorrothschild/mask-wearing-in-your-county",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "I Can Guess What You're Doing Right Now",
@@ -220,6 +252,7 @@ const projects = [
     archived: true,
     url: "https://connorrothschild.github.io/what-are-you-doing/",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Are You Smarter Than COMPAS?",
@@ -230,6 +263,7 @@ const projects = [
     archived: true,
     url: "https://connorrothschild.github.io/compas/",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "How Much Does Kid Cudi Hum?",
@@ -237,21 +271,15 @@ const projects = [
     year: 2020,
     url: "https://connorrothschild.github.io/cudi-hums/",
     type: "Story",
-    featured: true,
+    filterCategory: "visualization",
   },
-  // {
-  //   title: "How Many People Have Had COVID-19?",
-  //   description: "A novel way to visualize COVID-19 case counts.",
-  //   year: 2020,
-  //   url: "https://connorrothschild.github.io/how-many-people",
-  //   type: "Story",
-  // },
   {
     title: "Mapping Houston Homicides",
     description: "An exploration of homicides in Houston.",
     year: 2020,
     url: "https://connorrothschild.github.io/datathon-2020/source",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Mapping Police Killings",
@@ -259,7 +287,7 @@ const projects = [
     year: 2020,
     url: "https://mokshadata.studio/projects/police-force/",
     type: "Story",
-    featured: true,
+    filterCategory: "visualization",
   },
   {
     title: "Quarantunes",
@@ -267,18 +295,21 @@ const projects = [
     year: 2020,
     url: "https://quarantune.netlify.app",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "How Much Does Your State Spend on Police?",
     year: 2020,
     url: "https://connorrothschild.github.io/state-police-spending/",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "Spikes in Firearm Background Checks during COVID-19",
     year: 2020,
     url: "https://twitter.com/CL_Rothschild/status/1283412638618341376",
     type: "Chart",
+    filterCategory: "visualization",
   },
   {
     title: "Mapping Missing Migrants",
@@ -287,6 +318,7 @@ const projects = [
     year: 2019,
     url: "https://connorrothschild.github.io/map-missing-migrants",
     type: "Story",
+    filterCategory: "visualization",
   },
   {
     title: "The Race for Media Attention",
@@ -296,17 +328,9 @@ const projects = [
     archived: true,
     url: "https://observablehq.com/@connorrothschild/bar-chart-race",
     type: "Story",
+    filterCategory: "visualization",
   },
 ].reverse();
-
-const projectsFiltered = projects
-  .filter((project) => !project.archived)
-  // .sort((a, b) => a.year - b.year)
-  .map((project, i) => ({
-    id: i + 1,
-    ...project,
-  }))
-  .sort((a, b) => a.id - b.id);
 
 const prefixNumberWithZeroes = (number: number) => {
   if (number < 10) {
@@ -320,22 +344,90 @@ const prefixNumberWithZeroes = (number: number) => {
 
 export default function Archive() {
   const DARK_MODE = false;
+
+  const CATEGORIES = [
+    { name: "Visualization", slug: "visualization" },
+    { name: "Web", slug: "web" },
+  ];
+
+  // Initialize state based on URL query
+  const router = useRouter();
+  const [selectedFilter, setSelectedFilter] = useState(() => {
+    const { filter } = router.query;
+    if (filter) {
+      return filter as string;
+    }
+    return "";
+  });
+
+  // Check URL query string for filter
+  useEffect(() => {
+    const { filter } = router.query;
+    if (filter) {
+      setSelectedFilter(filter as string);
+    }
+  }, [router.query]);
+
+  // Actual filtering logic
+  const projectsFiltered = useMemo(() => {
+    const filterOutArchivedAndAddNumbers = (projects: any[]) =>
+      projects
+        .filter((project) => !project.archived)
+        // .sort((a, b) => a.year - b.year)
+        .map((project, i) => ({
+          id: i + 1,
+          ...project,
+        }))
+        .sort((a, b) => a.id - b.id);
+
+    if (!selectedFilter) {
+      return filterOutArchivedAndAddNumbers(projects);
+    }
+
+    return filterOutArchivedAndAddNumbers(
+      projects.filter((project) => project.filterCategory === selectedFilter)
+    );
+  }, [selectedFilter]);
+
   return (
-    <section
-      className="w-full min-h-screen relative"
-      style={{
-        filter: DARK_MODE ? "invert(1)" : "none",
-      }}
-    >
+    <section className="w-full min-h-screen relative">
       <div className="relative flex flex-col items-start justify-start pt-48 pb-24 w-full min-h-screen text-black px-[20px]">
         <div className="max-w-7xl mx-auto w-full">
           <h1 className="text-7xl font-serif italic font-extralight text-gray-500 mb-4">
             Archive
           </h1>
           {/* <SectionTitle classes="relative top-0">Archive</SectionTitle> */}
-          <p className="text-lg font-sans font-light leading-snug mb-12 text-gray-700">
-            A selected collection of my work—mostly for my own reference.
+          <p className="text-lg font-sans font-light leading-snug text-gray-700">
+            A collection of most of my work—mostly for my own reference.
           </p>
+          <div className="flex flex-row gap-2 mb-12 mt-4">
+            {CATEGORIES.map((filter) => (
+              <p
+                key={filter.slug}
+                onClick={() => {
+                  if (selectedFilter === filter.slug) {
+                    setSelectedFilter("");
+                    router.push({
+                      pathname: "/archive",
+                    });
+                  } else {
+                    setSelectedFilter(filter.slug);
+                    router.push({
+                      pathname: "/archive",
+                      query: { filter: filter.slug },
+                    });
+                  }
+                }}
+                className={`select-none cursor-pointer text-sm font-sans font-light leading-snug text-gray-700 transition ${
+                  selectedFilter === filter.slug
+                    ? "underline underline-offset-8"
+                    : "opacity-50"
+                }`}
+              >
+                {filter.name}
+              </p>
+            ))}
+          </div>
           <div className="hidden w-full max-w-5xl md:flex flex-row justify-between items-center gap-2 mb-2">
             <p className="min-w-[40px] text-sm uppercase text-left font-light">
               No.
@@ -349,22 +441,26 @@ export default function Archive() {
             </p>
             <p className="w-12"></p>
           </div>
-          {projectsFiltered
-            .sort((a, b) => b.id - a.id)
-            .map((project) => (
-              <TableRow
-                key={project.id}
-                id={project.id}
-                title={project.title}
-                type={project.type}
-                year={project.year}
-                url={project.url}
-                featured={project.featured}
-              />
-            ))}
+
+          {router.isReady ? (
+            projectsFiltered
+              .sort((a, b) => b.id - a.id)
+              .map((project) => (
+                <TableRow
+                  key={project.id}
+                  id={project.id}
+                  title={project.title}
+                  type={project.type}
+                  year={project.year}
+                  url={project.url}
+                  featured={project.featured}
+                />
+              ))
+          ) : (
+            <div className="h-screen" />
+          )}
         </div>
       </div>
-      {/* <Gradient /> */}
     </section>
   );
 }
@@ -412,11 +508,26 @@ function TableRow({
         {year}
       </p>
       <div
-        className={`hidden md:block w-12 text-right text-sm font-sans uppercase font-light text-gray-700`}
+        className={`hidden md:block w-12 text-right text-sm font-sans font-light text-gray-700`}
       >
-        {featured && <Dot />}
+        {featured && <HoverableDot />}
       </div>
     </a>
+  );
+}
+
+function HoverableDot() {
+  return (
+    <TooltipProvider delayDuration={0}>
+      <Tooltip>
+        <TooltipTrigger>
+          <Dot />
+        </TooltipTrigger>
+        <TooltipContent side="right" sideOffset={6}>
+          <p>Featured project</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 
@@ -431,13 +542,13 @@ function TableTitle({
 }) {
   return (
     <div
-      className="relative"
+      className="relative flex flex-row items-center gap-2"
       style={{
         perspective: "100px",
       }}
     >
       <div
-        className="leading-none overflow-hidden relative flex flex-row items-center gap-1 group h-full w-full"
+        className="leading-none overflow-hidden relative group h-full w-full flex flex-row items-center gap-2"
         style={{
           transformStyle: "preserve-3d",
           transition: "transform 800ms cubic-bezier(0.76, 0, 0.24, 1)",
@@ -465,66 +576,8 @@ function TableTitle({
         >
           {label}
         </p>
-        <div className="md:hidden block">{featured && <Dot />}</div>
       </div>
+      <div className="md:hidden block">{featured && <HoverableDot />}</div>
     </div>
   );
 }
-
-// function Gradient() {
-//   return (
-//     <svg
-//       xmlns="http://www.w3.org/2000/svg"
-//       version="1.1"
-//       viewBox="0 0 800 800"
-//       className="fixed bottom-0 right-0 w-full z-[-1] opacity-30"
-//     >
-//       <defs>
-//         <filter
-//           id="bbblurry-filter"
-//           x="-100%"
-//           y="-100%"
-//           width="400%"
-//           height="400%"
-//           filterUnits="objectBoundingBox"
-//           primitiveUnits="userSpaceOnUse"
-//           colorInterpolationFilters="sRGB"
-//         >
-//           <feGaussianBlur
-//             stdDeviation="61"
-//             x="0%"
-//             y="0%"
-//             width="100%"
-//             height="100%"
-//             in="SourceGraphic"
-//             edgeMode="none"
-//             result="blur"
-//           ></feGaussianBlur>
-//         </filter>
-//       </defs>
-//       <g filter="url(#bbblurry-filter)">
-//         <ellipse
-//           rx="215"
-//           ry="150"
-//           cx="601.1240490019634"
-//           cy="552.3812431615061"
-//           fill="hsl(37, 99%, 67%)"
-//         ></ellipse>
-//         <ellipse
-//           rx="215"
-//           ry="150"
-//           cx="333.495442814852"
-//           cy="522.0717990735438"
-//           fill="hsl(316, 73%, 52%)"
-//         ></ellipse>
-//         <ellipse
-//           rx="215"
-//           ry="150"
-//           cx="550.7388997502352"
-//           cy="338.5728695854466"
-//           fill="hsl(185, 100%, 57%)"
-//         ></ellipse>
-//       </g>
-//     </svg>
-//   );
-// }

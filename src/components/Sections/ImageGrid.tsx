@@ -157,7 +157,7 @@ export default function ImageGrid() {
       </motion.div>
       <Link
         href="/archive"
-        className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5 mt-3 justify-end max-w-7xl mx-auto"
+        className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5 mt-2 justify-end max-w-7xl mx-auto"
       >
         View all <Dot />
       </Link>

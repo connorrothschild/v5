@@ -27,7 +27,7 @@ const menuItems = [
 export default function Menu({}) {
   const [showMenu, setShowMenu] = useState(false);
 
-  const MENU_IN_DURATION = 1.5;
+  const MENU_IN_DURATION = 1;
   const WORD_IN_DURATION = 1;
 
   const container = {
@@ -108,11 +108,11 @@ export default function Menu({}) {
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       {/* If the route is not /, that means there is no loading animation. In that case, we should apply the CanvasGradient behind the menu */}
       {routeIsHome ? null : (
-        <div className="h-[60px] bg-gray-900 z-10 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]" />
+        <div className="h-[60px] bg-gray-900 z-20 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]" />
       )}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 text-gray-200`}
+        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 text-gray-100`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -132,13 +132,14 @@ export default function Menu({}) {
             animate="show"
             exit="exit"
             transition={{ duration: MENU_IN_DURATION, ease: easeInOutQuint }}
-            className="z-40 fixed top-0 left-0 w-screen h-screen flex flex-col md:flex-row justify-center items-center gap-2 font-serif"
+            className="z-40 fixed top-0 left-0 w-screen h-screen flex justify-center items-center flex-col md:flex-row gap-x-2 gap-y-0 font-serif overflow-hidden leading-[1.2] cursor-pointer"
             // style={{
             //   background: "rgba(0,0,0,.7)",
             //   backdropFilter: "blur(7px)",
             // }}
           >
             <CanvasGradient />
+            {/* <div className=""> */}
             {menuItems.map(({ href, w }, index) => (
               <motion.a
                 variants={word}
@@ -146,7 +147,7 @@ export default function Menu({}) {
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                className="text-white text-4xl overflow-hidden leading-snug cursor-pointer"
+                className="text-white text-4xl overflow-hidden leading-snug"
                 onClick={() => {
                   setShowMenu(false);
                   // const element = document.querySelector(href);
@@ -177,6 +178,7 @@ export default function Menu({}) {
                 )}
               </motion.a>
             ))}
+            {/* </div> */}
           </motion.div>
         )}
       </AnimatePresence>

@@ -8,6 +8,7 @@ import SectionTitle from "@/components/Elements/SectionTitle";
 import SectionSubtitle from "@/components/Elements/SectionSubtitle";
 import { ContactPopup } from "@/components/Elements/ContactPopup";
 import { useMediaQuery } from "usehooks-ts";
+import Link from "next/link";
 
 export default function Contact() {
   const [vizActive, setVizActive] = useState(false);
@@ -15,14 +16,6 @@ export default function Contact() {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [atLeastOneHasHovered, setAtLeastOneHasHovered] = useState(false);
-
-  // If mobile, always show the card with no blur
-  // useEffect(() => {
-  //   if (isMobile) {
-  //     setAtLeastOneHasHovered(true);
-  //   }
-  // }, [isMobile]);
-
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     setHasMounted(true);
@@ -44,9 +37,9 @@ export default function Contact() {
         <div className="flex flex-col gap-12 w-full pb-12">
           <SectionTitle classes="-left-6">02. Contact</SectionTitle>
           <SectionSubtitle>
-            I keep an intentionally small roster of clients to ensure mutual
-            interest & easy collaboration. There are two main channels I work
-            with clients through:
+            I work with a limited number of clients to ensure quality and close
+            collaboration. Those clients normally fall within one of two
+            categories:
           </SectionSubtitle>
 
           <div className="flex flex-col gap-2">
@@ -59,31 +52,35 @@ export default function Contact() {
                   : "Hover to reveal"}
               </GridTitle>
             )}
-            <div className="flex flex-col md:flex-row gap-2">
-              <ServiceCard
-                title="Data visualization"
-                description="Elegant, interactive data visualization design and development for
+            {hasMounted && (
+              <div className="flex flex-col md:flex-row gap-2">
+                <ServiceCard
+                  title="Data visualization"
+                  slug="visualization"
+                  description="Elegant, interactive data visualization design and development for
         established clients in government, journalism, and research."
-                inquiryPlaceholder="I saw on your website you work on data visualization. I'm interested in..."
-                active={vizActive}
-                setActive={setVizActive}
-                setAtLeastOneHasHovered={setAtLeastOneHasHovered}
-                isMobile={isMobile}
-              >
-                <VizScreen active={vizActive} />
-              </ServiceCard>
-              <ServiceCard
-                title="Web development"
-                description="Robust, performant web and application development ideal for startups going from 0 to 1."
-                inquiryPlaceholder="I saw on your website you work on web development. I'm interested in..."
-                active={webActive}
-                setActive={setWebActive}
-                setAtLeastOneHasHovered={setAtLeastOneHasHovered}
-                isMobile={isMobile}
-              >
-                <WebsiteScreen active={webActive} />
-              </ServiceCard>
-            </div>
+                  inquiryPlaceholder="I saw on your website you work on data visualization. I'm interested in..."
+                  active={vizActive}
+                  setActive={setVizActive}
+                  setAtLeastOneHasHovered={setAtLeastOneHasHovered}
+                  isMobile={isMobile}
+                >
+                  <VizScreen active={vizActive} />
+                </ServiceCard>
+                <ServiceCard
+                  title="Web development"
+                  slug="web"
+                  description="Robust, performant web and application development ideal for startups going from 0 to 1."
+                  inquiryPlaceholder="I saw on your website you work on web development. I'm interested in..."
+                  active={webActive}
+                  setActive={setWebActive}
+                  setAtLeastOneHasHovered={setAtLeastOneHasHovered}
+                  isMobile={isMobile}
+                >
+                  <WebsiteScreen active={webActive} />
+                </ServiceCard>
+              </div>
+            )}
             <div className="w-full md:text-right max-w-2xl md:ml-auto">
               <p
                 className="mt-4 w-full text-gray-500 font-sans leading-snug"
@@ -91,7 +88,7 @@ export default function Contact() {
                   textWrap: "balance",
                 }}
               >
-                Note: I maintain a minimum engagement fee of $8,000 per month of
+                Note: I maintain a minimum engagement fee of $6,000 per month of
                 work, which allows me to allocate the necessary time and
                 resources to deliver exceptional results.
               </p>
@@ -106,6 +103,7 @@ export default function Contact() {
 
 function ServiceCard({
   title,
+  slug,
   description,
   inquiryPlaceholder,
   children,
@@ -115,6 +113,7 @@ function ServiceCard({
   isMobile,
 }: {
   title: string;
+  slug: string;
   description: string;
   inquiryPlaceholder: string;
   children: React.ReactNode;
@@ -128,19 +127,19 @@ function ServiceCard({
   return (
     <ContactPopup inquiryPlaceholder={inquiryPlaceholder}>
       <div
-        className={`w-full transition-all duration-500 ${
-          active ? "" : "grayscale"
-        } ${hasHoveredOnce || isMobile ? "" : " blur-[3px]"}`}
+        className={`w-full hover:grayscale-0 ${active ? "" : "grayscale"} ${
+          isMobile || hasHoveredOnce ? "blur-[0px]" : "blur-[3px]"
+        }`}
         onMouseEnter={() => {
           setHasHoveredOnce(true);
           setAtLeastOneHasHovered(true);
         }}
-        // onMouseLeave={() => {
-        //   setActive(false);
-        // }}
+        style={{
+          transition: "all 500ms ease",
+        }}
       >
         <div
-          className={`transition-all animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-500 via-green-500 to-orange-600 to-[125%] ${
+          className={`transition-all animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-400 via-green-700 to-orange-700 to-[125%] ${
             active ? "running" : "opacity-80 paused"
           }`}
           onMouseEnter={() => {
@@ -151,9 +150,17 @@ function ServiceCard({
           }}
         >
           {children}
-          <h2 className="text-xl font-serif font-light tracking-wide leading-none mt-4 mb-1 text-white">
-            {title}
-          </h2>
+          <div className="flex flex-row justify-between items-center gap-4 mt-4 mb-1">
+            <h1 className="text-xl font-serif font-light tracking-wide leading-none text-white">
+              {title}
+            </h1>
+            <Link
+              className="bg-gray-800/50 px-3 py-1 rounded-md text-xs font-sans leading-snug text-gray-300 hover:bg-gray-800/75 transition-all"
+              href={`/archive?filter=${slug}`}
+            >
+              See examples &rarr;
+            </Link>
+          </div>
           <h2 className="text-base font-sans leading-snug text-gray-100">
             {description}
           </h2>
@@ -184,7 +191,7 @@ function WebsiteScreen({ active }: { active: boolean }) {
         <div className="w-4 h-4 rounded-full border border-solid border-gray-400" />
         <motion.p
           layout="position"
-          className="text-xs text-gray-600"
+          className="text-xs text-gray-200"
           initial={false}
           transition={{ ease: easeInOutQuint, duration: 0.5, delay: 0.5 }}
         >

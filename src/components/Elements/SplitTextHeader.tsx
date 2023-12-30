@@ -62,16 +62,16 @@ export default function SplitTextHeader({
     words.forEach((word, i) => {
       const letters = splitLetters(word, i === words.length - 1);
       const emphasized = [
-        "houston,",
-        "texas.",
-        "data",
+        "designer",
+        "&",
+        "developer",
         "visualization.",
         "websites",
       ].includes(word.toLowerCase());
       bodyText.push(
         <p
           key={word + "_" + i}
-          className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] !leading-[.9] lg:!leading-none ${
+          className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] !leading-[1.22] ${
             emphasized
               ? "font-serif font-normal gradient-text"
               : "font-sans font-extralight text-gray-600 mix-blend-multiply"
