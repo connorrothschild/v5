@@ -24,6 +24,7 @@
 html,
 body {
   background: var(--background) !important;
+  touch-action: none;
 }
 
 html,
