@@ -513,15 +513,13 @@ export default function App({ Component, pageProps }: AppProps) {
         ></link>
 
         <Toaster />
-
-        {/* For testing */}
-        {/* <Grid /> */}
         <Menu />
-        <Loader skipLoading={skipLoading}>
+
+        {/* <Loader skipLoading={skipLoading}>
           <Component {...pageProps} />
           <Footer />
-        </Loader>
-        {/* {router.pathname === "/" ? (
+        </Loader> */}
+        {router.pathname === "/" ? (
           <Loader>
             <Component {...pageProps} />
             <Footer />
@@ -531,7 +529,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
             <Footer />
           </>
-        )} */}
+        )}
       </main>
     </>
   );

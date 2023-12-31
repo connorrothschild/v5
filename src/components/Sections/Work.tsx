@@ -88,11 +88,11 @@ function ProjectCard({
           }}
         />
       </div>
-      <div className="flex flex-row items-center gap-1 flex-wrap">
+      <div className="flex flex-row items-center gap-2.5 flex-wrap">
         <h1 className="font-serif font-light text-xl leading-none text-gray-700">
           {client}
         </h1>
-        <h2 className="font-sans font-normal ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 border border-double border-gray-400 group-hover/image:border-gray-800 px-3 py-1 tracking-wide text-gray-500 group-hover/image:text-gray-700 text-[9px] rounded-full uppercase transition-colors duration-500">
+        <h2 className="font-sans font-normal w-max mt-px bg-gray-50 group-hover:bg-gray-50 border border-gray-400 group-hover/image:border-gray-800 px-3 py-1 text-gray-500 text-xs rounded-full">
           {service}
         </h2>
       </div>
