@@ -8,7 +8,9 @@ const Loader = ({
   skipLoading?: boolean;
   children: React.ReactNode;
 }) => {
-  const DURATION = skipLoading ? 0 : 3.5;
+  // const LOADING_TIME = skipLoading ? 0 : 3.5;
+  const LOADING_TIME = 3.5;
+
   return (
     <motion.div
       initial={{
@@ -31,15 +33,15 @@ const Loader = ({
         position: "fixed",
       }}
       transition={{
-        translateY: { duration: DURATION * 0.6153, ease: easeInOutQuint },
+        translateY: { duration: LOADING_TIME * 0.6153, ease: easeInOutQuint },
         clipPath: {
-          duration: DURATION * 0.30769,
-          delay: DURATION * 0.692,
+          duration: LOADING_TIME * 0.30769,
+          delay: LOADING_TIME * 0.692,
           ease: easeInOutQuint,
         },
         position: {
           duration: 0,
-          delay: DURATION,
+          delay: LOADING_TIME,
         },
       }}
       className="w-full h-full top-0 left-0 z-[1] overflow-clip"
