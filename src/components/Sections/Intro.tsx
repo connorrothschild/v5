@@ -8,7 +8,7 @@ export default function Intro() {
   const container = useRef<HTMLDivElement>(null);
   return (
     <section
-      className="relative mb-48 px-[20px] overflow-visible"
+      className="relative mt-24 md:mt-0 mb-48 px-[20px] overflow-visible"
       ref={container}
     >
       <Gradient />
@@ -38,7 +38,7 @@ function Gradient() {
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 800 800"
-      className="absolute top-full transform -translate-y-1/2 right-0 w-full z-[-1] opacity-30"
+      className="absolute top-full transform -translate-y-1/2 right-0 w-full z-[-1] opacity-30 pointer-events-none"
     >
       <defs>
         <filter

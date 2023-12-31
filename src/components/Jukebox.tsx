@@ -232,9 +232,12 @@ export default function Jukebox({
       <div
         className={`${
           controllerIsVisible
-            ? "opacity-100 delay-[2500ms] duration-500"
+            ? "opacity-100 duration-500"
             : "opacity-0 duration-100 pointer-events-none"
         } fixed bottom-0 right-0 z-50 px-4 py-5 transition-opacity ease-in-out`}
+        style={{
+          transitionDelay: controllerIsVisible ? "2500ms" : "0ms",
+        }}
       >
         <AnimatePresence>
           {currentVideo && isPlaying ? (

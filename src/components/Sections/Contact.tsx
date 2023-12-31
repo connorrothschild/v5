@@ -139,7 +139,7 @@ function ServiceCard({
         }}
       >
         <div
-          className={`transition-all animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-400 via-green-700 to-orange-700 to-[125%] ${
+          className={`transition-opacity animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-400 via-green-700 to-orange-700 to-[125%] ${
             active ? "running" : "opacity-80 paused"
           }`}
           onMouseEnter={() => {
@@ -155,7 +155,7 @@ function ServiceCard({
               {title}
             </h1>
             <Link
-              className="bg-gray-800/50 px-3 py-1 rounded-md text-xs font-sans leading-snug text-gray-300 hover:bg-gray-800/75 transition-all"
+              className="bg-gray-800/50 px-3 py-1 rounded-md text-xs font-sans leading-snug text-gray-300 hover:bg-gray-800/75 transition-colors"
               href={`/archive?filter=${slug}`}
             >
               See examples &rarr;
@@ -314,7 +314,7 @@ function Gradient() {
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 800 800"
-      className="absolute bottom-0 left-0 h-full z-[-1]"
+      className="absolute bottom-0 left-0 h-full z-[-1] pointer-events-none"
     >
       <defs>
         <filter

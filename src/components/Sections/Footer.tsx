@@ -31,7 +31,7 @@ export default function Footer() {
       ref={container}
     >
       <div
-        className="absolute top-0 left-0 bg-gradient-to-b from-transparent to-black w-full h-full z-10 group-hover:opacity-0 transition-all"
+        className="absolute top-0 left-0 bg-gradient-to-b from-transparent to-black w-full h-full z-10 group-hover:opacity-0 transition-opacity"
         style={{
           // Using inline styles here because tailwindcss-animate breaks transition w/ arbitrary values
           transitionDuration: "800ms",

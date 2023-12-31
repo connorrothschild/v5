@@ -389,6 +389,11 @@ export default function Archive() {
     );
   }, [selectedFilter]);
 
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   return (
     <section className="w-full min-h-screen relative">
       <div className="relative flex flex-col items-start justify-start pt-48 pb-24 w-full min-h-screen text-black px-[20px]">
@@ -407,12 +412,12 @@ export default function Archive() {
                 onClick={() => {
                   if (selectedFilter === filter.slug) {
                     setSelectedFilter("");
-                    router.push({
+                    router.replace({
                       pathname: "/archive",
                     });
                   } else {
                     setSelectedFilter(filter.slug);
-                    router.push({
+                    router.replace({
                       pathname: "/archive",
                       query: { filter: filter.slug },
                     });
@@ -442,7 +447,7 @@ export default function Archive() {
             <p className="w-12"></p>
           </div>
 
-          {router.isReady ? (
+          {hasMounted ? (
             projectsFiltered
               .sort((a, b) => b.id - a.id)
               .map((project) => (
@@ -555,16 +560,17 @@ function TableTitle({
         }}
       >
         <p
-          className="transition-all font-normal duration-500 ease-in-out pointer-events-none"
+          className="font-normal duration-500 ease-in-out pointer-events-none"
           style={{
             opacity: isActive ? 0 : 1,
             transform: isActive ? "translateY(-100%)" : "translateY(0)",
+            transitionProperty: "opacity, transform",
           }}
         >
           {label}
         </p>
         <p
-          className="absolute font-light transform transition-all duration-500 font-serif ease-in-out pointer-events-none"
+          className="absolute font-light transform duration-500 font-serif ease-in-out pointer-events-none"
           style={{
             transform: isActive ? "none" : "rotateX(-90deg)",
             opacity: isActive ? 1 : 0,
@@ -572,6 +578,7 @@ function TableTitle({
             transitionDelay: isActive ? "100ms" : "0ms",
             fontStyle: "italic",
             letterSpacing: ".4px",
+            transitionProperty: "opacity, transform",
           }}
         >
           {label}

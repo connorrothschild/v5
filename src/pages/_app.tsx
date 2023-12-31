@@ -458,30 +458,34 @@ export default function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
+  const LOADING_TIME = 3.5;
+  const [hasLoaded, setHasLoaded] = useState(false);
+
   // If route is anything other than the home page, skip the loading animation
   useEffect(() => {
+    let skipLoadingLocalToUseEffect = false;
     if (router.pathname !== "/") {
-      setSkipLoading(true);
+      skipLoadingLocalToUseEffect = true;
     }
-  }, [router.pathname]);
 
-  const LOADING_TIME = 3.5;
-
-  useEffect(() => {
-    if (skipLoading) {
+    if (skipLoading || skipLoadingLocalToUseEffect) {
       document.body.classList.add("loaded");
+      setHasLoaded(true);
       return;
     }
 
     console.log("Adding loading animation");
     document.body.classList.add("loading");
     document.body.classList.remove("loaded");
+    setHasLoaded(false);
 
     setTimeout(() => {
+      console.log("Removing loading animation");
       document.body.classList.remove("loading");
       document.body.classList.add("loaded");
+      setHasLoaded(true);
     }, LOADING_TIME * 1000);
-  }, [skipLoading]);
+  }, [router.pathname, skipLoading]);
 
   return (
     <>
@@ -508,13 +512,16 @@ export default function App({ Component, pageProps }: AppProps) {
           href="https://use.typekit.net/mhr2lku.css"
         ></link>
 
-        <Toaster richColors />
+        <Toaster />
 
         {/* For testing */}
         {/* <Grid /> */}
         <Menu />
-
-        {router.pathname === "/" ? (
+        <Loader skipLoading={skipLoading}>
+          <Component {...pageProps} />
+          <Footer />
+        </Loader>
+        {/* {router.pathname === "/" ? (
           <Loader>
             <Component {...pageProps} />
             <Footer />
@@ -524,7 +531,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
             <Footer />
           </>
-        )}
+        )} */}
       </main>
     </>
   );

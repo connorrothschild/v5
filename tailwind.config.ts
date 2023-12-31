@@ -16,10 +16,10 @@ const config: Config = {
     },
     extend: {
       height: {
-        screen: ["100vh", "100dvh"],
+        screen: ["100vh", "100dvh", "100svh"],
       },
       minHeight: {
-        screen: ["100vh", "100dvh"],
+        screen: ["100vh", "100dvh", "100svh"],
       },
       fontFamily: {
         // serif: ["var(--font-canela)"],

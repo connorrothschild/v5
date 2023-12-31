@@ -36,28 +36,28 @@ export function ContactPopup({
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  // if (isDesktop) {
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {/* <Button variant="outline">Edit Profile</Button> */}
-        {children}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] !font-sans">
-        <DialogHeader>
-          <DialogTitle>Get in touch</DialogTitle>
-          <DialogDescription>
-            Tell me a bit about your project, and I&apos;ll be in touch!
-          </DialogDescription>
-        </DialogHeader>
-        <ProfileForm
-          inquiryPlaceholder={inquiryPlaceholder}
-          setOpen={setOpen}
-        />
-      </DialogContent>
-    </Dialog>
-  );
-  // }
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          {/* <Button variant="outline">Edit Profile</Button> */}
+          {children}
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px] !font-sans">
+          <DialogHeader>
+            <DialogTitle>Get in touch</DialogTitle>
+            <DialogDescription>
+              Tell me a bit about your project, and I&apos;ll be in touch!
+            </DialogDescription>
+          </DialogHeader>
+          <ProfileForm
+            inquiryPlaceholder={inquiryPlaceholder}
+            setOpen={setOpen}
+          />
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   // FIXME: Drawer will unmount sticky elements, including navbar, when animating, watch https://github.com/shadcn-ui/ui/pull/2147
   return (
@@ -178,6 +178,7 @@ function ProfileForm({
         <Input
           type="text"
           id="name"
+          autoComplete="name"
           value={formData.name}
           onChange={handleChange}
         />
@@ -187,6 +188,7 @@ function ProfileForm({
         <Input
           type="email"
           id="email"
+          autoComplete="email"
           value={formData.email}
           onChange={handleChange}
         />

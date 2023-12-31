@@ -1,9 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { easeInOutQuint } from "@/config/eases";
 import Jukebox from "./Jukebox";
 import CanvasGradient from "./CanvasGradient";
 import { useRouter } from "next/router";
+import { useMediaQuery } from "usehooks-ts";
 
 const menuItems = [
   {
@@ -103,18 +104,34 @@ export default function Menu({}) {
   const router = useRouter();
   const routeIsHome = router.pathname === "/";
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   return (
     <>
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
       {/* If the route is not /, that means there is no loading animation. In that case, we should apply the CanvasGradient behind the menu */}
-      {routeIsHome ? null : (
-        <div className="h-[60px] bg-gray-900 z-20 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px]" />
-      )}
+      {hasMounted ? (
+        routeIsHome && !isMobile ? null : (
+          <div
+            id="menu-bar"
+            className={`opacity-0 transition h-[60px] z-[1] fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
+              routeIsHome ? "bg-gray-100 mix-blend-difference" : "bg-gray-900"
+            }`}
+          />
+        )
+      ) : null}
       <p
         id="menu-button"
-        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif transition-all duration-200 delay-200 text-gray-100`}
+        className={`opacity-0 pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-200 delay-200 text-gray-200`}
         onClick={() => {
           setShowMenu(!showMenu);
+        }}
+        style={{
+          transitionProperty: "opacity, transform",
         }}
       >
         Menu

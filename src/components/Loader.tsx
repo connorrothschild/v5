@@ -1,8 +1,14 @@
 import { motion } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
-const Loader = ({ children }) => {
-  const DURATION = 3.5;
+const Loader = ({
+  skipLoading,
+  children,
+}: {
+  skipLoading?: boolean;
+  children: React.ReactNode;
+}) => {
+  const DURATION = skipLoading ? 0 : 3.5;
   return (
     <motion.div
       initial={{
@@ -37,6 +43,9 @@ const Loader = ({ children }) => {
         },
       }}
       className="w-full h-full top-0 left-0 z-[1] overflow-clip"
+      style={{
+        willChange: "transform, clip-path, border-radius, position",
+      }}
     >
       {children}
     </motion.div>

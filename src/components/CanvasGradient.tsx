@@ -1,5 +1,5 @@
-import { useLayoutEffect, useRef } from "react";
-import { motion, MotionValue } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function CanvasGradient({
   incrementValue = 0.02,
@@ -7,7 +7,7 @@ export default function CanvasGradient({
   incrementValue?: number;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!ref.current) return;
     var c = ref.current as HTMLCanvasElement;
     var ctx = c.getContext("2d");

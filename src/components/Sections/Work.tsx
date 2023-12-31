@@ -68,7 +68,7 @@ function ProjectCard({
 }) {
   return (
     <a
-      className="w-full flex flex-col items-start gap-2 md:gap-2.5 group-hover:grayscale hover:!grayscale-0 transition-all duration-300"
+      className="w-full flex flex-col items-start gap-2 md:gap-2.5 group-hover:grayscale hover:!grayscale-0 transition-filter duration-500"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
@@ -81,13 +81,18 @@ function ProjectCard({
           alt="Project image"
           className="w-full aspect-square rounded-lg object-cover object-center"
         />
-        <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-b from-transparent to-[var(--background)] rounded-t-lg group-hover/image:opacity-0 transition-all duration-300" />
+        <div
+          className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-[var(--background)] rounded-t-lg group-hover/image:opacity-0 transition-opacity duration-700"
+          style={{
+            willChange: "opacity",
+          }}
+        />
       </div>
       <div className="flex flex-row items-center gap-1 flex-wrap">
         <h1 className="font-serif font-light text-xl leading-none text-gray-700">
           {client}
         </h1>
-        <h2 className="font-sans font-normal ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 border border-double border-gray-400 group-hover/image:border-gray-800 px-3 py-1 tracking-wide text-gray-500 group-hover/image:text-gray-700 text-[9px] rounded-full uppercase transition-all duration-300">
+        <h2 className="font-sans font-normal ml-1 w-max mt-1 bg-gray-50 group-hover:bg-gray-50 border border-double border-gray-400 group-hover/image:border-gray-800 px-3 py-1 tracking-wide text-gray-500 group-hover/image:text-gray-700 text-[9px] rounded-full uppercase transition-colors duration-500">
           {service}
         </h2>
       </div>

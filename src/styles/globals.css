@@ -16,15 +16,9 @@
   --background-invert: #131517;
 }
 
-/* FIXME: Not working. */
-/* * {
-  font-family: Montreal, sans-serif;
-} */
-
 html,
 body {
   background: var(--background) !important;
-  touch-action: none;
 }
 
 html,
@@ -61,7 +55,8 @@ body {
 } */
 
 /* body.loaded footer, */
-body.loaded #menu-button {
+body.loaded #menu-button,
+body.loaded #menu-bar {
   opacity: 1;
   pointer-events: auto;
 }

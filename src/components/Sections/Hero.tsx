@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, circInOut } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
 import CanvasGradient from "@/components/CanvasGradient";
+import { useMediaQuery } from "usehooks-ts";
 
 const LOADING_TIME = 3.5;
 
@@ -35,29 +36,34 @@ export default function Hero() {
   const scrollRef = useRef(null);
   const isInView = useInView(scrollRef);
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <>
       {/* Create a dummy element that is 1px tall, at the top of the screen.
       This element will be representative of whether the page is fully scrolled to the top. */}
       <div ref={scrollRef} className="absolute top-0 left-0 w-full h-px" />
-
-      <div className="pointer-events-none sticky top-0 left-0 z-10" id="home">
-        {/* <span className="z-[9] absolute bottom-24 right-8 user-select-none font-serif font-extralight tracking-wide text-yellow-500">
-          psst. there&apos;s music—click the menu ☺
-        </span> */}
+      <div
+        className="pointer-events-none relative md:sticky top-0 left-0 z-10"
+        id="home"
+      >
         <motion.div
           // BOUNCY:
-          // transition={{ ease: circInOut, duration: 1 }}
           // transition={{ ease: [0.14, 1.26, 0.64, 1], duration: 0.6 }}
-          // transition={{ ease: easeInOutQuint, duration: 0.6 }}
+          transition={{ ease: easeInOutQuint, duration: 0.7 }}
           animate={{
             clipPath:
-              isInView || !hasLoaded ? defaultClipPath : animatedClipPath,
+              isInView || !hasLoaded || isMobile
+                ? defaultClipPath
+                : animatedClipPath,
           }}
           className="transform-gpu flex items-center justify-center transform-origin-center w-screen overflow-hidden h-screen"
+          style={{
+            willChange: "clip-path",
+          }}
         >
           {/* Gradient spanning entire hero, from transparent to --background */}
-          {/* <div className="pointer-events-none absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[--background] z-[49]" /> */}
+          {/* <div className="pointer-events-none absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[--background-invert] z-[49]" /> */}
           <CanvasGradient />
 
           <div className="hidden md:flex pl-12 leading-none font-light py-4 text-right absolute bottom-0 right-4 w-[calc(100%-12px)] text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-serif z-[49]">
