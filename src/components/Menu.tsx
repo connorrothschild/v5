@@ -138,7 +138,7 @@ export default function Menu({}) {
       ) : null}
       <p
         id="menu-button"
-        className={`opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-200 delay-200 text-gray-200`}
+        className={`opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-200 delay-200 text-[--background]`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
