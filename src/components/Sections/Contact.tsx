@@ -139,7 +139,7 @@ function ServiceCard({
         }}
       >
         <div
-          className={`transition-opacity animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-400 via-green-700 to-orange-700 to-[125%] ${
+          className={`select-none transition-opacity animate-gradient cursor-pointer group rounded-lg shadow-lg hover:shadow-sm px-3 py-4 flex flex-col h-full gap-1 bg-gradient-to-r from-[-25%] from-blue-400 via-green-700 to-orange-700 to-[125%] ${
             active ? "running" : "opacity-80 paused"
           }`}
           onMouseEnter={() => {
