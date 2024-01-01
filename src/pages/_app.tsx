@@ -421,7 +421,7 @@ const manrope = Manrope({
 });
 
 const montreal = localFont({
-  src: "./fonts/montreal/PPNeueMontreal-Book.otf",
+  src: "./fonts/montreal/PPNeueMontreal-Book.woff2",
   // weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "fallback",
   variable: "--font-montreal",
@@ -429,16 +429,22 @@ const montreal = localFont({
 
 import Menu from "@/components/Menu";
 import Loader from "@/components/Loader";
-import Grid from "@/components/Grid";
 import Footer from "@/components/Sections/Footer";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Toaster } from "sonner";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   // We only want this loader on 1) fresh loads and 2) on the home page
   const router = useRouter();
+  // Add router pathname to data-router-pathname attribute on body
+  useEffect(() => {
+    document.body.setAttribute("data-router-pathname", router.pathname);
+  }, [router.pathname]);
+
   const [skipLoading, setSkipLoading] = useState(false);
+
   useEffect(() => {
     const startHandler = () => {
       console.log("Router change started");
@@ -461,14 +467,28 @@ export default function App({ Component, pageProps }: AppProps) {
   const LOADING_TIME = 3.5;
   const [hasLoaded, setHasLoaded] = useState(false);
 
+  // FIXME: Not working.
   // If route is anything other than the home page, skip the loading animation
   useEffect(() => {
     let skipLoadingLocalToUseEffect = false;
+
+    const startHandler = () => {
+      console.log("Router change started");
+      skipLoadingLocalToUseEffect = true;
+    };
+
+    const completeHandler = () => {
+      console.log("Router change completed");
+    };
+
+    router.events.on("routeChangeStart", startHandler);
+    router.events.on("routeChangeComplete", completeHandler);
+
     if (router.pathname !== "/") {
       skipLoadingLocalToUseEffect = true;
     }
 
-    if (skipLoading || skipLoadingLocalToUseEffect) {
+    if (skipLoadingLocalToUseEffect) {
       document.body.classList.add("loaded");
       setHasLoaded(true);
       return;
@@ -485,7 +505,12 @@ export default function App({ Component, pageProps }: AppProps) {
       document.body.classList.add("loaded");
       setHasLoaded(true);
     }, LOADING_TIME * 1000);
-  }, [router.pathname, skipLoading]);
+
+    return () => {
+      router.events.off("routeChangeStart", startHandler);
+      router.events.off("routeChangeComplete", completeHandler);
+    };
+  }, [router]);
 
   return (
     <>
@@ -503,6 +528,13 @@ export default function App({ Component, pageProps }: AppProps) {
           font-family: var(--font-sans);
         }
       `}</style>
+
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"
+        />
+      </Head>
 
       <main
         className={`${montreal.variable} ${canela.variable} ${editorialNew.variable} ${tobias.variable} ${manrope.variable} ${suisse.variable} ${nyghtSerif.variable} font-sans`}

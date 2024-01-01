@@ -46,11 +46,17 @@ export default function Footer() {
           </p>
           <p className="text-gray-400 font-sans font-light text-xl">
             Connect on{" "}
-            <a href="#" className="text-gray-300 font-serif">
+            <a
+              href="https://www.linkedin.com/in/connor-rothschild/"
+              className="text-gray-300 font-serif"
+            >
               LinkedIn
             </a>{" "}
             or{" "}
-            <a href="#" className="text-gray-300 font-serif">
+            <a
+              href="https://twitter.com/CL_Rothschild"
+              className="text-gray-300 font-serif"
+            >
               Twitter
             </a>
             .

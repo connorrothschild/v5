@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .pause {
-    animation-play-state: paused;
-  }
-  .play {
-    animation-play-state: running;
-  }
-}
-
 :root {
   --background: #f3f4f6;
   --background-invert: #131517;
@@ -49,90 +40,17 @@ body {
   display: none;
 }
 
-/* To get Vaul drawer working, need to uncomment: */
-/* body {
-  top: 0 !important;
-} */
-
-/* body.loaded footer, */
+/* Menu management */
 body.loaded #menu-button,
 body.loaded #menu-bar {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* TEST */
-@property --r {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
+body[data-router-pathname="/"].hero-in-view #menu-bar {
+  opacity: 0;
+  pointer-events: none;
 }
-
-#a {
-  animation: rotating 3s linear infinite;
-}
-
-@keyframes rotating {
-  0% {
-    --r: 0deg;
-  }
-  100% {
-    --r: 360deg;
-  }
-}
-
-#a::after {
-  content: "";
-  display: block;
-  position: absolute;
-  inset: 2px;
-  z-index: 1;
-  border-radius: 45px;
-  -webkit-border-radius: 45px;
-  -moz-border-radius: 45px;
-  -ms-border-radius: 45px;
-  -o-border-radius: 45px;
-}
-
-/* @property --r2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@property --x {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
-#b {
-  background: conic-gradient(
-    from calc(var(--r2) - 80deg) at var(--xPos) 50px,
-    #222 0%,
-    #fff 20%,
-    #222 25%
-  );
-  animation: -0.64s rotating2 3s linear infinite, -0.64s x 3s linear infinite;
-}
-
-@keyframes rotating2 {
-  0% {
-    --r2: 0deg;
-  }
-  32.82275711% {
-    --r2: 0deg;
-  }
-  50% {
-    --r2: 180deg;
-  }
-  82.82275711% {
-    --r2: 180deg;
-  }
-  100% {
-    --r2: 360deg;
-  }
-} */
 
 @keyframes hue-rotate-animation {
   0% {

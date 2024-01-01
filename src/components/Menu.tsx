@@ -119,7 +119,8 @@ export default function Menu({}) {
           <div
             id="menu-bar"
             className={`opacity-0 transition h-[60px] z-[1] fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
-              routeIsHome ? "bg-gray-100 mix-blend-difference" : "bg-gray-900"
+              // routeIsHome ? "bg-gray-100 mix-blend-difference" : "bg-gray-900"
+              "bg-gray-900"
             }`}
           />
         )
@@ -184,13 +185,13 @@ export default function Menu({}) {
                       {l}
                     </motion.span>
                   );
-                })}{" "}
+                })}
                 {index < menuItems.length - 1 && (
                   <motion.span
                     className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
                     variants={ampersand}
                   >
-                    &
+                    ,
                   </motion.span>
                 )}
               </motion.a>

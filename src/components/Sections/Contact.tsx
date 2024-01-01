@@ -145,7 +145,13 @@ function ServiceCard({
           onMouseEnter={() => {
             setActive(true);
           }}
+          onPointerEnter={() => {
+            setActive(true);
+          }}
           onMouseLeave={() => {
+            setActive(false);
+          }}
+          onPointerLeave={() => {
             setActive(false);
           }}
         >

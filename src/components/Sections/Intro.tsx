@@ -17,7 +17,7 @@ export default function Intro() {
           <div className="">
             <SplitTextHeader
               container={container}
-              phrase="I'm Connor, a designer & developer based in Houston, Texas. Clients call me when they need to make websites that are performant, beautiful, and durable."
+              phrase="I'm Connor, a software & data visualization engineer in Houston, TX. Clients call me when they want to make websites that are performant, beautiful, and durable."
             />
           </div>
           <ContactPopup>

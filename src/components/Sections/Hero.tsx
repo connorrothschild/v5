@@ -38,6 +38,20 @@ export default function Hero() {
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
+  // Add a class to the body when the hero is in view
+  const heroRef = useRef(null);
+  const heroIsInView = useInView(heroRef, {
+    amount: 0.1,
+  });
+
+  useEffect(() => {
+    if (heroIsInView) {
+      document.body.classList.add("hero-in-view");
+    } else {
+      document.body.classList.remove("hero-in-view");
+    }
+  }, [heroIsInView]);
+
   return (
     <>
       {/* Create a dummy element that is 1px tall, at the top of the screen.
@@ -46,6 +60,7 @@ export default function Hero() {
       <div
         className="pointer-events-none relative md:sticky top-0 left-0 z-10"
         id="home"
+        ref={heroRef}
       >
         <motion.div
           // BOUNCY:
@@ -83,7 +98,7 @@ export default function Hero() {
 function Name({ hasLoaded }: { hasLoaded: boolean }) {
   return (
     <div
-      className="absolute top-0 left-0 z-1 h-full w-full flex flex-col md:flex-row text-center justify-center items-center mix-blend-hard-light"
+      className="select-none absolute top-0 left-0 z-1 h-full w-full flex flex-col md:flex-row text-center justify-center items-center mix-blend-hard-light"
       style={{
         gap: hasLoaded ? ".75rem" : "0.25rem",
       }}
