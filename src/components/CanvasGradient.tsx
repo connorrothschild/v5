@@ -62,7 +62,7 @@ export default function CanvasGradient({
       id="canvas"
       width="32"
       height="32"
-      className="z-1 absolute top-0 left-0 w-full h-screen"
+      className="z-1 absolute top-0 left-0 w-full h-full"
       style={{
         filter: "brightness(.7)",
       }}

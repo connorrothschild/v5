@@ -44,6 +44,7 @@ const projects = [
     url: "https://minervadata.xyz/",
     type: "App",
     filterCategory: "web",
+    featured: true,
   },
   {
     title: "Absolute Rest",
@@ -57,6 +58,7 @@ const projects = [
     url: "https://www.newline.co/courses/better-data-visualizations-with-svelte",
     type: "Course",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "A Visual Introduction to Prompt Engineering",
@@ -64,6 +66,7 @@ const projects = [
     url: "https://www.learnpromptengineering.org/",
     type: "Story",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "What languages dominate the internet?",
@@ -85,6 +88,7 @@ const projects = [
     url: "https://restofworld.org/2023/techs-bad-year-global-layoffs-data/",
     type: "Story",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "babby.xyz",
@@ -113,6 +117,7 @@ const projects = [
     url: "https://cityofpraxis.org",
     type: "App, web",
     filterCategory: "web",
+    featured: true,
   },
   {
     title: "Gallery",
@@ -127,6 +132,7 @@ const projects = [
     url: "https://restofworld.org/2022/blackouts/",
     type: "Story",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "An Interactive History of Impact Investing",
@@ -134,6 +140,7 @@ const projects = [
     url: "https://impact.collabfund.com/",
     type: "Microsite",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "COVID vulnerability scores vs. vaccination rates across the U.S.",
@@ -148,6 +155,7 @@ const projects = [
     url: "https://www.axios.com/2021/07/23/olympic-winners",
     type: "Chart",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "The U.S. college population, visualized as 100 students",
@@ -204,6 +212,7 @@ const projects = [
     url: "https://connorrothschild.github.io/bob-ross-art-gallery/",
     type: "Story",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "One Line Hacks",
@@ -272,6 +281,7 @@ const projects = [
     url: "https://connorrothschild.github.io/cudi-hums/",
     type: "Story",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "Mapping Houston Homicides",
@@ -288,6 +298,7 @@ const projects = [
     url: "https://mokshadata.studio/projects/police-force/",
     type: "Story",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "Quarantunes",
@@ -323,7 +334,7 @@ const projects = [
   {
     title: "The Race for Media Attention",
     description:
-      "Visualizing media coverage of 2020 presidential candiyears over time.",
+      "Visualizing media coverage of 2020 presidential candidates over time.",
     year: 2019,
     archived: true,
     url: "https://observablehq.com/@connorrothschild/bar-chart-race",
@@ -398,12 +409,12 @@ export default function Archive() {
     <section className="w-full min-h-screen relative">
       <div className="relative flex flex-col items-start justify-start pt-48 pb-24 w-full min-h-screen text-black px-[20px]">
         <div className="max-w-7xl mx-auto w-full">
-          <h1 className="text-7xl font-serif italic font-extralight text-gray-500 mb-4">
+          <h1 className="text-7xl font-serif font-extralight text-gray-700 mb-4">
             Archive
           </h1>
           {/* <SectionTitle classes="relative top-0">Archive</SectionTitle> */}
           <p className="text-lg font-sans font-light leading-snug text-gray-700">
-            A collection of most of my work—mostly for my own reference.
+            A collection of (most of) my work.
           </p>
           <div className="flex flex-row gap-2 mb-12 mt-4">
             {CATEGORIES.map((filter) => (
@@ -547,7 +558,7 @@ function TableTitle({
 }) {
   return (
     <div
-      className="relative flex flex-row items-center gap-2"
+      className="relative flex flex-row items-start gap-2"
       style={{
         perspective: "100px",
       }}
@@ -584,7 +595,9 @@ function TableTitle({
           {label}
         </p>
       </div>
-      <div className="md:hidden block">{featured && <HoverableDot />}</div>
+      <div className="md:hidden flex items-center">
+        {featured && <HoverableDot />}
+      </div>
     </div>
   );
 }

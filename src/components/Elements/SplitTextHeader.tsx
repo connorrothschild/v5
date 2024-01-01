@@ -1,7 +1,7 @@
-import { useRef, useEffect, useState, JSX } from "react";
+import { useRef, useEffect, useState } from "react";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import gsap from "gsap";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import type { RefObject } from "react";
 
 export default function SplitTextHeader({
@@ -11,7 +11,7 @@ export default function SplitTextHeader({
   container: RefObject<HTMLDivElement>;
   phrase: string;
 }) {
-  let refs = useRef<HTMLSpanElement[]>([]);
+  const wordsRef = useRef<HTMLSpanElement[]>([]);
   const body = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,27 +22,21 @@ export default function SplitTextHeader({
   const isInView = useInView(container);
   const [hasInstantiated, setHasInstantiated] = useState(false);
 
-  // Wait to create animation until after refs.current is populated and thing is in view
   useEffect(() => {
-    // if (!body.current) return;
-    // if (refs.current.length === 0) return;
-    if (!isInView) return; // Important to check this last
-    if (hasInstantiated) return;
-
+    if (!isInView || hasInstantiated) return;
     createAnimation();
     setHasInstantiated(true);
   }, [isInView, hasInstantiated]);
 
   const createAnimation = () => {
-    if (!container.current || !container.current?.offsetHeight) return;
+    if (!container.current || !container.current.offsetHeight) return;
 
-    gsap.to(refs.current, {
+    gsap.to(wordsRef.current, {
       scrollTrigger: {
         trigger: container.current,
         scrub: true,
-
-        start: "top 90%", // When the top of the container reaches 80% down the viewport
-        end: "bottom 20%", // When the bottom of the container reaches 20% down the viewport
+        start: "top 90%",
+        end: "bottom 20%",
       },
       opacity: 1,
       ease: "none",
@@ -50,17 +44,8 @@ export default function SplitTextHeader({
     });
   };
 
-  const splitWords = (phrase: string | string[]) => {
-    let words;
-    if (typeof phrase === "string") {
-      words = phrase.split(" ");
-    } else {
-      words = phrase;
-    }
-
-    let bodyText: JSX.Element[] = [];
-    words.forEach((word, i) => {
-      const letters = splitLetters(word, i === words.length - 1);
+  const splitWords = (phrase: string) => {
+    return phrase.split(" ").map((word, index) => {
       const emphasized = [
         "software",
         "&",
@@ -69,38 +54,22 @@ export default function SplitTextHeader({
         "engineer",
         "websites",
       ].includes(word.toLowerCase());
-      bodyText.push(
-        <p
-          key={word + "_" + i}
-          className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] !leading-[1.1] ${
+      return (
+        <span
+          key={word + "_" + index}
+          className={`opacity-10 text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.5rem] !leading-[1] ${
             emphasized
               ? "font-serif font-light gradient-text"
-              : "font-sans font-extralight text-gray-600 mix-blend-multiply"
+              : "text-gray-600 font-sans"
           }`}
-        >
-          {letters}
-        </p>
-      );
-    });
-    return bodyText;
-  };
-
-  const splitLetters = (word: string, isLast: boolean) => {
-    let lettersArray: JSX.Element[] = [];
-    word.split("").forEach((letter, i) => {
-      lettersArray.push(
-        <span
-          key={letter + "_" + i}
-          className="opacity-10"
-          ref={(el: HTMLSpanElement) => {
-            refs.current.push(el);
+          ref={(el) => {
+            wordsRef.current.push(el);
           }}
         >
-          {letter}
+          {word + (index < phrase.split(" ").length - 1 ? " " : "")}
         </span>
       );
     });
-    return lettersArray;
   };
 
   return (

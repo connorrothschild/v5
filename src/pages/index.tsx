@@ -3,6 +3,8 @@ import Intro from "@/components/Sections/Intro";
 import Work from "@/components/Sections/Work";
 import Contact from "@/components/Sections/Contact";
 import Head from "next/head";
+import Loader from "@/components/Loader";
+import Footer from "@/components/Sections/Footer";
 
 const META_TITLE = "Connor Rothschild";
 const META_DESCRIPTION =
@@ -18,10 +20,14 @@ export default function Home() {
         <meta property="og:title" content={META_TITLE} />
         <meta property="og:description" content={META_DESCRIPTION} />
       </Head>
-      <Hero />
-      <Intro />
-      <Work />
-      <Contact />
+
+      <Loader>
+        <Hero />
+        <Intro />
+        <Work />
+        <Contact />
+        <Footer />
+      </Loader>
     </>
   );
 }

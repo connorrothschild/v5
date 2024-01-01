@@ -5,22 +5,20 @@ import Jukebox from "./Jukebox";
 import CanvasGradient from "./CanvasGradient";
 import { useRouter } from "next/router";
 import { useMediaQuery } from "usehooks-ts";
+import { ContactPopup } from "./Elements/ContactPopup";
+import Link from "next/link";
 
 const menuItems = [
   {
-    href: "/#home",
+    href: "/",
     w: "Home",
   },
-  // {
-  //   href: "#about",
-  //   w: "About",
-  // },
   {
-    href: "/#work",
+    href: "/archive",
     w: "Projects",
   },
   {
-    href: "/#contact",
+    // href: "",
     w: "Contact",
   },
 ];
@@ -110,6 +108,19 @@ export default function Menu({}) {
     setHasMounted(true);
   }, []);
 
+  // Hitting escape should close the menu
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
     <>
       {/* Note that the menu is hidden on page load, once the Loader component applies .loaded it will be visible (see globals.css) */}
@@ -150,52 +161,81 @@ export default function Menu({}) {
             animate="show"
             exit="exit"
             transition={{ duration: MENU_IN_DURATION, ease: easeInOutQuint }}
-            className="z-40 fixed top-0 left-0 w-screen h-screen flex justify-center items-center flex-col md:flex-row gap-x-2 gap-y-0 font-serif overflow-hidden leading-[1.2] cursor-pointer"
+            className="z-40 fixed inset-0 h-screen h-[100dvh] flex justify-center items-center flex-col md:flex-row gap-x-2 gap-y-0 font-serif overflow-hidden leading-[1.2] cursor-pointer"
             // style={{
             //   background: "rgba(0,0,0,.7)",
             //   backdropFilter: "blur(7px)",
             // }}
           >
             <CanvasGradient />
-            {/* <div className=""> */}
-            {menuItems.map(({ href, w }, index) => (
-              <motion.a
-                variants={word}
-                key={`menu-${index}`}
-                initial="hidden"
-                animate="show"
-                exit="exit"
-                className="text-white text-4xl overflow-hidden leading-snug"
-                onClick={() => {
-                  setShowMenu(false);
-                  // const element = document.querySelector(href);
-                  // element.scrollIntoView({
-                  //   behavior: "smooth",
-                  // });
-                }}
-                href={href}
-              >
-                {w.split("").map((l, index) => {
-                  return (
-                    <motion.span
-                      variants={letter}
-                      key={index}
-                      className="inline-block"
-                    >
-                      {l}
-                    </motion.span>
-                  );
-                })}
-                {index < menuItems.length - 1 && (
-                  <motion.span
-                    className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
-                    variants={ampersand}
+            {menuItems.map(({ href, w }, index) => {
+              return href ? (
+                <motion.div
+                  variants={word}
+                  key={`menu-${index}`}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                  className="text-white text-4xl overflow-hidden leading-snug select-none"
+                  onClick={() => {
+                    setShowMenu(false);
+                  }}
+                >
+                  <Link href={href}>
+                    {w.split("").map((l, index) => {
+                      return (
+                        <motion.span
+                          variants={letter}
+                          key={index}
+                          className="inline-block"
+                        >
+                          {l}
+                        </motion.span>
+                      );
+                    })}
+                    {index < menuItems.length - 1 && (
+                      <motion.span
+                        className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
+                        variants={ampersand}
+                      >
+                        ,
+                      </motion.span>
+                    )}
+                  </Link>
+                </motion.div>
+              ) : (
+                <ContactPopup>
+                  <motion.button
+                    variants={word}
+                    key={`menu-${index}`}
+                    initial="hidden"
+                    animate="show"
+                    exit="exit"
+                    className="text-white text-4xl overflow-hidden leading-snug select-none"
                   >
-                    ,
-                  </motion.span>
-                )}
-              </motion.a>
-            ))}
+                    {w.split("").map((l, index) => {
+                      return (
+                        <motion.span
+                          variants={letter}
+                          key={index}
+                          className="inline-block"
+                        >
+                          {l}
+                        </motion.span>
+                      );
+                    })}
+                    {index < menuItems.length - 1 && (
+                      <motion.span
+                        className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
+                        variants={ampersand}
+                      >
+                        ,
+                      </motion.span>
+                    )}
+                  </motion.button>
+                </ContactPopup>
+              );
+            })}
             {/* </div> */}
           </motion.div>
         )}

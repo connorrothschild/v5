@@ -1,4 +1,5 @@
 import Archive from "@/components/Sections/Archive";
+import Footer from "@/components/Sections/Footer";
 import Head from "next/head";
 import React from "react";
 
@@ -18,6 +19,7 @@ export default function archive() {
       </Head>
 
       <Archive />
+      <Footer />
     </>
   );
 }
