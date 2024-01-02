@@ -4,10 +4,29 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack: (config) => {
-    config.externals = [...config.externals, { canvas: "canvas" }]; // required to make Konva & react-konva work
-    config.resolve.fallback = { fs: false, module: false, path: false };
-    return config;
+  async redirects() {
+    return [
+      {
+        source: "/award/:splat*",
+        destination: "https://connorrothschild.github.io/v4/award/:splat*",
+        permanent: true,
+      },
+      {
+        source: "/project/:splat*",
+        destination: "https://connorrothschild.github.io/v4/project/:splat*",
+        permanent: true,
+      },
+      {
+        source: "/post/:splat*",
+        destination: "https://connorrothschild.github.io/v4/post/:splat*",
+        permanent: true,
+      },
+      {
+        source: "/viz",
+        destination: "https://connorrothschild.github.io/v4/viz",
+        permanent: true,
+      },
+    ];
   },
 };
 

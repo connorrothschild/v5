@@ -20,7 +20,7 @@ export default function SectionTitle({
   return (
     <>
       <motion.h1
-        className={`hidden md:block absolute -top-24 leading-none text-[17vw] opacity-20 font-serif font-extralight text-gray-600 italic ${classes}`}
+        className={`select-none hidden md:block absolute -top-24 leading-none text-[17vw] opacity-20 font-serif font-extralight text-gray-600 italic ${classes}`}
         ref={ref}
         style={{ translateY, opacity }}
       >
