@@ -47,7 +47,8 @@ body.loaded #menu-bar {
   pointer-events: auto;
 }
 
-body[data-router-pathname="/"].hero-in-view #menu-bar {
+body[data-router-pathname="/"].hero-in-view #menu-bar,
+body[data-router-pathname="/404"] #menu-bar {
   opacity: 0;
   pointer-events: none;
 }
