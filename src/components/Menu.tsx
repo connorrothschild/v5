@@ -136,7 +136,7 @@ export default function Menu({}) {
             id="menu-bar"
             className={`opacity-0 duration-500 transition h-[60px] z-20 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
               // routeIsHome ? "bg-gray-100 mix-blend-difference" : "bg-gray-900"
-              "bg-gray-100 mix-blend-difference"
+              "bg-gray-100 mix-blend-difference backdrop-blur-sm"
             }`}
           />
         )
