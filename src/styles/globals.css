@@ -40,18 +40,33 @@ body {
   display: none;
 }
 
-/* Menu management */
-body.loaded #menu-button,
-body.loaded #menu-bar {
+/* Menu should be visible if the following conditions are met:
+  1. The page is loaded
+  2. The hero is not in view
+  3. The page is not 404
+ */
+body[data-router-pathname="/"].loaded:not(.hero-in-view) #menu-bar,
+body.loaded .menu-button {
   opacity: 1;
   pointer-events: auto;
 }
 
-body[data-router-pathname="/"].hero-in-view #menu-bar,
+/* For any other route */
+body:not([data-router-pathname="/"]) #menu-bar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 body[data-router-pathname="/404"] #menu-bar {
   opacity: 0;
   pointer-events: none;
 }
+
+/* body[data-router-pathname="/"].hero-in-view #menu-bar,
+body[data-router-pathname="/404"] #menu-bar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+} */
 
 @keyframes hue-rotate-animation {
   0% {

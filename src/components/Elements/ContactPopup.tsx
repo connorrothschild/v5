@@ -199,6 +199,7 @@ function ProfileForm({
           id="inquiry"
           value={formData.inquiry}
           onChange={handleChange}
+          className="leading-snug"
         />
       </div>
       <Button type="submit" disabled={isSubmitting}>

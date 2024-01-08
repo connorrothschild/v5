@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useRouter } from "next/router";
+import SectionTitle from "../Elements/SectionTitle";
 
 const projects = [
   {
@@ -409,7 +410,7 @@ export default function Archive() {
     <section className="w-full min-h-screen relative">
       <div className="relative flex flex-col items-start justify-start pt-48 pb-24 w-full min-h-screen text-black px-[20px]">
         <div className="max-w-7xl mx-auto w-full">
-          <h1 className="text-7xl font-serif font-extralight text-gray-700 mb-4">
+          <h1 className="text-7xl font-sans font-extralight text-gray-700 mb-2">
             Archive
           </h1>
           {/* <SectionTitle classes="relative top-0">Archive</SectionTitle> */}
@@ -524,7 +525,7 @@ function TableRow({
         {year}
       </p>
       <div
-        className={`hidden md:block w-12 text-right text-sm font-sans font-light text-gray-700`}
+        className={`hidden h-[18px] md:block w-12 text-right text-sm font-sans font-light text-gray-700`}
       >
         {featured && <HoverableDot />}
       </div>

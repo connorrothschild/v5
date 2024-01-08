@@ -58,7 +58,7 @@ export default function Hero() {
       This element will be representative of whether the page is fully scrolled to the top. */}
       <div ref={scrollRef} className="absolute top-0 left-0 w-full h-px" />
       <div
-        className="pointer-events-none relative md:sticky top-0 left-0 z-10"
+        className="pointer-events-none relative md:sticky top-0 left-0 z-10 max-md:rounded-b-[1rem] max-md:overflow-hidden"
         id="home"
         ref={heroRef}
       >
@@ -106,7 +106,7 @@ function Name({ hasLoaded }: { hasLoaded: boolean }) {
       <div className="">
         <motion.div
           layout="position"
-          className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light"
+          className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-normal"
         >
           C
           {["o", "n", "n", "o", "r"].map((letter, i) => (
@@ -136,7 +136,7 @@ function Name({ hasLoaded }: { hasLoaded: boolean }) {
       <div className="">
         <motion.div
           layout="position"
-          className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-light"
+          className="font-serif text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[6rem] leading-[.85] text-white font-normal"
         >
           R
           {["o", "t", "h", "s", "c", "h", "i", "l", "d"].map((letter, i) => (

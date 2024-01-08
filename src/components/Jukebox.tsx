@@ -307,7 +307,7 @@ export default function Jukebox({
                   playOrPause();
                 }
               }}
-              className="leading-none text-white text-2xl font-serif cursor-pointer absolute bottom-0 right-0 z-50 px-4 py-5"
+              className="leading-none text-white text-2xl font-sans cursor-pointer absolute bottom-0 right-0 z-50 px-4 py-5"
             >
               ♫
               {/* <svg

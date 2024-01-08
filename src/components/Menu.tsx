@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useMediaQuery } from "usehooks-ts";
 import { ContactPopup } from "./Elements/ContactPopup";
 import Link from "next/link";
+import Contact from "./Sections/Contact";
 
 const menuItems = [
   {
@@ -16,6 +17,10 @@ const menuItems = [
   {
     href: "/archive",
     w: "Projects",
+  },
+  {
+    href: "/about",
+    w: "About",
   },
   {
     // href: "",
@@ -129,16 +134,16 @@ export default function Menu({}) {
         routeIsHome && !isMobile ? null : (
           <div
             id="menu-bar"
-            className={`opacity-0 duration-500 transition h-[60px] z-[1] fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
+            className={`opacity-0 duration-500 transition h-[60px] z-20 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
               // routeIsHome ? "bg-gray-100 mix-blend-difference" : "bg-gray-900"
-              "bg-gray-900"
+              "bg-gray-100 mix-blend-difference"
             }`}
           />
         )
       ) : null}
       <p
-        id="menu-button"
-        className={`opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-300 delay-200 text-[--background]`}
+        // id="menu-button"
+        className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-300 delay-200 text-[--background]`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -147,6 +152,17 @@ export default function Menu({}) {
         }}
       >
         Menu
+      </p>
+      <p
+        // id="menu-button"
+        className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 right-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-300 delay-200 text-[--background]`}
+        style={{
+          transitionProperty: "opacity, transform",
+        }}
+      >
+        <ContactPopup>
+          <span>Work with me</span>
+        </ContactPopup>
       </p>
 
       {/* We want to render the Jukebox at all times so that it plays even when not visible. We only toggle visibility, not rendering. */}
@@ -161,7 +177,7 @@ export default function Menu({}) {
             animate="show"
             exit="exit"
             transition={{ duration: MENU_IN_DURATION, ease: easeInOutQuint }}
-            className="z-40 fixed inset-0 h-screen h-[100dvh] flex justify-center items-center flex-col md:flex-row gap-x-2 gap-y-0 font-serif overflow-hidden leading-[1.2] cursor-pointer"
+            className="z-40 fixed inset-0 h-screen h-[100dvh] flex justify-center items-center flex-col md:flex-row gap-x-2 gap-y-0 font-sans overflow-hidden leading-[1.2] cursor-pointer"
             // style={{
             //   background: "rgba(0,0,0,.7)",
             //   backdropFilter: "blur(7px)",
@@ -195,7 +211,7 @@ export default function Menu({}) {
                     })}
                     {index < menuItems.length - 1 && (
                       <motion.span
-                        className="text-gray-300 opacity-50 font-serif font-light text-4xl overflow-hidden"
+                        className="text-gray-300 opacity-50 font-sans font-light text-4xl overflow-hidden"
                         variants={ampersand}
                       >
                         ,

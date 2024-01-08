@@ -20,7 +20,7 @@ export default function Footer() {
 
   return (
     <motion.footer
-      className="bg-gray-900 h-[600px] relative group z-20 overflow-hidden mt-[-24px]"
+      className="bg-black h-[600px] relative group z-20 overflow-hidden mt-[-24px]"
       style={{
         borderTopLeftRadius: borderTopRadius,
         borderTopRightRadius: borderTopRadius,
@@ -41,21 +41,21 @@ export default function Footer() {
       <div className="p-8 md:p-10 flex flex-col md:flex-row justify-between w-full gap-12">
         <div className="flex w-full flex-col justify-start items-start relative z-10 gap-4">
           <p className="text-gray-400 font-sans font-light text-xl">
-            A designer and developer based in Houston, Texas, specializing in
-            application development and data visualization.
+            The portfolio of software & data visualization engineer, Connor
+            Rothschild.
           </p>
           <p className="text-gray-400 font-sans font-light text-xl">
             Connect on{" "}
             <a
               href="https://www.linkedin.com/in/connor-rothschild/"
-              className="text-gray-300 font-serif"
+              className="text-gray-300"
             >
               LinkedIn
             </a>{" "}
             or{" "}
             <a
               href="https://twitter.com/CL_Rothschild"
-              className="text-gray-300 font-serif"
+              className="text-gray-300"
             >
               Twitter
             </a>

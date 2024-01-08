@@ -1,10 +1,12 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import GridTitle from "@/components/Elements/GridTitle";
 import SectionSubtitle from "@/components/Elements/SectionSubtitle";
 import Dot from "@/components/Elements/Dot";
 import SectionTitle from "@/components/Elements/SectionTitle";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { easeInOutQuint } from "@/config/eases";
 
 export default function Work() {
   return (
@@ -66,12 +68,15 @@ function ProjectCard({
   url: string;
   image: string;
 }) {
+  const [hover, setHover] = useState(false);
   return (
     <a
       className="w-full flex flex-col items-start gap-2 md:gap-2.5 group-hover:grayscale hover:!grayscale-0 transition-filter duration-500"
       href={url}
       target="_blank"
       rel="noopener noreferrer"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <div className="w-full rounded-lg relative group/image">
         <Image
@@ -87,6 +92,22 @@ function ProjectCard({
             willChange: "opacity",
           }}
         />
+        <AnimatePresence>
+          {hover && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{
+                duration: 0.5,
+                ease: easeInOutQuint,
+              }}
+              className="flex flex-row items-center gap-1 absolute top-2 right-2 text-xs text-gray-700 bg-white px-3 py-1 rounded-lg"
+            >
+              Go to site <Dot />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <div className="flex flex-row items-center gap-2.5 flex-wrap">
         <h1 className="font-serif font-light text-xl leading-none text-gray-700">

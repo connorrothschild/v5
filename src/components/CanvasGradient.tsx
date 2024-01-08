@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 export default function CanvasGradient({
-  incrementValue = 0.05,
+  incrementValue = 0.04,
 }: {
   incrementValue?: number;
 }) {

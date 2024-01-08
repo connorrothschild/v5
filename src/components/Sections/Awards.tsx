@@ -277,9 +277,7 @@ const Card = ({
         </span>
       </h1>
       {/* </div> */}
-      <span className="pt-1 font-sans font-normal tracking-tight text-stone-500">
-        {year}
-      </span>
+      <span className="pt-1 font-sans font-normal text-stone-500">{year}</span>
     </div>
   );
 };

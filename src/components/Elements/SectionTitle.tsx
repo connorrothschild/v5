@@ -26,7 +26,7 @@ export default function SectionTitle({
       >
         {children}
       </motion.h1>
-      <h1 className="md:hidden block text-gray-700 text-xl font-serif italic font-extralight tracking-wide -mb-6">
+      <h1 className="md:hidden block text-gray-500 text-xl font-serif italic font-light tracking-wide -mb-9">
         {children}
       </h1>
     </>
