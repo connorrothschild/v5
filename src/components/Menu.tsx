@@ -134,7 +134,7 @@ export default function Menu({}) {
         routeIsHome && !isMobile ? null : (
           <div
             id="menu-bar"
-            className={`opacity-0 duration-500 transition h-[60px] z-20 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
+            className={`opacity-0 duration-500 transition h-[58px] z-20 fixed top-[20px] left-[20px] w-[calc(100vw-40px)] rounded-[10px] ${
               // routeIsHome ? "bg-gray-100 mix-blend-difference" : "bg-gray-900"
               "bg-gray-100 mix-blend-difference backdrop-blur-sm"
             }`}
@@ -143,7 +143,7 @@ export default function Menu({}) {
       ) : null}
       <p
         // id="menu-button"
-        className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-300 delay-200 text-[--background]`}
+        className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-sans duration-300 delay-200 text-[--background]`}
         onClick={() => {
           setShowMenu(!showMenu);
         }}
@@ -155,7 +155,7 @@ export default function Menu({}) {
       </p>
       <p
         // id="menu-button"
-        className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 right-6 p-4 cursor-pointer text-lg z-50 leading-none font-serif duration-300 delay-200 text-[--background]`}
+        className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 right-6 p-4 cursor-pointer text-lg z-50 leading-none font-sans duration-300 delay-200 text-[--background]`}
         style={{
           transitionProperty: "opacity, transform",
         }}

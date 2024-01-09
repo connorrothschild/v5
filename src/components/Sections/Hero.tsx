@@ -29,7 +29,7 @@ export default function Hero() {
 
   const defaultClipPath = "inset(0px 0px 0px 0px round 0)";
   const animatedClipPath = useMemo(
-    () => `inset(20px 20px ${height - 80}px 20px round 10px)`,
+    () => `inset(20px 20px ${height - 78}px 20px round 10px)`,
     [height]
   );
 
@@ -100,7 +100,7 @@ function Name({ hasLoaded }: { hasLoaded: boolean }) {
     <div
       className="select-none absolute top-0 left-0 z-1 h-full w-full flex flex-col md:flex-row text-center justify-center items-center mix-blend-hard-light"
       style={{
-        gap: hasLoaded ? ".75rem" : "0.25rem",
+        gap: hasLoaded ? "1rem" : "0.25rem",
       }}
     >
       <div className="">

@@ -62,9 +62,9 @@ export default function Footer() {
             .
           </p>
         </div>
-        <div className="flex  flex-col justify-start w-max md:w-full md:items-end relative z-10">
+        <div className="flex w-max min-w-[167px] flex-col justify-start md:items-end relative z-10">
           <ContactPopup>
-            <button className="cursor-pointer group/button relative text-white font-sans text-lg flex flex-row gap-1.5 items-center px-8 py-2 rounded-full">
+            <button className=" cursor-pointer group/button relative text-white font-sans text-lg flex flex-row gap-1.5 items-center px-8 py-2 rounded-full">
               <Dot classes="left-2 top-1/2 transform -translate-y-1/2 absolute z-[-1] group-hover/button:w-full group-hover/button:h-full group-hover/button:left-0 transition-all" />
               Work with me
               {/* <ArrowRightIcon className="text-inherit h-4 w-4" /> */}

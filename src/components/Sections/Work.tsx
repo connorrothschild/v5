@@ -75,15 +75,27 @@ function ProjectCard({
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => {
+        setHover(true);
+      }}
+      onTouchStart={() => {
+        setHover(true);
+      }}
+      onTouchEnd={() => {
+        setHover(false);
+      }}
+      onMouseLeave={() => {
+        setHover(false);
+      }}
     >
       <div className="w-full rounded-lg relative group/image">
         <Image
-          width={1000}
-          height={1000}
+          width={1400}
+          height={1400}
           src={image}
-          alt="Project image"
+          placeholder="blur"
+          blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
+          alt={`Project image for ${client}`}
           className="w-full aspect-square rounded-lg object-cover object-center"
         />
         <div
