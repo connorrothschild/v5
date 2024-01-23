@@ -23,7 +23,6 @@ export default function Home() {
         <meta name="twitter:creator" content="@CL_Rothschild" />
         <meta name="twitter:title" content={META_TITLE} />
         <meta name="twitter:description" content={META_DESCRIPTION} />
-
         <meta property="og:title" content={META_TITLE} />
         <meta property="og:description" content={META_DESCRIPTION} />
       </Head>
