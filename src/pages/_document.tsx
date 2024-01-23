@@ -9,7 +9,7 @@ export default function Document() {
           property="og:image"
           content="https://next-site-connorrothschild.vercel.app/social.png"
         />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@CL_Rothschild" />
         <meta name="twitter:creator" content="@CL_Rothschild" />
         <meta
