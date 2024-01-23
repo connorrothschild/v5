@@ -4,6 +4,7 @@ import { easeInOutQuint } from "@/config/eases";
 
 import CanvasGradient from "@/components/CanvasGradient";
 import { useMediaQuery } from "usehooks-ts";
+import VideoPlayer from "../VideoPlayer";
 
 const LOADING_TIME = 3.5;
 

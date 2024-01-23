@@ -5,6 +5,7 @@ import Contact from "@/components/Sections/Contact";
 import Head from "next/head";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Sections/Footer";
+import Showreel from "@/components/Sections/Showreel";
 
 const META_TITLE = "Connor Rothschild";
 const META_DESCRIPTION =
@@ -17,12 +18,19 @@ export default function Home() {
         <title>{META_TITLE}</title>
         <meta name="description" content={META_DESCRIPTION} />
 
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@CL_Rothschild" />
+        <meta name="twitter:creator" content="@CL_Rothschild" />
+        <meta name="twitter:title" content={META_TITLE} />
+        <meta name="twitter:description" content={META_DESCRIPTION} />
+
         <meta property="og:title" content={META_TITLE} />
         <meta property="og:description" content={META_DESCRIPTION} />
       </Head>
 
       <Loader>
         <Hero />
+        <Showreel />
         <Intro />
         <Work />
         <Contact />

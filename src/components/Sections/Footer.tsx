@@ -40,7 +40,12 @@ export default function Footer() {
       />
       <div className="p-8 md:p-10 flex flex-col md:flex-row justify-between w-full gap-12">
         <div className="flex w-full flex-col justify-start items-start relative z-10 gap-4">
-          <p className="text-gray-400 font-sans font-light text-xl">
+          <p
+            className="text-gray-400 font-sans font-light text-xl"
+            style={{
+              textWrap: "pretty",
+            }}
+          >
             The portfolio of software & data visualization engineer, Connor
             Rothschild.
           </p>

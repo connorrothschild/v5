@@ -40,9 +40,9 @@ const Word = ({ children, progress, range }) => {
   return (
     <span
       // className="relative mr-3 mt-3"
-      className={`relative text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.45rem] !leading-[1.135] ${
+      className={`relative text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.45rem] !leading-[1.1375] ${
         emphasized
-          ? "font-serif font-normal gradient-text mb-[.4%]"
+          ? "font-serif font-light gradient-text mb-[.4%]"
           : "text-gray-700 font-sans font-extralight"
       }`}
     >
