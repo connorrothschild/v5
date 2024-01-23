@@ -18,7 +18,7 @@ export default function Home() {
         <title>{META_TITLE}</title>
         <meta name="description" content={META_DESCRIPTION} />
 
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@CL_Rothschild" />
         <meta name="twitter:creator" content="@CL_Rothschild" />
         <meta name="twitter:title" content={META_TITLE} />
