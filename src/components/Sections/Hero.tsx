@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView, circInOut } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
 import CanvasGradient from "@/components/CanvasGradient";
 import { useMediaQuery } from "usehooks-ts";
-import VideoPlayer from "../VideoPlayer";
 
 const LOADING_TIME = 3.5;
 
@@ -63,25 +62,22 @@ export default function Hero() {
         id="home"
         ref={heroRef}
       >
-        <motion.div
-          // BOUNCY:
-          // transition={{ ease: [0.14, 1.26, 0.64, 1], duration: 0.6 }}
-          transition={{ ease: easeInOutQuint, duration: 0.7 }}
-          animate={{
+        <div
+          className="transform-gpu flex items-center justify-center transform-origin-center w-screen overflow-hidden h-screen"
+          style={{
+            willChange: "clip-path",
             clipPath:
               isInView || !hasLoaded || isMobile
                 ? defaultClipPath
                 : animatedClipPath,
-          }}
-          className="transform-gpu flex items-center justify-center transform-origin-center w-screen overflow-hidden h-screen"
-          style={{
-            willChange: "clip-path",
+            transitionProperty: "clip-path",
+            transitionDuration: "700ms",
+            transitionTimingFunction: `cubic-bezier(${easeInOutQuint.join(
+              ","
+            )})`,
           }}
         >
-          {/* Gradient spanning entire hero, from transparent to --background */}
-          {/* <div className="pointer-events-none absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[--background-invert] z-[49]" /> */}
           <CanvasGradient />
-
           <div className="hidden md:flex pl-12 leading-none font-light py-4 text-right absolute bottom-0 right-4 w-[calc(100%-12px)] text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-serif z-[49]">
             The portfolio of software & data visualization engineer, Connor
             Rothschild.
@@ -90,7 +86,7 @@ export default function Hero() {
             2024 Portfolio
           </div>
           <Name hasLoaded={hasLoaded} />
-        </motion.div>
+        </div>
       </div>
     </>
   );
