@@ -1,1 +1,1 @@
-[My personal site](www.connorrothschild.com)
+[My personal site](https://www.connorrothschild.com)
