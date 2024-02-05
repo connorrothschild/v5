@@ -1,8 +1,6 @@
 import sendgrid from "@sendgrid/mail";
 
-sendgrid.setApiKey(
-  "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"
-);
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: any, res: any) => {
