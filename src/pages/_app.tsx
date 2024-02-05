@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
-import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -200,8 +199,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <Toaster />
         <Menu />
         <Component {...pageProps} />
-        <Analytics />
       </main>
+      <Analytics />
     </>
   );
 }
