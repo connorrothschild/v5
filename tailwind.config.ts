@@ -22,14 +22,9 @@ const config: Config = {
         screen: ["100vh", "100dvh", "100svh"],
       },
       fontFamily: {
-        // serif: ["var(--font-tobias)"],
         serif: ["var(--font-nyght)"],
-        // serif: ["ivypresto-display"],
-        // serif: ["var(--font-montreal)"],
         // !! Sans is defined in app.tsx so that it can be used in global styles, including shadcn modals
-        // sans: ["var(--font-manrope)"],
-        // sans: ["var(--font-tasa-orbiter)"],
-        // sans: ["var(--font-suisse)"],
+        // sans: ["var(--font-montreal)"],
       },
       keyframes: {
         "accordion-down": {

@@ -14,9 +14,8 @@ export default function Showreel() {
 
   return (
     <motion.section
-      className="max-w-7xl px-[20px] mx-auto mt-24 md:-mt-36 mb-24 md:mb-36"
+      className="max-w-7xl px-[20px] mx-auto mt-24 md:-mt-36 mb-24 md:mb-64"
       ref={container}
-      // style={{ translateY }}
     >
       <VideoPlayer />
     </motion.section>

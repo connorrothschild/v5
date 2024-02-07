@@ -8,7 +8,7 @@ export default function Intro() {
   const container = useRef<HTMLDivElement>(null);
   return (
     <section
-      className="relative mt-24 md:mt-0 mb-48 px-[20px] overflow-visible"
+      className="relative mt-48 md:mt-0 mb-48 px-[20px] overflow-visible"
       ref={container}
     >
       <Gradient />

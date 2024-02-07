@@ -1,3 +1,4 @@
+import { easeInOutQuint } from "@/config/eases";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -42,10 +43,13 @@ export default function VideoPlayer() {
 
   return (
     <div
-      className="relative mx-auto my-8 rounded-[6px] overflow-hidden cursor-pointer border border-solid border-gray-300"
-      //   style={{
-      //     boxShadow: "0 0 20px rgba(0,0,0,.2)",
-      //   }}
+      className={`relative mx-auto my-8 rounded-[6px] overflow-hidden cursor-pointer border border-solid border-gray-300 ${
+        isPaused ? "scale-90 md:scale-75" : "scale-100"
+      }`}
+      style={{
+        transitionDuration: "800ms",
+        transitionTimingFunction: `cubic-bezier(${easeInOutQuint.join(",")})`,
+      }}
       onClick={togglePlayPause}
     >
       <div className="absolute top-4 right-4 z-[1]">
@@ -55,7 +59,12 @@ export default function VideoPlayer() {
           onPlayPause={togglePlayPause}
         />
       </div>
-      <video className="w-full " ref={videoRef} loop>
+      <video
+        className="w-full"
+        ref={videoRef}
+        loop
+        poster="/images/mockups/tech-downturn.jpg"
+      >
         <source src="/videos/showreel.mp4" />
       </video>
       <AnimatePresence>
@@ -66,8 +75,8 @@ export default function VideoPlayer() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <p className="text-white text-3xl md:text-5xl font-serif font-light tracking-wide">
-              Play Showreel
+            <p className="text-white text-3xl md:text-5xl font-sans font-light">
+              Play
             </p>
           </motion.div>
         )}
