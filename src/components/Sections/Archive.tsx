@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Dot from "@/components/Elements/Dot";
-
 import {
   Tooltip,
   TooltipContent,
@@ -8,9 +7,29 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useRouter } from "next/router";
-import SectionTitle from "../Elements/SectionTitle";
 
 const projects = [
+  {
+    title: "Riders in the Smog",
+    year: 2024,
+    url: "https://restofworld.org/2024/riders-in-the-smog-gig-workers-pollution/",
+    type: "Chart",
+    filterCategory: "visualization",
+  },
+  {
+    title: "Dressed to Express",
+    year: 2024,
+    url: "https://www.aclutx.org/en/publications/dressed-express-how-dress-codes-discriminate-against-texas-students-and-must-be-changed",
+    type: "Chart",
+    filterCategory: "visualization",
+  },
+  {
+    title: "Hinge Copilot",
+    year: 2024,
+    url: "https://www.dating-copilot.com/",
+    type: "App, web",
+    filterCategory: "web",
+  },
   {
     title: "Svelte Charts",
     year: 2023,
@@ -28,7 +47,6 @@ const projects = [
   {
     title: "Causative Labs",
     year: 2023,
-    // url: "https://minervadata.xyz/",
     type: "App",
     filterCategory: "web",
   },
