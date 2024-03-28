@@ -10,6 +10,27 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
+    title: "The Changing Face of Protest",
+    year: 2024,
+    url: "https://restofworld.org/2024/facial-recognition-government-protest-surveillance/",
+    type: "Chart",
+    filterCategory: "visualization",
+  },
+  {
+    title: "Praxis Portal",
+    year: 2024,
+    url: "https://portal.praxisnation.com/",
+    type: "App, web",
+    filterCategory: "web",
+  },
+  {
+    title: "Vana Portrait",
+    year: 2024,
+    url: "https://portrait.vana.com/",
+    type: "App, web",
+    filterCategory: "web",
+  },
+  {
     title: "Riders in the Smog",
     year: 2024,
     url: "https://restofworld.org/2024/riders-in-the-smog-gig-workers-pollution/",
