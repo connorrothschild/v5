@@ -10,6 +10,13 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
+    title: "LaDataViz Studio Site",
+    year: 2024,
+    url: "https://www.ladataviz.com/",
+    type: "Web",
+    filterCategory: "web",
+  },
+  {
     title: "The Changing Face of Protest",
     year: 2024,
     url: "https://restofworld.org/2024/facial-recognition-government-protest-surveillance/",
