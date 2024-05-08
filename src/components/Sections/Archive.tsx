@@ -10,7 +10,14 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
-    title: "LaDataViz Studio Site",
+    title: "Rainmaker",
+    year: 2024,
+    url: "https://www.makerain.com/",
+    type: "Web",
+    filterCategory: "web",
+  },
+  {
+    title: "LaDataViz Studio",
     year: 2024,
     url: "https://www.ladataviz.com/",
     type: "Web",
