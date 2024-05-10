@@ -13,7 +13,7 @@ export default function KaraokeText({
   });
   const words = phrase.split(" ");
   return (
-    <p className="self-center flex flex-wrap gap-x-[.65em] text-gray-600">
+    <p className="self-center flex flex-wrap gap-x-[.5em] md:gap-x-[.65em] text-gray-600">
       {words.map((word, i) => {
         const start = i / words.length;
         const end = start + 1 / words.length;
