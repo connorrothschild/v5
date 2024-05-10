@@ -8,16 +8,16 @@ export default function Intro() {
   const container = useRef<HTMLDivElement>(null);
   return (
     <section
-      className="relative mt-48 md:mt-0 mb-48 px-[20px] overflow-visible"
+      className="relative mt-48 md:mt-0 mb-48 px-[20px] overflow-visible h-[200vh]"
       ref={container}
     >
       <Gradient />
-      <div className="max-w-7xl w-full mx-auto">
+      <div className="max-w-7xl w-full mx-auto sticky top-0 h-screen flex flex-col justify-center items-center">
         <div className="flex flex-col justify-between gap-8">
           <div className="">
             <SplitTextHeader
               container={container}
-              phrase="I'm Connor, a software & data visualization engineer in Houston, TX. Clients call me when they want to make websites that are performant, beautiful, and durable."
+              phrase="I’m Connor, a software & data visualization engineer in Houston, TX. Clients call me when they want to make websites that are performant, beautiful, and durable."
             />
           </div>
           <ContactPopup>
@@ -38,7 +38,7 @@ function Gradient() {
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 800 800"
-      className="absolute top-full transform -translate-y-1/2 right-0 w-full z-[-1] opacity-30 pointer-events-none"
+      className="absolute h-screen top-1/2 right-0 z-[-1] opacity-30 pointer-events-none"
     >
       <defs>
         <filter

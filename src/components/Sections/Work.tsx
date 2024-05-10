@@ -8,6 +8,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeInOutQuint } from "@/config/eases";
 
+import rainmaker from "../../../public/images/mockups/rainmaker.jpg";
+import minerva from "../../../public/images/mockups/minerva.jpg";
+import restOfWorld from "../../../public/images/mockups/rest-of-world.jpg";
+
 export default function Work() {
   return (
     <section className="relative px-[20px] py-6 md:py-48" id="work">
@@ -24,22 +28,22 @@ export default function Work() {
             <GridTitle>Select projects</GridTitle>
             <div className="flex flex-col md:flex-row gap-4 md:gap-2 group">
               <ProjectCard
-                client="Minerva"
-                service="App, web development"
-                url="https://realtors.minervadata.xyz/"
-                image="/images/mockups/minerva.jpg"
+                client="Rainmaker"
+                service="Web development"
+                url="https://www.makerain.com/"
+                image={rainmaker}
               />
               <ProjectCard
                 client="Rest of World"
                 service="Data visualization"
                 url="https://restofworld.org/2022/blackouts/"
-                image="/images/mockups/rest-of-world.jpg"
+                image={restOfWorld}
               />
               <ProjectCard
-                client="Praxis"
-                service="Web development"
-                url="https://www.cityofpraxis.com/"
-                image="/images/mockups/praxis.jpg"
+                client="Minerva"
+                service="App, web development"
+                url="https://realtors.minervadata.xyz/"
+                image={minerva}
               />
             </div>
             <div className="w-full text-right">
@@ -66,7 +70,7 @@ function ProjectCard({
   client: string;
   service: string;
   url: string;
-  image: string;
+  image: any;
 }) {
   const [hover, setHover] = useState(false);
   return (
@@ -94,14 +98,15 @@ function ProjectCard({
           height={1400}
           src={image}
           placeholder="blur"
-          blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
+          // blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
           alt={`Project image for ${client}`}
           className="w-full aspect-square rounded-lg object-cover object-center"
         />
         <div
-          className="w-full h-full absolute top-0 left-0 bg-gradient-to-t from-[var(--background)] rounded-t-lg group-hover/image:opacity-0 transition-opacity duration-700"
+          className="w-full h-full absolute top-0 left-0 to-[60%] rounded-lg group-hover/image:opacity-0 transition-opacity duration-700"
           style={{
             willChange: "opacity",
+            boxShadow: "1px 2px 5px 2px rgba(0,0,0,.15) inset",
           }}
         />
         <AnimatePresence>

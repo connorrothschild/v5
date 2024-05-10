@@ -15,9 +15,10 @@ const projects = [
     url: "https://www.makerain.com/",
     type: "Web",
     filterCategory: "web",
+    featured: true,
   },
   {
-    title: "LaDataViz Studio",
+    title: "LaDataViz",
     year: 2024,
     url: "https://www.ladataviz.com/",
     type: "Web",
@@ -29,6 +30,7 @@ const projects = [
     url: "https://restofworld.org/2024/facial-recognition-government-protest-surveillance/",
     type: "Chart",
     filterCategory: "visualization",
+    featured: true,
   },
   {
     title: "Praxis Portal",

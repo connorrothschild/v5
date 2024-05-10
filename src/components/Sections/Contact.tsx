@@ -96,7 +96,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      {/* <Gradient /> */}
+      <Gradient />
     </section>
   );
 }
@@ -320,7 +320,7 @@ function Gradient() {
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       viewBox="0 0 800 800"
-      className="absolute bottom-0 left-0 h-full z-[-1] pointer-events-none"
+      className="absolute bottom-0 left-0 h-full z-[-1] pointer-events-none opacity-30"
     >
       <defs>
         <filter
