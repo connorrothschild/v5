@@ -11,15 +11,14 @@ export default function Intro() {
       className="relative mt-48 md:mt-0 mb-48 px-[20px] h-[200vh]"
       ref={container}
     >
-      <Gradient />
+      {/* <Gradient /> */}
+
       <div className="max-w-7xl w-full mx-auto sticky top-0 h-[100vh] flex flex-col justify-center items-center">
         <div className="flex flex-col justify-between gap-8">
-          <div className="">
-            <SplitTextHeader
-              container={container}
-              phrase="I’m Connor, a software & data visualization engineer in Houston, TX. Clients call me when they want to make websites that are performant, beautiful, and durable."
-            />
-          </div>
+          <SplitTextHeader
+            container={container}
+            phrase="I’m Connor, a software & data visualization engineer in Houston, TX. Clients call me when they want to make websites that are performant, beautiful, and durable."
+          />
           <ContactPopup>
             <div className="cursor-pointer text-gray-500 font-sans text-base flex flex-row items-center gap-1.5">
               Booking new projects for 2024
