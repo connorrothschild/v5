@@ -11,6 +11,7 @@ export default function KaraokeText({
   const { scrollYProgress } = useScroll({
     target: container,
   });
+
   const words = phrase.split(" ");
   return (
     <p className="self-center flex flex-wrap gap-x-[.5em] md:gap-x-[.65em] text-gray-600">

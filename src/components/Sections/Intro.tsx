@@ -7,12 +7,12 @@ import { ContactPopup } from "@/components/Elements/ContactPopup";
 export default function Intro() {
   const container = useRef<HTMLDivElement>(null);
   return (
-    <section className="relative mt-48 md:mt-0 mb-48 px-[20px] overflow-visible h-[200vh]">
+    <section
+      className="relative mt-48 md:mt-0 mb-48 px-[20px] h-[200vh]"
+      ref={container}
+    >
       <Gradient />
-      <div
-        className="max-w-7xl w-full mx-auto sticky top-0 h-[100vh] flex flex-col justify-center items-center"
-        ref={container}
-      >
+      <div className="max-w-7xl w-full mx-auto sticky top-0 h-[100vh] flex flex-col justify-center items-center">
         <div className="flex flex-col justify-between gap-8">
           <div className="">
             <SplitTextHeader
