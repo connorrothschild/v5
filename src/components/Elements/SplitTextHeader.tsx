@@ -2,16 +2,12 @@ import { useTransform, motion, MotionValue, useScroll } from "framer-motion";
 import React from "react";
 
 export default function KaraokeText({
-  container,
+  scrollYProgress,
   phrase,
 }: {
-  container: React.RefObject<HTMLDivElement>;
+  scrollYProgress: MotionValue<number>;
   phrase: string;
 }) {
-  const { scrollYProgress } = useScroll({
-    target: container,
-  });
-
   const words = phrase.split(" ");
   return (
     <p className="self-center flex flex-wrap gap-x-[.5em] md:gap-x-[.65em] text-gray-600">

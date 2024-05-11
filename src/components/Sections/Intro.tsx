@@ -3,20 +3,25 @@ import SplitTextHeader from "@/components/Elements/SplitTextHeader";
 
 import Dot from "@/components/Elements/Dot";
 import { ContactPopup } from "@/components/Elements/ContactPopup";
+import { useScroll } from "framer-motion";
 
 export default function Intro() {
   const container = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: container,
+  });
+
   return (
     <section
       className="relative mt-48 md:mt-0 mb-48 px-[20px] h-[200vh]"
       ref={container}
     >
-      {/* <Gradient /> */}
-
+      <Gradient />
       <div className="max-w-7xl w-full mx-auto sticky top-0 h-[100vh] flex flex-col justify-center items-center">
         <div className="flex flex-col justify-between gap-8">
           <SplitTextHeader
-            container={container}
+            scrollYProgress={scrollYProgress}
             phrase="I’m Connor, a software & data visualization engineer in Houston, TX. Clients call me when they want to make websites that are performant, beautiful, and durable."
           />
           <ContactPopup>
