@@ -10,6 +10,14 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
+    title: "Inside the BJP’s WhatsApp machine",
+    year: 2024,
+    url: "https://restofworld.org/2024/bjp-whatsapp-modi/",
+    type: "Chart",
+    filterCategory: "visualization",
+    featured: false,
+  },
+  {
     title: "Rainmaker",
     year: 2024,
     url: "https://www.makerain.com/",
