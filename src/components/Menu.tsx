@@ -144,7 +144,7 @@ export default function Menu({}) {
       <p
         // id="menu-button"
         className={`menu-button opacity-0 select-none pointer-events-none fixed top-6 left-6 p-4 cursor-pointer text-lg z-50 leading-none font-sans duration-300 delay-200 text-[--background]`}
-        onClick={() => {
+        onMouseDown={() => {
           setShowMenu(!showMenu);
         }}
         style={{
@@ -193,7 +193,7 @@ export default function Menu({}) {
                   animate="show"
                   exit="exit"
                   className="text-white text-4xl overflow-hidden leading-snug select-none"
-                  onClick={() => {
+                  onMouseDown={() => {
                     setShowMenu(false);
                   }}
                 >

@@ -255,7 +255,7 @@ export default function Jukebox({
                 transition: "opacity 250ms ease",
               }}
             >
-              <div className="flex flex-col gap-1" onClick={playOrPause}>
+              <div className="flex flex-col gap-1" onMouseDown={playOrPause}>
                 <p className="leading-none text-gray-300 text-2xl font-serif font-semibold cursor-pointer">
                   {currentVideoTitle}
                 </p>
@@ -267,7 +267,7 @@ export default function Jukebox({
               <div className="h-10 flex flex-col justify-center">
                 <span
                   className="text-gray-200 leading-none font-light cursor-pointer h-5"
-                  onClick={() => {
+                  onMouseDown={() => {
                     previousVideo();
                   }}
                 >
@@ -275,7 +275,7 @@ export default function Jukebox({
                 </span>
                 <span
                   className="text-gray-200 leading-none font-light cursor-pointer h-5"
-                  onClick={() => {
+                  onMouseDown={() => {
                     nextVideo();
                   }}
                 >
@@ -300,7 +300,7 @@ export default function Jukebox({
               animate={{ opacity: 1, y: 0, transition: { delay: 0.25 } }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ ease: easeInOutQuint }}
-              onClick={() => {
+              onMouseDown={() => {
                 if (!currentVideo) {
                   setCurrentVideo(options[0].id);
                 } else {

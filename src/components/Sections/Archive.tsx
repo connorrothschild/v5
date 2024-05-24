@@ -484,7 +484,7 @@ export default function Archive() {
             {CATEGORIES.map((filter) => (
               <p
                 key={filter.slug}
-                onClick={() => {
+                onMouseDown={() => {
                   if (selectedFilter === filter.slug) {
                     setSelectedFilter("");
                     router.replace({

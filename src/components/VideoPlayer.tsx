@@ -50,7 +50,7 @@ export default function VideoPlayer() {
         transitionDuration: "800ms",
         transitionTimingFunction: `cubic-bezier(${easeInOutQuint.join(",")})`,
       }}
-      onClick={togglePlayPause}
+      onMouseDown={togglePlayPause}
     >
       <div className="absolute top-4 right-4 z-[1]">
         <VideoPlayerControls
@@ -131,7 +131,7 @@ const VideoPlayerControls: React.FC<VideoPlayerControlsProps> = ({
       <div className="absolute">
         <button
           className="group cursor-pointer flex justify-center items-center"
-          //   onClick={onPlayPause}
+          //   onMouseDown={onPlayPause}
         >
           {/* <div className="fill-white">
             {isPaused ? <PlayIcon /> : <PauseIcon />}
