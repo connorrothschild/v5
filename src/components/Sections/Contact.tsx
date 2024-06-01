@@ -23,7 +23,7 @@ export default function Contact() {
 
   return (
     <section
-      className="relative px-[20px] py-6 md:py-48 overflow-y-visible overflow-x-hidden"
+      className="relative px-[20px] py-6 md:py-48 overflow-y-visible"
       id="contact"
     >
       <div className="gap-12 mx-auto max-w-7xl">
