@@ -294,13 +294,12 @@ function BottomButton() {
             toneMapped={false}
           />
 
-          {/* FIXME: Because Drei rerenders the Link in the HTML tag, it does not carry out the exact same router behavior as the native Link. 
-          Page transitions will not work */}
+          {/* FIXME: Click targets are not exact... */}
           <Html center>
             <Link
               scroll={false}
               href="/projects"
-              className="cursor-pointer text-lg ml-auto flex items-center gap-3 w-max text-white rounded-full transition-all px-[16vw] py-[38px]"
+              className="cursor-pointer text-lg ml-auto flex items-center gap-3 w-max text-white rounded-full transition-all px-[12vw] md:px-[16vw] lg:px-[18vw] py-[24px]"
               onPointerOver={() => setHovered(true)}
               onPointerOut={() => setHovered(false)}
             >
