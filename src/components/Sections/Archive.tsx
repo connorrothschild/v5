@@ -10,6 +10,14 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
+    title: "Midjourney Magazine",
+    year: 2024,
+    url: "https://mag.midjourney.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+  },
+  {
     title: "Inside the BJP’s WhatsApp machine",
     year: 2024,
     url: "https://restofworld.org/2024/bjp-whatsapp-modi/",
@@ -259,7 +267,7 @@ const projects = [
   {
     title: "Texas School District COVID-19 Monitoring Dashboard",
     year: 2021,
-    url: "https://news.rice.edu/2021/05/05/dashboard-developed-at-rice-will-help-texas-schools-open-safely-amid-pandemic/",
+    url: "https://news.rice.edu/news/2021/dashboard-developed-rice-will-help-texas-schools-open-safely-amid-pandemic",
     type: "Story",
     filterCategory: "visualization",
   },
