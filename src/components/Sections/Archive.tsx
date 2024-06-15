@@ -259,7 +259,7 @@ const projects = [
   {
     title: "Texas School District COVID-19 Monitoring Dashboard",
     year: 2021,
-    url: "https://news.rice.edu/2021/05/05/dashboard-developed-at-rice-will-help-texas-schools-open-safely-amid-pandemic/",
+    url: "https://news.rice.edu/news/2021/dashboard-developed-rice-will-help-texas-schools-open-safely-amid-pandemic",
     type: "Story",
     filterCategory: "visualization",
   },

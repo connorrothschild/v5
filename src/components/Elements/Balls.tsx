@@ -114,7 +114,7 @@ export function Ball({ i, which, size, isTouchDevice, ...props }) {
   const api = useRef();
   const handleClick = () => {
     if (!api.current) return;
-    api.current.applyImpulse({ x: 0, y: Math.sqrt(size * 10), z: 0 }, true);
+    api.current.applyImpulse({ x: 0, y: size * 5, z: 0 }, true);
     api.current.applyTorqueImpulse(
       {
         x: Math.random() / 2,
