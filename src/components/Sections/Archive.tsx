@@ -10,6 +10,14 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
+    title: "Midjourney Magazine",
+    year: 2024,
+    url: "https://mag.midjourney.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+  },
+  {
     title: "Inside the BJP’s WhatsApp machine",
     year: 2024,
     url: "https://restofworld.org/2024/bjp-whatsapp-modi/",
