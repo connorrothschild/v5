@@ -1,15 +1,19 @@
 import { useRef, useMemo } from "react";
-import * as THREE from "three";
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import { useHelper, Image, useTexture } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useHelper, useTexture } from "@react-three/drei";
 import CustomShaderMaterial from "three-custom-shader-material";
-import { TextureLoader } from "three/src/loaders/TextureLoader";
 import vertexShader from "!!raw-loader!./shaders/vertex.glsl";
 import fragmentShader from "!!raw-loader!./shaders/fragment.glsl";
+import {
+  PointLightHelper,
+  Vector2,
+  MathUtils,
+  MeshStandardMaterial,
+} from "three";
 
 function Lights() {
   const pointLightRef = useRef();
-  useHelper(pointLightRef, THREE.PointLightHelper, 0.7, "cyan");
+  useHelper(pointLightRef, PointLightHelper, 0.7, "cyan");
   return (
     <pointLight
       ref={pointLightRef}
@@ -22,7 +26,7 @@ function Lights() {
   );
 }
 
-function Scene({ image }) {
+function Scene({ image }: { image: any }) {
   const { viewport } = useThree();
   const { width, height } = viewport;
 
@@ -33,7 +37,7 @@ function Scene({ image }) {
   const uniforms = useMemo(
     () => ({
       uTexture: { value: texture },
-      uMouse: { value: new THREE.Vector2(0, 0) },
+      uMouse: { value: new Vector2(0, 0) },
     }),
     [texture]
   );
@@ -42,12 +46,12 @@ function Scene({ image }) {
 
   useFrame((state) => {
     const { mouse } = state;
-    mouseLerped.current.x = THREE.MathUtils.lerp(
+    mouseLerped.current.x = MathUtils.lerp(
       mouseLerped.current.x,
       mouse.x,
       0.015
     );
-    mouseLerped.current.y = THREE.MathUtils.lerp(
+    mouseLerped.current.y = MathUtils.lerp(
       mouseLerped.current.y,
       mouse.y,
       0.015
@@ -69,7 +73,7 @@ function Scene({ image }) {
       />
       <CustomShaderMaterial
         ref={materialRef}
-        baseMaterial={THREE.MeshStandardMaterial}
+        baseMaterial={MeshStandardMaterial}
         vertexShader={vertexShader}
         fragmentShader={fragmentShader}
         uniforms={uniforms}

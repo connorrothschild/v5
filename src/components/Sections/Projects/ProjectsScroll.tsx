@@ -1,25 +1,16 @@
 import { Canvas } from "@react-three/fiber";
-// import { Leva } from "leva";
-// import Scene from "./Scene";
-import { Suspense, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRef } from "react";
-import {
-  useScroll,
-  motion,
-  useTransform,
-  useInView,
-  AnimatePresence,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import Dot from "../Elements/Dot";
-import Archive from "./Archive";
-import Footer from "./Footer";
-import { ContactPopup } from "../Elements/ContactPopup";
-import Header from "./Header";
-import { Html, Loader, useProgress } from "@react-three/drei";
+import Dot from "@/components/Elements/Dot";
+import Archive from "@/components/Sections/Archive";
+import Footer from "@/components/Sections/Footer";
+import Header from "@/components/Sections/Header";
+import { useProgress } from "@react-three/drei";
 
 import { lazy } from "react";
-import FullscreenLoader from "../FullscreenLoader";
+import FullscreenLoader from "../../FullscreenLoader";
 const Scene = lazy(() => import("./Scene"));
 
 export default function ProjectsScroll() {
@@ -73,7 +64,19 @@ export default function ProjectsScroll() {
   );
 }
 
-function Project({ title, description, image, url, index }) {
+function Project({
+  title,
+  description,
+  image,
+  url,
+  index,
+}: {
+  title: string;
+  description: string;
+  image: any;
+  url: string;
+  index: number;
+}) {
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {
     setHasMounted(true);

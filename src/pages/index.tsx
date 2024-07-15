@@ -6,7 +6,7 @@ import Head from "next/head";
 import Loader from "@/components/Loader";
 import Footer from "@/components/Sections/Footer";
 import Showreel from "@/components/Sections/Showreel";
-import ProjectsScroll from "@/components/Sections/ProjectsScroll";
+import ProjectsScroll from "@/components/Sections/Projects/ProjectsScroll";
 import Menu from "@/components/Menu";
 import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 

@@ -1,5 +1,5 @@
 import PageTransitionWrapper from "@/components/PageTransitionWrapper";
-import ProjectsScroll from "@/components/Sections/ProjectsScroll";
+import ProjectsScroll from "@/components/Sections/Projects/ProjectsScroll";
 import React from "react";
 
 export default function projects() {

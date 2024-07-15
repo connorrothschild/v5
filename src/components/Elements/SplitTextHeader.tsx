@@ -117,7 +117,7 @@ const Word = ({
 
   return (
     <span
-      className={`relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3.8rem] tracking-[-0.005em] leading-[1.1] md:!leading-[1.05] ${
+      className={`relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3.8rem] tracking-[-0.015em] leading-[1.1] md:!leading-[1.05] ${
         hoveredOnce
           ? tooltipWords.includes(children)
             ? "text-gray-800 font-bold"

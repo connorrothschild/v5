@@ -10,7 +10,7 @@ export default function Intro() {
   return (
     <>
       <Header />
-      <section className="sticky top-0 px-[20px] overflow-x-clip">
+      <section className="sticky px-[20px] overflow-x-clip">
         <Image
           // https://x.com/ciguleva/status/1787339128700301588
           src="/tmp/shadows.png"
@@ -24,7 +24,7 @@ export default function Intro() {
         src="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
         className="absolute top-0 left-0 w-full h-full object-cover"
       /> */}
-        <div className="fixed top-0 left-0 w-full h-full">
+        <div className="absolute top-0 left-0 w-full h-full">
           <Balls showEmoji={showEmoji} />
         </div>
         {/* <Gradient /> */}
@@ -40,7 +40,7 @@ export default function Intro() {
           >
             <SplitTextHeader
               // scrollYProgress={scrollYProgress}
-              phrase="👋 I’m Connor, a software & data visualization engineer in Texas. Clients call me when they want to make websites that are performant, beautiful, and fun."
+              phrase="👋 I’m Connor, an engineer in Texas. I make websites that are performant, beautiful, and fun."
               setShowEmoji={setShowEmoji}
             />
           </div>
