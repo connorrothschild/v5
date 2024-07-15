@@ -10,6 +10,15 @@ import { useRouter } from "next/router";
 
 const projects = [
   {
+    title:
+      "From Relationships to Revenue: the LinkedIn Sales Navigator Advantage",
+    year: 2024,
+    url: "https://linkedin.github.io/linkedin-sales-navigator-roi-calculator/",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+  },
+  {
     title: "Midjourney Magazine",
     year: 2024,
     url: "https://mag.midjourney.com/",
@@ -113,7 +122,7 @@ const projects = [
   {
     title: "Minerva",
     year: 2023,
-    url: "https://minervadata.xyz/",
+    url: "https://realtors.minervadata.xyz/",
     type: "App",
     filterCategory: "web",
     featured: true,
