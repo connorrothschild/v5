@@ -10,15 +10,17 @@ import Image from "next/image";
 import React, { Suspense, useEffect, useState } from "react";
 import VideoPlayer from "../VideoPlayer";
 
-export default function KaraokeText({
+export default function SplitTextHeader({
   phrase,
-  setShowEmoji,
+  setTriggerBounce,
 }: {
   phrase: string;
-  setShowEmoji: (showEmoji: boolean) => void;
+  setTriggerBounce: (triggerBounce: number) => void;
 }) {
   const words = phrase.split(" ");
   const [numberOfHoveredWords, setNumberOfHoveredWords] = useState(0);
+
+  const [tooltip, setTooltip] = useState<string | null>(null);
 
   // On mobile, we want everything to be visible, don't want to force the user to click on every word lol
   const [isMobile, setIsMobile] = useState(false);
@@ -36,6 +38,21 @@ export default function KaraokeText({
 
   return (
     <>
+      {/* <AnimatePresence>
+        {tooltip && (
+          <motion.div
+            className="pointer-events-none absolute top-0 left-0 w-full h-full bg-black/50 z-50 flex justify-center items-center"
+            // onMouseDown={() => {
+            //   setTooltip(null);
+            // }}
+
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          />
+        )}
+      </AnimatePresence> */}
       <p className="self-center flex flex-wrap gap-x-[.4em] md:gap-x-[.65em] text-gray-600 select-none">
         {words.map((word, i) => {
           const start = i / words.length;
@@ -44,8 +61,10 @@ export default function KaraokeText({
             <Word
               key={i}
               setNumberOfHoveredWords={setNumberOfHoveredWords}
-              setShowEmoji={setShowEmoji}
               isMobile={isMobile}
+              tooltip={tooltip}
+              setTooltip={setTooltip}
+              setTriggerBounce={setTriggerBounce}
             >
               {word}
             </Word>
@@ -88,13 +107,17 @@ const tooltipWordToComponentMap = {
 const Word = ({
   children,
   setNumberOfHoveredWords,
-  setShowEmoji,
   isMobile,
+  tooltip,
+  setTooltip,
+  setTriggerBounce,
 }: {
   children: string;
   setNumberOfHoveredWords: React.Dispatch<React.SetStateAction<number>>;
-  setShowEmoji: React.Dispatch<React.SetStateAction<boolean>>;
   isMobile: boolean;
+  tooltip: string | null;
+  setTooltip: React.Dispatch<React.SetStateAction<string | null>>;
+  setTriggerBounce: (triggerBounce: number) => void;
 }) => {
   const [hoveredOnce, setHoveredOnce] = useState(false);
   // If screen becomes mobile, set hoveredOnce to true
@@ -104,7 +127,6 @@ const Word = ({
     }
   }, [isMobile]);
 
-  const [tooltip, setTooltip] = useState(false);
   const [tooltipOffsetDirection, setTooltipOffsetDirection] = useState<
     "left" | "right"
   >("left");
@@ -117,13 +139,17 @@ const Word = ({
 
   return (
     <span
-      className={`relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3.8rem] tracking-[-0.015em] leading-[1.1] md:!leading-[1.05] ${
+      className={`font-light relative transition-opacity duration-300 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[3.8rem] tracking-[-0.03em] leading-[1.1] md:!leading-[1.05] 
+        ${
+          // FIXME: opacity 0, or something like opacity 25%?
+          tooltip && tooltip !== children ? "opacity-0" : ""
+        } ${
         hoveredOnce
           ? tooltipWords.includes(children)
-            ? "text-gray-800 font-bold"
+            ? "text-gray-800 font-normal"
             : "mix-blend-plus-lighter pointer-events-none text-gray-600"
           : tooltipWords.includes(children)
-          ? "font-bold mix-blend-plus-lighter"
+          ? "font-normal mix-blend-plus-lighter"
           : "mix-blend-plus-lighter"
       }`}
       // style={{
@@ -133,9 +159,9 @@ const Word = ({
       // }}
       onMouseEnter={(event) => {
         if (hoveredOnce) {
-          setTooltip(true);
+          setTooltip(children);
           if (children === "Texas.") {
-            setShowEmoji(true);
+            setTriggerBounce((prev: number) => prev + 1);
           }
           const elementLeft = event.currentTarget.getBoundingClientRect().left;
           const screenWidth = window.innerWidth;
@@ -150,19 +176,22 @@ const Word = ({
         setHoveredOnce(true);
       }}
       onMouseLeave={() => {
-        setTooltip(false);
+        setTooltip(null);
       }}
     >
       <AnimatePresence>
-        {tooltip && tooltipWords.includes(children) && (
+        {tooltip === children && tooltipWords.includes(children) && (
           <motion.span
             initial={{ opacity: 0, y: 0, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 0, scale: 0.95 }}
             transition={{ ease: easeInOutQuint, duration: 0.4 }}
-            className={`z-50 pointer-events-none absolute top-full overflow-hidden transform -translate-x-full mix-blend-normal ${
+            className={`mt-2 z-50 pointer-events-none absolute top-full rounded overflow-hidden transform -translate-x-full mix-blend-normal ${
               tooltipOffsetDirection === "left" ? "left-0" : "right-0"
             }`}
+            style={{
+              boxShadow: "0 0 30px rgba(0,0,0,.75)",
+            }}
           >
             {tooltipWordToComponentMap[children]}
           </motion.span>
@@ -170,7 +199,12 @@ const Word = ({
       </AnimatePresence>
       <motion.span
         style={{
-          filter: hoveredOnce ? "blur(0px)" : "blur(8px)",
+          filter: hoveredOnce
+            ? "blur(0px)"
+            : // ? tooltip && tooltip !== children
+              //   ? "blur(2px)"
+              //   : "blur(0px)"
+              "blur(8px)",
         }}
         className={"transition-all duration-300"}
       >
@@ -188,14 +222,14 @@ function ImageOfMe() {
       alt="Connor Rothschild"
       width={400}
       height={400}
-      className="mt-1 min-w-[min(400px,_50vw)] min-h-[min(400px,_50vw)] rounded-xl"
+      className="min-w-[min(400px,_50vw)] min-h-[min(400px,_50vw)]"
     />
   );
 }
 
 function Video() {
   return (
-    <span className="block mt-1 min-w-[min(400px,_50vw)] rounded-lg overflow-hidden">
+    <span className="block min-w-[min(400px,_50vw)]">
       <VideoPlayer muted />
     </span>
   );

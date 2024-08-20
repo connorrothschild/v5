@@ -58,8 +58,6 @@ export default function ProjectsScroll() {
           index={4}
         />
       </div>
-      <Archive />
-      <Footer />
     </>
   );
 }

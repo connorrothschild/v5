@@ -15,7 +15,7 @@ export default function About() {
     <section className="w-full min-h-screen relative">
       <div className="z-10 relative flex flex-col items-start justify-start pt-48 pb-24 w-full min-h-screen text-black px-[20px]">
         <div className="max-w-7xl mx-auto w-full">
-          <h1 className="text-7xl font-sans font-extralight text-gray-700 mb-2">
+          <h1 className="text-7xl font-sans font-extralight text-gray-700 mb-2 tracking-[-0.02em]">
             About
           </h1>
           {/* <SectionTitle classes="relative">About</SectionTitle> */}

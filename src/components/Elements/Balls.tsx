@@ -1,27 +1,24 @@
-import {
-  CoefficientCombineRule,
-  ConvexHullCollider,
-  RoundCuboidCollider,
-} from "@react-three/rapier";
+import { RoundCuboidCollider } from "@react-three/rapier";
 import { useWindowSize } from "usehooks-ts";
-import { useRef, useMemo, memo, useState, useEffect, forwardRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import {
+  useRef,
+  useMemo,
+  memo,
+  useState,
+  useEffect,
+  forwardRef,
+  useCallback,
+} from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import {
   Environment,
   Html as HtmlImpl,
   Lightformer,
   RoundedBox,
   useGLTF,
-  useProgress,
 } from "@react-three/drei";
-import {
-  Physics,
-  RigidBody,
-  BallCollider,
-  CuboidCollider,
-} from "@react-three/rapier";
+import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
 import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
-import { MathUtils, Vector3 } from "three";
 import Link from "next/link";
 import Dot from "./Dot";
 
@@ -31,7 +28,7 @@ function Balls(props: any) {
   const isTouchDevice = useIsTouchDevice();
 
   const emoji = useMemo(() => {
-    if (props.showEmoji) {
+    if (props.triggerBounce > 0) {
       return (
         <Smiley
           key="emoji"
@@ -41,10 +38,11 @@ function Balls(props: any) {
           // position={[0,0,0]}
           size={0.25}
           isTouchDevice={isTouchDevice}
+          triggerBounce={props.triggerBounce}
         />
       );
     }
-  }, [props.showEmoji, isTouchDevice]);
+  }, [isTouchDevice, props.triggerBounce]);
 
   const balls = useMemo(
     () =>
@@ -159,21 +157,35 @@ export function Ball({ i, which, size, isTouchDevice, ...props }) {
 
 useGLTF.preload("/cowboy.glb");
 
-function Smiley({ i, which, size, isTouchDevice, ...props }) {
+function Smiley({ i, which, size, isTouchDevice, triggerBounce, ...props }) {
   const api = useRef();
-  const handleClick = () => {
-    if (!api.current) return;
-    api.current.applyImpulse({ x: 0, y: Math.random() * 15, z: 0 }, true);
-    // api.current.applyTorqueImpulse(
-    //   {
-    //     x: Math.random() * 10,
-    //     y: Math.random() * 10,
-    //     z: 0,
-    //     // z: Math.random() * 10,
-    //   },
-    //   true
-    // );
+
+  const clamp = (value: number, min: number, max: number) => {
+    return Math.min(Math.max(value, min), max);
   };
+  const handleClick = useCallback(() => {
+    if (!api.current) return;
+    api.current.applyImpulse(
+      { x: 0, y: clamp(Math.random() * 15, 5, 15), z: 0 },
+      true
+    );
+  }, []);
+
+  useEffect(() => {
+    if (triggerBounce > 1) {
+      if (!api.current) return;
+      console.log("applying impulse");
+      api.current.applyTorqueImpulse(
+        {
+          // x: Math.PI / 2,
+          x: 0,
+          y: Math.PI * 2,
+          z: 0,
+        },
+        true
+      );
+    }
+  }, [triggerBounce]);
 
   const { nodes, materials } = useGLTF("/cowboy.glb");
 
@@ -183,7 +195,7 @@ function Smiley({ i, which, size, isTouchDevice, ...props }) {
       colliders={"hull"}
       // enabledTranslations={[true, true, false]}
       enabledTranslations={[true, true, false]}
-      enabledRotations={[false, false, false]} // If any are true, the emoji will appear in front of the balls.
+      enabledRotations={[false, true, false]} // If any are true, the emoji will appear in front of the balls.
       ref={api}
       // position={[0, 0, 1]}
       linearDamping={1}
@@ -191,7 +203,7 @@ function Smiley({ i, which, size, isTouchDevice, ...props }) {
       restitution={1}
       // scale={[size, size, size]}
       rotation={[-Math.PI / 2, 0, 0]}
-      {...props}
+      // {...props}
     >
       {/* <BallCollider args={[size]} /> */}
       {/* {vertices.length > 0 && <ConvexHullCollider vertices={vertices} />} */}

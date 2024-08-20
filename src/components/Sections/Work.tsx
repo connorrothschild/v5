@@ -130,7 +130,7 @@ function ProjectCard({
         <h1 className="font-serif font-light text-xl leading-none text-gray-700">
           {client}
         </h1>
-        <h2 className="font-sans font-normal w-max mt-px bg-gray-50 group-hover:bg-gray-50 border border-gray-400 group-hover/image:border-gray-800 px-3 py-1 text-gray-500 text-xs rounded-full">
+        <h2 className="font-sans font-light w-max mt-px bg-gray-50 group-hover:bg-gray-50 border border-gray-400 group-hover/image:border-gray-800 px-3 py-1 text-gray-500 text-xs rounded-full">
           {service}
         </h2>
       </div>

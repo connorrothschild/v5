@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  /* --background: #f3f4f6; */
-  --background: #f0efef;
+  --background: #ffffff;
+  /* --background: #f0efef; */
   --background-invert: #131517;
 }
 
@@ -94,6 +94,7 @@ body[data-router-pathname="/404"] #menu-bar {
   .animate-gradient {
     animation: hue-rotate-animation 12s infinite 500ms;
     -webkit-animation: hue-rotate-animation 12s infinite 500ms;
+    animation-duration: 12s !important;
   }
   .paused {
     animation-play-state: paused;

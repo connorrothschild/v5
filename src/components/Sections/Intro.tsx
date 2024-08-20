@@ -5,19 +5,17 @@ import Balls from "../Elements/Balls";
 import Header from "./Header";
 
 export default function Intro() {
-  const [showEmoji, setShowEmoji] = useState(false);
+  const [triggerBounce, setTriggerBounce] = useState(0);
 
   return (
     <>
-      <Header />
       <section className="sticky px-[20px] overflow-x-clip">
         <Image
-          // https://x.com/ciguleva/status/1787339128700301588
           src="/tmp/shadows.png"
           alt=""
           width={1000}
           height={1000}
-          className="fixed top-0 left-0 w-full h-full object-cover opacity-40 pointer-events-none"
+          className="fixed top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
           draggable={false}
         />
         {/* <iframe
@@ -25,7 +23,7 @@ export default function Intro() {
         className="absolute top-0 left-0 w-full h-full object-cover"
       /> */}
         <div className="absolute top-0 left-0 w-full h-full">
-          <Balls showEmoji={showEmoji} />
+          <Balls triggerBounce={triggerBounce} />
         </div>
         {/* <Gradient /> */}
         <div className="hero max-w-4xl w-full mx-auto top-0 h-screen flex flex-col justify-center items-center">
@@ -39,9 +37,8 @@ export default function Intro() {
             // }}
           >
             <SplitTextHeader
-              // scrollYProgress={scrollYProgress}
               phrase="👋 I’m Connor, an engineer in Texas. I make websites that are performant, beautiful, and fun."
-              setShowEmoji={setShowEmoji}
+              setTriggerBounce={setTriggerBounce}
             />
           </div>
         </div>

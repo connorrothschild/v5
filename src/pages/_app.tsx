@@ -98,13 +98,23 @@ const nyghtSerif = localFont({
 const montreal = localFont({
   src: [
     {
-      path: "./fonts/montreal/PPNeueMontreal-Book.woff2",
+      path: "./fonts/montreal/PPNeueMontreal-Book.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/montreal/PPNeueMontreal-Regular.otf",
       weight: "400",
       style: "normal",
     },
     {
       path: "./fonts/montreal/PPNeueMontreal-Medium.otf",
-      weight: "700",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/montreal/PPNeueMontreal-Bold.otf",
+      weight: "600",
       style: "normal",
     },
   ],
@@ -118,6 +128,7 @@ import { useEffect, useRef, useState } from "react";
 import { Toaster } from "sonner";
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
+import Header from "@/components/Sections/Header";
 
 // Add a global variable to track if the app has mounted
 let isAppMounted = false;
@@ -208,6 +219,7 @@ export default function App({ Component, pageProps }: AppProps) {
           href="https://use.typekit.net/mhr2lku.css"
         ></link>
         <Toaster />
+        <Header />
         <AnimatePresence
           mode="wait"
           onExitComplete={() => window.scrollTo(0, 0)}
