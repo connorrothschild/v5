@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  /* --background: #f3f4f6; */
   --background: #ffffff;
+  /* --background: #f0efef; */
   --background-invert: #131517;
 }
 
@@ -16,6 +16,7 @@ body {
 html,
 body {
   overscroll-behavior-y: none;
+  /* scrollbar-gutter: stable; */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -93,6 +94,7 @@ body[data-router-pathname="/404"] #menu-bar {
   .animate-gradient {
     animation: hue-rotate-animation 12s infinite 500ms;
     -webkit-animation: hue-rotate-animation 12s infinite 500ms;
+    animation-duration: 12s !important;
   }
   .paused {
     animation-play-state: paused;
@@ -102,4 +104,8 @@ body[data-router-pathname="/404"] #menu-bar {
     animation-play-state: running;
     -webkit-animation-play-state: running;
   }
+}
+
+.hide-hero .hero {
+  opacity: 0;
 }

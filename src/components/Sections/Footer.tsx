@@ -19,29 +19,30 @@ export default function Footer() {
   );
 
   return (
+    // FIXME: Add stuff here...
     <motion.footer
-      className="bg-black h-[600px] relative group z-20 overflow-hidden mt-[-24px]"
-      style={{
-        borderTopLeftRadius: borderTopRadius,
-        borderTopRightRadius: borderTopRadius,
-      }}
+      className="bg-gray-50 relative group z-20 overflow-hidden border-t border-solid border-gray-300"
+      // style={{
+      //   borderTopLeftRadius: borderTopRadius,
+      //   borderTopRightRadius: borderTopRadius,
+      // }}
       transition={{
         ease: easeInOutQuint,
       }}
       ref={container}
     >
-      <div
-        className="absolute top-0 left-0 bg-gradient-to-b from-transparent to-black w-full h-full z-10 group-hover:opacity-0 transition-opacity"
+      {/* <div
+        className="absolute top-0 left-0 bg-gradient-to-b from-transparent to-white w-full h-full z-10 group-hover:opacity-0 transition-opacity"
         style={{
           // Using inline styles here because tailwindcss-animate breaks transition w/ arbitrary values
           transitionDuration: "800ms",
           transitionTimingFunction: `cubic-bezier(${easeInOutQuint.join(",")})`,
         }}
-      />
+      /> */}
       <div className="p-8 md:p-10 flex flex-col md:flex-row justify-between w-full gap-12">
         <div className="flex w-full flex-col justify-start items-start relative z-10 gap-4">
           <p
-            className="text-gray-400 font-sans font-light text-xl"
+            className="text-gray-700 font-sans font-light text-xl"
             style={{
               textWrap: "pretty",
             }}
@@ -49,18 +50,18 @@ export default function Footer() {
             The portfolio of software & data visualization engineer, Connor
             Rothschild.
           </p>
-          <p className="text-gray-400 font-sans font-light text-xl">
+          <p className="text-gray-700 font-sans font-light text-xl">
             Connect on{" "}
             <a
               href="https://www.linkedin.com/in/connor-rothschild/"
-              className="text-gray-300"
+              className="text-gray-900"
             >
               LinkedIn
             </a>{" "}
             or{" "}
             <a
               href="https://twitter.com/CL_Rothschild"
-              className="text-gray-300"
+              className="text-gray-900"
             >
               Twitter
             </a>
@@ -69,24 +70,16 @@ export default function Footer() {
         </div>
         <div className="flex w-max min-w-[167px] flex-col justify-start md:items-end relative z-10">
           <ContactPopup>
-            <button className=" cursor-pointer group/button relative text-white font-sans text-lg flex flex-row gap-1.5 items-center px-8 py-2 rounded-full">
-              <Dot classes="left-2 top-1/2 transform -translate-y-1/2 absolute z-[-1] group-hover/button:w-full group-hover/button:h-full group-hover/button:left-0 transition-all" />
+            <button className="cursor-pointer group/button relative text-black font-light text-lg flex flex-row gap-1.5 items-center px-8 py-2 rounded-full">
+              <Dot
+                classes={`left-2 top-1/2 transform -translate-y-1/2 !absolute z-[-1] group-hover/button:w-full group-hover/button:h-full group-hover/button:left-0 duration-300 ease-in-out`}
+              />
               Work with me
               {/* <ArrowRightIcon className="text-inherit h-4 w-4" /> */}
             </button>
           </ContactPopup>
         </div>
       </div>
-      <h1
-        className="font-serif italic absolute left-1/2 bottom-0 translate-y-[33%] transform -translate-x-1/2 text-white text-[26vw] font-light group-hover:translate-y-[10%] transition leading-none"
-        style={{
-          // Using inline styles here because tailwindcss-animate breaks transition w/ arbitrary values
-          transitionDuration: "800ms",
-          transitionTimingFunction: `cubic-bezier(${easeInOutQuint.join(",")})`,
-        }}
-      >
-        CONNOR
-      </h1>
     </motion.footer>
   );
 }

@@ -270,14 +270,14 @@ const Card = ({
   return (
     <div className="w-full flex flex-row justify-between items-center gap-2 pt-3">
       {/* <div className="flex flex-col justify-center gap-2"> */}
-      <h1 className="leading-none text-xl font-serif text-left font-regular text-stone-700 pt-1">
+      <h1 className="leading-none text-xl font-serif text-left font-light text-stone-700 pt-1">
         {title}
         <span className="ml-3 text-stone-500 font-sans text-base font-light leading-none">
           {award} @ {organization}
         </span>
       </h1>
       {/* </div> */}
-      <span className="pt-1 font-sans font-normal text-stone-500">{year}</span>
+      <span className="pt-1 font-sans font-light text-stone-500">{year}</span>
     </div>
   );
 };
