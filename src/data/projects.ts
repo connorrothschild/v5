@@ -201,7 +201,7 @@ export const projects = [
   {
     title: "Praxis",
     year: 2022,
-    url: "https://cityofpraxis.org",
+    url: "https://praxisnation.org",
     type: "App, web",
     filterCategory: "web",
     featured: true,

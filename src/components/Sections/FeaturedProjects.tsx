@@ -8,14 +8,14 @@ import { Cursor } from "../Elements/Cursor/Core";
 export default function FeaturedProjects() {
   return (
     <div className="max-w-5xl mx-auto w-full pt-48 pb-24 px-[20px]">
-      <h1 className="text-7xl font-sans font-extralight text-gray-700 mb-2 tracking-[-0.02em]">
+      <h1 className="text-5xl md:text-7xl font-sans font-extralight text-gray-700 mb-4 tracking-[-0.02em]">
         Select Projects
       </h1>
       <p className="text-lg font-sans font-light leading-snug text-gray-700 max-w-[640px] text-wrap-pretty">
         I enjoy working with clients to create projects that are both functional
         and beautiful. Here are some examples:
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8">
         <ServiceCard
           title="Web development"
           description="Websites that draw eyes and convert visitors."

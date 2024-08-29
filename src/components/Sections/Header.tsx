@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="fixed z-50 w-full py-6 top-0 left-0 flex flex-row items-center gap-2 px-8 justify-between">
+    <header className="fixed z-50 w-full py-6 top-0 left-0 flex flex-row items-center gap-2 px-4 md:px-8 justify-between">
       <Link
         scroll={false}
         href="/"
@@ -22,7 +22,7 @@ export default function Header() {
         Connor Rothschild
       </Link>
       <ContactPopup>
-        <div className="cursor-pointer flex items-center gap-2 text-gray-700">
+        <div className="cursor-pointer flex items-center gap-1.5 font-sans font-light text-gray-700">
           Work with me <Dot classes="!w-5 !h-5" />
         </div>
       </ContactPopup>

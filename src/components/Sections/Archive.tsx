@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { useRouter } from "next/router";
 import { projects } from "@/data/projects";
+import { AnimatePresence, motion } from "framer-motion";
 
 const prefixNumberWithZeroes = (number: number) => {
   if (number < 10) {
@@ -69,17 +70,39 @@ export default function Archive() {
     setHasMounted(true);
   }, []);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
     <section className="w-full min-h-screen relative">
       <div className="relative flex flex-col items-start justify-start py-24 w-full min-h-screen text-black px-[20px]">
         <div className="max-w-5xl mx-auto w-full">
-          <h1 className="text-7xl font-sans font-extralight text-gray-700 mb-2 tracking-[-0.02em]">
+          <h1 className="text-5xl md:text-7xl font-sans font-extralight text-gray-700 mb-4 tracking-[-0.02em]">
             All Projects
           </h1>
           <p className="text-lg font-sans font-light leading-snug text-gray-700">
             Everything I have worked on.
           </p>
-          <div className="flex flex-row gap-2 mb-12 mt-4">
+          <div className="flex flex-row gap-2 mb-12 mt-8">
             {CATEGORIES.map((filter) => (
               <p
                 key={filter.slug}
@@ -120,37 +143,50 @@ export default function Archive() {
               </p>
             ))}
           </div>
-          <div className="hidden w-full max-w-5xl md:flex flex-row justify-between items-center gap-2 mb-2">
-            <p className="min-w-[40px] text-sm uppercase text-left font-light">
-              No.
-            </p>
-            <p className="w-full text-sm uppercase font-light">Title</p>
-            <p className="w-full md:w-[100px] text-sm uppercase font-light">
-              Type
-            </p>
-            <p className="w-full md:w-[100px] text-sm uppercase font-light">
-              Year
-            </p>
-            <p className="w-12"></p>
-          </div>
 
-          {hasMounted ? (
-            projectsFiltered
-              .sort((a, b) => b.id - a.id)
-              .map((project) => (
-                <TableRow
-                  key={project.id}
-                  id={project.id}
-                  title={project.title}
-                  type={project.type}
-                  year={project.year}
-                  url={project.url}
-                  featured={project.featured}
-                />
-              ))
-          ) : (
-            <div className="h-screen" />
-          )}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedFilter}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <div className="hidden w-full max-w-5xl md:flex flex-row justify-between items-center gap-2 mb-2">
+                <p className="min-w-[40px] text-sm uppercase text-left font-light">
+                  No.
+                </p>
+                <p className="w-full text-sm uppercase font-light">Title</p>
+                <p className="w-full md:w-[100px] text-sm uppercase font-light">
+                  Type
+                </p>
+                <p className="w-full md:w-[100px] text-sm uppercase font-light">
+                  Year
+                </p>
+                <p className="w-12"></p>
+              </div>
+
+              {hasMounted ? (
+                projectsFiltered
+                  .sort((a, b) => b.id - a.id)
+                  .map((project) => (
+                    <motion.div key={project.id} variants={itemVariants}>
+                      <TableRow
+                        key={project.id}
+                        id={project.id}
+                        title={project.title}
+                        type={project.type}
+                        year={project.year}
+                        url={project.url}
+                        featured={project.featured}
+                      />
+                    </motion.div>
+                  ))
+              ) : (
+                <div className="h-screen" />
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
     </section>

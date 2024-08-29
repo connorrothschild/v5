@@ -15,7 +15,7 @@ export default function Intro() {
           alt=""
           width={1000}
           height={1000}
-          className="fixed top-0 left-0 w-full h-full object-cover opacity-30 pointer-events-none"
+          className="fixed top-0 left-0 w-full h-full object-cover opacity-40 pointer-events-none"
           draggable={false}
         />
         {/* <iframe
