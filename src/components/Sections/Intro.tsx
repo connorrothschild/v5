@@ -22,7 +22,7 @@ export default function Intro() {
         src="https://paveldogreat.github.io/WebGL-Fluid-Simulation/"
         className="absolute top-0 left-0 w-full h-full object-cover"
       /> */}
-        <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full max-w-[1330px] mx-auto">
           <Balls triggerBounce={triggerBounce} />
         </div>
         {/* <Gradient /> */}

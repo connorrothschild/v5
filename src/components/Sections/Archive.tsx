@@ -228,15 +228,15 @@ function TableRow({
       <div className="w-full text-left text-lg font-sans font-light text-gray-700">
         <TableTitle label={title} featured={featured} isActive={isActive} />
       </div>
-      <p className="w-full md:w-[100px] text-left text-xs leading-none font-sans uppercase font-light text-gray-500">
+      <p className="w-full md:w-[100px] text-left text-xs leading-[1.05] font-sans uppercase font-light text-gray-500">
         {type}
         <span className="md:hidden font-sans inline">, {year}</span>
       </p>
-      <p className="hidden md:block w-full md:w-[100px] text-left text-xs leading-none font-sans uppercase font-light text-gray-500">
+      <p className="hidden md:block w-full md:w-[100px] text-left text-xs leading-[1.05] font-sans uppercase font-light text-gray-500">
         {year}
       </p>
       <div
-        className={`hidden h-[18px] md:block w-12 text-right text-sm font-sans font-light text-gray-700`}
+        className={`hidden h-3 md:flex items-center justify-end w-12 text-right`}
       >
         {featured && <HoverableDot />}
       </div>
@@ -276,7 +276,7 @@ function TableTitle({
       }}
     >
       <div
-        className="leading-none overflow-hidden relative group h-full w-full flex flex-row items-center gap-2"
+        className="leading-[1.05] overflow-hidden relative group h-full w-full flex flex-row items-center gap-2"
         style={{
           transformStyle: "preserve-3d",
           transition: "transform 800ms cubic-bezier(0.76, 0, 0.24, 1)",

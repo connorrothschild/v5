@@ -26,6 +26,7 @@ const shapes = ["heart", "blink", "blush", "laugh"];
 
 function Balls(props: any) {
   const isTouchDevice = useIsTouchDevice();
+  const { width } = useWindowSize();
 
   const emoji = useMemo(() => {
     if (props.triggerBounce > 0) {
@@ -44,24 +45,24 @@ function Balls(props: any) {
     }
   }, [isTouchDevice, props.triggerBounce]);
 
-  const balls = useMemo(
-    () =>
-      Array.from({ length: 12 }, (v, i) => (
-        <Ball
-          key={i}
-          i={i}
-          which={shapes[i % shapes.length]}
-          position={[Math.random(), 10 + Math.random() * 10, 0]}
-          // position={[0, 0, 0]}
-          size={0.25 + Math.random() * 0.25} // Random size between 0.25 and .5
-          isTouchDevice={isTouchDevice}
-        />
-      )),
-    [isTouchDevice]
-  );
+  const balls = useMemo(() => {
+    const maxSize = 0.5; // Maximum size for the balls
+    const minSize = 0.25; // Minimum size for the balls
+    const scaleFactor = Math.min(1, 1000 / width); // Scale factor based on screen width
 
-  const { width } = useWindowSize();
-  const zoom = useMemo(() => width / 6, [width]);
+    return Array.from({ length: 12 }, (v, i) => (
+      <Ball
+        key={i}
+        i={i}
+        which={shapes[i % shapes.length]}
+        position={[Math.random(), 10 + Math.random() * 10, 0]}
+        size={minSize + Math.random() * (maxSize - minSize) * scaleFactor}
+        isTouchDevice={isTouchDevice}
+      />
+    ));
+  }, [isTouchDevice, width]);
+
+  const zoom = useMemo(() => Math.min(width / 6, 200), [width]);
 
   return (
     <Canvas shadows orthographic camera={{ position: [0, 0, 10], zoom: zoom }}>
