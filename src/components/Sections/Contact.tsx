@@ -162,7 +162,7 @@ function ServiceCard({
             </h1>
             <Link
               className="bg-gray-800/50 px-3 py-1 rounded-md text-xs font-sans leading-snug text-gray-300 hover:bg-gray-800/75 transition-colors"
-              href={`/archive?filter=${slug}`}
+              href={`/projects?filter=${slug}`}
             >
               See examples &rarr;
             </Link>

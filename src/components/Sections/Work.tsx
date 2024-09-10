@@ -48,7 +48,7 @@ export default function Work() {
             </div>
             <div className="w-full text-right">
               <Link
-                href="/archive"
+                href="/projects"
                 className="text-gray-500 font-sans text-base flex flex-row items-center gap-1.5 justify-end max-w-7xl mx-auto"
               >
                 View all <Dot />

@@ -64,7 +64,7 @@ export default function CanvasGradient({
       height="32"
       className="z-1 absolute top-0 left-0 w-full h-full"
       style={{
-        filter: "brightness(.7)",
+        filter: "brightness(1.2)",
       }}
       ref={ref}
     />

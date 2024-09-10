@@ -111,7 +111,7 @@ export default function Archive() {
                     setSelectedFilter("");
                     router.push(
                       {
-                        // pathname: "/archive",
+                        // pathname: "/projects",
                         pathname: router.pathname,
                       },
                       undefined,

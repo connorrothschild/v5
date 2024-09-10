@@ -15,7 +15,7 @@ const menuItems = [
     w: "Home",
   },
   {
-    href: "/archive",
+    href: "/projects",
     w: "Projects",
   },
   {
