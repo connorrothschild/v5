@@ -1,5 +1,15 @@
 export const projects = [
   {
+    title: "Realm",
+    year: 2024,
+    url: "https://realmalliance.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+    image: "/images/screens/realm.jpg",
+    titleWidth: 65,
+  },
+  {
     title: "From Relationships to Revenue",
     year: 2024,
     url: "https://linkedin.github.io/linkedin-sales-navigator-roi-calculator/",
@@ -20,6 +30,14 @@ export const projects = [
     titleWidth: 150,
   },
   {
+    title: "ISP Myanmar: Visual Explainers",
+    year: 2024,
+    url: "https://ispmyanmar.com/category/visual-explainer/",
+    type: "Chart",
+    filterCategory: "visualization",
+    featured: false,
+  },
+  {
     title: "Inside the BJP’s WhatsApp machine",
     year: 2024,
     url: "https://restofworld.org/2024/bjp-whatsapp-modi/",
@@ -34,7 +52,7 @@ export const projects = [
     type: "Web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/rainmaker.png",
+    image: "/images/screens/rainmaker.jpg",
     titleWidth: 85,
   },
   {
@@ -148,9 +166,8 @@ export const projects = [
     url: "https://www.learnpromptengineering.org/",
     type: "Story",
     filterCategory: "web",
-    featured: true,
+    featured: false,
     image: "/images/screens/learn-prompt.png",
-
     titleWidth: 280,
   },
   {
@@ -205,7 +222,7 @@ export const projects = [
     type: "App, web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/praxis.png",
+    image: "/images/screens/praxis.jpg",
     titleWidth: 65,
   },
   {
@@ -307,7 +324,7 @@ export const projects = [
     url: "https://connorrothschild.github.io/bob-ross-art-gallery/",
     type: "Story",
     filterCategory: "visualization",
-    featured: true,
+    featured: false,
     image: "/images/screens/bob-ross.png",
     titleWidth: 210,
   },
