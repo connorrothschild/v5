@@ -1,5 +1,13 @@
 export const projects = [
   {
+    title: "When China Blocked Popular AI Websites",
+    year: 2024,
+    url: "https://restofworld.org/2024/when-china-blocked-ai-sites/",
+    type: "Chart",
+    filterCategory: "visualization",
+    featured: false,
+  },
+  {
     title: "Realm",
     year: 2024,
     url: "https://realmalliance.com/",
