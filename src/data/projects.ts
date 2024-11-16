@@ -1,5 +1,15 @@
 export const projects = [
   {
+    title: "Monumental Labs",
+    year: 2024,
+    url: "https://www.monumentallabs.co/",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+    image: "/images/screens/monumental.png",
+    titleWidth: 140,
+  },
+  {
     title: "When China Blocked Popular AI Websites",
     year: 2024,
     url: "https://restofworld.org/2024/when-china-blocked-ai-sites/",
@@ -200,7 +210,7 @@ export const projects = [
     filterCategory: "visualization",
     featured: true,
     image: "/images/screens/tech.png",
-    titleWidth: 210,
+    titleWidth: 220,
   },
   {
     title: "babby.xyz",
