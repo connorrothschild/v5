@@ -1,12 +1,22 @@
 export const projects = [
   {
-    title: "Monumental Labs",
+    title: "Dirac",
     year: 2024,
-    url: "https://www.monumentallabs.co/",
+    url: "https://www.diracinc.com",
     type: "Web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/monumental.png",
+    image: "dirac",
+    titleWidth: 60,
+  },
+  {
+    title: "Monumental Labs",
+    year: 2024,
+    url: "https://www.monumentallabs.co",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+    image: "monumental",
     titleWidth: 140,
   },
   {
@@ -24,7 +34,7 @@ export const projects = [
     type: "Web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/realm.jpg",
+    image: "realm",
     titleWidth: 65,
   },
   {
@@ -34,7 +44,7 @@ export const projects = [
     type: "Web",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/linkedin.png",
+    image: "linkedin",
     titleWidth: 200,
   },
   {
@@ -44,7 +54,7 @@ export const projects = [
     type: "Web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/midjourney.png",
+    image: "midjourney",
     titleWidth: 150,
   },
   {
@@ -70,7 +80,7 @@ export const projects = [
     type: "Web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/rainmaker.jpg",
+    image: "rainmaker",
     titleWidth: 85,
   },
   {
@@ -87,7 +97,7 @@ export const projects = [
     type: "Chart",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/protests.png",
+    image: "protests",
     titleWidth: 200,
   },
   {
@@ -159,7 +169,7 @@ export const projects = [
     type: "App",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/minerva.png",
+    image: "minerva",
     titleWidth: 75,
   },
   {
@@ -175,7 +185,7 @@ export const projects = [
     type: "Course",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/course.png",
+    image: "course",
     titleWidth: 250,
   },
   {
@@ -185,7 +195,7 @@ export const projects = [
     type: "Story",
     filterCategory: "web",
     featured: false,
-    image: "/images/screens/learn-prompt.png",
+    image: "learn-prompt",
     titleWidth: 280,
   },
   {
@@ -209,7 +219,7 @@ export const projects = [
     type: "Story",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/tech.png",
+    image: "tech",
     titleWidth: 220,
   },
   {
@@ -240,7 +250,7 @@ export const projects = [
     type: "App, web",
     filterCategory: "web",
     featured: true,
-    image: "/images/screens/praxis.jpg",
+    image: "praxis",
     titleWidth: 65,
   },
   {
@@ -257,7 +267,7 @@ export const projects = [
     type: "Story",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/blackouts.png",
+    image: "blackouts",
     titleWidth: 85,
   },
   {
@@ -267,7 +277,7 @@ export const projects = [
     type: "Microsite",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/impact.png",
+    image: "impact",
     titleWidth: 265,
   },
   {
@@ -284,7 +294,7 @@ export const projects = [
     type: "Chart",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/olympics.png",
+    image: "olympics",
     titleWidth: 180,
   },
   {
@@ -343,7 +353,7 @@ export const projects = [
     type: "Story",
     filterCategory: "visualization",
     featured: false,
-    image: "/images/screens/bob-ross.png",
+    image: "bob-ross",
     titleWidth: 210,
   },
   {
@@ -414,7 +424,7 @@ export const projects = [
     type: "Story",
     filterCategory: "visualization",
     featured: true,
-    image: "/images/screens/cudi.png",
+    image: "cudi",
     titleWidth: 210,
   },
   {

@@ -2,8 +2,8 @@ const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
 
-const thumbnailsDir = "public/images/thumbnails";
-const compressedDir = "public/images/blurs";
+const thumbnailsDir = "public/images/screens";
+const compressedDir = "public/images/blurred-screens";
 
 fs.readdir(thumbnailsDir, (err, files) => {
   if (err) {
@@ -16,8 +16,8 @@ fs.readdir(thumbnailsDir, (err, files) => {
     const compressedFilePath = path.join(compressedDir, file);
 
     sharp(filePath)
-      .blur(10)
-      .jpeg({ quality: 10 }) // Adjust quality for compression. Lower means more compression
+      .jpeg({ quality: 70 })
+      .blur(100)
       .toFile(compressedFilePath, (err) => {
         if (err) {
           console.error(`Error creating compressed image for ${file}:`, err);

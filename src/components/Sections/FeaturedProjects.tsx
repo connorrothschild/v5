@@ -125,9 +125,9 @@ function ServiceCard({
 
         <Marquee repeat={3} speed={0.5} pauseOnHover={true} reversed={reversed}>
           <div className="flex flex-row gap-2 mr-2">
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <ProjectCard
-                key={project.id}
+                key={`${project.id}-${index}`}
                 project={project}
                 setHoveredProject={setHoveredProject}
               />
@@ -164,14 +164,16 @@ function ProjectCard({
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      key={project.id}
+      // key={project.id}
       className="block cursor-none"
       onMouseEnter={() => setHoveredProject(project)}
       // onMouseOut={() => setHoveredProject(null)}
     >
       <div className="aspect-[1.675/1] h-48 outline-solid outline outline-gray-100 hover:outline-gray-200 transition-all duration-300">
         <Image
-          src={project.image}
+          src={`/images/screens/${project.image}.jpg`}
+          placeholder="blur"
+          blurDataURL={`images/blurred-screens/${project.image}.jpg`}
           alt={`Project image for ${project.title}`}
           className="w-full h-full object-cover object-bottom"
           width={400}
