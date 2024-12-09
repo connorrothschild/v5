@@ -105,11 +105,11 @@ export default function About() {
             </a>{" "}
             and{" "}
             <a
-              href="https://www.tunera.xyz/fonts/nyght-serif/"
+              href="https://www.typewolf.com/times-now"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Nyght Serif
+              Times Now
             </a>
             .
           </BodyText>

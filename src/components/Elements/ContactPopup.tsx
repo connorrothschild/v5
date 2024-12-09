@@ -25,6 +25,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import clsx from "clsx";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function ContactPopup({
   children,
@@ -38,11 +39,22 @@ export function ContactPopup({
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={setOpen} modal={false}>
         <DialogTrigger asChild>
           {/* <Button variant="outline">Edit Profile</Button> */}
           {children}
         </DialogTrigger>
+        {/* Replaced the overlay with this so that it does not cause layout shift when clicking while modal={true} */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="fixed inset-0 z-50 bg-black/80"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+          )}
+        </AnimatePresence>
         <DialogContent className="sm:max-w-[425px] !font-sans">
           <DialogHeader>
             <DialogTitle>Get in touch</DialogTitle>

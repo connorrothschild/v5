@@ -109,3 +109,77 @@ body[data-router-pathname="/404"] #menu-bar {
 .hide-hero .hero {
   opacity: 0;
 }
+
+/* BLOG */
+.prose p,
+.prose li {
+  color: #333;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  /* text-wrap: balance; */
+  text-wrap: pretty;
+}
+
+.prose p {
+  margin-top: 14px;
+}
+
+.prose strong {
+  font-weight: 500;
+  color: #191919;
+  letter-spacing: -0.005em;
+  font-weight: 500;
+
+  /* Highlight? */
+  /* color: #191919;
+    background: #FFEB3B;
+    padding: 2px 3px 1px 3px;
+    border-radius: 3px;
+    font-size: 95%; */
+}
+
+.prose ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.prose li {
+  margin-top: 10px;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 0.05em;
+}
+
+.prose h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 60px;
+}
+
+.prose h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 40px;
+}
+
+/* Override spacing here */
+.prose h2 + h3 {
+  margin-top: 16px;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  line-height: 1.25;
+  text-wrap: pretty;
+  scroll-margin-top: var(--top-gutter, 150px);
+}
+
+.prose hr {
+  margin: 40px 0;
+}
