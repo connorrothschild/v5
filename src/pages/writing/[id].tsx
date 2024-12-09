@@ -2,6 +2,7 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import { getPost, getAllPostIds } from "@/lib/posts";
 import React, { useEffect, useState } from "react";
+import Head from "next/head";
 
 type TocItem = {
   value: string;
@@ -43,46 +44,57 @@ export default function Post({ post }: Props) {
   }, []);
 
   return (
-    <div className="relative px-4 lg:px-8 grid grid-cols-10 [--top-gutter:150px] my-[--top-gutter]">
-      <nav
-        aria-hidden
-        className="font-serif tracking-[-0.02em] col-span-1 hidden md:block sticky top-[--top-gutter] h-fit w-[240px] mr-12 text-[16px] shrink-0"
-      >
-        <div className="border-l border-gray-200">
-          {post.tableOfContents.map((heading) => (
-            <a
-              key={heading.slug}
-              href={`#${heading.slug}`}
-              className={`leading-tight block pl-4 py-1 -ml-px border-l hover:border-gray-800 transition-colors ${
-                activeHeading === heading.slug
-                  ? "border-gray-800 text-gray-900"
-                  : "border-transparent text-gray-500"
-              } ${heading.depth === 3 ? "pl-8" : ""} ${
-                heading.depth === 4 ? "pl-12" : ""
-              }`}
-              style={
-                {
-                  textWrap: "pretty",
-                } as React.CSSProperties
-              }
-            >
-              {heading.value}
-            </a>
-          ))}
-        </div>
-      </nav>
-
-      <article className="col-span-full md:col-start-5 md:col-span-6 lg:col-start-5 lg:col-span-4 w-full font-serif">
-        <h1 className="text-[2.5rem] font-bold mb-3 leading-tight tracking-[-0.02em]">
-          {post.title}
-        </h1>
-        <div className="text-[#666] text-[1rem] mb-8">{post.date}</div>
-        <div
-          className="prose prose-lg"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+    <>
+      <Head>
+        <title>{post.title}</title>
+        <meta property="og:title" content={post.title} />
+        <meta name="description" content={`Connor Rothschild | ${post.date}`} />
+        <meta
+          property="og:description"
+          content={`Connor Rothschild | ${post.date}`}
         />
-      </article>
-    </div>
+      </Head>
+      <div className="relative px-4 lg:px-8 grid grid-cols-10 [--top-gutter:150px] my-[--top-gutter]">
+        <nav
+          aria-hidden
+          className="font-serif tracking-[-0.02em] col-span-1 hidden md:block sticky top-[--top-gutter] h-fit w-[240px] mr-12 text-[16px] shrink-0"
+        >
+          <div className="border-l border-gray-200">
+            {post.tableOfContents.map((heading) => (
+              <a
+                key={heading.slug}
+                href={`#${heading.slug}`}
+                className={`leading-tight block pl-4 py-1 -ml-px border-l hover:border-gray-800 transition-colors ${
+                  activeHeading === heading.slug
+                    ? "border-gray-800 text-gray-900"
+                    : "border-transparent text-gray-500"
+                } ${heading.depth === 3 ? "pl-8" : ""} ${
+                  heading.depth === 4 ? "pl-12" : ""
+                }`}
+                style={
+                  {
+                    textWrap: "pretty",
+                  } as React.CSSProperties
+                }
+              >
+                {heading.value}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        <article className="col-span-full md:col-start-5 md:col-span-6 lg:col-start-5 lg:col-span-4 w-full font-serif">
+          <h1 className="text-[2.5rem] font-bold mb-3 leading-tight tracking-[-0.02em]">
+            {post.title}
+          </h1>
+          <div className="text-[#666] text-[1rem] mb-8">{post.date}</div>
+          <div
+            className="prose prose-lg"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+        </article>
+      </div>
+    </>
   );
 }
 
