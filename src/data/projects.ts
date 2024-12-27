@@ -1,5 +1,13 @@
 export const projects = [
   {
+    title: "Eternal",
+    year: 2024,
+    url: "https://eternal.co/",
+    type: "Web",
+    filterCategory: "web",
+    featured: false,
+  },
+  {
     title: "Dirac",
     year: 2024,
     url: "https://www.diracinc.com",
