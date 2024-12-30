@@ -20,19 +20,21 @@ export default function FeaturedProjects() {
           title="Web development"
           description="Websites that draw eyes and convert visitors."
           priceRange="$8,000-$16,000"
-          reversed={true}
+          reversed={false}
           projects={projects
             .filter((project) => project.filterCategory === "web")
-            .filter((project) => project.featured)}
+            .filter((project) => project.featured)
+            .reverse()}
         />
         <ServiceCard
           title="Data visualization"
           description="Charts, maps, and visual experiences that tell a story."
           priceRange="$3,000-$10,000"
-          reversed={true}
+          reversed={false}
           projects={projects
             .filter((project) => project.filterCategory === "visualization")
-            .filter((project) => project.featured)}
+            .filter((project) => project.featured)
+            .reverse()}
         />
       </div>
     </div>

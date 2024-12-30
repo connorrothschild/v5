@@ -1,5 +1,15 @@
 export const projects = [
   {
+    title: "Valar Atomics",
+    year: 2025,
+    url: "https://valaratomics.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+    image: "valar",
+    titleWidth: 120,
+  },
+  {
     title: "Eternal",
     year: 2024,
     url: "https://eternal.co/",
@@ -23,7 +33,7 @@ export const projects = [
     url: "https://www.monumentallabs.co",
     type: "Web",
     filterCategory: "web",
-    featured: true,
+    featured: false,
     image: "monumental",
     titleWidth: 140,
   },
