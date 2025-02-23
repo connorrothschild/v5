@@ -1,11 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useEffect } from "react";
 import Marquee from "@/components/Elements/Marquee";
-import BlurEdge from "@/components/Elements/BlurEdge";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import { Cursor } from "../Elements/Cursor/Core";
 
 export default function FeaturedProjects() {
+  const [hasLoaded, setHasLoaded] = useState(false);
+  useEffect(() => {
+    setHasLoaded(true);
+  }, []);
+
   return (
     <div className="max-w-5xl mx-auto w-full pt-48 pb-24 px-[20px]">
       <h1 className="text-5xl md:text-7xl font-sans font-extralight text-gray-700 mb-4 tracking-[-0.02em]">
@@ -15,7 +19,13 @@ export default function FeaturedProjects() {
         I enjoy working with clients to create projects that are both functional
         and beautiful. Here are some examples:
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8">
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-8"
+        style={{
+          opacity: hasLoaded ? 1 : 0,
+          transition: "opacity 300ms ease-in-out 200ms",
+        }}
+      >
         <ServiceCard
           title="Web development"
           description="Websites that draw eyes and convert visitors."
@@ -23,8 +33,7 @@ export default function FeaturedProjects() {
           reversed={false}
           projects={projects
             .filter((project) => project.filterCategory === "web")
-            .filter((project) => project.featured)
-            .reverse()}
+            .filter((project) => project.featured)}
         />
         <ServiceCard
           title="Data visualization"
@@ -33,8 +42,7 @@ export default function FeaturedProjects() {
           reversed={false}
           projects={projects
             .filter((project) => project.filterCategory === "visualization")
-            .filter((project) => project.featured)
-            .reverse()}
+            .filter((project) => project.featured)}
         />
       </div>
     </div>
@@ -142,9 +150,9 @@ function ServiceCard({
           Inquire
         </button>
       </ContactPopup>
-      <p className="text-sm text-gray-600 px-6 text-right">
+      {/* <p className="text-sm text-gray-600 px-6 text-right">
         Work ranges from: {priceRange}
-      </p>
+      </p> */}
     </div>
   );
 }

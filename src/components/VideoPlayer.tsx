@@ -50,7 +50,7 @@ export default function VideoPlayer({ muted = false }: { muted?: boolean }) {
   };
 
   return (
-    <div
+    <span
       className="h-full w-full"
       // className={`relative mx-auto my-8 rounded-[6px] overflow-hidden cursor-pointer border border-solid border-gray-300 ${
       //   isPaused ? "scale-90 md:scale-75" : "scale-100"
@@ -61,20 +61,19 @@ export default function VideoPlayer({ muted = false }: { muted?: boolean }) {
       }}
       onMouseDown={togglePlayPause}
     >
-      {/* <div className="absolute top-4 right-4 z-[1]">
+      {/* <span className="absolute top-4 right-4 z-[1]">
         <VideoPlayerControls
           progress={videoProgress}
           isPaused={isPaused}
           onPlayPause={togglePlayPause}
         />
-      </div> */}
+      </span> */}
       <video
         className="w-full"
         ref={videoRef}
         muted={muted}
         controls={false}
         loop
-        allowsInlineMediaPlayback
         playsInline
         poster="/images/mockups/tech-downturn.jpg"
       >
@@ -82,7 +81,7 @@ export default function VideoPlayer({ muted = false }: { muted?: boolean }) {
       </video>
       <AnimatePresence>
         {isPaused && (
-          <motion.div
+          <motion.span
             className="absolute  inset-0 w-full h-full bg-black/50 backdrop-blur-md flex justify-center items-center cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -91,10 +90,10 @@ export default function VideoPlayer({ muted = false }: { muted?: boolean }) {
             <p className="text-white text-3xl md:text-5xl font-sans font-light">
               Play
             </p>
-          </motion.div>
+          </motion.span>
         )}
       </AnimatePresence>
-    </div>
+    </span>
   );
 }
 
@@ -119,7 +118,7 @@ const VideoPlayerControls: React.FC<VideoPlayerControlsProps> = ({
   const dashOffset = dashArray * (1 - progress);
 
   return (
-    <div className="relative flex justify-center items-center">
+    <span className="relative flex justify-center items-center">
       <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
         <circle
           cx={center}
@@ -141,17 +140,17 @@ const VideoPlayerControls: React.FC<VideoPlayerControlsProps> = ({
           strokeLinecap="round"
         />
       </svg>
-      <div className="absolute">
+      <span className="absolute">
         <button
           className="group cursor-pointer flex justify-center items-center"
           //   onMouseDown={onPlayPause}
         >
-          {/* <div className="fill-white">
+          {/* <span className="fill-white">
             {isPaused ? <PlayIcon /> : <PauseIcon />}
-          </div> */}
+          </span> */}
         </button>
-      </div>
-    </div>
+      </span>
+    </span>
   );
 };
 

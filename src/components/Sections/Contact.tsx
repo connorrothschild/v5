@@ -161,6 +161,7 @@ function ServiceCard({
               {title}
             </h1>
             <Link
+              scroll={false}
               className="bg-gray-800/50 px-3 py-1 rounded-md text-xs font-sans leading-snug text-gray-300 hover:bg-gray-800/75 transition-colors"
               href={`/projects?filter=${slug}`}
             >

@@ -8,6 +8,7 @@ import {
   useEffect,
   forwardRef,
   useCallback,
+  Suspense,
 } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import {
@@ -17,7 +18,7 @@ import {
   RoundedBox,
   useGLTF,
 } from "@react-three/drei";
-import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
+import { Physics, RigidBody, CuboidCollider, HullCollider } from "@react-three/rapier";
 import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 import Link from "next/link";
 import Dot from "./Dot";
@@ -28,27 +29,31 @@ function Balls(props: any) {
   const isTouchDevice = useIsTouchDevice();
   const { width } = useWindowSize();
 
+  // Always render the emoji, but control its visibility and position
   const emoji = useMemo(() => {
-    if (props.triggerBounce > 0) {
-      return (
+    const isVisible = props.triggerBounce > 0;
+    console.log('triggerBounce:', props.triggerBounce, 'isVisible:', isVisible);
+    
+    return (
+      <Suspense fallback={null}>
         <Smiley
           key="emoji"
           i={12}
           which="heart"
-          position={[Math.random(), 10 + Math.random() * 10, 0]}
-          // position={[0,0,0]}
+          position={isVisible ? [0, 10, 0] : [0, -100, 0]}
           size={0.25}
           isTouchDevice={isTouchDevice}
           triggerBounce={props.triggerBounce}
+          shouldShow={isVisible}
         />
-      );
-    }
+      </Suspense>
+    );
   }, [isTouchDevice, props.triggerBounce]);
 
   const balls = useMemo(() => {
-    const maxSize = 0.5; // Maximum size for the balls
-    const minSize = 0.25; // Minimum size for the balls
-    const scaleFactor = Math.min(1, 1000 / width); // Scale factor based on screen width
+    const maxSize = 0.5;
+    const minSize = 0.25;
+    const scaleFactor = Math.min(1, 1000 / width);
 
     return Array.from({ length: 12 }, (v, i) => (
       <Ball
@@ -65,31 +70,48 @@ function Balls(props: any) {
   const zoom = useMemo(() => Math.min(width / 6, 200), [width]);
 
   return (
-    <Canvas shadows orthographic camera={{ position: [0, 0, 10], zoom: zoom }}>
-      <ambientLight intensity={Math.PI} />
-      <spotLight decay={0} position={[5, 10, 2.5]} angle={0.2} castShadow />
-      <Physics>
-        {balls}
-        {emoji}
-        <BottomButton />
-        <Walls />
-        {/* <MousePane /> */}
-      </Physics>
-      <Environment>
-        <Lightformer
-          form="rect"
-          intensity={4}
-          position={[15, 10, 10]}
-          scale={20}
-          onCreated={(self) => self.lookAt(0, 0, 0)}
+    <Canvas
+      shadows="basic"
+      dpr={[1, 2]}
+      performance={{ min: 0.5 }}
+      orthographic
+      camera={{ position: [0, 0, 10], zoom: zoom }}
+    >
+      <Suspense fallback={null}>
+        <ambientLight intensity={Math.PI / 2} />
+        <spotLight
+          decay={0}
+          position={[5, 10, 2.5]}
+          angle={0.2}
+          castShadow
+          shadow-mapSize={[512, 512]}
         />
-        <Lightformer
-          intensity={2}
-          position={[-10, 0, -20]}
-          scale={[10, 100, 1]}
-          onCreated={(self) => self.lookAt(0, 0, 0)}
-        />
-      </Environment>
+        <Physics
+          gravity={[0, -9.81, 0]}
+          interpolate={false}
+          timeStep={1 / 60}
+        >
+          {balls}
+          {emoji}
+          <BottomButton />
+          <Walls />
+        </Physics>
+        <Environment>
+          <Lightformer
+            form="rect"
+            intensity={2}
+            position={[15, 10, 10]}
+            scale={20}
+            onCreated={(self) => self.lookAt(0, 0, 0)}
+          />
+          <Lightformer
+            intensity={1}
+            position={[-10, 0, -20]}
+            scale={[10, 100, 1]}
+            onCreated={(self) => self.lookAt(0, 0, 0)}
+          />
+        </Environment>
+      </Suspense>
     </Canvas>
   );
 }
@@ -158,12 +180,19 @@ export function Ball({ i, which, size, isTouchDevice, ...props }) {
 
 useGLTF.preload("/cowboy.glb");
 
-function Smiley({ i, which, size, isTouchDevice, triggerBounce, ...props }) {
+function Smiley({ i, which, size, isTouchDevice, triggerBounce, shouldShow = true, ...props }) {
   const api = useRef();
+  const meshRef = useRef();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    console.log('Smiley shouldShow:', shouldShow);
+  }, [shouldShow]);
 
   const clamp = (value: number, min: number, max: number) => {
     return Math.min(Math.max(value, min), max);
   };
+  
   const handleClick = useCallback(() => {
     if (!api.current) return;
     api.current.applyImpulse(
@@ -173,12 +202,9 @@ function Smiley({ i, which, size, isTouchDevice, triggerBounce, ...props }) {
   }, []);
 
   useEffect(() => {
-    if (triggerBounce > 1) {
-      if (!api.current) return;
-      console.log("applying impulse");
+    if (triggerBounce > 1 && api.current) {
       api.current.applyTorqueImpulse(
         {
-          // x: Math.PI / 2,
           x: 0,
           y: Math.PI * 2,
           z: 0,
@@ -190,25 +216,35 @@ function Smiley({ i, which, size, isTouchDevice, triggerBounce, ...props }) {
 
   const { nodes, materials } = useGLTF("/cowboy.glb");
 
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  // Memoize the material to prevent unnecessary recreations
+  const orangeMaterial = useMemo(() => (
+    <meshStandardMaterial
+      color={"orange"}
+      roughness={0.2}
+      toneMapped={false}
+    />
+  ), []);
+
+  if (!isLoaded || !shouldShow) return null;
+
   return (
     <RigidBody
-      // colliders={false}
-      colliders={"hull"}
-      // enabledTranslations={[true, true, false]}
+      colliders="hull"
       enabledTranslations={[true, true, false]}
-      enabledRotations={[false, true, false]} // If any are true, the emoji will appear in front of the balls.
+      enabledRotations={[false, true, false]}
       ref={api}
-      // position={[0, 0, 1]}
       linearDamping={1}
       angularDamping={1}
       restitution={1}
-      // scale={[size, size, size]}
       rotation={[-Math.PI / 2, 0, 0]}
-      // {...props}
+      {...props}
     >
-      {/* <BallCollider args={[size]} /> */}
-      {/* {vertices.length > 0 && <ConvexHullCollider vertices={vertices} />} */}
       <group
+        ref={meshRef}
         scale={0.05}
         onPointerOver={() => {
           if (!isTouchDevice) handleClick();
@@ -217,36 +253,31 @@ function Smiley({ i, which, size, isTouchDevice, triggerBounce, ...props }) {
           if (isTouchDevice) handleClick();
         }}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_2.geometry}
-          material={materials.Brown}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_3.geometry}
-          material={materials.Orange_Dark_Matte}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_4.geometry}
-          // material={materials.Orange_Shiny}
-        >
-          <meshStandardMaterial
-            color={"orange"}
-            roughness={0.2}
-            toneMapped={false}
-          />
-        </mesh>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_5.geometry}
-          material={materials.White_Matte}
-        />
+        {shouldShow && (
+          <>
+            <mesh
+              geometry={nodes.Object_2.geometry}
+              material={materials.Brown}
+              castShadow
+            />
+            <mesh
+              geometry={nodes.Object_3.geometry}
+              material={materials.Orange_Dark_Matte}
+              castShadow
+            />
+            <mesh
+              geometry={nodes.Object_4.geometry}
+              castShadow
+            >
+              {orangeMaterial}
+            </mesh>
+            <mesh
+              geometry={nodes.Object_5.geometry}
+              material={materials.White_Matte}
+              castShadow
+            />
+          </>
+        )}
       </group>
     </RigidBody>
   );

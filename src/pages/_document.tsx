@@ -18,7 +18,7 @@ export default function Document() {
         />
         <meta
           name="twitter:image:alt"
-          content="The portfolio of software & data visualization engineer, Connor Rothschild."
+          content="The portfolio of software engineer Connor Rothschild."
         />
       </Head>
       <body>

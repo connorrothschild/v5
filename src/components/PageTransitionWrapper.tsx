@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "./Sections/Header";
 import { motion } from "framer-motion";
 
 export const perspective = {

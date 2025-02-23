@@ -1,14 +1,10 @@
 import { easeInOutQuint } from "@/config/eases";
-import {
-  useTransform,
-  motion,
-  MotionValue,
-  useScroll,
-  AnimatePresence,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import React, { Suspense, useEffect, useState } from "react";
 import VideoPlayer from "../VideoPlayer";
+import React, { useEffect, useState } from "react";
+
+import me from "@/components/_Images/me/andys-low.webp";
 
 export default function SplitTextHeader({
   phrase,
@@ -72,6 +68,7 @@ export default function SplitTextHeader({
         })}
       </p>
       {/* <Link
+        scroll={false}
         href="/projects"
         className="bottom-8 absolute left-1/2 transform -translate-x-1/2 cursor-pointer py-6 px-12 text-lg ml-auto flex items-center gap-3 w-max text-white rounded-full transition-all"
         style={
@@ -158,22 +155,23 @@ const Word = ({
       //     : "none",
       // }}
       onMouseEnter={(event) => {
-        if (hoveredOnce) {
-          setTooltip(children);
-          if (children === "Texas.") {
-            setTriggerBounce((prev: number) => prev + 1);
-          }
-          const elementLeft = event.currentTarget.getBoundingClientRect().left;
-          const screenWidth = window.innerWidth;
-          const elementWidth = window.innerWidth / 2;
-
-          if (elementLeft + elementWidth > screenWidth) {
-            setTooltipOffsetDirection("right");
-          } else {
-            setTooltipOffsetDirection("left");
-          }
+        setTooltip(children);
+        if (children === "Texas.") {
+          setTriggerBounce((prev: number) => prev + 1);
         }
-        setHoveredOnce(true);
+        const elementLeft = event.currentTarget.getBoundingClientRect().left;
+        const screenWidth = window.innerWidth;
+        const elementWidth = window.innerWidth / 2;
+
+        if (elementLeft + elementWidth > screenWidth) {
+          setTooltipOffsetDirection("right");
+        } else {
+          setTooltipOffsetDirection("left");
+        }
+
+        if (!hoveredOnce) {
+          setHoveredOnce(true);
+        }
       }}
       onMouseLeave={() => {
         setTooltip(null);
@@ -218,7 +216,7 @@ const Word = ({
 function ImageOfMe() {
   return (
     <Image
-      src="/images/me/andys-low.jpg"
+      src={me}
       alt="Connor Rothschild"
       width={400}
       height={400}

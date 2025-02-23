@@ -50,7 +50,7 @@ const montreal = localFont({
     },
     {
       path: "./fonts/montreal/PPNeueMontreal-Bold.otf",
-      weight: "600",
+      weight: "700",
       style: "normal",
     },
   ],
@@ -63,9 +63,12 @@ import { Toaster } from "sonner";
 import Head from "next/head";
 import { AnimatePresence } from "framer-motion";
 import Header from "@/components/Sections/Header";
+import PageTransitionWrapper from "@/components/PageTransitionWrapper";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
   return (
     <>
       {/* Needed to make global fonts apply in shadcn components */}
@@ -97,6 +100,7 @@ export default function App({ Component, pageProps }: AppProps) {
         ></link>
         <Toaster />
         <Header />
+
         <AnimatePresence
           mode="wait"
           onExitComplete={() => window.scrollTo(0, 0)}

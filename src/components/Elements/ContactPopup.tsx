@@ -29,7 +29,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export function ContactPopup({
   children,
-  inquiryPlaceholder = "A bit about your project...",
+  inquiryPlaceholder = "",
 }: {
   children: React.ReactNode;
   inquiryPlaceholder?: string;
@@ -59,7 +59,7 @@ export function ContactPopup({
           <DialogHeader>
             <DialogTitle>Get in touch</DialogTitle>
             <DialogDescription>
-              Tell me a bit about your project, and I&apos;ll be in touch!
+              Tell me a bit about what&apos;s up, and I&apos;ll be in touch.
             </DialogDescription>
           </DialogHeader>
           <ProfileForm
@@ -82,7 +82,7 @@ export function ContactPopup({
         <DrawerHeader className="text-left">
           <DrawerTitle>Get in touch</DrawerTitle>
           <DrawerDescription>
-            Tell me a bit about your project, and I&apos;ll be in touch!
+            Tell me a bit about what&apos;s up, and I&apos;ll be in touch.
           </DrawerDescription>
         </DrawerHeader>
         <ProfileForm

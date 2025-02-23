@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     // FIXME: Add stuff here...
     <motion.footer
-      className="bg-gray-50 relative group z-20 overflow-hidden border-t border-solid border-gray-300"
+      className="bg-[#fcfcfc] relative group z-20 overflow-hidden border-t border-solid border-gray-200"
       // style={{
       //   borderTopLeftRadius: borderTopRadius,
       //   borderTopRightRadius: borderTopRadius,
@@ -42,15 +42,22 @@ export default function Footer() {
       <div className="p-8 md:p-10 flex flex-col md:flex-row justify-between w-full gap-12">
         <div className="flex w-full flex-col justify-start items-start relative z-10 gap-4">
           <p
-            className="text-gray-700 font-sans font-light text-xl"
+            className="text-gray-700 font-sans font-normal text-lg md:text-xl"
             style={{
+              textWrap: "balance",
               textWrap: "pretty",
             }}
           >
-            The portfolio of software & data visualization engineer, Connor
-            Rothschild.
+            The portfolio of Connor Rothschild. Currently at{" "}
+            <a
+              href="https://www.asimovcollective.com/"
+              className="text-gray-900"
+            >
+              Asimov Collective
+            </a>
+            .
           </p>
-          <p className="text-gray-700 font-sans font-light text-xl">
+          <p className="text-gray-700 font-sans font-normal text-lg md:text-xl">
             Connect on{" "}
             <a
               href="https://www.linkedin.com/in/connor-rothschild/"

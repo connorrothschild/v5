@@ -1,11 +1,12 @@
 ---
-title: 'Actors and Extras (or, The Lost Art of Doing Things)' 
+title: 'Actors and Extras' 
 date: 'December 9, 2024'
+category: "personal"
+showToc: true
+image: '/posts/actors-and-extras/social.webp'
+showTopImage: false
 ---
 
-Every year, on my birthday (starting… this year), I’m going to write the most profound lesson I learned in the year prior. Today, I turned 26, and below I share what I’ve spent the most cumulative time thinking about this past year.
-
----
 
 The first few years of adulthood are unique, because they’re the first years that we’re really afforded true freedom. Sure, in college, you are given some autonomy—but your decisions are still mostly guided by your university, your major, and your friend group. We go through the motions, really, from ages 0-22. It’s not until our mid 20s that we are given the opportunity to author our own story—to define the current of our lives, rather than follow suit of those around us. And it’s in this period that two distinct types of people emerge:
 
@@ -165,10 +166,6 @@ It’s not about always getting it right. It’s about doing. And through doing,
 
 ## Other reading
 
-* [High Agency](https://www.pathikshah.com/high-agency)
-
-* [You Can Just Do Things](https://x.com/shaiyanhkhan/status/1754197898814689379)
-
-* [Just Do Stuff](https://fb.watch/wlYBu1qEot/)
-
-
+- [High Agency](https://www.pathikshah.com/high-agency)
+- [You Can Just Do Things](https://x.com/shaiyanhkhan/status/1754197898814689379)
+- [Just Do Stuff](https://fb.watch/wlYBu1qEot/)

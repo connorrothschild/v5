@@ -1,9 +1,10 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
+import { serialize } from "next-mdx-remote/serialize";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import remarkGfm from "remark-gfm";
+import rehypeHeadingIds from "./rehype-heading-ids";
 
 type TocItem = {
   value: string;
@@ -15,8 +16,12 @@ type PostData = {
   id: string;
   title: string;
   date: string;
-  content: string;
+  category: string;
+  content: MDXRemoteSerializeResult;
   tableOfContents: TocItem[];
+  showToc?: boolean;
+  showTopImage?: boolean;
+  image?: string;
 };
 
 const postsDirectory = path.join(process.cwd(), "posts");
@@ -28,13 +33,7 @@ function slugify(text: string): string {
     .replace(/(^-|-$)+/g, "");
 }
 
-export async function getPost(id: string): Promise<PostData> {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, "utf8");
-
-  const { data, content } = matter(fileContents);
-
-  // Extract TOC items
+function extractTocItems(content: string): TocItem[] {
   const tocItems: TocItem[] = [];
   const lines = content.split("\n");
   let currentH2Slug = "";
@@ -53,11 +52,9 @@ export async function getPost(id: string): Promise<PostData> {
       if (depth === 2) {
         currentH2Slug = slug;
       } else if (depth === 3) {
-        // For h3s, prefix with parent h2's slug
         slug = `${currentH2Slug}-${slug}`;
       }
 
-      // Handle duplicate slugs
       let uniqueSlug = slug;
       let counter = 1;
       while (usedSlugs.has(uniqueSlug)) {
@@ -74,37 +71,39 @@ export async function getPost(id: string): Promise<PostData> {
     }
   });
 
-  // Process content
-  const processedContent = await remark()
-    .use(remarkGfm)
-    .use(html)
-    .process(content);
+  return tocItems;
+}
 
-  // Add IDs to headings
-  let htmlContent = processedContent.toString();
-  tocItems.forEach((item) => {
-    const headingRegex = new RegExp(
-      `<h${item.depth}>([^<]*|<strong>[^<]*</strong>|[^<]*<strong>[^<]*</strong>[^<]*)</h${item.depth}>`,
-      "g"
-    );
+export async function getPost(id: string): Promise<PostData> {
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    // Only replace the first occurrence to avoid duplicates
-    let found = false;
-    htmlContent = htmlContent.replace(headingRegex, (match, p1) => {
-      if (!found && p1.replace(/<[^>]*>/g, "").trim() === item.value) {
-        found = true;
-        return `<h${item.depth} id="${item.slug}">${p1}</h${item.depth}>`;
-      }
-      return match;
-    });
+  const { data, content } = matter(fileContents);
+
+  // Extract TOC items before processing MDX
+  const tocItems = extractTocItems(content);
+
+  // Process content with MDX
+  const mdxContent = await serialize(content, {
+    parseFrontmatter: true,
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [[rehypeHeadingIds]],
+      format: "mdx",
+      development: false,
+    },
   });
 
   return {
     id,
     title: data.title,
     date: data.date,
-    content: htmlContent,
+    category: data.category,
+    content: mdxContent,
     tableOfContents: tocItems,
+    showTopImage: data.showTopImage,
+    showToc: data.showToc,
+    image: data.image,
   };
 }
 

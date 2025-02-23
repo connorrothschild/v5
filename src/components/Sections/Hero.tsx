@@ -79,8 +79,7 @@ export default function Hero() {
         >
           <CanvasGradient />
           <div className="hidden md:flex leading-none font-light text-right absolute bottom-0 right-0 p-4 text-xl flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-sans z-[49]">
-            The portfolio of software & data visualization engineer, Connor
-            Rothschild.
+            The portfolio of software engineer Connor Rothschild.
           </div>
           <div className="flex md:hidden leading-none font-light text-right absolute bottom-0 right-0 p-4 text-lg flex-col text-gray-300 mix-blend-screen tracking-[0.0125rem] font-sans z-[49]">
             2024 Portfolio

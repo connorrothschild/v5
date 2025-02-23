@@ -22,8 +22,8 @@ const prefixNumberWithZeroes = (number: number) => {
 
 export default function Archive() {
   const CATEGORIES = [
-    { name: "Visualization", slug: "visualization" },
     { name: "Web", slug: "web" },
+    { name: "Visualization", slug: "visualization" },
   ];
 
   // Initialize state based on URL query

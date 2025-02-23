@@ -4,7 +4,7 @@ import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 
 const META_TITLE = "Connor Rothschild";
 const META_DESCRIPTION =
-  "The portfolio of software & data visualization engineer, Connor Rothschild.";
+  "The portfolio of software engineer Connor Rothschild.";
 
 export default function Home() {
   return (
