@@ -5,6 +5,7 @@ category: "technical"
 showToc: false
 showTopImage: true
 image: '/posts/realm/social.webp'
+unlisted: false
 ---
 
 The team at Asimov Collective recently wrapped up a new brand identity for [Realm](https://x.com/realmalliance), the foundational physical security platform for critical industry.

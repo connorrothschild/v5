@@ -5,6 +5,7 @@ category: "technical"
 showToc: false
 showTopImage: true
 image: '/posts/rainmaker/social.webp'
+unlisted: false
 ---
 
 The team at Asimov Collective recently wrapped up a new brand identity for [Rainmaker](https://x.com/RainmakerCorp), a cloud seeding startup that provides water for farms, watersheds, and ecosystems, fortifying growth and stewarding the natural world.
