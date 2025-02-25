@@ -5,6 +5,7 @@ category: "personal"
 showToc: true
 image: '/posts/noone-is-anything/social.webp'
 showTopImage: false
+unlisted: true
 ---
 
 What would you think if someone told you their favorite show was The Office?

@@ -22,6 +22,7 @@ type PostData = {
   showToc?: boolean;
   showTopImage?: boolean;
   image?: string;
+  unlisted?: boolean;
 };
 
 const postsDirectory = path.join(process.cwd(), "posts");
@@ -104,6 +105,7 @@ export async function getPost(id: string): Promise<PostData> {
     showTopImage: data.showTopImage,
     showToc: data.showToc,
     image: data.image,
+    unlisted: data.unlisted,
   };
 }
 
@@ -125,7 +127,10 @@ export async function getAllPosts(): Promise<PostData[]> {
     })
   );
 
-  return allPostsData.sort((a, b) => {
+  // Filter out unlisted posts
+  const filteredPosts = allPostsData.filter((post) => !post.unlisted);
+
+  return filteredPosts.sort((a, b) => {
     if (a.date < b.date) {
       return 1;
     } else {
