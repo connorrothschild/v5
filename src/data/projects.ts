@@ -1,5 +1,29 @@
 export const projects = [
   {
+    title: "Integral",
+    year: 2025,
+    url: "https://www.integralneuro.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: false,
+  },
+  {
+    title: "Terrain",
+    year: 2025,
+    url: "https://www.terrain.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: false,
+  },
+  {
+    title: "Durin",
+    year: 2025,
+    url: "https://www.durin.com/",
+    type: "Web",
+    filterCategory: "web",
+    featured: false,
+  },
+  {
     title: "Valar Atomics",
     year: 2025,
     url: "https://valaratomics.com/",

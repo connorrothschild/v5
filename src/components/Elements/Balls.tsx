@@ -32,7 +32,6 @@ function Balls(props: any) {
   // Always render the emoji, but control its visibility and position
   const emoji = useMemo(() => {
     const isVisible = props.triggerBounce > 0;
-    console.log('triggerBounce:', props.triggerBounce, 'isVisible:', isVisible);
     
     return (
       <Suspense fallback={null}>
@@ -184,10 +183,6 @@ function Smiley({ i, which, size, isTouchDevice, triggerBounce, shouldShow = tru
   const api = useRef();
   const meshRef = useRef();
   const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    console.log('Smiley shouldShow:', shouldShow);
-  }, [shouldShow]);
 
   const clamp = (value: number, min: number, max: number) => {
     return Math.min(Math.max(value, min), max);
