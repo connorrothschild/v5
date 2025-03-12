@@ -181,9 +181,9 @@ function ProjectCard({
     >
       <div className="aspect-[1.675/1] h-48 outline-solid outline outline-gray-100 hover:outline-gray-200 transition-all duration-300">
         <Image
-          src={`/images/screens/${project.image}.jpg`}
+          src={`/images/screens/${project.image}.webp`}
           placeholder="blur"
-          blurDataURL={`images/blurred-screens/${project.image}.jpg`}
+          blurDataURL={`images/blurred-screens/${project.image}.webp`}
           alt={`Project image for ${project.title}`}
           className="w-full h-full object-cover object-bottom"
           width={400}

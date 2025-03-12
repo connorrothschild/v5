@@ -1,6 +1,6 @@
 import { easeInOutQuint } from "@/config/eases";
 import { useScroll, useTransform, motion } from "framer-motion";
-import { useRef } from "react";
+import { CSSProperties, useRef } from "react";
 import Dot from "@/components/Elements/Dot";
 import { ContactPopup } from "@/components/Elements/ContactPopup";
 
@@ -41,13 +41,7 @@ export default function Footer() {
       /> */}
       <div className="p-8 md:p-10 flex flex-col md:flex-row justify-between w-full gap-12">
         <div className="flex w-full flex-col justify-start items-start relative z-10 gap-4">
-          <p
-            className="text-gray-700 font-sans font-normal text-lg md:text-xl"
-            style={{
-              textWrap: "balance",
-              textWrap: "pretty",
-            }}
-          >
+          <p className="text-gray-700 font-sans font-normal text-lg text-wrap-balance">
             The portfolio of Connor Rothschild. Currently at{" "}
             <a
               href="https://www.asimovcollective.com/"
@@ -57,7 +51,7 @@ export default function Footer() {
             </a>
             .
           </p>
-          <p className="text-gray-700 font-sans font-normal text-lg md:text-xl">
+          <p className="text-gray-700 font-sans font-normal text-lg">
             Connect on{" "}
             <a
               href="https://www.linkedin.com/in/connor-rothschild/"

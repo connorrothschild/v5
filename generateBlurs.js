@@ -16,7 +16,7 @@ fs.readdir(thumbnailsDir, (err, files) => {
     const compressedFilePath = path.join(compressedDir, file);
 
     sharp(filePath)
-      .jpeg({ quality: 70 })
+      .webp({ quality: 70 })
       .blur(100)
       .toFile(compressedFilePath, (err) => {
         if (err) {

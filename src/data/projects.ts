@@ -1,5 +1,15 @@
 export const projects = [
   {
+    title: "Venice AI",
+    year: 2025,
+    url: "https://venice.ai",
+    type: "Web",
+    filterCategory: "web",
+    featured: true,
+    image: "venice",
+    titleWidth: 80,
+  },
+  {
     title: "Integral",
     year: 2025,
     url: "https://www.integralneuro.com/",
@@ -13,7 +23,9 @@ export const projects = [
     url: "https://www.terrain.com/",
     type: "Web",
     filterCategory: "web",
-    featured: false,
+    featured: true,
+    image: "terrain",
+    titleWidth: 73,
   },
   {
     title: "Durin",
