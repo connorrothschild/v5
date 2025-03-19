@@ -24,8 +24,8 @@ interface Props {
 }
 
 const CATEGORY_LABELS = {
-  technical: "Technical",
   personal: "Personal",
+  technical: "Technical",
 } as const;
 
 const META_TITLE = "Writing | Connor Rothschild";

@@ -86,4 +86,4 @@ This is a powerful technique to take something otherwise static and turn it into
 
 ## Making Earth Habitable
 
-The project was a fun one to work on, and we're really proud of the result. Check out Rainmaker [here](https://rainmaker.com/)—and as always, get in touch with us at [Asimov Collective](https://asimovcollective.com/) with your design and development needs.
+The project was a fun one to work on, and we're really proud of the result. Check out Rainmaker [here](https://rainmaker.com/).

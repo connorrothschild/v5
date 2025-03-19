@@ -61,4 +61,4 @@ This was our first project carrying out internationalization via [i18next](https
 
 ## Integrated Security
 
-The project was a fun one to work on, and we're really proud of the result. Check out Realm [here](https://realmalliance.com/)—and as always, get in touch with us at [Asimov Collective](https://asimovcollective.com/) with any related design and development needs.
+The project was a fun one to work on, and we're really proud of the result. Check out Realm [here](https://realmalliance.com/).
