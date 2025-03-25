@@ -186,7 +186,7 @@ function ProfileForm({
       onSubmit={handleSubmit}
     >
       <div className="grid gap-2">
-        <Label htmlFor="email">Name</Label>
+        <Label htmlFor="name">Name</Label>
         <Input
           type="text"
           id="name"
