@@ -20,7 +20,7 @@ Every day, we either let the block sit without refinement, or we act to craft a 
 
 Progression is chipping away at the blocks surrounding our final figure. We are nothing but excellence waiting to be revealed.
 
-This daily choice defines our journey. The sculptor doesn't transform marble into David in a single session. Rather, it's the accumulation of thousands of deliberate chisel strikes, each removing what doesn't belong. So too with self-mastery—each small daily choice to read instead of scrol, to challenge instead of seek comfort, to face difficult emotions instead of numbing them—these are the strikes that gradually reveal our potential.
+This daily choice defines our journey. The sculptor doesn't transform marble into David in a single session. Rather, it's the accumulation of thousands of deliberate chisel strikes, each removing what doesn't belong. So too with self-mastery—each small daily choice to read instead of scroll, to challenge instead of seek comfort, to face difficult emotions instead of numbing them—these are the strikes that gradually reveal our potential.
 
 The most beautiful aspect of this process is its inevitability when pursued consistently. Excellence isn't something we must construct from nothing; it's something already within us, waiting to be uncovered through patient, deliberate removal of what doesn't serve our highest self. And in the modern era, self-improvement is chiefly defined by the removal of excess and vices, rather than the addition of virtue.
 
