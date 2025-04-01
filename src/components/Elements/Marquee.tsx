@@ -1,22 +1,20 @@
-import {
-  useFrame,
-  useIntersectionObserver,
-  useResizeObserver,
-} from "@darkroom.engineering/hamo";
+"use client";
+
+import { useIntersectionObserver, useResizeObserver } from "hamo";
+import { useTempus } from "tempus/react";
 import cn from "clsx";
 import modulo from "just-modulo";
-import { useLenis } from "@studio-freight/react-lenis";
 import { useRef, useState } from "react";
-import { useIsTouchDevice } from "@/hooks/useIsTouchDevice";
 
 export default function Marquee({
   children,
   className,
   repeat = 2,
   speed = 1,
-  scrollVelocity = true,
+  scrollVelocity = false,
   reversed = false,
   pauseOnHover = false,
+  itemClassName,
   onMouseEnter,
   onMouseLeave,
   ...props
@@ -28,30 +26,33 @@ export default function Marquee({
   scrollVelocity?: boolean;
   reversed?: boolean;
   pauseOnHover?: boolean;
+  itemClassName?: string;
   onMouseEnter?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }) {
-  const [setRectRef, { contentRect: rect }] = useResizeObserver();
-  const elementsRef = useRef([]);
+  const [setRectRef, getEntry] = useResizeObserver({
+    lazy: true,
+  });
+
+  const elementsRef = useRef<HTMLDivElement[]>([]);
   const transformRef = useRef(Math.random() * 1000);
   const isHovered = useRef(false);
-  const [velocity, setVelocity] = useState(1);
 
   const [setIntersectionRef, intersection] = useIntersectionObserver();
 
-  const lenis = useLenis(); // eslint-disable-line react-hooks/exhaustive-deps
+  const [velocity, setVelocity] = useState(1);
 
-  const isMobile = useIsTouchDevice();
+  useTempus((_, deltaTime) => {
+    const entry = getEntry();
 
-  useFrame((_: any, deltaTime: number) => {
+    if (!entry || !intersection) return;
+
     if (!intersection.isIntersecting) return;
-    if (!rect?.width) return;
 
-    let velocityValue = isMobile ? 0 : lenis?.velocity ?? 0;
-    if (!scrollVelocity) {
-      velocityValue = 0;
-    }
-    velocityValue = 1 + Math.abs(velocityValue / 5);
+    if (!entry?.borderBoxSize[0]?.inlineSize) return;
+
+    let velocityValue = 0;
+    velocityValue = 1 + Math.abs(velocityValue / 2);
 
     // // FOR ABRUPT STOPS
     // if (pauseOnHover && isHovered.current) return;
@@ -73,17 +74,18 @@ export default function Marquee({
       transformRef.current += offset;
     }
 
-    transformRef.current = modulo(transformRef.current, rect.width);
+    const width = entry.borderBoxSize[0].inlineSize;
+    transformRef.current = modulo(transformRef.current, width);
 
-    elementsRef.current.forEach((node) => {
+    for (const node of elementsRef.current) {
       node.style.transform = `translate3d(${-transformRef.current}px,0,0)`;
-    });
+    }
   });
 
   return (
     <div
       ref={setIntersectionRef}
-      className={cn(className, "flex overflow-x-clip")}
+      className={cn(className, "flex overflow-x-clip w-full")}
       onMouseEnter={(e) => {
         isHovered.current = true;
         onMouseEnter?.(e);
@@ -94,13 +96,15 @@ export default function Marquee({
       }}
       {...props}
     >
-      {new Array(repeat).fill(children).map((_, i) => (
+      {new Array(repeat).fill(children).map((_, i: number) => (
         <div
           key={i}
-          className={"flex whitespace-nowrap transform-gpu"}
-          aria-hidden={i !== 0 ?? undefined}
+          className={cn(itemClassName, "flex whitespace-nowrap transform-gpu")}
+          aria-hidden={i !== 0 || undefined}
           data-nosnippet={i !== 0 ? "" : undefined}
           ref={(node) => {
+            if (!node) return;
+            // @ts-ignore
             elementsRef.current[i] = node;
 
             if (i === 0) setRectRef(node);
