@@ -18,7 +18,7 @@ function BlogRecommendationCard({ post }: { post: BlogRecommendation }) {
       className="block px-4 py-3 mb-2 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
     >
       <h3 className="text-base mb-1">{post.title}</h3>
-      <p className="text-sm text-wrap-pretty text-[#666666]">{post.reason}</p>
+      <p className="text-sm text-[#666666]">{post.reason}</p>
     </Link>
   );
 }
@@ -97,7 +97,7 @@ export function ChatBot() {
             <div className="min-h-[150px] max-h-[min(80vh,400px)] mb-4 relative scrollbar-hide">
               <div className="min-h-[150px] max-h-[min(80vh,400px)] overflow-y-auto scrollbar-hide pt-4">
                 {/* Scrim at top and bottom */}
-                <div className="pointer-events-none absolute top-0 left-0 w-full h-4 bg-gradient-to-b from-white to-transparent z-10" />
+                <div className="pointer-events-none absolute top-[-1px] left-0 w-full h-4 bg-gradient-to-b from-white to-transparent z-10" />
                 <div className="pointer-events-none absolute bottom-0 left-0 w-full h-4 bg-gradient-to-t from-white to-transparent z-10" />
                 {messagesPlusFakeIntroMessage.map((message) => {
                   return (
