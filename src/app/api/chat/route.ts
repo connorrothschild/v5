@@ -55,6 +55,7 @@ SPECIFIC INSTRUCTIONS:
 
 NOTES:
 * No formatting: Any text that you render should be provided WITHOUT formatting. Do NOT give content in Markdown or HTML tags.
+* BE CONCISE: You only need to reply to their immediate query, and then render the recommendBlogPost tool output. No need for lengthy explanations.
 * EXTRA EXTRA EXTRA IMPORTANT: You MUST use the recommendBlogPost tool to recommend posts. DO NOT write out recommendations in text.
 `;
 
