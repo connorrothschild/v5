@@ -10,11 +10,7 @@ const recommendBlogPost = createTool({
   parameters: z.object({
     title: z.string().describe("Title of the blog post"),
     id: z.string().describe("ID of the blog post (without .md extension)"),
-    reason: z
-      .string()
-      .describe(
-        "Reason for recommending this post, prefixed with 'This post '"
-      ),
+    reason: z.string().describe("Reason for recommending this post"),
   }),
   execute: async function ({ title, id, reason }) {
     return { title, id, reason };
@@ -63,7 +59,7 @@ NOTES:
 `;
 
     const result = streamText({
-      model: openai("gpt-3.5-turbo"),
+      model: openai("gpt-3.5-turbo-instruct"),
       messages: [{ role: "system", content: prompt }, ...messages],
       tools,
       maxSteps: 10,
