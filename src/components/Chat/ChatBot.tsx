@@ -175,7 +175,7 @@ export function ChatBot() {
                     value={input}
                     onChange={handleInputChange}
                     placeholder="What kind of content are you looking for?"
-                    className="flex-1 text-sm z-[9] relative"
+                    className="flex-1 text-sm z-[9] relative pr-4"
                   />
                   <div className="absolute z-10 right-[1px] top-[1px] h-[calc(100%-2px)] rounded-md w-6 bg-gradient-to-l from-white to-transparent via-white" />
                 </div>

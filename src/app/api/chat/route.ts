@@ -59,7 +59,8 @@ NOTES:
 `;
 
     const result = streamText({
-      model: openai("gpt-3.5-turbo-instruct"),
+      // model: openai("gpt-3.5-turbo"),
+      model: openai("gpt-4o"),
       messages: [{ role: "system", content: prompt }, ...messages],
       tools,
       maxSteps: 10,
