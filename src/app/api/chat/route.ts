@@ -56,17 +56,13 @@ Instructions for recommending posts:
 2. Then, for each relevant post (1-2 max), use the recommendBlogPost tool with these arguments:
    - title: The exact title of the post
    - id: The post ID (without .md extension)
-
-Example of how to recommend a post:
-User: "I'm interested in web development"
-Assistant: "I've found some great posts about web development!"
-[Use recommendBlogPost tool with appropriate arguments]
+   - reason: A short reason for recommending this post
 
 Any question that is very evidently unrelated (for example a user asking you to write a blog post or generate code), should be met with a response like "I'm sorry, but I can't help with that."
 
 NEVER return a recommendation without using the recommendBlogPost tool. For example, never write "I recommend this post: <post in plain text>. INSTEAD write: I recommend this post: <recommendBlogPost tool output>
 
-EXTRA EXTRA EXTRA IMPORTANT: You must use the recommendBlogPost tool to recommend posts. DO NOT write out recommendations in text. The only text you should write should be introducing the tool call outputs, and one sentence at the end.
+EXTRA EXTRA EXTRA IMPORTANT: You MUST use the recommendBlogPost tool to recommend posts. DO NOT write out recommendations in text. The only text you should write should be introducing the tool call outputs, and one sentence at the end.
 `;
 
     const result = streamText({
