@@ -106,7 +106,7 @@ export function ChatBot() {
                       className={`mb-4 w-fit max-w-[90%] p-3 rounded-lg ${
                         message.role === "assistant"
                           ? "bg-gray-50 bg-gradient-to-r from-gray-100 to-gray-50 border border-gray-200"
-                          : "bg-blue-50 bg-gradient-to-l from-blue-100 to-blue-50 border border-blue-200 ml-auto text-right text-blue-700"
+                          : "bg-blue-50 bg-gradient-to-l from-blue-100 to-blue-50 border border-blue-200 ml-auto text-left text-blue-700"
                       }`}
                     >
                       {/* @ts-expect-error I faked the message above. */}
