@@ -20,7 +20,7 @@ export default function HoverLink({
       scroll={false}
       href={href}
       onMouseEnter={() => setHovered(start)}
-      className="font-sans font-light text-gray-700"
+      className="font-sans px-1 font-light text-gray-700"
     >
       <motion.span layout="size" className="flex items-center">
         {start}

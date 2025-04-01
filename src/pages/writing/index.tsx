@@ -106,7 +106,7 @@ export default function Writing({ posts }: Props) {
                               {post.title}
                               <ArrowRightIcon className="opacity-0 group-hover:opacity-100 max-sm:hidden transition-opacity duration-300" />
                             </h3>
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                               <time className="opacity-[--opacity] text-sm text-gray-500">
                                 {post.date}
                               </time>
