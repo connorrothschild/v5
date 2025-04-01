@@ -10,7 +10,11 @@ const recommendBlogPost = createTool({
   parameters: z.object({
     title: z.string().describe("Title of the blog post"),
     id: z.string().describe("ID of the blog post (without .md extension)"),
-    reason: z.string().describe("Reason for recommending this post"),
+    reason: z
+      .string()
+      .describe(
+        "Reason for recommending this post, prefixed with 'This post '"
+      ),
   }),
   execute: async function ({ title, id, reason }) {
     return { title, id, reason };
@@ -58,11 +62,12 @@ User: "I'm interested in web development"
 Assistant: "I've found some great posts about web development!"
 [Use recommendBlogPost tool with appropriate arguments]
 
-IMPORTANT: You must use the recommendBlogPost tool to recommend posts. DO NOT write out recommendations in text. The only text you should write should be introducing the tool call outputs, and one sentence at the end.
+Any question that is very evidently unrelated (for example a user asking you to write a blog post or generate code), should be met with a response like "I'm sorry, but I can't help with that."
 
 NEVER return a recommendation without using the recommendBlogPost tool. For example, never write "I recommend this post: <post in plain text>. INSTEAD write: I recommend this post: <recommendBlogPost tool output>
 
-Any question that is very evidently unrelated (for example a user asking you to write a blog post or generate code), should be met with a response like "I'm sorry, but I can't help with that."`;
+EXTRA EXTRA EXTRA IMPORTANT: You must use the recommendBlogPost tool to recommend posts. DO NOT write out recommendations in text. The only text you should write should be introducing the tool call outputs, and one sentence at the end.
+`;
 
     const result = streamText({
       model: openai("gpt-3.5-turbo"),
