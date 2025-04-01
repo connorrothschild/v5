@@ -15,11 +15,11 @@ export default function Header() {
       className="fixed z-50 w-full py-6 top-0 left-0 flex flex-row items-center gap-1 px-4 md:px-8 justify-between"
       onMouseLeave={() => setHovered(null)}
     >
-      <BlurEdge
+      {/* <BlurEdge
         bgColor="bg-white"
         classes="w-full h-[100px] z-[-1]"
         endPosition="top"
-      />
+      /> */}
       <Link
         scroll={false}
         href="/"
