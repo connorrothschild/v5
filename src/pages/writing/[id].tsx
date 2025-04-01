@@ -1,4 +1,3 @@
-// pages/blog/[id].tsx
 import { GetStaticProps, GetStaticPaths } from "next";
 import { getPost, getAllPostIds } from "@/lib/posts";
 import React, { useEffect, useState } from "react";

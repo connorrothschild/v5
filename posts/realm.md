@@ -6,6 +6,7 @@ showToc: false
 showTopImage: true
 image: '/posts/realm/social.webp'
 unlisted: false
+synopsisForLlms: "Realm Alliance is a foundational physical security platform for critical industries, with a website built using React, Next.js (pages router), Tailwind CSS, Motion for animations, and TinaCMS for content management. The website showcases technical sophistication through a complex 3D scene created with Three.js and React Three Fiber, featuring custom shaders for grid visualization, building highlighting with edge detection, camera controls, and pulsating radial gradients. Additional notable features include an expanding menu leveraging Motion's layout animations for smooth transitions, and full internationalization support via i18next, organizing all copy in a locales/common.json file that effectively serves as a lightweight CMS. The result is a visually striking and technically advanced web experience that effectively communicates Realm's focus on integrated security solutions for critical infrastructure."
 ---
 
 The team at Asimov Collective recently wrapped up a new brand identity for [Realm](https://x.com/realmalliance), the foundational physical security platform for critical industry.

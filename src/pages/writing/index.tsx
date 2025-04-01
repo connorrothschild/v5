@@ -69,6 +69,8 @@ export default function Writing({ posts }: Props) {
             <h1 className="text-5xl md:text-7xl font-sans font-extralight text-gray-700 mb-12 tracking-[-0.02em]">
               Writing
             </h1>
+
+            <ChatBot />
             <div className="grid gap-24">
               {categories.map((category) => (
                 <section key={category} className="relative">
@@ -135,6 +137,7 @@ export default function Writing({ posts }: Props) {
 
 import { AnimatePresence, motion } from "framer-motion";
 import Footer from "@/components/Sections/Footer";
+import { ChatBot } from "@/components/Chat/ChatBot";
 
 function ExpandedDate({ date }: { date: string }) {
   const [hovered, setHovered] = useState(false);
