@@ -228,3 +228,19 @@ body[data-router-pathname="/404"] #menu-bar {
 .text-wrap-balance {
   text-wrap: balance;
 }
+
+/* Small screens */
+@media (max-width: 768px) {
+  .prose h2 {
+    font-size: 24px;
+  }
+
+  .prose p,
+  .prose li {
+    font-size: 16px;
+  }
+
+  .prose p {
+    margin-top: 20px;
+  }
+}
