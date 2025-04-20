@@ -18,17 +18,22 @@ const nextConfig = {
     return [
       {
         source: "/award/:splat*",
-        destination: "https://connorrothschild.github.io/v4/award/:splat*",
+        destination: "https://v4.connorrothschild.com/award/:splat*",
         permanent: true,
       },
       {
         source: "/project/:splat*",
-        destination: "https://connorrothschild.github.io/v4/project/:splat*",
+        destination: "https://v4.connorrothschild.com/project/:splat*",
         permanent: true,
       },
       {
         source: "/post/:splat*",
-        destination: "https://connorrothschild.github.io/v4/post/:splat*",
+        destination: "https://v4.connorrothschild.com/post/:splat*",
+        permanent: true,
+      },
+      {
+        source: "/viz",
+        destination: "https://v4.connorrothschild.com/viz",
         permanent: true,
       },
     ];
