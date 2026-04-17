@@ -66,6 +66,13 @@ import Header from "@/components/Sections/Header";
 import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 import { useEffect } from "react";
 
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
