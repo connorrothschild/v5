@@ -4,6 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="icon" href="/favicon.ico" />
         <meta
           property="og:image"
